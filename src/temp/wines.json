@@ -1,0 +1,29 @@
+{
+  "wine": {
+    "id": 1,
+    "winery": "winery-name",
+    "name": "wine-name",
+    "description": "",
+    "image": "url",
+    "vintage": "YYYY",
+    "type": "wine-type",
+    "grapes": [],
+    "region": "wine-location",
+    "country": "country-name",
+    "reviews": []
+  },
+  "review": {
+    "reviewer": "user-name",
+    "description": "",
+    "rate": 0,
+    "replies": []
+  },
+  "reply": {
+    "user": "",
+    "comment": ""
+  },
+  "tastes": {
+    "light": 50,
+    "bold": 20
+  }
+}
