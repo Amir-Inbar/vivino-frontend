@@ -20,11 +20,13 @@ export class AppHeader extends Component {
           </div>
         </div>
         <nav>
-          <button>Wines</button>
-          <button>Pairings</button>
-          <button>Grapes</button>
-          <button>Regions</button>
-          <button>Awards</button>
+          <ul>
+            <li>Wines</li>
+            <li>Pairings</li>
+            <li>Grapes</li>
+            <li>Regions</li>
+            <li>Awards</li>
+          </ul>
         </nav>
       </header>
     );

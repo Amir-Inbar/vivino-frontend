@@ -10,8 +10,8 @@ export function App() {
   return (
     <Router>
       <div className="App">
-        <AppHeader />
         <main className="container">
+          <AppHeader />
           <Switch>
             {/* <Route component={VivinoApp} path="/" /> */}
             <Route component={WinePage} path="/" />

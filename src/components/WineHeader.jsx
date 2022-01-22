@@ -5,8 +5,23 @@ import fullStar from "../assets/imgs/icons/full-star.svg";
 export class WineHeader extends Component {
   tags = ["Israel", "Judean Hills", "Red wine", "Cabernet Sauvignon"];
 
-  previewTags() {
-    return this.tags.map((tag) => <span className="tag">{tag}</span>);
+  renderTags() {
+    return this.tags.map((tag, i) => (
+      <a className="tag" key={i}>
+        {tag}
+      </a>
+    ));
+  }
+
+  renderStars(symbol, stars) {
+    const n = 5;
+    const width = (82.5 * (stars || n)) / n + "px";
+    const template = [...Array(n)].map((el, i) => <img src={symbol} key={i} />);
+    return (
+      <div className="stars" style={{ width }}>
+        {template}
+      </div>
+    );
   }
 
   render() {
@@ -18,25 +33,13 @@ export class WineHeader extends Component {
         <div className="content">
           <h2>Shiloh</h2>
           <h1>Shor Cabernet Sauvignon 2018</h1>
-          <div className="tags">{this.previewTags()}</div>
+          <div className="tags">{this.renderTags()}</div>
           <div className="rate">
             <div className="avg">4.2</div>
             <div className="more-info">
-              <div className="stars">
-                <div className="empty">
-                  <img src={emptyStar} />
-                  <img src={emptyStar} />
-                  <img src={emptyStar} />
-                  <img src={emptyStar} />
-                  <img src={emptyStar} />
-                </div>
-                <div className="full" style={{ width: "75px" }}>
-                  <img src={fullStar} />
-                  <img src={fullStar} />
-                  <img src={fullStar} />
-                  <img src={fullStar} />
-                  <img src={fullStar} />
-                </div>
+              <div className="stars-container">
+                {this.renderStars(emptyStar)}
+                {this.renderStars(fullStar, 4.2)}
               </div>
               <div className="num-ratings">94 ratings</div>
             </div>

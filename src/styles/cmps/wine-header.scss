@@ -30,9 +30,10 @@
       padding-bottom: 62px;
       .tag {
         padding: 2px 8px 0 0;
-        &::after {
+        &:not(:last-child):after {
           margin-inline-start: 8px;
           content: "·";
+          text-decoration: none;
         }
       }
     }
@@ -47,23 +48,21 @@
         transform: scale(1.1, 1.2);
       }
       .more-info {
-        padding-top: 2px;
+        padding: 2px 8px;
         display: flex;
         flex-direction: column;
-        .stars {
+        .stars-container {
           position: relative;
           display: flex;
           justify-content: flex-start;
           align-items: center;
           height: 20px;
-          .empty,
-          .full {
+          .stars {
             position: absolute;
             padding: 2px;
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            width: 80px;
             overflow: hidden;
             > * {
               height: 16px;

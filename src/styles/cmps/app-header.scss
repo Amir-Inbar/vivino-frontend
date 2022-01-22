@@ -31,13 +31,14 @@
     }
   }
   nav {
-    display: flex;
-    justify-content: space-between;
-    max-width: 490px;
-    button {
-      border: 0;
-      background-color: transparent;
-      padding: 8px;
+    ul {
+      display: flex;
+      justify-content: space-between;
+      max-width: 490px;
+      list-style-type: none;
+      li {
+        padding: 8px;
+      }
     }
   }
 }
