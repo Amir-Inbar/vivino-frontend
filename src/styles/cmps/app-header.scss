@@ -1,0 +1,43 @@
+.app-header {
+  display: flex;
+  flex-direction: column;
+  .control-bar {
+    font-size: 1em;
+    display: flex;
+    height: 64px;
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 120px;
+      margin-inline-end: 24px;
+    }
+    .search {
+      flex: 1;
+      margin: 12px;
+      border: 1px solid #dedede;
+      background-image: url("../../assets/imgs/icons/search.svg");
+      background-position: 16px;
+      background-size: 16px;
+      background-repeat: no-repeat;
+      border-radius: 3em;
+      display: flex;
+      max-width: 300px;
+      input {
+        outline: none;
+        border: 0;
+        margin-inline-start: 50px;
+      }
+    }
+  }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    max-width: 490px;
+    button {
+      border: 0;
+      background-color: transparent;
+      padding: 8px;
+    }
+  }
+}
