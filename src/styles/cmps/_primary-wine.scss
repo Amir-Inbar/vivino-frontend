@@ -29,15 +29,112 @@
         background: rgba(0, 0, 0, 0.075);
       }
     }
-    .low-price {
-      background-image: url('../../assets/imgs/icons/coinwhite.svg');
-    }
-
-    .select-price {
-      background-color: #ba1628;
-    }
     :not(:last-child) {
       margin-inline-end: 8px;
+    }
+  }
+
+  .wines-carousel {
+    margin-block-start: 80px;
+    transform: translate3d(0%, 0px, 0px);
+    display: flex;
+    transition: all 0.3s ease-out;
+    background-repeat: no-repeat;
+    gap: 15px;
+    .wine-card {
+      background-color: #fff;
+      padding: 16px;
+      box-shadow: 0 0 0 1px rgb(87 87 87 / 10%),
+        0 8px 8px 0 rgb(234 224 218 / 30%);
+      border-radius: 16px;
+      transition: all 0.1s ease-in-out;
+      border: 0;
+      width: 100%;
+      cursor: pointer;
+      background-color: #fff;
+
+      .upper-card {
+        .wine-img {
+          transition: all 0.25s ease-in-out;
+          margin-top: -56px;
+          height: 300px;
+        }
+        .main-rating {
+          align-self: center;
+          flex-grow: 2;
+          .rating {
+            padding-bottom: 24px;
+
+            .avg-rate {
+              font-size: 40px;
+              line-height: 48px;
+              font-weight: 400;
+              margin-right: 8px;
+            }
+          }
+        }
+      }
+      .wine-details {
+        padding-bottom: 8px;
+        color: #1e1e1e;
+        background-color: transparent;
+        text-align: left;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 400;
+        p {
+          &:not(:first-of-type) {
+            font-weight: 600;
+          }
+        }
+      }
+      .wine-location {
+        color: #1e1e1e;
+        background-color: transparent;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 400;
+        img {
+          height: 24px;
+          min-width: 24px;
+          width: 24px;
+          margin-inline-end: 5px;
+        }
+      }
+      &:hover {
+        box-shadow: 0 8px 8px 0 rgb(51 48 48 / 20%),
+          0 -8px 24px 0 rgb(234 224 218 / 30%);
+        text-decoration: none;
+
+        .hover-wine {
+          transition: all 0.25s ease-in-out;
+
+          margin-top: -72px;
+          height: 316px;
+        }
+      }
+    }
+  }
+
+  .carousel-control {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    z-index: 100;
+    background: #fff;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px 0 rgb(66 66 66 / 20%);
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%);
+
+    svg {
+      width: 15px;
+      height: 15px;
     }
   }
 }
