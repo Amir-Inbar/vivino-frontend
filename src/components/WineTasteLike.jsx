@@ -6,7 +6,7 @@ import tastes from "../assets/json/fill-taste.json";
 export class TasteLike extends Component {
   render() {
     return (
-      <div class="taste-like">
+      <div className="taste-like">
         <h2>What does this wine taste like?</h2>
         <div className="details">
           <table>
