@@ -1,0 +1,65 @@
+[
+  {
+    "name": "oaky",
+    "description": "Oak, tobacco, vanilla",
+    "mentions": [
+      "oak",
+      "vanilla",
+      "coffee",
+      "tobacco",
+      "baking spice",
+      "clove"
+    ],
+    "color": "#8c5433"
+  },
+  {
+    "name": "red fruit",
+    "description": "Red fruit, cherry, pomegranate",
+    "mentions": [
+      "red fruit",
+      "pomegranate",
+      "raspberry",
+      "cherry",
+      "strawberry",
+      "bing cherry"
+    ],
+    "color": "#c73a31"
+  },
+  {
+    "name": "black fruit",
+    "description": "Plum, dark fruit, black fruit",
+    "mentions": [
+      "plum",
+      "black fruit",
+      "jam",
+      "dark fruit",
+      "blackberry",
+      "cassis"
+    ],
+    "color": "#2c3e80"
+  },
+  {
+    "name": "spices",
+    "description": "Pepper, licorice, anise",
+    "mentions": ["pepper", "anise", "menthol", "licorice", "mint"],
+    "color": "#b19257"
+  },
+  {
+    "name": "earthy",
+    "description": "Smoke, graphite, leather",
+    "mentions": ["smoke", "leather", "balsamic", "graphite", "tar", "earthy"],
+    "color": "#b59b6f"
+  },
+  {
+    "name": "deried fruit",
+    "description": "Black raisin",
+    "mentions": ["black raising"],
+    "color": "#b9655d"
+  },
+  {
+    "name": "floral",
+    "description": "Perfume",
+    "mentions": ["perfume"],
+    "color": "#f86677"
+  }
+]
