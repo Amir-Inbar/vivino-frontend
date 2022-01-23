@@ -64,7 +64,7 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 20px 0 rgba(66, 66, 66, 0.2);
-      top: calc(50% - 45px);
+      top: calc(50% - 25px);
       &.next {
         left: calc(100% - 25px);
       }
@@ -78,7 +78,7 @@
       flex-direction: column;
       flex: 1;
       border-radius: 20px;
-      height: 200px;
+      height: 140px;
       max-width: 33%;
       box-shadow: 0 0 0 1px rgba(87, 87, 87, 0.1),
         0 8px 8px 0 rgba(234, 224, 218, 0.3);
@@ -95,7 +95,10 @@
         align-items: center;
         justify-content: center;
         border-radius: 16px 16px 0 0;
-        flex-basis: 60%;
+        flex-basis: 55%;
+        img {
+          height: 60%;
+        }
       }
       h3 {
         font-weight: 400;
