@@ -1,10 +1,10 @@
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import { AppHeader } from './components/AppHeader';
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { AppHeader } from "./components/AppHeader";
 // import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
-import { VivinoApp } from './pages/VivinoApp';
-import { WinePage } from './pages/WinePage';
+import { VivinoApp } from "./pages/VivinoApp";
+import { WinePage } from "./pages/WinePage";
 
-import './styles/global.scss';
+import "./styles/global.scss";
 
 export function App() {
   return (
@@ -13,8 +13,8 @@ export function App() {
         <main className="container">
           <AppHeader />
           <Switch>
-            <Route component={VivinoApp} path="/" />
-            {/* <Route component={WinePage} path="/" /> */}
+            {/* <Route component={VivinoApp} path="/" /> */}
+            <Route component={WinePage} path="/" />
           </Switch>
         </main>
       </div>

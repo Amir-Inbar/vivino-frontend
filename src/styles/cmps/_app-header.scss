@@ -37,7 +37,25 @@
       max-width: 490px;
       list-style-type: none;
       li {
-        padding: 8px;
+        padding: 3px 4px 4px 24px;
+        height: 22px;
+        width: 22px;
+        background-repeat: no-repeat;
+        &.wines {
+          background-image: url("../../assets//imgs/icons/wines.svg");
+        }
+        &.pairings {
+          background-image: url("../../assets//imgs/icons/cheese.svg");
+        }
+        &.grapes {
+          background-image: url("../../assets//imgs/icons/grapes.svg");
+        }
+        &.regions {
+          background-image: url("../../assets//imgs/icons/regions.svg");
+        }
+        &.awards {
+          background-image: url("../../assets//imgs/icons/awards.svg");
+        }
       }
     }
   }

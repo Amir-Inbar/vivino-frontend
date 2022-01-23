@@ -5,10 +5,33 @@
     "mentions": [
       "oak",
       "vanilla",
-      "coffee",
       "tobacco",
+      "chocolate",
+      "cedar",
+      "coffee",
       "baking spice",
-      "clove"
+      "clove",
+      "mocha",
+      "baking spice",
+      "cola",
+      "butter",
+      "caramel",
+      "cigar",
+      "toffee",
+      "allspice",
+      "hickory",
+      "espresso",
+      "coconut",
+      "nutmeg",
+      "butterscotch",
+      "pipe tobacco",
+      "toasted marshmallow",
+      "wood smoke",
+      "creme brulee",
+      "cocoa nib",
+      "milk chocolate",
+      "sandalwood",
+      "pastry"
     ],
     "color": "#8c5433"
   },
@@ -17,11 +40,13 @@
     "description": "Red fruit, cherry, pomegranate",
     "mentions": [
       "red fruit",
-      "pomegranate",
-      "raspberry",
       "cherry",
+      "raspberry",
       "strawberry",
-      "bing cherry"
+      "pomegranate",
+      "cranberry",
+      "red currant",
+      "watermelon"
     ],
     "color": "#c73a31"
   },
@@ -29,37 +54,137 @@
     "name": "black fruit",
     "description": "Plum, dark fruit, black fruit",
     "mentions": [
+      "black berry",
       "plum",
-      "black fruit",
-      "jam",
       "dark fruit",
-      "blackberry",
-      "cassis"
+      "black cherry",
+      "black fruit",
+      "blue berry",
+      "jam",
+      "black currant",
+      "cassis",
+      "boysen berry",
+      "ripe blackberry",
+      "bramble",
+      "berry jam",
+      "black raspberry",
+      "grape jam"
     ],
     "color": "#2c3e80"
   },
   {
     "name": "spices",
     "description": "Pepper, licorice, anise",
-    "mentions": ["pepper", "anise", "menthol", "licorice", "mint"],
+    "mentions": [
+      "pepper",
+      "licorice",
+      "cinnamon",
+      "anise",
+      "mint",
+      "eucalyptus",
+      "savory",
+      "menthol",
+      "fennel",
+      "dried herns",
+      "licorice",
+      "gingerbread",
+      "oregano",
+      "musk",
+      "jalapeno",
+      "bay leaf",
+      "rosemary"
+    ],
     "color": "#b19257"
   },
   {
     "name": "earthy",
     "description": "Smoke, graphite, leather",
-    "mentions": ["smoke", "leather", "balsamic", "graphite", "tar", "earthy"],
+    "mentions": [
+      "earthy",
+      "leather",
+      "smoke",
+      "cocoa",
+      "minerals",
+      "tar",
+      "charcoal",
+      "stone",
+      "honey",
+      "mushroom",
+      "pencil shavings",
+      "chalk",
+      "truffle",
+      "graphite",
+      "forest floor",
+      "tobacco leaf",
+      "smoked meats",
+      "ginger",
+      "ash",
+      "salt",
+      "ground coffee",
+      "crushed gravel",
+      "barbecure meat",
+      "grilled meat",
+      "bacon fat",
+      "balsamic",
+      "pencil lead",
+      "clay dust",
+      "iron",
+      "petroleum",
+      "graphite"
+    ],
     "color": "#b59b6f"
   },
   {
-    "name": "deried fruit",
+    "name": "dried fruit",
     "description": "Black raisin",
-    "mentions": ["black raising"],
+    "mentions": [
+      "fig",
+      "raisin",
+      "prune",
+      "dried fruit",
+      "dried blackberry",
+      "dried cranberry",
+      "black raisin"
+    ],
     "color": "#b9655d"
   },
   {
     "name": "floral",
     "description": "Perfume",
-    "mentions": ["perfume"],
+    "mentions": ["perfume", "violet", "lavender", "honeysuckle", "hibiscus"],
     "color": "#f86677"
+  },
+  {
+    "name": "vegetal",
+    "description": "Tomato, asparagus, bell...",
+    "mentions": ["tomato", "asparagus", "bekk oeooer", "rhubarb", "grass"],
+    "color": "#9c9a2a"
+  },
+  {
+    "name": "citrus",
+    "description": "Citrus, marmalade, lemo...",
+    "mentions": ["citrus", "marmalade", "lemon", "lime", "orage"],
+    "color": "#ee803e"
+  },
+  {
+    "name": "tree fruit",
+    "description": "Stone fruit, peach pres...",
+    "mentions": [
+      "stone fruit",
+      "peach",
+      "apricot",
+      "apple",
+      "melon",
+      "cataloupe",
+      "green pear",
+      "persimmon"
+    ],
+    "color": "#819632"
+  },
+  {
+    "name": "tropical",
+    "description": "Citrus, marmalade, lemo...",
+    "mentions": ["mango", "tropical", "kiwi", "guava"],
+    "color": "#e99228"
   }
 ]

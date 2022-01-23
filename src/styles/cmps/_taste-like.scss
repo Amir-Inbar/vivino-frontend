@@ -79,25 +79,34 @@
       flex: 1;
       border-radius: 20px;
       height: 200px;
+      max-width: 33%;
       box-shadow: 0 0 0 1px rgba(87, 87, 87, 0.1),
         0 8px 8px 0 rgba(234, 224, 218, 0.3);
       border-radius: 16px;
       transition: all 0.1s ease-in-out;
       border: 0;
-      width: 100%;
       cursor: pointer;
       background-color: #fff;
       -webkit-tap-highlight-color: transparent;
       padding: 0;
       .picture {
+        user-select: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border-radius: 16px 16px 0 0;
         flex-basis: 60%;
       }
       h3 {
+        font-weight: 400;
         font-size: 1em;
-        padding: 8px 0;
+        padding: 8px;
+        margin: 0 12px;
+        white-space: nowrap;
+        overflow: hidden;
       }
       p {
+        color: #575757;
         font-size: 0.875em;
       }
     }
