@@ -10,8 +10,8 @@ export function ScaleRate(props) {
         const desc = review.description;
         const decrease = new RegExp(`(${scale.decrease.join("|")})`, "gi");
         const increase = new RegExp(`(${scale.increase.join("|")})`, "gi");
-        sum[scale.min] += (desc.match(decrease) || []).length;
-        sum[scale.max] += (desc.match(increase) || []).length;
+        sum[scale.min] += desc.match(decrease)?.length || 0;
+        sum[scale.max] += desc.match(increase)?.length || 0;
         return sum;
       },
       { [scale.min]: 0, [scale.max]: 0 }
@@ -28,7 +28,7 @@ export function ScaleRate(props) {
       const avg = wine[scale.max]
         ? scale.avg * slideRange * 0.3 +
           (wine[scale.max] / 100) * slideRange * 0.7
-        : scale.avg * slideRange;
+        : scale.avg * slideRange || 0.5 * slideRange;
       return (
         <tr key={"SCALE_RATE_" + idx}>
           <td>{camelCaseToSentence(scale.min)}</td>

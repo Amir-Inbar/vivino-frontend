@@ -1,11 +1,11 @@
-@import url(//db.onlinewebfonts.com/c/03d44a9a83b9f8a39806dac12ec6d615?family=Graphik+Web+Bold);
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
 
 * {
   box-sizing: border-box;
 }
 
 html {
-  font-family: OpenSans, sans-serif;
+  font-family: "Lato", OpenSans, sans-serif;
   font-size: 16px;
   scroll-behavior: smooth;
 }
@@ -14,7 +14,7 @@ body {
   margin: 0;
   min-height: 100vh;
   font-size: 0.8125rem;
-  font-family: "GraphikWeb", "Verdana", sans-serif;
+  font-family: "Lato", "Verdana", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -53,9 +53,17 @@ a {
 button {
   font-family: inherit;
   cursor: pointer;
-
   * {
     pointer-events: none;
+  }
+  padding: 6px 12px;
+  color: $clr5;
+  border-radius: 3em;
+  background-color: $clr4;
+  border: solid 2px $clr5;
+  &:hover {
+    color: $clr4;
+    background-color: $clr5;
   }
 }
 
@@ -68,22 +76,3 @@ a.active,
 a.my-active {
   color: red;
 }
-
-// MAC like scrollbar
-// ::-webkit-scrollbar {
-//   width: 8px;
-//   background-color: rgba(0, 0, 0, 0);
-//   -webkit-border-radius: 100px;
-// }
-
-// ::-webkit-scrollbar:hover {
-//   background-color: rgba(0, 0, 0, 0.09);
-// }
-
-// ::-webkit-scrollbar-thumb:vertical {
-//   background: rgba(0, 0, 0, 0.5);
-// }
-
-// ::-webkit-scrollbar-thumb:vertical:active {
-//   -webkit-border-radius: 100px;
-// }

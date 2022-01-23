@@ -1,4 +1,5 @@
 import { WineHeader } from "../components/WineHeader";
+import { WineryPreview } from "../components/WineryPreview";
 import { TasteLike } from "../components/WineTasteLike";
 import demo from "../temp/wines.json";
 
@@ -18,6 +19,7 @@ export const WinePage = () => {
   return (
     <>
       <WineHeader wine={wine} />
+      <WineryPreview winery={wine.winery} />
       <TasteLike wine={wine} />
     </>
   );

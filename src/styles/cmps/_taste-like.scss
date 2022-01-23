@@ -1,7 +1,7 @@
 .taste-like {
   display: flex;
   flex-direction: column;
-  padding: 32px;
+  padding: 32px 0;
   h2 {
     font-size: 1.75em;
     font-weight: 600;
@@ -50,67 +50,75 @@
   .taste-fill {
     position: relative;
     padding: 48px 0;
-    display: flex;
-    gap: 20px;
-    width: 100%;
     button {
       position: absolute;
+      z-index: 1;
       border: 0;
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: $clr4;
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 20px 0 rgba(66, 66, 66, 0.2);
-      top: calc(50% - 25px);
+      top: calc(55% - 30px);
       &.next {
-        left: calc(100% - 25px);
+        left: calc(100% - 20px);
       }
       &.prev {
-        left: -25px;
+        left: -20px;
       }
     }
-    .taste-fill-preview {
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      border-radius: 20px;
-      height: 140px;
-      max-width: 33%;
-      box-shadow: 0 0 0 1px rgba(87, 87, 87, 0.1),
-        0 8px 8px 0 rgba(234, 224, 218, 0.3);
-      border-radius: 16px;
-      transition: all 0.1s ease-in-out;
-      border: 0;
-      cursor: pointer;
-      background-color: #fff;
-      -webkit-tap-highlight-color: transparent;
-      padding: 0;
-      .picture {
-        user-select: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 16px 16px 0 0;
-        flex-basis: 55%;
-        img {
-          height: 60%;
-        }
-      }
-      h3 {
-        font-weight: 400;
-        font-size: 1em;
-        padding: 8px;
-        margin: 0 12px;
+    .taste-cards {
+      width: 100%;
+      overflow: hidden;
+      .taste-slider {
+        height: 160px;
         white-space: nowrap;
-        overflow: hidden;
-      }
-      p {
-        color: #575757;
-        font-size: 0.875em;
+        transition: 0.3s;
+        .taste-fill-preview {
+          display: inline-block;
+          text-align: center;
+          flex-direction: column;
+          flex: 1;
+          border-radius: 20px;
+          height: 140px;
+          box-shadow: 0 0 0 1px rgba(87, 87, 87, 0.1),
+            0 8px 8px 0 rgba(234, 224, 218, 0.3);
+          border-radius: 16px;
+          transition: all 0.1s ease-in-out;
+          border: 0;
+          cursor: pointer;
+          background-color: #fff;
+          -webkit-tap-highlight-color: transparent;
+          margin: 8px 0.7%;
+          width: 32%;
+          @include hover-box;
+          .picture {
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px 16px 0 0;
+            height: 55%;
+            img {
+              height: 60%;
+            }
+          }
+          h3 {
+            font-weight: 400;
+            font-size: 1em;
+            padding: 8px;
+            margin: 0 12px;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+          p {
+            color: #575757;
+            font-size: 0.875em;
+          }
+        }
       }
     }
   }

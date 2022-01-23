@@ -4,6 +4,7 @@ import { sentenceToKababCase } from "../services/util.service";
 export function TasteFill(props) {
   const { tastes, reviews } = props;
   const [position, setPosition] = useState(0);
+  const [slidePos, setSlidePos] = useState(0);
 
   const tastesReducer = tastes
     .map((taste) => {
@@ -38,12 +39,11 @@ export function TasteFill(props) {
     .sort((a, b) => b.total - a.total);
 
   useEffect(() => {
-    preview();
+    display();
   }, [position]);
 
-  const preview = () => {
-    const start = Math.min(position * 3, tastesReducer.length - 3);
-    return tastesReducer.slice(start, start + 3).map((item, idx) => {
+  const display = () => {
+    return tastesReducer.map((item, idx) => {
       return (
         <div className="taste-fill-preview" key={"TASTE_FILL_" + idx}>
           <div className="picture" style={{ backgroundColor: item.color }}>
@@ -59,6 +59,12 @@ export function TasteFill(props) {
     });
   };
 
+  const slidePosition = () => {
+    return position
+      ? -((Math.min((position + 1) * 3, tastesReducer.length) / 3) * 100 - 100)
+      : 0;
+  };
+
   return (
     <div className="taste-fill">
       {tastesReducer.length > position * 3 + 3 ? (
@@ -71,7 +77,14 @@ export function TasteFill(props) {
           -
         </button>
       ) : null}
-      {preview()}
+      <div className="taste-cards">
+        <div
+          className="taste-slider"
+          style={{ transform: `translateX(${slidePosition()}%)` }}
+        >
+          {display()}
+        </div>
+      </div>
     </div>
   );
 }
