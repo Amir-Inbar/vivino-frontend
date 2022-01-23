@@ -1,27 +1,15 @@
 import { Component } from "react";
-import emptyStar from "../assets/imgs/icons/empty-star.svg";
-import fullStar from "../assets/imgs/icons/full-star.svg";
+import { StarRate } from "./StarRate";
 
 export class WineHeader extends Component {
   tags = ["Israel", "Judean Hills", "Red wine", "Cabernet Sauvignon"];
 
   renderTags() {
     return this.tags.map((tag, i) => (
-      <a className="tag" key={i}>
+      <a className="tag" key={"WINE_TAG_" + i}>
         {tag}
       </a>
     ));
-  }
-
-  renderStars(symbol, stars) {
-    const n = 5;
-    const width = (82.5 * (stars || n)) / n + "px";
-    const template = [...Array(n)].map((el, i) => <img src={symbol} key={i} />);
-    return (
-      <div className="stars" style={{ width }}>
-        {template}
-      </div>
-    );
   }
 
   render() {
@@ -37,10 +25,7 @@ export class WineHeader extends Component {
           <div className="rate">
             <div className="avg">4.2</div>
             <div className="more-info">
-              <div className="stars-container">
-                {this.renderStars(emptyStar)}
-                {this.renderStars(fullStar, 4.2)}
-              </div>
+              <StarRate rate={4.2} />
               <div className="num-ratings">94 ratings</div>
             </div>
           </div>

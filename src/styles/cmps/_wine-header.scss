@@ -51,25 +51,6 @@
         padding: 2px 8px;
         display: flex;
         flex-direction: column;
-        .stars-container {
-          position: relative;
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          height: 20px;
-          .stars {
-            position: absolute;
-            padding: 2px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            overflow: hidden;
-            > * {
-              height: 16px;
-              width: 16px;
-            }
-          }
-        }
         .num-ratings {
         }
       }
