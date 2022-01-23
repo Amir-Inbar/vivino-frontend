@@ -1,173 +1,267 @@
 {
-  "wine": {
-    "id": 1,
-    "winery": "Shiloh",
-    "name": "Shor Cabernet Sauvignon",
-    "description": "",
-    "image": "http://images.vivino.com/thumbs/B8ukZ0TdRb2r9pLFD9cSNg_pb_x600.png",
-    "vintage": 2018,
-    "type": "Red wine",
-    "grapes": ["cabernat sauvignon"],
-    "region": "Judean Hills",
-    "country": "Israel",
-    "bold": 80,
-    "tannic": 60,
-    "sweet": 20,
-    "acidic": 40,
-    "reviews": [
-      {
-        "id": 1,
-        "wineId": 1,
-        "userId": 1,
-        "reviewer": "Oleg Khutorskoy",
-        "description": "The color is deep dark red, almost opaque. The aroma is complex, concentrated: currants, blackberries, a palette of oriental spices, graphite, coffee, dark chocolate, tobacco and leather notes. The body is dense, perfectly balanced. On the palate there are ripe black fruits, allspice, cloves and eucalyptus. Long-lasting enveloping aftertaste. Great wine, thanks to the master - winemaker!",
-        "rate": 4.5,
-        "replies": []
-      },
-      {
-        "id": 2,
-        "wineId": 1,
-        "userId": 2,
-        "reviewer": "Eldad Cohen",
-        "description": "Excellent Cab! Very bold yet smooth and fun. Smells of oak, vanilla, red fruit and pomegranate. Medium acidity, full body with a long finish.",
-        "rate": 4,
-        "replies": []
-      },
-      {
-        "id": 3,
-        "wineId": 1,
-        "userId": 3,
-        "reviewer": "Oleg Golynker",
-        "description": "Rich fruit taste and mushroom nose",
-        "rate": 4.5,
-        "replies": []
-      },
-      {
-        "id": 4,
-        "wineId": 1,
-        "userId": 4,
-        "reviewer": "Gustavo Povarchik",
-        "description": "Gold medal in Decanter 2020. Full body. Strong tanins. Reminds of plumb and oak. Round taste. I really like it. I am sorry not having patience. It seems to me that it will improve a lot in next 4 or 5 years",
-        "rate": 4.5,
-        "replies": []
-      },
-      {
-        "id": 5,
-        "wineId": 1,
-        "userId": 5,
-        "reviewer": "Ilia Vilk",
-        "description": "Has body and is very expressive, which is generally not of my taste. Sharp fruit flavour.",
-        "rate": 3.5,
-        "replies": []
-      },
-      {
-        "id": 6,
-        "wineId": 1,
-        "userId": 6,
-        "reviewer": "Boaz Granoth",
-        "description": "Color - deep Ruby Nose - red fruit, tobacco, plum. Palate - nice fruit, with medium acidity and medium body. Finish - medium Overall - the medium class from the vineyard - and attempts being medium in everything (quite successfully). So - you can't go wrong with it, nor will it be amazing.",
-        "rate": 4,
-        "replies": []
-      },
-      {
-        "id": 7,
-        "wineId": 1,
-        "userId": 7,
-        "reviewer": "Aviv Ron",
-        "description": "Really nice. Bold red fruit in the mouth. Cassis and herbs. Surprise for a 100% CS.",
-        "rate": 4,
-        "replies": []
-      },
-      {
-        "id": 8,
-        "wineId": 1,
-        "userId": 8,
-        "reviewer": "MK",
-        "description": "Full body with strong aromas, well balanced with tastes that will long last. This winery so far never disappointing. Better to open 1 hour before drinking for a better experience.",
-        "rate": 4,
-        "replies": []
-      },
-      {
-        "id": 9,
-        "wineId": 1,
-        "userId": 9,
-        "reviewer": "Alex Alex",
-        "description": "Rich test. Smoothy. cranberries black plum blackberries , balanced, fool body. Medium finish.",
-        "rate": 4,
-        "replies": []
-      },
-      {
-        "id": 10,
-        "wineId": 1,
-        "userId": 10,
-        "reviewer": "H",
-        "description": "Utterly fantastic wine. Cherry, spice, leather, smoke, graphite deliciousness. Non astringent and super bold. Just an absolute pleasure. I could drink this every night.",
-        "rate": 5,
-        "replies": []
-      },
-      {
-        "id": 11,
-        "wineId": 1,
-        "userId": 11,
-        "reviewer": "Adi Samsonoff",
-        "description": "red fruit oak vanilla black raisins.",
-        "rate": 5,
-        "replies": []
-      },
-      {
-        "id": 12,
-        "wineId": 1,
-        "userId": 12,
-        "reviewer": "Yigong Lu",
-        "description": "Smells strong oak and dark fruit, but with a surprisingly obvious red plum and cheery flavor- an interesting combination not that typical of Cab in my mind. The succulence on the palate is such a bless to go with something like roast duck which is what I tried. The tannins on the finish feels smooth and tender. The finish is so compact that you won’t feel any unpleasant feelings afterwards but the cleanness and the comfortable dryness when you chew a pomegranate or a real grape!.",
-        "rate": 5,
-        "replies": []
-      },
-      {
-        "id": 13,
-        "wineId": 1,
-        "userId": 14,
-        "reviewer": "DCLaxfan",
-        "description": "A robust Israeli Cab from vineyards in historic hills. Winemaker is the famous Amichai Luria who has great ideas on winemaking. The Cab is aged 15 months in French Oak. Strong nose of plum, pomegranate, green pepper, and zatar. Bouncy mouth of bing cherry, plum, petrol, and rocky hillside. Sharp tannins demand a good decant to tame a slightly astringent finish. Paired well with top rib by Mrs. L for Friday dinner. Not at the top of Israeli Cabs but a solid 3.6 from me. L’chaim my friends!!!",
-        "rate": 4.5,
-        "replies": []
-      },
-      {
-        "id": 14,
-        "wineId": 1,
-        "userId": 14,
-        "reviewer": "Roy Mano",
-        "description": "As promised by other reviews this is indeed a great wine. Deep dark red in colour with a complex taste. Red fruit and oak are the dominant taste with a great aftertaste of some vanilla. I really liked this wine and would highly recommend",
-        "rate": 4,
-        "replies": []
-      },
-      {
-        "id": 15,
-        "wineId": 1,
-        "userId": 15,
-        "reviewer": "Sergey Vastchenok",
-        "description": "Red berries, tannins, perfume, spices, pepper, licorice, menthol, 89",
-        "rate": 4,
-        "replies": []
-      }
-    ]
-  },
-  "review": {
-    "id": 1,
-    "wineId": 1,
-    "userId": 1,
-    "vintage": 2018,
-    "reviewer": "user-name",
-    "description": "",
-    "rate": 0,
-    "replies": []
-  },
-  "reply": {
-    "user": "",
-    "comment": ""
-  },
-  "tastes": {
-    "light": 50,
-    "bold": 20
-  }
+  "wines": [
+    {
+      "id": 1,
+      "wineryId": 1,
+      "winery": "Shiloh",
+      "name": "Shor Cabernet Sauvignon",
+      "description": "",
+      "image": "http://images.vivino.com/thumbs/B8ukZ0TdRb2r9pLFD9cSNg_pb_x600.png",
+      "vintage": 2018,
+      "type": "Red wine",
+      "grapes": ["cabernat sauvignon"],
+      "region": "Judean Hills",
+      "country": "Israel",
+      "bold": 80,
+      "tannic": 60,
+      "sweet": 20,
+      "acidic": 40
+    },
+    {
+      "id": 2,
+      "wineryId": 2,
+      "winery": "Pasqua Vigneti e Cantine",
+      "name": "Desire Lush & Zin Primitivo",
+      "description": "",
+      "image": "https://images.vivino.com/thumbs/yBVzB01nR22gyLQougbf6A_pb_x600.png",
+      "vintage": 2018,
+      "type": "Red wine",
+      "grapes": ["primitivo"],
+      "region": "Puglia",
+      "country": "Italy",
+      "bold": 80,
+      "tannic": 22,
+      "sweet": 53,
+      "acidic": 12
+    }
+  ],
+  "winery": [
+    {
+      "id": 2,
+      "name": "Pasqua Vigneti e Cantine",
+      "country": "Italy",
+      "region": "Veneto",
+      "overview": "Pasqua Vigneti e Cantine, founded in 1925 in Verona, was born of the Family’s love for Valpolicella. Three generations of people with a Veronese heart and an international soul, sharing the same great passion: viticulture and the production of unique wines.",
+      "description": "Pasqua Vigneti e Cantine is a historic company producing quality Veneto and Italian wines and a leader in the Italian and international markets. A family passion. Almost a century of history.\n\nFounded in 1925 in Verona and born of the love of Famiglia Pasqua for Valpolicella, it tells a story of wine, vineyards, and deep roots in the territory\n<<img:https://images.vivino.com/misc/sponsorships/4929_pasqua/4929_pasqua_2_2560x1520.jpg>>\n3 generations have always been united by a great passion for viticulture and the production of fine wines, first in Valpolicella and then also on the east coast of Lake Garda and in the most prestigious hills of the Soave denomination.\n<<img:https://images.vivino.com/misc/sponsorships/4929_pasqua/4929_pasqua_3_2560x1520.jpg>>\n3 generations have always been united by a great passion for viticulture and the production of fine wines, first in Valpolicella and then also on the east coast of Lake Garda and in the most prestigious hills of the Soave denomination.\nhttps://images.vivino.com/misc/sponsorships/4929_pasqua/4929_pasqua_4_2560x1520.jpg\nIf the winery places enormous strategic value to Italy, the drive towards foreign markets, culminating in the foundation of Pasqua USA and Pasqua China, has led the company to be present today in 65 markets.\n\nUmberto Pasqua leads the company with his sons Riccardo and Alessandro.",
+      "logo": "https://images.vivino.com/wineries/4929/logos/fJeVO0iKRZiDFHxUy9Wkfw.jpeg"
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "wineId": 1,
+      "userId": 1,
+      "reviewer": "Oleg Khutorskoy",
+      "description": "The color is deep dark red, almost opaque. The aroma is complex, concentrated: currants, blackberries, a palette of oriental spices, graphite, coffee, dark chocolate, tobacco and leather notes. The body is dense, perfectly balanced. On the palate there are ripe black fruits, allspice, cloves and eucalyptus. Long-lasting enveloping aftertaste. Great wine, thanks to the master - winemaker!",
+      "rate": 4.5,
+      "replies": []
+    },
+    {
+      "id": 2,
+      "wineId": 1,
+      "userId": 2,
+      "reviewer": "Eldad Cohen",
+      "description": "Excellent Cab! Very bold yet smooth and fun. Smells of oak, vanilla, red fruit and pomegranate. Medium acidity, full body with a long finish.",
+      "rate": 4,
+      "replies": []
+    },
+    {
+      "id": 3,
+      "wineId": 1,
+      "userId": 3,
+      "reviewer": "Oleg Golynker",
+      "description": "Rich fruit taste and mushroom nose",
+      "rate": 4.5,
+      "replies": []
+    },
+    {
+      "id": 4,
+      "wineId": 1,
+      "userId": 4,
+      "reviewer": "Gustavo Povarchik",
+      "description": "Gold medal in Decanter 2020. Full body. Strong tanins. Reminds of plumb and oak. Round taste. I really like it. I am sorry not having patience. It seems to me that it will improve a lot in next 4 or 5 years",
+      "rate": 4.5,
+      "replies": []
+    },
+    {
+      "id": 5,
+      "wineId": 1,
+      "userId": 5,
+      "reviewer": "Ilia Vilk",
+      "description": "Has body and is very expressive, which is generally not of my taste. Sharp fruit flavour.",
+      "rate": 3.5,
+      "replies": []
+    },
+    {
+      "id": 6,
+      "wineId": 1,
+      "userId": 6,
+      "reviewer": "Boaz Granoth",
+      "description": "Color - deep Ruby Nose - red fruit, tobacco, plum. Palate - nice fruit, with medium acidity and medium body. Finish - medium Overall - the medium class from the vineyard - and attempts being medium in everything (quite successfully). So - you can't go wrong with it, nor will it be amazing.",
+      "rate": 4,
+      "replies": []
+    },
+    {
+      "id": 7,
+      "wineId": 1,
+      "userId": 7,
+      "reviewer": "Aviv Ron",
+      "description": "Really nice. Bold red fruit in the mouth. Cassis and herbs. Surprise for a 100% CS.",
+      "rate": 4,
+      "replies": []
+    },
+    {
+      "id": 8,
+      "wineId": 1,
+      "userId": 8,
+      "reviewer": "MK",
+      "description": "Full body with strong aromas, well balanced with tastes that will long last. This winery so far never disappointing. Better to open 1 hour before drinking for a better experience.",
+      "rate": 4,
+      "replies": []
+    },
+    {
+      "id": 9,
+      "wineId": 1,
+      "userId": 9,
+      "reviewer": "Alex Alex",
+      "description": "Rich test. Smoothy. cranberries black plum blackberries , balanced, fool body. Medium finish.",
+      "rate": 4,
+      "replies": []
+    },
+    {
+      "id": 10,
+      "wineId": 1,
+      "userId": 10,
+      "reviewer": "H",
+      "description": "Utterly fantastic wine. Cherry, spice, leather, smoke, graphite deliciousness. Non astringent and super bold. Just an absolute pleasure. I could drink this every night.",
+      "rate": 5,
+      "replies": []
+    },
+    {
+      "id": 11,
+      "wineId": 1,
+      "userId": 11,
+      "reviewer": "Adi Samsonoff",
+      "description": "red fruit oak vanilla black raisins.",
+      "rate": 5,
+      "replies": []
+    },
+    {
+      "id": 12,
+      "wineId": 1,
+      "userId": 12,
+      "reviewer": "Yigong Lu",
+      "description": "Smells strong oak and dark fruit, but with a surprisingly obvious red plum and cheery flavor- an interesting combination not that typical of Cab in my mind. The succulence on the palate is such a bless to go with something like roast duck which is what I tried. The tannins on the finish feels smooth and tender. The finish is so compact that you won’t feel any unpleasant feelings afterwards but the cleanness and the comfortable dryness when you chew a pomegranate or a real grape!.",
+      "rate": 5,
+      "replies": []
+    },
+    {
+      "id": 13,
+      "wineId": 1,
+      "userId": 14,
+      "reviewer": "DCLaxfan",
+      "description": "A robust Israeli Cab from vineyards in historic hills. Winemaker is the famous Amichai Luria who has great ideas on winemaking. The Cab is aged 15 months in French Oak. Strong nose of plum, pomegranate, green pepper, and zatar. Bouncy mouth of bing cherry, plum, petrol, and rocky hillside. Sharp tannins demand a good decant to tame a slightly astringent finish. Paired well with top rib by Mrs. L for Friday dinner. Not at the top of Israeli Cabs but a solid 3.6 from me. L’chaim my friends!!!",
+      "rate": 4.5,
+      "replies": []
+    },
+    {
+      "id": 14,
+      "wineId": 1,
+      "userId": 14,
+      "reviewer": "Roy Mano",
+      "description": "As promised by other reviews this is indeed a great wine. Deep dark red in colour with a complex taste. Red fruit and oak are the dominant taste with a great aftertaste of some vanilla. I really liked this wine and would highly recommend",
+      "rate": 4,
+      "replies": []
+    },
+    {
+      "id": 15,
+      "wineId": 1,
+      "userId": 15,
+      "reviewer": "Sergey Vastchenok",
+      "description": "Red berries, tannins, perfume, spices, pepper, licorice, menthol, 89",
+      "rate": 4,
+      "replies": []
+    },
+    {
+      "id": 16,
+      "wineId": 2,
+      "userId": 16,
+      "reviewer": "Oren Rosen",
+      "description": "A great Primitivo! Deep red color. Scents of cherry and vanilla. Balanced and highly fruity with notes of black cherry and chocolate. Very nice!",
+      "rate": 4.5,
+      "replies": []
+    },
+    {
+      "id": 17,
+      "wineId": 2,
+      "userId": 17,
+      "reviewer": "Moty Shvalb",
+      "description": "plum cherry chocolate vanilla black cherry blackberry black fruit raspberry jam",
+      "rate": 4.5,
+      "replies": []
+    },
+    {
+      "id": 18,
+      "wineId": 2,
+      "userId": 18,
+      "reviewer": "Steven de la Rouge",
+      "description": "he best value wine I've had for a long time! This is a rich, full bodied red with juicy black fruit and well balanced spice and earthiness",
+      "rate": 4.5,
+      "replies": []
+    },
+    {
+      "id": 19,
+      "wineId": 2,
+      "userId": 19,
+      "reviewer": "Kati Sharett",
+      "description": "Amazing vfm. Chewy jammy primitivo zin. Full of dark bing cherry, deep color. Dark chocolate licorice pepper and vanilla. Potent. Bold round and robust. A great surprise for the price point!",
+      "rate": 5,
+      "replies": []
+    },
+    {
+      "id": 20,
+      "wineId": 2,
+      "userId": 20,
+      "reviewer": "Barnaby Kemp",
+      "description": "Consistently good. Everyday drinker, chocolate, tobacco and cherry for me. Recommended.",
+      "rate": 4,
+      "replies": []
+    },
+    {
+      "id": 21,
+      "wineId": 2,
+      "userId": 21,
+      "reviewer": "Brad Stephenson",
+      "description": "A medium red wine. Taste of cherry and raspberry. Unfortunately it wasn't as good I thought it would be. It sort of tasted a little steely and not quite as smooth as I'd prefer. I drank this at the Arcade Food Centre near Tottenham Court Road in London.",
+      "rate": 3.5,
+      "replies": []
+    },
+    {
+      "id": 22,
+      "wineId": 2,
+      "userId": 22,
+      "reviewer": "Liah rated this wine",
+      "description": "One of my favorite red wines! At first sip very fruity and light with tastes of red fruit such as raspberry and cherry, but once the taste settles you may notice stronger darker tastes of plum and even a hint of chocolate. Overall a very interesting unique wine which is why I love it. Very recommend!.",
+      "rate": 4,
+      "replies": []
+    },
+    {
+      "id": 23,
+      "wineId": 2,
+      "userId": 23,
+      "reviewer": "Anna Regina",
+      "description": "Raspberries, plum, pepper, leather. Dry, can’t detect sweet notes. It’s enjoyable and interesting, but I’m a bit surprised it’s rated as high as 4,2 in Vivino.",
+      "rate": 3.5,
+      "replies": []
+    },
+    {
+      "id": 24,
+      "wineId": 2,
+      "userId": 24,
+      "reviewer": "GDP",
+      "description": "Blackcurrant, bit of mint, strawberry and again...blackcurrant. Loads of fruit, huge flavour and a bargain for £10 to go with big flavour foods. Super smooth.",
+      "rate": 3.5,
+      "replies": []
+    }
+  ]
 }

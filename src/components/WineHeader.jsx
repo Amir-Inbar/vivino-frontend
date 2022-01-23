@@ -7,7 +7,7 @@ export function WineHeader(props) {
     return [
       wine.country,
       wine.region,
-      wine.winery,
+      wine.winery.name || wine.winery,
       wine.type,
       ...wine.grapes.map((grape) =>
         grape
@@ -38,10 +38,10 @@ export function WineHeader(props) {
   return (
     <div className="top-section full">
       <div className="picture">
-        <img src="//images.vivino.com/thumbs/B8ukZ0TdRb2r9pLFD9cSNg_pb_x600.png" />
+        <img src={wine.image} />
       </div>
       <div className="content">
-        <h2>{wine.winery}</h2>
+        <h2>{wine.winery.name || wine.winery}</h2>
         <h1>
           {wine.name} {wine.vintage}
         </h1>

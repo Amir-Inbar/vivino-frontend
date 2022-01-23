@@ -12,7 +12,7 @@ export function TasteLike(props) {
     <div className="taste-like">
       <h2>What does this wine taste like?</h2>
       <div className="details">
-        <ScaleRate wine={wine} percentage={[80, 60, 20, 40]} />
+        <ScaleRate wine={wine} />
         <div className="more">
           <h4>Wine lovers taste summary</h4>
           <p>{basedOn()}</p>

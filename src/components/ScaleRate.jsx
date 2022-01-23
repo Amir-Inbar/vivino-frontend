@@ -2,7 +2,7 @@ import { camelCaseToSentence } from "../services/util.service";
 import sections from "../assets/json/scale-sections.json";
 
 export function ScaleRate(props) {
-  const { percentage, wine } = props;
+  const { wine } = props;
 
   const scaleReducer = sections.map((scale) => {
     const count = wine.reviews.reduce(
@@ -16,21 +16,30 @@ export function ScaleRate(props) {
       },
       { [scale.min]: 0, [scale.max]: 0 }
     );
+    // console.log(count);
     const avg = count[scale.max] / (count[scale.min] + count[scale.max]);
     return { min: scale.min, max: scale.max, avg: avg || 0.5 };
   });
 
   const scales = () => {
+    const barWidth = 15;
+    const slideRange = 100 - barWidth;
     return scaleReducer.map((scale, idx) => {
       const avg = wine[scale.max]
-        ? (scale.avg * 80 + (wine[scale.max] / 100) * 80) / 2
-        : scale.avg * 80;
+        ? scale.avg * slideRange * 0.3 +
+          (wine[scale.max] / 100) * slideRange * 0.7
+        : scale.avg * slideRange;
       return (
         <tr key={"SCALE_RATE_" + idx}>
           <td>{camelCaseToSentence(scale.min)}</td>
           <td className="scale-container">
             <div className="scale">
-              <div style={{ left: avg + "%" }}></div>
+              <div
+                style={{
+                  left: (wine[scale.max] / 100) * slideRange + "%",
+                  width: barWidth + "%",
+                }}
+              ></div>
             </div>
           </td>
           <td>{camelCaseToSentence(scale.max)}</td>
