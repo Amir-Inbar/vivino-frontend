@@ -50,7 +50,7 @@ export function WineHeader(props) {
           <div className="avg">{rate()}</div>
           <div className="more-info">
             <StarRate rate={rate()} />
-            <div className="num-ratings">94 ratings</div>
+            <div className="num-ratings">{wine.reviews.length} ratings</div>
           </div>
         </div>
       </div>

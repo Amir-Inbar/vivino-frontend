@@ -6,7 +6,9 @@ export function TasteLike(props) {
   const { wine } = props;
 
   const basedOn = () =>
-    `The taste profile of ${wine.winery} ${wine.name} is based on ${wine.reviews.length} user reviews`;
+    `The taste profile of ${wine.winery.name || wine.winery} ${
+      wine.name
+    } is based on ${wine.reviews.length} user reviews`;
 
   return (
     <div className="taste-like">
