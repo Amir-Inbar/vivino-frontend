@@ -1,7 +1,7 @@
 .winery-preview {
   margin: 32px 0;
   border: 0;
-  width: 100%;
+  width: calc(100% - 20px);
   cursor: pointer;
   background-color: #fff;
   -webkit-tap-highlight-color: transparent;
@@ -20,6 +20,7 @@
       font-weight: 600;
     }
     .country {
+      padding-inline-start: 4px;
       display: flex;
       align-items: center;
       gap: 4px;

@@ -31,7 +31,14 @@ export function WineSlider(props) {
         wineReviews.length
       ).toFixed(1);
       return (
-        <div className="wine-preview" key={"WINE_" + idx}>
+        <div
+          className="wine-preview"
+          style={{
+            width: `calc(100% / ${itemPerPage} - 8px)`,
+            margin: `0px 4px`,
+          }}
+          key={"WINE_" + idx}
+        >
           <div className="preview-header">
             <div className="wine-bottle">
               <img className="bottle-img" src={item.image} />

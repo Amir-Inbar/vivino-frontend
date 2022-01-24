@@ -83,6 +83,7 @@
     display: flex;
     table {
       flex: 1;
+      padding: 0 12px;
       tr {
         display: flex;
         td {
@@ -139,37 +140,38 @@
       box-shadow: 0 4px 20px 0 rgba(66, 66, 66, 0.2);
       top: calc(55% - 30px);
       &.next {
-        left: calc(100% - 20px);
+        left: calc(100% - 50px);
       }
       &.prev {
-        left: -20px;
+        left: 5px;
       }
     }
     .taste-cards {
-      width: 100%;
+      margin: 0 auto;
+      width: calc(100% - 50px);
       overflow: hidden;
       .taste-slider {
         height: 160px;
         white-space: nowrap;
-        transition: 0.3s;
+        // transition: 0.3s;
         .taste-fill-preview {
           display: inline-block;
           text-align: center;
-          flex-direction: column;
           flex: 1;
-          border-radius: 20px;
           min-height: 140px;
-          box-shadow: 0 0 0 1px rgba(87, 87, 87, 0.1),
-            0 8px 8px 0 rgba(234, 224, 218, 0.3);
-          border-radius: 16px;
-          transition: all 0.1s ease-in-out;
-          border: 0;
           cursor: pointer;
-          background-color: #fff;
-          -webkit-tap-highlight-color: transparent;
-          margin: 8px 0.7%;
-          width: 32%;
+          margin: 8px 4px;
+          width: calc(100% / 3 - 8px);
           overflow: hidden;
+          // transition: transform 0.1s ease-in-out;
+          // flex-direction: column;
+          // border-radius: 20px;
+          // box-shadow: 0 0 0 1px rgba(87, 87, 87, 0.1),
+          //   0 8px 8px 0 rgba(234, 224, 218, 0.3);
+          // border-radius: 16px;
+          // border: 0;
+          // background-color: #fff;
+          // -webkit-tap-highlight-color: transparent;
           @include hover-box;
           .picture {
             user-select: none;
@@ -310,10 +312,10 @@
     box-shadow: 0 4px 20px 0 rgba(66, 66, 66, 0.2);
     top: calc(55% - 30px);
     &.next {
-      left: calc(100% - 30px);
+      left: calc(100% - 50px);
     }
     &.prev {
-      left: -30px;
+      left: 5px;
     }
   }
   @include for-tablet-layout {
@@ -322,36 +324,37 @@
     }
   }
   .wine-cards {
+    margin: 0 auto;
     padding: 48px 0;
-    width: 100%;
+    width: calc(100% - 50px);
     overflow: hidden;
     .wine-slider {
       white-space: nowrap;
-      transition: 0.3s;
       @include for-tablet-layout {
         display: flex;
         flex-wrap: wrap;
         width: 90vw;
       }
       .wine-preview {
+        cursor: pointer;
         min-width: 210px;
         display: inline-block;
-        text-align: center;
-        flex-direction: column;
         flex: 1;
-        border-radius: 20px;
         min-height: 360px;
-        box-shadow: 0 0 0 1px rgba(87, 87, 87, 0.1),
-          0 8px 8px 0 rgba(234, 224, 218, 0.3);
-        border-radius: 16px;
-        transition: all 0.1s ease-in-out;
-        border: 0;
-        cursor: pointer;
-        background-color: #fff;
-        -webkit-tap-highlight-color: transparent;
-        margin: 8px 0.7%;
-        width: 23.62%;
         overflow: hidden;
+        // transition: transform 0.1s ease-in-out;
+        // text-align: center;
+        // flex-direction: column;
+        // border-radius: 20px;
+        // box-shadow: 0 0 0 1px rgba(87, 87, 87, 0.1),
+        //   0 8px 8px 0 rgba(234, 224, 218, 0.3);
+        // border-radius: 16px;
+        // border: 0;
+        // background-color: #fff;
+        // -webkit-tap-highlight-color: transparent;
+        // margin: 0 4px;
+        // width: calc(100% / 4 - 8px);
+        // overflow: hidden;
         @include hover-box;
         &:hover .bottle-img {
           transform: translateY(-5px) scale(102%);
