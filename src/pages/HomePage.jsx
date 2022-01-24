@@ -1,6 +1,6 @@
-import { PrimaryWine } from '../components/PrimaryWine';
+import { PrimaryWine } from "../components/PrimaryWine";
 
-export const VivinoApp = () => {
+export const HomePage = () => {
   return (
     <section className="main-app">
       <PrimaryWine />

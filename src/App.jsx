@@ -1,7 +1,7 @@
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { AppHeader } from "./components/AppHeader";
 // import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
-import { VivinoApp } from "./pages/VivinoApp";
+import { HomePage } from "./pages/HomePage";
 import { WinePage } from "./pages/WinePage";
 import { WineryPage } from "./pages/WineryPage";
 
@@ -14,8 +14,8 @@ export function App() {
         <main className="container">
           <AppHeader />
           <Switch>
-            {/* <Route component={VivinoApp} path="/" /> */}
-            {/* <Route component={WinePage} path="/" /> */}
+            <Route component={HomePage} path="/" />
+            <Route component={WinePage} path="/" />
             <Route component={WineryPage} path="/" />
           </Switch>
         </main>

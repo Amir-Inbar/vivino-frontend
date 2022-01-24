@@ -1,6 +1,12 @@
 .wine-header {
   width: 100%;
   background-color: #f7f3f0;
+  background: linear-gradient(
+    90deg,
+    rgba(247, 243, 240, 1) 0%,
+    rgba(247, 243, 240, 1) 80%,
+    rgba(247, 243, 240, 0) 100%
+  );
   .information {
     display: flex;
     margin-block-end: 24px;
