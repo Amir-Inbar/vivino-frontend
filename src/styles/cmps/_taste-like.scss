@@ -29,11 +29,10 @@
             div {
               position: relative;
               font-size: 0;
-              width: 20%;
+              width: 15%;
               border-radius: 6px;
               background-color: $clr1;
               height: 8px;
-              left: 10%;
             }
           }
         }
@@ -42,6 +41,8 @@
     .more {
       padding: 0 16px;
       max-width: 300px;
+      letter-spacing: 0.8px;
+      line-height: 1.3em;
       h4 {
         text-transform: uppercase;
       }
@@ -83,7 +84,7 @@
           flex-direction: column;
           flex: 1;
           border-radius: 20px;
-          height: 140px;
+          min-height: 140px;
           box-shadow: 0 0 0 1px rgba(87, 87, 87, 0.1),
             0 8px 8px 0 rgba(234, 224, 218, 0.3);
           border-radius: 16px;
@@ -94,16 +95,16 @@
           -webkit-tap-highlight-color: transparent;
           margin: 8px 0.7%;
           width: 32%;
+          overflow: hidden;
           @include hover-box;
           .picture {
             user-select: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 16px 16px 0 0;
             height: 55%;
             img {
-              height: 60%;
+              margin: 8px;
             }
           }
           h3 {
@@ -113,10 +114,13 @@
             margin: 0 12px;
             white-space: nowrap;
             overflow: hidden;
+            width: calc(100% - 22px);
+            text-overflow: ellipsis;
           }
           p {
             color: #575757;
             font-size: 0.875em;
+            white-space: normal;
           }
         }
       }

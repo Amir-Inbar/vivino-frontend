@@ -3,7 +3,13 @@
     "min": "light",
     "max": "bold",
     "decrease": ["super light", "very light"],
-    "increase": ["super bold", "full bold", "full body", "very bold"]
+    "increase": [
+      "super bold",
+      "full bodied",
+      "full bold",
+      "full body",
+      "very bold"
+    ]
   },
   {
     "min": "smooth",

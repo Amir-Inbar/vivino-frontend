@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { sentenceToKababCase } from "../services/util.service";
+import {
+  getShortSentence,
+  sentenceToKababCase,
+} from "../services/util.service";
 
 export function TasteFill(props) {
-  const { tastes, reviews } = props;
+  const { tastes, reviews, setTaste } = props;
   const [position, setPosition] = useState(0);
-  const [slidePos, setSlidePos] = useState(0);
+
+  // useEffect(() => {
+  //   display();
+  // }, [position]);
+
+  function getDescription(mentions) {
+    const desc = mentions.map((taste) => taste.keyword).join(", ");
+    return getShortSentence(desc);
+  }
 
   const tastesReducer = tastes
     .map((taste) => {
@@ -16,7 +27,7 @@ export function TasteFill(props) {
         .map((keyword) => {
           const count = reviews.reduce((sum, review) => {
             const re = new RegExp(
-              `(${keyword}|${keyword.replace(" ", "")})`,
+              `\\b(${keyword}|${keyword.replace(" ", "")})\\b`,
               "gi"
             );
             const found = review.description.match(re) || [];
@@ -26,26 +37,27 @@ export function TasteFill(props) {
           }, 0);
           return { keyword, count };
         })
-        .filter((mention) => !!mention.count);
-      let description = mentions
-        .map((taste) => taste.keyword)
-        .slice(0, 3)
-        .join(", ");
-      description =
-        description.charAt(0).toUpperCase() + description.slice(1) + " ...";
-      return { ...taste, description, mentions, total, url };
+        .filter((mention) => !!mention.count)
+        .sort((a, b) => b.count - a.count);
+      return {
+        ...taste,
+        description: getDescription(mentions),
+        mentions,
+        total,
+        url,
+      };
     })
     .filter((taste) => !!taste.mentions.length)
     .sort((a, b) => b.total - a.total);
 
-  useEffect(() => {
-    display();
-  }, [position]);
-
   const display = () => {
     return tastesReducer.map((item, idx) => {
       return (
-        <div className="taste-fill-preview" key={"TASTE_FILL_" + idx}>
+        <div
+          className="taste-fill-preview"
+          key={"TASTE_FILL_" + idx}
+          onClick={() => setTaste(item)}
+        >
           <div className="picture" style={{ backgroundColor: item.color }}>
             <img src={item.url} />
           </div>
@@ -59,10 +71,15 @@ export function TasteFill(props) {
     });
   };
 
-  const slidePosition = () => {
-    return position
+  const sliderStyle = () => {
+    const sec = 3;
+    const pos = position
       ? -((Math.min((position + 1) * 3, tastesReducer.length) / 3) * 100 - 100)
       : 0;
+    return {
+      transform: `translateX(${pos}%)`,
+      transition: `${-pos % 100 ? sec / (100 / (-pos % 100)) : sec}s`,
+    };
   };
 
   return (
@@ -78,10 +95,7 @@ export function TasteFill(props) {
         </button>
       ) : null}
       <div className="taste-cards">
-        <div
-          className="taste-slider"
-          style={{ transform: `translateX(${slidePosition()}%)` }}
-        >
+        <div className="taste-slider" style={sliderStyle()}>
           {display()}
         </div>
       </div>

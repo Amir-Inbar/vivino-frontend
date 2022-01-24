@@ -1,4 +1,5 @@
 import React from "react";
+import { sentenceToKababCase } from "../services/util.service";
 
 export function WineryPreview(props) {
   const { winery } = props;
@@ -6,7 +7,14 @@ export function WineryPreview(props) {
     <section className="winery-preview">
       <section className="information">
         <h2>{winery.name}</h2>
-        <p className="country">{winery.country}</p>
+        <div className="country">
+          <img
+            src={require(`../assets/imgs/icons/flags/${sentenceToKababCase(
+              winery.country
+            )}.png`)}
+          />
+          <p>{winery.country}</p>
+        </div>
         <p className="short-description">{winery.overview}</p>
         <button>Read more</button>
       </section>
