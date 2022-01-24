@@ -72,7 +72,7 @@ export function TasteFill(props) {
   };
 
   const sliderStyle = () => {
-    const sec = 3;
+    const sec = 2;
     const pos = position
       ? -((Math.min((position + 1) * 3, tastesReducer.length) / 3) * 100 - 100)
       : 0;

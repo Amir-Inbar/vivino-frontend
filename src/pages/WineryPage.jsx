@@ -38,7 +38,7 @@ export function WineryPage() {
         reviews={reviews}
         rate={rateAvg}
       />
-      <WineryWines wines={wines} />
+      <WineryWines winery={winery} wines={wines} reviews={reviews} />
     </>
   );
 }

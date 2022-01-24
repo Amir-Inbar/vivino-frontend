@@ -293,3 +293,141 @@
     }
   }
 }
+
+.wine-container {
+  position: relative;
+  button {
+    position: absolute;
+    z-index: 1;
+    border: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: $clrwht;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px 0 rgba(66, 66, 66, 0.2);
+    top: calc(55% - 30px);
+    &.next {
+      left: calc(100% - 30px);
+    }
+    &.prev {
+      left: -30px;
+    }
+  }
+  @include for-tablet-layout {
+    button {
+      display: none;
+    }
+  }
+  .wine-cards {
+    padding: 48px 0;
+    width: 100%;
+    overflow: hidden;
+    .wine-slider {
+      white-space: nowrap;
+      transition: 0.3s;
+      @include for-tablet-layout {
+        display: flex;
+        flex-wrap: wrap;
+        width: 90vw;
+      }
+      .wine-preview {
+        min-width: 210px;
+        display: inline-block;
+        text-align: center;
+        flex-direction: column;
+        flex: 1;
+        border-radius: 20px;
+        min-height: 360px;
+        box-shadow: 0 0 0 1px rgba(87, 87, 87, 0.1),
+          0 8px 8px 0 rgba(234, 224, 218, 0.3);
+        border-radius: 16px;
+        transition: all 0.1s ease-in-out;
+        border: 0;
+        cursor: pointer;
+        background-color: #fff;
+        -webkit-tap-highlight-color: transparent;
+        margin: 8px 0.7%;
+        width: 23.62%;
+        overflow: hidden;
+        @include hover-box;
+        &:hover .bottle-img {
+          transform: translateY(-5px) scale(102%);
+        }
+        .preview-header {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          .wine-bottle {
+            flex: 1;
+            max-height: 280px;
+            img {
+              top: -20px;
+              height: 300px;
+              padding: 0 16px;
+              transition: transform 0.5s;
+              &:not(:last-child) {
+                position: absolute;
+              }
+              &:last-child {
+                visibility: hidden;
+                height: 90%;
+                width: 100%;
+              }
+            }
+          }
+          .wine-rate {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .avg-rate {
+              font-size: 2.6em;
+            }
+            .total-ratings {
+              color: $clr4;
+            }
+            .sale-status {
+              padding: 24px 0;
+              color: $clr1;
+              font-weight: 700;
+            }
+            > *:not(.stars-container) {
+              margin-inline-start: -33%;
+            }
+          }
+        }
+        .preview-info {
+          flex: 1;
+          padding: 0 18px;
+          display: flex;
+          flex-direction: column;
+          text-align: left;
+          h4 {
+            margin: 0;
+            font-size: 1em;
+          }
+          h5 {
+            padding: 0;
+            font-size: 1em;
+            font-weight: 400;
+            color: $clr4;
+          }
+          .wine-country {
+            padding-top: 4px;
+            display: flex;
+            gap: 4px;
+            img {
+              border-radius: 50%;
+              height: 16px;
+              width: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -5,21 +5,29 @@ export function WineryHeader(props) {
   const { winery, wines, reviews, rate } = props;
 
   function WineryMap({ winery }) {
-    return winery.lat && winery.lng ? (
+    return (
       <div className="winery-map">
-        <iframe
-          src={`https://maps.google.com/maps?q=${winery.lat},${winery.lng}&t=&z=10&ie=UTF8&iwloc=&output=embed`}
-          width="100%"
-          height="100%"
-          frameBorder="0"
-          allowFullScreen="0"
-        ></iframe>
+        {winery.lat && winery.lng ? (
+          <iframe
+            src={`https://maps.google.com/maps?q=${winery.lat},${winery.lng}&t=&z=10&ie=UTF8&iwloc=&output=embed`}
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            allowFullScreen="0"
+          ></iframe>
+        ) : null}
       </div>
-    ) : null;
+    );
   }
 
   return (
-    <header className="winery-header full">
+    <header
+      className="winery-header full"
+      style={{
+        background: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,1)), url(${winery.image}) no-repeat center`,
+        backgroundSize: "cover",
+      }}
+    >
       <WineryMap winery={winery} />
       <div className="winery-information fit-media">
         <p className="title">Winery</p>
