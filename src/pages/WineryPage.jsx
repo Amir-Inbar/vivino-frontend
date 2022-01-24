@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { WineryHeader } from "../components/WineryHeader";
 import { WineryWines } from "../components/WineryWines";
-import demo from "../temp/wines.json";
+import demo from "../temp/demo.json";
 
 export function WineryPage() {
   const [winery, setWinery] = useState(demo.winery[0]);

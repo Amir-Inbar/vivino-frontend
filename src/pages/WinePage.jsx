@@ -3,7 +3,7 @@ import { TastePreview } from "../components/TastePreview";
 import { WineHeader } from "../components/WineHeader";
 import { WineryPreview } from "../components/WineryPreview";
 import { TasteLike } from "../components/WineTasteLike";
-import demo from "../temp/wines.json";
+import demo from "../temp/demo.json";
 
 // DEMO DATA
 const AGGREGATED_DATA = demo.wines.map((wine) => {
