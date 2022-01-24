@@ -59,8 +59,6 @@
           padding: 2px 8px;
           display: flex;
           flex-direction: column;
-          .num-ratings {
-          }
         }
       }
     }
@@ -163,15 +161,6 @@
           margin: 8px 4px;
           width: calc(100% / 3 - 8px);
           overflow: hidden;
-          // transition: transform 0.1s ease-in-out;
-          // flex-direction: column;
-          // border-radius: 20px;
-          // box-shadow: 0 0 0 1px rgba(87, 87, 87, 0.1),
-          //   0 8px 8px 0 rgba(234, 224, 218, 0.3);
-          // border-radius: 16px;
-          // border: 0;
-          // background-color: #fff;
-          // -webkit-tap-highlight-color: transparent;
           @include hover-box;
           .picture {
             user-select: none;
@@ -214,7 +203,6 @@
   z-index: 2;
   display: flex;
   justify-content: center;
-  //   align-items: center;
   .taste-content {
     border-radius: 16px;
     background-color: $clrwht;
@@ -342,19 +330,6 @@
         flex: 1;
         min-height: 360px;
         overflow: hidden;
-        // transition: transform 0.1s ease-in-out;
-        // text-align: center;
-        // flex-direction: column;
-        // border-radius: 20px;
-        // box-shadow: 0 0 0 1px rgba(87, 87, 87, 0.1),
-        //   0 8px 8px 0 rgba(234, 224, 218, 0.3);
-        // border-radius: 16px;
-        // border: 0;
-        // background-color: #fff;
-        // -webkit-tap-highlight-color: transparent;
-        // margin: 0 4px;
-        // width: calc(100% / 4 - 8px);
-        // overflow: hidden;
         @include hover-box;
         &:hover .bottle-img {
           transform: translateY(-5px) scale(102%);
