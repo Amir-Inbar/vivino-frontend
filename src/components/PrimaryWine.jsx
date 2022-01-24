@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 export const PrimaryWine = () => {
   const [selectColor, setSelectColor] = useState(1);
   const selectPrice = (priceNum) => {
@@ -17,11 +17,11 @@ export const PrimaryWine = () => {
             backgroundImage:
               selectColor === 1
                 ? `url(${
-                    require('../assets/imgs/icons/coinwhite.svg').default
+                    require("../assets/imgs/icons/coinwhite.svg").default
                   })`
-                : `url(${require('../assets/imgs/icons/coin.svg').default})`,
+                : `url(${require("../assets/imgs/icons/coin.svg").default})`,
 
-            backgroundColor: selectColor === 1 ? '#ba1628' : '',
+            backgroundColor: selectColor === 1 ? "#ba1628" : "",
           }}
         ></button>
         <button
@@ -31,13 +31,13 @@ export const PrimaryWine = () => {
             backgroundImage:
               selectColor === 2
                 ? `url(${
-                    require('../assets/imgs/icons/doublecoinwhite.svg').default
+                    require("../assets/imgs/icons/doublecoinwhite.svg").default
                   })`
                 : `url(${
-                    require('../assets/imgs/icons/doublecoin.svg').default
+                    require("../assets/imgs/icons/doublecoin.svg").default
                   })`,
 
-            backgroundColor: selectColor === 2 ? '#ba1628' : '',
+            backgroundColor: selectColor === 2 ? "#ba1628" : "",
           }}
         ></button>
         <button
@@ -47,25 +47,25 @@ export const PrimaryWine = () => {
             backgroundImage:
               selectColor === 3
                 ? `url(${
-                    require('../assets/imgs/icons/threecoinwhite.svg').default
+                    require("../assets/imgs/icons/threecoinwhite.svg").default
                   })`
                 : `url(${
-                    require('../assets/imgs/icons/threecoin.svg').default
+                    require("../assets/imgs/icons/threecoin.svg").default
                   })`,
 
-            backgroundColor: selectColor === 3 ? '#ba1628' : '',
+            backgroundColor: selectColor === 3 ? "#ba1628" : "",
           }}
         ></button>
       </div>
       <div className="wines-carousel flex">
         <div className="carousel-control">
-          <svg class="chevron__chevron--2zNRX undefined" viewBox="0 0 7 14">
+          <svg viewBox="0 0 7 14">
             <g>
               <path
                 d="M-0.000,13.281 L6.568,7.001 L-0.000,0.722 "
                 fill="none"
                 stroke="#585858"
-                stroke-width="1"
+                strokeWidth="1"
               ></path>
             </g>
           </svg>
@@ -73,7 +73,7 @@ export const PrimaryWine = () => {
         <div className="wine-card">
           <div className="upper-card flex ">
             <div className="wine-img hover-wine">
-              <img src={require('../assets/imgs/icons/1wine.png')} alt="" />
+              <img src={require("../assets/imgs/icons/1wine.png")} alt="" />
             </div>
             <div className="main-rating flex column align-center ">
               <div className="rating flex column align-center">
@@ -81,7 +81,7 @@ export const PrimaryWine = () => {
                 <div>stars</div>
                 <div>8183 ratings</div>
               </div>
-              <div style={{ color: '#b03000' }}>Sold Out</div>
+              <div style={{ color: "#b03000" }}>Sold Out</div>
             </div>
           </div>
           <div className="wine-details">
@@ -90,14 +90,14 @@ export const PrimaryWine = () => {
             <p>Primitivo 2018</p>
           </div>
           <div className="wine-location flex align-center ">
-            <img src={require('../assets/imgs/icons/flags/italy.png')} alt="" />
+            <img src={require("../assets/imgs/icons/flags/italy.png")} alt="" />
             <span>Puglia, Italy</span>
           </div>
         </div>
         <div className="wine-card">
           <div className="upper-card flex ">
             <div className="wine-img hover-wine">
-              <img src={require('../assets/imgs/icons/1wine.png')} alt="" />
+              <img src={require("../assets/imgs/icons/1wine.png")} alt="" />
             </div>
             <div className="main-rating flex column align-center ">
               <div className="rating flex column align-center">
@@ -105,7 +105,7 @@ export const PrimaryWine = () => {
                 <div>stars</div>
                 <div>8183 ratings</div>
               </div>
-              <div style={{ color: '#b03000' }}>Sold Out</div>
+              <div style={{ color: "#b03000" }}>Sold Out</div>
             </div>
           </div>
           <div className="wine-details">
@@ -114,14 +114,14 @@ export const PrimaryWine = () => {
             <p>Primitivo 2018</p>
           </div>
           <div className="wine-location flex align-center ">
-            <img src={require('../assets/imgs/icons/flags/italy.png')} alt="" />
+            <img src={require("../assets/imgs/icons/flags/italy.png")} alt="" />
             <span>Puglia, Italy</span>
           </div>
         </div>
         <div className="wine-card">
           <div className="upper-card flex ">
             <div className="wine-img hover-wine">
-              <img src={require('../assets/imgs/icons/1wine.png')} alt="" />
+              <img src={require("../assets/imgs/icons/1wine.png")} alt="" />
             </div>
             <div className="main-rating flex column align-center ">
               <div className="rating flex column align-center">
@@ -129,7 +129,7 @@ export const PrimaryWine = () => {
                 <div>stars</div>
                 <div>8183 ratings</div>
               </div>
-              <div style={{ color: '#b03000' }}>Sold Out</div>
+              <div style={{ color: "#b03000" }}>Sold Out</div>
             </div>
           </div>
           <div className="wine-details">
@@ -138,14 +138,14 @@ export const PrimaryWine = () => {
             <p>Primitivo 2018</p>
           </div>
           <div className="wine-location flex align-center ">
-            <img src={require('../assets/imgs/icons/flags/italy.png')} alt="" />
+            <img src={require("../assets/imgs/icons/flags/italy.png")} alt="" />
             <span>Puglia, Italy</span>
           </div>
         </div>
         <div className="wine-card">
           <div className="upper-card flex ">
             <div className="wine-img hover-wine">
-              <img src={require('../assets/imgs/icons/1wine.png')} alt="" />
+              <img src={require("../assets/imgs/icons/1wine.png")} alt="" />
             </div>
             <div className="main-rating flex column align-center ">
               <div className="rating flex column align-center">
@@ -153,7 +153,7 @@ export const PrimaryWine = () => {
                 <div>stars</div>
                 <div>8183 ratings</div>
               </div>
-              <div style={{ color: '#b03000' }}>Sold Out</div>
+              <div style={{ color: "#b03000" }}>Sold Out</div>
             </div>
           </div>
           <div className="wine-details">
@@ -162,7 +162,7 @@ export const PrimaryWine = () => {
             <p>Primitivo 2018</p>
           </div>
           <div className="wine-location flex align-center ">
-            <img src={require('../assets/imgs/icons/flags/italy.png')} alt="" />
+            <img src={require("../assets/imgs/icons/flags/italy.png")} alt="" />
             <span>Puglia, Italy</span>
           </div>
         </div>

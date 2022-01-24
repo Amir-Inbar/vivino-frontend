@@ -16,7 +16,7 @@ export function WineryPreview(props) {
           <p>{winery.country}</p>
         </div>
         <p className="short-description">{winery.overview}</p>
-        <button>Read more</button>
+        <button className="more">Read more</button>
       </section>
       <section className="image">
         <img src={winery.image} />

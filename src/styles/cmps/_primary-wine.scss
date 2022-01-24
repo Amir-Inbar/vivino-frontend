@@ -1,6 +1,6 @@
 .primary-wines {
   .primary-top-title {
-    font-family: 'GraphikWeb', 'Verdana', sans-serif;
+    font-family: "GraphikWeb", "Verdana", sans-serif;
 
     font-size: 40px;
     line-height: 48px;
@@ -42,12 +42,9 @@
     background-repeat: no-repeat;
     gap: 15px;
     .wine-card {
+      @include hover-box;
       background-color: #fff;
       padding: 16px;
-      box-shadow: 0 0 0 1px rgb(87 87 87 / 10%),
-        0 8px 8px 0 rgb(234 224 218 / 30%);
-      border-radius: 16px;
-      transition: all 0.1s ease-in-out;
       border: 0;
       width: 100%;
       cursor: pointer;
@@ -76,7 +73,7 @@
       }
       .wine-details {
         padding-bottom: 8px;
-        color: #1e1e1e;
+        color: $clrblk;
         background-color: transparent;
         text-align: left;
         font-size: 16px;
@@ -89,7 +86,7 @@
         }
       }
       .wine-location {
-        color: #1e1e1e;
+        color: $clrblk;
         background-color: transparent;
         font-size: 16px;
         line-height: 24px;
@@ -102,13 +99,9 @@
         }
       }
       &:hover {
-        box-shadow: 0 8px 8px 0 rgb(51 48 48 / 20%),
-          0 -8px 24px 0 rgb(234 224 218 / 30%);
         text-decoration: none;
-
         .hover-wine {
           transition: all 0.25s ease-in-out;
-
           margin-top: -72px;
           height: 316px;
         }

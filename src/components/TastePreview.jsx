@@ -60,16 +60,13 @@ export function TastePreview(props) {
             }
           : { backgroundColor: taste.color };
       const countStyle = () => {
-        const size = ("" + mention.count).length * 1.25;
-        const style =
-          keyword === mention.keyword
-            ? { backgroundColor: taste.color, color: "#fff" }
-            : {
-                backgroundColor: "#fff",
-                color: taste.color,
-                borderColor: taste.color,
-              };
-        return { ...style, width: size + "em", borderRadius: 50 / size + "px" };
+        return keyword === mention.keyword
+          ? { backgroundColor: taste.color, color: "#fff" }
+          : {
+              backgroundColor: "#fff",
+              color: taste.color,
+              borderColor: taste.color,
+            };
       };
       return (
         <button
@@ -81,10 +78,10 @@ export function TastePreview(props) {
               : () => setKeyword(mention.keyword)
           }
         >
-          <span className="count" style={countStyle()}>
+          <div className="count" style={countStyle()}>
             {mention.count}
-          </span>
-          <span className="title">{mention.keyword}</span>
+          </div>
+          <div className="title">{mention.keyword}</div>
         </button>
       );
     });

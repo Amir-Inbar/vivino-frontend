@@ -1,0 +1,289 @@
+.wine-header {
+  width: 100%;
+  background-color: #f7f3f0;
+  .information {
+    display: flex;
+    margin-block-end: 24px;
+    align-items: flex-start;
+    .picture {
+      padding-top: 28px;
+      display: flex;
+      justify-content: center;
+      @include for-tablet-layout {
+        width: 208px;
+      }
+      img {
+        padding: 25px;
+        max-height: 300px;
+      }
+    }
+    .content {
+      padding-top: 48px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      h2 {
+        padding-bottom: 6px;
+      }
+      h1 {
+        padding-bottom: 18px;
+      }
+      .tags {
+        padding-bottom: 62px;
+        .tag {
+          padding: 2px 8px 0 0;
+          &:not(:last-child):after {
+            margin-inline-start: 8px;
+            content: "·";
+            text-decoration: none;
+          }
+        }
+      }
+      .rate {
+        display: flex;
+        .avg {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 2.5em;
+          font-weight: 500;
+          transform: scale(1.1, 1.2);
+        }
+        .more-info {
+          padding: 2px 8px;
+          display: flex;
+          flex-direction: column;
+          .num-ratings {
+          }
+        }
+      }
+    }
+    .price {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.taste-like {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 0;
+  h2 {
+    font-size: 1.75em;
+    font-weight: 600;
+  }
+  .details {
+    display: flex;
+    table {
+      flex: 1;
+      tr {
+        display: flex;
+        td {
+          min-width: 50px;
+          padding: 14px 4px 0 0;
+        }
+        td.scale-container {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          div.scale {
+            border-radius: 6px;
+            color: $clr3;
+            background-color: $clr3;
+            width: 100%;
+            height: 7px;
+            div {
+              position: relative;
+              top: -0.5px;
+              font-size: 0;
+              width: 15%;
+              border-radius: 6px;
+              background-color: $clr1;
+              height: 8px;
+            }
+          }
+        }
+      }
+    }
+    .more {
+      padding: 0 16px;
+      max-width: 300px;
+      letter-spacing: 0.8px;
+      line-height: 1.3em;
+      h4 {
+        text-transform: uppercase;
+      }
+    }
+  }
+  .taste-fill {
+    position: relative;
+    padding: 48px 0;
+    button {
+      position: absolute;
+      z-index: 1;
+      border: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: $clrwht;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px 0 rgba(66, 66, 66, 0.2);
+      top: calc(55% - 30px);
+      &.next {
+        left: calc(100% - 20px);
+      }
+      &.prev {
+        left: -20px;
+      }
+    }
+    .taste-cards {
+      width: 100%;
+      overflow: hidden;
+      .taste-slider {
+        height: 160px;
+        white-space: nowrap;
+        transition: 0.3s;
+        .taste-fill-preview {
+          display: inline-block;
+          text-align: center;
+          flex-direction: column;
+          flex: 1;
+          border-radius: 20px;
+          min-height: 140px;
+          box-shadow: 0 0 0 1px rgba(87, 87, 87, 0.1),
+            0 8px 8px 0 rgba(234, 224, 218, 0.3);
+          border-radius: 16px;
+          transition: all 0.1s ease-in-out;
+          border: 0;
+          cursor: pointer;
+          background-color: #fff;
+          -webkit-tap-highlight-color: transparent;
+          margin: 8px 0.7%;
+          width: 32%;
+          overflow: hidden;
+          @include hover-box;
+          .picture {
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 55%;
+            img {
+              margin: 8px;
+            }
+          }
+          h3 {
+            font-weight: 400;
+            font-size: 1em;
+            padding: 8px;
+            margin: 0 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            width: calc(100% - 22px);
+            text-overflow: ellipsis;
+          }
+          p {
+            color: #575757;
+            font-size: 0.875em;
+            white-space: normal;
+          }
+        }
+      }
+    }
+  }
+}
+
+.taste-preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(51, 51, 51, 0.5);
+  min-height: 100%;
+  min-width: 100%;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  //   align-items: center;
+  .taste-content {
+    border-radius: 16px;
+    background-color: $clrwht;
+    width: 80%;
+    height: max-content;
+    margin-top: 5vh;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    .taste-header {
+      position: relative;
+      color: $clrwht;
+      width: 100%;
+      height: 96px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding-block-end: 8px;
+      img {
+        margin-top: 6px;
+        padding: 4px 4px;
+        height: 50px;
+        width: 50px;
+      }
+      button {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        height: 24px;
+        width: 24px;
+        margin: 0;
+        padding: 0;
+        color: $clrwht;
+        border: 0;
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+    }
+    .taste-keywords {
+      display: flex;
+      button {
+        margin: 8px;
+        border: solid 2px $clrwht;
+        color: $clrwht;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        .count {
+          display: inline-block;
+          margin-inline-end: 4px;
+          padding: 0 4px;
+          border-radius: 3em;
+          font-size: 0.875em;
+        }
+      }
+    }
+    .taste-reviews {
+      overflow-y: scroll;
+      margin-block-end: 24px;
+      width: 100%;
+      .taste-review {
+        > * {
+          display: inline-block;
+        }
+        .reviewer {
+          padding: 0 32px;
+        }
+        .content {
+          display: block;
+          margin: 16px 8px 4px 8px;
+          padding: 16px;
+          @include hover-box;
+        }
+      }
+    }
+  }
+}

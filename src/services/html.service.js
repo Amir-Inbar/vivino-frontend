@@ -49,15 +49,17 @@ function _bold(content, spanClassName = "bold") {
 }
 
 function _lines(str) {
-    return str.split("\n")
+    // str = str.split("\n\n").map((section) => `<section>${section}</section>`).join("");
+    str = str.split("\n")
         .map((line) => {
             if (line === "---") return `<hr/>`;
             if (line.slice(0, 3) === "###") return `<h3>${line.slice(3)}</h3>`;
             if (line.slice(0, 2) === "##") return `<h2>${line.slice(2)}</h2>`;
             if (line.slice(0, 1) === "#") return `<h1>${line.slice(1)}</h1>`;
             if (line.slice(0, 2) === "||" || line.slice(0, 2) === "<<") return line;
-            return `<p>${line}</p>`;
+            return line ? `<p>${line}</p>` : '';
         }).join("");
+    return str;
 }
 
 function _template(str) {
@@ -100,7 +102,7 @@ function _template(str) {
             });
             if (dynLines.length)
                 content = content.replace(`{{${dynVar[dynVar.length - 1]}}}`, dynLines.join(""));
-            str = str.replace(`<<${exp}>>`, content);
+            str = str.replace(`<<${exp}>>`, dynLines.length === 1 ? dynLines[0] : content);
         });
     }
     return str;
