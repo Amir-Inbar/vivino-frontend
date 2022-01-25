@@ -64,6 +64,7 @@
 .winery-header {
   position: relative;
   .winery-map {
+    animation: fadein 5s ease-in;
     mix-blend-mode: multiply;
     position: relative;
     height: 170px;
