@@ -77,7 +77,7 @@ export const PrimaryWine = (props) => {
                 d="M-0.000,13.281 L6.568,7.001 L-0.000,0.722 "
                 fill="none"
                 stroke="#585858"
-                stroke-width="1"
+                strokeWidth="1"
               ></path>
             </g>
           </svg>

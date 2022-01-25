@@ -36,21 +36,23 @@ export function WineHeader(props) {
   };
 
   return (
-    <div className="top-section full">
-      <div className="picture">
-        <img src={wine.image} />
-      </div>
-      <div className="content">
-        <h2>{wine.winery.name || wine.winery}</h2>
-        <h1>
-          {wine.name} {wine.vintage}
-        </h1>
-        <div className="tags">{keywords()}</div>
-        <div className="rate">
-          <div className="avg">{rate()}</div>
-          <div className="more-info">
-            <StarRate rate={rate()} />
-            <div className="num-ratings">{wine.reviews.length} ratings</div>
+    <div className="wine-header full">
+      <div className="information fit-media">
+        <div className="picture">
+          <img src={wine.image} />
+        </div>
+        <div className="content">
+          <h2>{wine.winery.name || wine.winery}</h2>
+          <h1>
+            {wine.name} {wine.vintage}
+          </h1>
+          <div className="tags">{keywords()}</div>
+          <div className="rate">
+            <div className="avg">{rate()}</div>
+            <div className="more-info">
+              <StarRate rate={rate()} />
+              <div className="num-ratings">{wine.reviews.length} ratings</div>
+            </div>
           </div>
         </div>
       </div>

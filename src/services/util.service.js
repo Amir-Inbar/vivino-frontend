@@ -1,5 +1,3 @@
-import IGNORE_WORDS from "../assets/json/ignore.words.json"
-
 async function getCurrentPosition() {
     try {
         const geolocation = await new Promise((resolve, reject) => {
@@ -24,55 +22,6 @@ export async function getDistanceInKm(location1, location2) {
     return res;
 }
 
-export function createWordsRateMap(str) {
-    if (!str) return {};
-    const extractKeywords = (str) => {
-        const url = `((([A-Za-z]{3,9}:(?:\\/\\/)?)(?:[-;:&=\\+\\$,\\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\\+\\$,\\w]+@)[A-Za-z0-9.-]+)((?:\\/[\\+~%\\/.\\w-_]*)?\\??(?:[-\\+=&;%@.\\w_]*)#?(?:[\\w]*))?)`;
-        const ignore = `\\b(?<!(${url}|${IGNORE_WORDS.join("|")}))`;
-        const pattern = `(\\b(((?:[A-Z]+[\\s|\\-])?[A-Z](\\w+)(\\s|\\.\\w+|)){1,3}(?=\\W))|\\b([a-z]+){3})${ignore}`;
-        const re = new RegExp(pattern, "gm");
-        return str.match(re) || [];
-    }
-    const words = extractKeywords(str);
-    const totalShows = (val) => words.map(word => word.replace("-", " ")).filter(word => !isIgnoreWord(word) && word === val).length || 1;
-    const isIgnoreWord = (keyword) => IGNORE_WORDS.includes(keyword.toLowerCase());
-    return words.reduce((sum, value, index, words) => {
-        const rate = (acc) => (acc * (words.length / index) ^ (1 / (totalShows(value)))) * (1 + (words.length / index) / words.length);
-        const isValid = (keyword) => isNaN(keyword) && keyword.length > 2 && !isIgnoreWord(keyword);
-        const setFormat = (value) => value.split(" ").map(word => {
-            return word.split("-").map(val => {
-                return val.charAt(0).toUpperCase() + val.slice(1).toLowerCase();
-            }).join("-");
-        }).filter(word => !isIgnoreWord(word)).join(" ");
-        let keyword = setFormat(value);
-        if (isValid(keyword)) {
-            const key = Object.keys(sum).find(key => (key !== keyword) && (keyword.includes(key) || keyword.replace(" ", "-") === key));
-            if (key)
-                if (key.split(" ").length < keyword.split(" ").length) {
-                    sum[keyword] = sum[key];
-                    delete sum[key];
-                } else keyword = key;
-            sum[keyword] = sum[keyword] ? rate(sum[keyword] + 1) : rate(1);
-        }
-        return sum;
-    }, {});
-}
-
-export function getKeywords(str, max = 6) {
-    if (!str) return [];
-    const sortMapToArray = (obj, isDescending = true) => {
-        const arr = Object.keys(obj).map(key => (key));
-        return arr.sort((val1, val2) => isDescending ? obj[val2] - obj[val1] : obj[val1] - obj[val2]) || [];
-    }
-    if (Object.prototype.toString.call(str) === '[object Array]') str = str.join(',');
-    const rated = createWordsRateMap(str);
-    return sortMapToArray(rated).slice(0, max).filter(word => rated[word] > 1);
-}
-
-export function isWordIgnored(word) {
-    return IGNORE_WORDS.includes(word.toLowerCase());
-}
-
 export function deepClone(value) {
     if (typeOf(value) === "Array" || typeOf(value) === "Object") {
         if (typeOf(value) === "Array") value = [...value];
@@ -85,10 +34,10 @@ export function deepClone(value) {
 }
 
 export function getShortSentence(str, length = 48) {
-    if (str.length < length) return str;
+    if (str.length < length) return str.charAt(0).toUpperCase() + str.slice(1);
     var res = str.substr(0, length);
     res = str.substr(0, Math.min(res.length, res.lastIndexOf(" ")));
-    return res + '...';
+    return res.charAt(0).toUpperCase() + res.slice(1) + '...';
 }
 
 export async function getBase64FromUrl(url) {

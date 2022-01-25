@@ -3,7 +3,7 @@ import { TasteFill } from "./TasteFills";
 import tastes from "../assets/json/fill-taste.json";
 
 export function TasteLike(props) {
-  const { wine } = props;
+  const { wine, setTaste } = props;
 
   const basedOn = () =>
     `The taste profile of ${wine.winery.name || wine.winery} ${
@@ -20,7 +20,7 @@ export function TasteLike(props) {
           <p>{basedOn()}</p>
         </div>
       </div>
-      <TasteFill tastes={tastes} reviews={wine.reviews} />
+      <TasteFill tastes={tastes} reviews={wine.reviews} setTaste={setTaste} />
     </div>
   );
 }

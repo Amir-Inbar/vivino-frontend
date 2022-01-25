@@ -16,7 +16,6 @@ export function ScaleRate(props) {
       },
       { [scale.min]: 0, [scale.max]: 0 }
     );
-    // console.log(count);
     const avg = count[scale.max] / (count[scale.min] + count[scale.max]);
     return { min: scale.min, max: scale.max, avg: avg || 0.5 };
   });
@@ -36,7 +35,7 @@ export function ScaleRate(props) {
             <div className="scale">
               <div
                 style={{
-                  left: (wine[scale.max] / 100) * slideRange + "%",
+                  marginInlineStart: (wine[scale.max] / 100) * slideRange + "%",
                   width: barWidth + "%",
                 }}
               ></div>
