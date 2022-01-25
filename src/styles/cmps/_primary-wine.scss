@@ -36,20 +36,25 @@
 
   .wines-carousel {
     margin-block-start: 80px;
-    transform: translate3d(0%, 0px, 0px);
     display: flex;
     transition: all 0.3s ease-out;
     background-repeat: no-repeat;
     gap: 15px;
+
+    overflow-x: hidden;
     .wine-card {
       background-color: #fff;
       padding: 16px;
       box-shadow: 0 0 0 1px rgb(87 87 87 / 10%),
         0 8px 8px 0 rgb(234 224 218 / 30%);
       border-radius: 16px;
-      transition: all 0.1s ease-in-out;
+      transition: all 0.3s ease-out;
+
       border: 0;
       width: 100%;
+      max-width: 25%;
+      flex-basis: 25%;
+      flex-shrink: 0;
       cursor: pointer;
       background-color: #fff;
 
@@ -58,10 +63,12 @@
           transition: all 0.25s ease-in-out;
           margin-top: -56px;
           height: 300px;
+          background-position: 50%;
         }
         .main-rating {
           align-self: center;
           flex-grow: 2;
+
           .rating {
             padding-bottom: 24px;
 
@@ -79,9 +86,7 @@
         color: #1e1e1e;
         background-color: transparent;
         text-align: left;
-        font-size: 16px;
-        line-height: 24px;
-        font-weight: 400;
+
         p {
           &:not(:first-of-type) {
             font-weight: 600;
@@ -91,9 +96,7 @@
       .wine-location {
         color: #1e1e1e;
         background-color: transparent;
-        font-size: 16px;
-        line-height: 24px;
-        font-weight: 400;
+
         img {
           height: 24px;
           min-width: 24px;
@@ -114,6 +117,12 @@
         }
       }
     }
+
+    .wine-title {
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 500;
+    }
   }
 
   .carousel-control {
@@ -127,14 +136,21 @@
     justify-content: center;
     box-shadow: 0 4px 20px 0 rgb(66 66 66 / 20%);
     cursor: pointer;
-    position: absolute;
     top: 50%;
-    right: 0;
-    transform: translate(50%, -50%);
+    position: absolute;
 
     svg {
       width: 15px;
       height: 15px;
     }
+  }
+
+  .right-control {
+    transform: translate(50%, -50%);
+    right: 0;
+  }
+  .left-control {
+    transform: translate(-50%, -50%);
+    left: 0;
   }
 }
