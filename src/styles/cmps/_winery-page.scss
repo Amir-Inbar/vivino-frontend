@@ -64,6 +64,7 @@
 .winery-header {
   position: relative;
   .winery-map {
+    mix-blend-mode: multiply;
     position: relative;
     height: 170px;
     iframe {
