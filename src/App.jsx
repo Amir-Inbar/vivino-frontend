@@ -14,9 +14,9 @@ export function App() {
         <main className="container">
           <AppHeader />
           <Switch>
-            <Route component={HomePage} path="/" />
+            {/* <Route component={HomePage} path="/" /> */}
             {/* <Route component={WinePage} path="/" /> */}
-            {/* <Route component={WineryPage} path="/" /> */}
+            <Route component={WineryPage} path="/" />
           </Switch>
         </main>
       </div>

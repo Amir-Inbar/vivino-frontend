@@ -3,24 +3,9 @@ import { sentenceToKababCase } from "../services/util.service";
 import { StarRate } from "./StarRate";
 
 export function WineSlider(props) {
-  const { reviews } = props;
+  const { reviews, wines } = props;
   const [position, setPosition] = useState(0);
   const itemPerPage = 4;
-
-  const wines = [
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-  ];
 
   const display = () => {
     return wines.map((item, idx) => {
