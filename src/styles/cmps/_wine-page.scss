@@ -332,7 +332,7 @@
         overflow: hidden;
         @include hover-box;
         &:hover .bottle-img {
-          transform: translateY(-5px) scale(102%);
+          transform: translateY(-10px);
         }
         .preview-header {
           display: flex;
