@@ -19,8 +19,8 @@ export function WineSlider(props) {
         <div
           className="wine-preview"
           style={{
-            width: `calc(100% / ${itemPerPage} - 8px)`,
-            margin: `0px 4px`,
+            width: `calc(100% / ${itemPerPage} - 20px)`,
+            margin: `0px 10px`,
           }}
           key={"WINE_" + idx}
         >
