@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { sentenceToKababCase } from "../services/util.service";
 export const PrimaryWine = (props) => {
   const [selectColor, setSelectColor] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
@@ -23,11 +24,11 @@ export const PrimaryWine = (props) => {
             backgroundImage:
               selectColor === 1
                 ? `url(${
-                    require('../assets/imgs/icons/coinwhite.svg').default
+                    require("../assets/imgs/icons/coinwhite.svg").default
                   })`
-                : `url(${require('../assets/imgs/icons/coin.svg').default})`,
+                : `url(${require("../assets/imgs/icons/coin.svg").default})`,
 
-            backgroundColor: selectColor === 1 ? '#ba1628' : '',
+            backgroundColor: selectColor === 1 ? "#ba1628" : "",
           }}
         ></button>
         <button
@@ -37,13 +38,13 @@ export const PrimaryWine = (props) => {
             backgroundImage:
               selectColor === 2
                 ? `url(${
-                    require('../assets/imgs/icons/doublecoinwhite.svg').default
+                    require("../assets/imgs/icons/doublecoinwhite.svg").default
                   })`
                 : `url(${
-                    require('../assets/imgs/icons/doublecoin.svg').default
+                    require("../assets/imgs/icons/doublecoin.svg").default
                   })`,
 
-            backgroundColor: selectColor === 2 ? '#ba1628' : '',
+            backgroundColor: selectColor === 2 ? "#ba1628" : "",
           }}
         ></button>
         <button
@@ -53,13 +54,13 @@ export const PrimaryWine = (props) => {
             backgroundImage:
               selectColor === 3
                 ? `url(${
-                    require('../assets/imgs/icons/threecoinwhite.svg').default
+                    require("../assets/imgs/icons/threecoinwhite.svg").default
                   })`
                 : `url(${
-                    require('../assets/imgs/icons/threecoin.svg').default
+                    require("../assets/imgs/icons/threecoin.svg").default
                   })`,
 
-            backgroundColor: selectColor === 3 ? '#ba1628' : '',
+            backgroundColor: selectColor === 3 ? "#ba1628" : "",
           }}
         ></button>
       </div>
@@ -71,7 +72,7 @@ export const PrimaryWine = (props) => {
           className="carousel-control right-control"
           onClick={() => onChangePage(currentPage - 100)}
         >
-          <svg class="chevron__chevron--2zNRX undefined" viewBox="0 0 7 14">
+          <svg viewBox="0 0 7 14">
             <g>
               <path
                 d="M-0.000,13.281 L6.568,7.001 L-0.000,0.722 "
@@ -86,26 +87,22 @@ export const PrimaryWine = (props) => {
           className="carousel-control left-control"
           onClick={() => onChangePage(currentPage + 100)}
         >
-          <svg
-            style={{ transform: 'rotate(180deg)' }}
-            class="chevron__chevron--2zNRX chevron__left--2pdho"
-            viewBox="0 0 7 14"
-          >
+          <svg style={{ transform: "rotate(180deg)" }} viewBox="0 0 7 14">
             <g>
               <path
                 d="M-0.000,13.281 L6.568,7.001 L-0.000,0.722 "
                 fill="none"
                 stroke="#585858"
-                stroke-width="1"
+                strokeWidth="1"
               ></path>
             </g>
           </svg>
         </div>
-        {props.wines.map((wine) => (
-          <div className="wine-card">
+        {props.wines.map((wine, idx) => (
+          <div className="wine-card" key={"WINE_" + idx}>
             <div className="upper-card flex ">
               <div className="wine-img hover-wine">
-                <img src={require('../assets/imgs/icons/1wine.png')} alt="" />
+                <img src={require("../assets/imgs/icons/1wine.png")} alt="" />
               </div>
               <div className="main-rating flex column align-center ">
                 <div className="rating wine-title flex column align-center">
@@ -116,10 +113,10 @@ export const PrimaryWine = (props) => {
                 <div
                   className="wine-title"
                   style={
-                    wine.price ? { color: '#046057' } : { color: '#b03000' }
+                    wine.price ? { color: "#046057" } : { color: "#b03000" }
                   }
                 >
-                  {wine.price ? wine.price + '$' : 'Sold Out'}
+                  {wine.price ? wine.price + "$" : "Sold Out"}
                 </div>
               </div>
             </div>
@@ -131,7 +128,9 @@ export const PrimaryWine = (props) => {
             </div>
             <div className="wine-location flex align-center ">
               <img
-                src={require(`../assets/imgs/icons/flags/${wine.country}.png`)}
+                src={require(`../assets/imgs/icons/flags/${sentenceToKababCase(
+                  wine.country
+                )}.png`)}
                 alt=""
               />
               <span>

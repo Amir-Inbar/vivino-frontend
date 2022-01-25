@@ -1,6 +1,6 @@
 import { PrimaryWine } from "../components/PrimaryWine";
 import demoData from "../temp/demo.json";
-export const VivinoApp = () => {
+export const HomePage = () => {
   const { wines } = demoData;
   return (
     <section className="main-app">
