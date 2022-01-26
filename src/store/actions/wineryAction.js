@@ -1,12 +1,11 @@
-import { wineService } from '../../services/wine.service';
+import { wineryService } from '../../services/winery.service';
 
-export function loadWines() {
+export function loadWineries() {
   return async (dispatch, getState) => {
-    console.log('amir');
     const { filterBy } = getState().wineModule;
     try {
-      const wines = await wineService.query(filterBy);
-      dispatch({ type: 'SET_WINES', wines });
+      const wineries = await wineryService.query(filterBy);
+      dispatch({ type: 'SET_WINERIES', wineries });
     } catch (err) {
       console.log(err);
     }

@@ -1,15 +1,15 @@
 const INITIAL_STATE = {
-  wineries: null,
+  reviews: null,
 };
 
-export function wineryReducer(state = INITIAL_STATE, action) {
+export function reviewReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case 'SET_WINERIES':
+    case 'SET_REVIEWS':
       return {
         ...state,
-        wineries: [...action.wineries.data],
-        page: { ...action.wineries.page },
-        total: action.wineries.total,
+        reviews: [...action.reviews.data],
+        page: { ...action.reviews.page },
+        total: action.reviews.total,
       };
     case 'ADD_WINE':
       return {
