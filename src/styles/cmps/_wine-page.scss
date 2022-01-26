@@ -330,19 +330,15 @@
       }
       .wine-preview {
         > img {
-          position: absolute;
-          z-index: -1;
-          border-radius: 16px 16px 0 0;
-          width: 100%;
           height: 150px;
-          opacity: 0.5;
-          // @include card-wave;
+          border-radius: 16px 16px 0 0;
+          @include card-wave;
         }
-        background: linear-gradient(
-          338deg,
-          rgba(255, 255, 255, 1) 62%,
-          rgba(46, 28, 14, 0) 100%
-        );
+        // background: linear-gradient(
+        //   338deg,
+        //   rgba(255, 255, 255, 1) 62%,
+        //   rgba(46, 28, 14, 0) 100%
+        // );
         position: relative;
         cursor: pointer;
         min-width: 210px;
@@ -355,10 +351,6 @@
         &:hover {
           .bottle-img {
             transform: translateY(-10px) rotateZ(-1deg);
-          }
-          .wine-rate {
-            animation: hover-zoom 1s 2 ease-in-out;
-            animation-delay: 0.5s;
           }
         }
         .preview-header {

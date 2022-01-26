@@ -103,6 +103,10 @@
 }
 
 @mixin card-wave {
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  opacity: 0.3;
   clip-path: polygon(
     100% 0%,
     0% 0%,
