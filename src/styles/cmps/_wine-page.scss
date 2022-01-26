@@ -8,11 +8,13 @@
     rgba(247, 243, 240, 0) 100%
   );
   .information {
+    &:hover img {
+      transform: rotateZ(-3deg);
+    }
     display: flex;
     margin-block-end: 24px;
     align-items: flex-start;
     .picture {
-      padding-top: 28px;
       display: flex;
       justify-content: center;
       @include for-tablet-layout {
@@ -21,6 +23,7 @@
       img {
         padding: 25px;
         max-height: 300px;
+        transition: transform 2s;
       }
     }
     .content {
@@ -167,9 +170,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 55%;
             img {
               margin: 8px;
+              max-width: 50%;
             }
           }
           h3 {
@@ -306,7 +309,7 @@
       left: 5px;
     }
   }
-  @include for-tablet-layout {
+  @include for-normal-layout {
     button {
       display: none;
     }
@@ -318,21 +321,29 @@
     overflow: hidden;
     .wine-slider {
       white-space: nowrap;
-      @include for-tablet-layout {
+      @include for-normal-layout {
         display: flex;
         flex-wrap: wrap;
-        width: 90vw;
+        gap: 20px;
+        white-space: initial;
       }
       .wine-preview {
+        position: relative;
         cursor: pointer;
         min-width: 210px;
         display: inline-block;
         flex: 1;
         min-height: 360px;
-        overflow: hidden;
+        width: calc(25% - 20px);
+        margin: 0 10px;
         @include hover-box;
-        &:hover .bottle-img {
-          transform: translateY(-10px);
+        &:hover {
+          .bottle-img {
+            transform: translateY(-10px) rotateZ(-2deg);
+          }
+          .wine-rate {
+            animation: hover-zoom 1s;
+          }
         }
         .preview-header {
           display: flex;
@@ -345,7 +356,7 @@
               top: -20px;
               height: 300px;
               padding: 0 16px;
-              transition: transform 0.5s;
+              transition: transform 1s;
               &:not(:last-child) {
                 position: absolute;
               }
