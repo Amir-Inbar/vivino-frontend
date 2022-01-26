@@ -17,6 +17,7 @@ export function WineSlider(props) {
       ).toFixed(1);
       return (
         <div className="wine-preview" key={"WINE_" + idx}>
+          {item.background ? <img src={item.background} /> : ""}
           <div className="preview-header">
             <div className="wine-bottle">
               <img className="bottle-img" src={item.image} />
