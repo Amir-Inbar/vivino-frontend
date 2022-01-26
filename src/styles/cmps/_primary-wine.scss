@@ -34,94 +34,92 @@
     }
   }
 
-  .wines-carousel {
-    margin-block-start: 80px;
-    display: flex;
-    transition: all 0.3s ease-out;
-    background-repeat: no-repeat;
-    gap: 15px;
+  .main-carousel {
+    position: relative;
 
-    overflow-x: hidden;
-    .wine-card {
-      @include hover-box;
-      background-color: #fff;
-      padding: 16px;
-      box-shadow: 0 0 0 1px rgb(87 87 87 / 10%),
-        0 8px 8px 0 rgb(234 224 218 / 30%);
-      border-radius: 16px;
+    .wines-carousel {
       transition: all 0.3s ease-out;
+      background-repeat: no-repeat;
+      padding-top: 70px;
+      margin: 0px auto;
 
-      border: 0;
-      width: 100%;
-      max-width: 25%;
-      flex-basis: 25%;
-      flex-shrink: 0;
-      cursor: pointer;
-      background-color: #fff;
+      .wine-card {
+        @include hover-box;
+        background-color: #fff;
+        padding: 16px;
+        box-shadow: 0 0 0 1px rgb(87 87 87 / 10%),
+          0 8px 8px 0 rgb(234 224 218 / 30%);
+        border-radius: 16px;
+        transition: all 0.3s ease-out;
+        border: 0;
+        margin: 0 8px;
+        flex-shrink: 0;
+        background-color: #fff;
+        cursor: pointer;
 
-      .upper-card {
-        .wine-img {
-          transition: all 0.25s ease-in-out;
-          margin-top: -56px;
-          height: 300px;
-          background-position: 50%;
-        }
-        .main-rating {
-          align-self: center;
-          flex-grow: 2;
+        .upper-card {
+          .wine-img {
+            transition: all 0.25s ease-in-out;
+            margin-top: -56px;
+            height: 300px;
+            background-position: 50%;
+          }
+          .main-rating {
+            align-self: center;
+            flex-grow: 2;
 
-          .rating {
-            padding-bottom: 24px;
+            .rating {
+              padding-bottom: 24px;
 
-            .avg-rate {
-              font-size: 40px;
-              line-height: 48px;
-              font-weight: 400;
-              margin-right: 8px;
+              .avg-rate {
+                font-size: 40px;
+                line-height: 48px;
+                font-weight: 400;
+                margin-right: 8px;
+              }
             }
           }
         }
-      }
-      .wine-details {
-        padding-bottom: 8px;
-        color: $clrblk;
-        background-color: transparent;
-        text-align: left;
+        .wine-details {
+          padding-bottom: 8px;
+          color: $clrblk;
+          background-color: transparent;
+          text-align: left;
 
-        p {
-          &:not(:first-of-type) {
-            font-weight: 600;
+          p {
+            &:not(:first-of-type) {
+              font-weight: 600;
+            }
+          }
+        }
+        .wine-location {
+          color: $clrblk;
+          background-color: transparent;
+
+          img {
+            height: 24px;
+            min-width: 24px;
+            width: 24px;
+            margin-inline-end: 5px;
+          }
+        }
+        &:hover {
+          text-decoration: none;
+          .hover-wine {
+            transition: all 0.25s ease-in-out;
+            margin-top: -72px;
+            height: 316px;
           }
         }
       }
-      .wine-location {
-        color: $clrblk;
-        background-color: transparent;
 
-        img {
-          height: 24px;
-          min-width: 24px;
-          width: 24px;
-          margin-inline-end: 5px;
-        }
+      .wine-title {
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 500;
       }
-      &:hover {
-        text-decoration: none;
-        .hover-wine {
-          transition: all 0.25s ease-in-out;
-          margin-top: -72px;
-          height: 316px;
-        }
-      }
-    }
-
-    .wine-title {
-      font-size: 16px;
-      line-height: 24px;
-      font-weight: 500;
     }
   }
-
   .carousel-control {
     display: flex;
     width: 50px;
@@ -144,10 +142,10 @@
 
   .right-control {
     transform: translate(50%, -50%);
-    right: 0;
+    right: 10px;
   }
   .left-control {
     transform: translate(-50%, -50%);
-    left: 0;
+    left: 10px;
   }
 }

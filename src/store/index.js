@@ -1,12 +1,13 @@
 import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import { robotReducer } from './reducers/robotReducer';
-// import { userReducer } from './reducers/userReducer';
+import { wineReducer } from './reducers/wineReducer';
+import { wineryReducer } from './reducers/wineryReducer';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-  robotModule: robotReducer,
+  wineModule: wineReducer,
+  wineryModule: wineryReducer,
 });
 
 export const store = createStore(
