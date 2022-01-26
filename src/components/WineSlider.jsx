@@ -3,24 +3,9 @@ import { sentenceToKababCase } from "../services/util.service";
 import { StarRate } from "./StarRate";
 
 export function WineSlider(props) {
-  const { reviews } = props;
+  const { reviews, wines } = props;
   const [position, setPosition] = useState(0);
   const itemPerPage = 4;
-
-  const wines = [
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-    ...props.wines,
-  ];
 
   const display = () => {
     return wines.map((item, idx) => {
@@ -31,14 +16,8 @@ export function WineSlider(props) {
         wineReviews.length
       ).toFixed(1);
       return (
-        <div
-          className="wine-preview"
-          style={{
-            width: `calc(100% / ${itemPerPage} - 8px)`,
-            margin: `0px 4px`,
-          }}
-          key={"WINE_" + idx}
-        >
+        <div className="wine-preview" key={"WINE_" + idx}>
+          {item.background ? <img src={item.background} /> : ""}
           <div className="preview-header">
             <div className="wine-bottle">
               <img className="bottle-img" src={item.image} />

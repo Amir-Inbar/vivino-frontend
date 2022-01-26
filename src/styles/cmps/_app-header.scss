@@ -1,4 +1,5 @@
 .app-header {
+  user-select: none;
   display: flex;
   flex-direction: column;
   .control-bar {
@@ -38,6 +39,7 @@
       max-width: 490px;
       list-style-type: none;
       li {
+        cursor: pointer;
         display: flex;
         align-items: center;
         background-repeat: no-repeat;
@@ -49,4 +51,14 @@
       }
     }
   }
+}
+
+.popup-menu {
+  position: absolute;
+  z-index: 100;
+  width: 600px;
+  height: 400px;
+  background-color: red;
+  padding: 16px;
+  border-radius: 16px;
 }

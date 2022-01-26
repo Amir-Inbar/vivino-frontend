@@ -4,6 +4,11 @@ import sections from "../assets/json/scale-sections.json";
 export function ScaleRate(props) {
   const { wine } = props;
 
+  const basedOn = () =>
+    `The taste profile of ${wine.winery.name || wine.winery} ${
+      wine.name
+    } is based on ${wine.reviews.length} user reviews`;
+
   const scaleReducer = sections.map((scale) => {
     const count = wine.reviews.reduce(
       (sum, review) => {
@@ -28,7 +33,7 @@ export function ScaleRate(props) {
         ? scale.avg * slideRange * 0.3 +
           (wine[scale.max] / 100) * slideRange * 0.7
         : scale.avg * slideRange || 0.5 * slideRange;
-      return (
+      return wine[scale.max] ? (
         <tr key={"SCALE_RATE_" + idx}>
           <td>{camelCaseToSentence(scale.min)}</td>
           <td className="scale-container">
@@ -43,13 +48,26 @@ export function ScaleRate(props) {
           </td>
           <td>{camelCaseToSentence(scale.max)}</td>
         </tr>
+      ) : (
+        ""
       );
     });
   };
 
-  return (
-    <table>
-      <tbody>{scales()}</tbody>
-    </table>
-  );
+  const data = scales();
+
+  return data.filter((scale) => scale).length ? (
+    <>
+      <h2>What does this wine taste like?</h2>
+      <div className="details">
+        <table>
+          <tbody>{data}</tbody>
+        </table>
+        <div className="more">
+          <h4>Wine lovers taste summary</h4>
+          <p>{basedOn()}</p>
+        </div>
+      </div>
+    </>
+  ) : null;
 }

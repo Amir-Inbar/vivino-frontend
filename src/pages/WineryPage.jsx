@@ -9,6 +9,12 @@ export function WineryPage() {
   const [reviews, setReviews] = useState([]);
   const [rateAvg, setRateAvg] = useState(0);
 
+  // demo.reviews.forEach((review) => {
+  //   const { reviewer, description, rate } = review;
+  //   console.log(`INSERT INTO reviews (userId,wineId,wineryId,reviewer,description,rate)
+  // VALUES(NULL,2,1,"${reviewer}","${description}",${rate})`);
+  // });
+
   useEffect(() => {
     setWines(demo.wines.filter((wine) => wine.wineryId === winery.id));
   }, [winery]);
