@@ -15,7 +15,7 @@ export const WinePage = () => {
   const { winery } = useSelector((state) => state.wineryModule);
 
   useEffect(() => {
-    dispatch(loadWine(3));
+    dispatch(loadWine(1));
   }, [dispatch]);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export const WinePage = () => {
       <WineHeader wine={wine} />
       <WineryPreview winery={winery} />
       <TasteLike wine={wine} setTaste={setTaste} />
-      <TastePreview reviews={wine.reviews} taste={taste} setTaste={setTaste} />
+      <TastePreview taste={taste} setTaste={setTaste} />
       <MoreWines winery={winery} activeId={wine?._id} />
     </>
   ) : null;

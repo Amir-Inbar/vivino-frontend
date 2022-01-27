@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { innerHtml } from "../services/html.service";
+import { sentenceToKababCase } from "../services/util.service";
 import { StarRate } from "./StarRate";
 
 export function TastePreview(props) {
-  const { taste, reviews, setTaste } = props;
+  const { taste, setTaste } = props;
   const [keyword, setKeyword] = useState("");
+  if (!taste) return null;
+  const url = require(`../assets/imgs/icons/taste/${sentenceToKababCase(
+    taste.name
+  )}.svg`);
+  const reviews = [];
 
   function display() {
     if (
@@ -98,7 +104,7 @@ export function TastePreview(props) {
           style={{ backgroundColor: taste.color }}
         >
           <button onClick={() => setTaste(null)}>X</button>
-          <img src={taste.url} />
+          <img src={url} />
           <h2>{taste.name}</h2>
         </section>
         <section className="taste-keywords">{keywords()}</section>

@@ -5,63 +5,28 @@ import {
 } from "../services/util.service";
 
 export function TasteFill(props) {
-  const { tastes, reviews, setTaste } = props;
+  const { tastes, setTaste } = props;
   const [position, setPosition] = useState(0);
-  if (!reviews) return null;
+  if (!tastes) return null;
 
-  function getDescription(mentions) {
-    const desc = mentions.map((taste) => taste.keyword).join(", ");
-    return getShortSentence(desc);
-  }
-
-  const tastesReducer = tastes
-    .map((taste) => {
+  const display = () => {
+    return tastes.map((taste, idx) => {
       const url = require(`../assets/imgs/icons/taste/${sentenceToKababCase(
         taste.name
       )}.svg`);
-      var total = 0;
-      const mentions = taste.mentions
-        .map((keyword) => {
-          const count = reviews.reduce((sum, review) => {
-            const re = new RegExp(
-              `\\b(${keyword}|${keyword.replace(" ", "")})\\b`,
-              "gi"
-            );
-            const found = review.description.match(re) || [];
-            total += found.length;
-            sum += found.length;
-            return sum;
-          }, 0);
-          return { keyword, count };
-        })
-        .filter((mention) => !!mention.count)
-        .sort((a, b) => b.count - a.count);
-      return {
-        ...taste,
-        description: getDescription(mentions),
-        mentions,
-        total,
-        url,
-      };
-    })
-    .filter((taste) => !!taste.mentions.length)
-    .sort((a, b) => b.total - a.total);
-
-  const display = () => {
-    return tastesReducer.map((item, idx) => {
       return (
         <div
           className="taste-fill-preview"
           key={"TASTE_FILL_" + idx}
-          onClick={() => setTaste(item)}
+          onClick={() => setTaste(taste)}
         >
-          <div className="picture" style={{ backgroundColor: item.color }}>
-            <img src={item.url} />
+          <div className="picture" style={{ backgroundColor: taste.color }}>
+            <img src={url} />
           </div>
-          <h3>{item.description}</h3>
+          <h3>{taste.description}</h3>
           <p>
-            {item.total} mentions of{" "}
-            <span style={{ color: item.color }}>{item.name}</span> notes
+            {taste.total} mentions of{" "}
+            <span style={{ color: taste.color }}>{taste.name}</span> notes
           </p>
         </div>
       );
@@ -71,7 +36,7 @@ export function TasteFill(props) {
   const sliderStyle = () => {
     const sec = 2;
     const pos = position
-      ? -((Math.min((position + 1) * 3, tastesReducer.length) / 3) * 100 - 100)
+      ? -((Math.min((position + 1) * 3, tastes.length) / 3) * 100 - 100)
       : 0;
     return {
       transform: `translateX(${pos}%)`,
@@ -81,7 +46,7 @@ export function TasteFill(props) {
 
   return (
     <div className="taste-fill">
-      {tastesReducer.length > position * 3 + 3 ? (
+      {tastes.length > position * 3 + 3 ? (
         <button className="next" onClick={() => setPosition(position + 1)}>
           -
         </button>
