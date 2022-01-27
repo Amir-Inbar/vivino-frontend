@@ -1,4 +1,5 @@
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import { AppHeader } from "./components/AppHeader";
 // import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 import { WinePage } from "./pages/WinePage";
@@ -12,9 +13,9 @@ export function App() {
         <main className="container">
           <AppHeader />
           <Switch>
-            {/* <Route component={HomePage} path="/" /> */}
-            {/* <Route component={WinePage} path="/" /> */}
-            <Route component={WineryPage} path="/" />
+            <Route component={WinePage} path="/wine/:id" />
+            <Route component={WineryPage} path="/winery/:id" />
+            <Route component={HomePage} path="/" />
           </Switch>
         </main>
       </div>

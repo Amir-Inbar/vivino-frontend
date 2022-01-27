@@ -4,13 +4,14 @@ import { WineryHeader } from "../components/WineryHeader";
 import { WineryWines } from "../components/WineryWines";
 import { loadWinery } from "../store/actions/wineryAction";
 
-export function WineryPage() {
+export const WineryPage = (props) => {
   const dispatch = useDispatch();
   const { winery } = useSelector((state) => state.wineryModule);
 
   useEffect(() => {
-    dispatch(loadWinery(4));
-  }, [dispatch]);
+    const { id } = props.match.params;
+    dispatch(loadWinery(id));
+  }, [props.match.params.id]);
 
   return winery ? (
     <>
@@ -18,4 +19,4 @@ export function WineryPage() {
       <WineryWines winery={winery} max={8} />
     </>
   ) : null;
-}
+};

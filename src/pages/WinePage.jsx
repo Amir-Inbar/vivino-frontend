@@ -9,7 +9,7 @@ import { loadWine } from "../store/actions/wineAction";
 import { loadWinery } from "../store/actions/wineryAction";
 import { loadReview } from "../store/actions/reviewAction";
 
-export const WinePage = () => {
+export const WinePage = (props) => {
   const [taste, setTaste] = useState(null);
   const dispatch = useDispatch();
   const { wine } = useSelector((state) => state.wineModule);
@@ -17,9 +17,10 @@ export const WinePage = () => {
   const { reviews } = useSelector((state) => state.reviewModule);
 
   useEffect(() => {
-    dispatch(loadWine(8));
-    dispatch(loadReview(2, { page: { size: 4 } }));
-  }, [dispatch]);
+    const { id } = props.match.params;
+    dispatch(loadWine(id));
+    dispatch(loadReview(id, { page: { size: 4 } }));
+  }, [props.match.params.id]);
 
   useEffect(() => {
     if (wine?.wineryId) dispatch(loadWinery(wine.wineryId));
