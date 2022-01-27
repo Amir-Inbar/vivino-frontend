@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { sentenceToKababCase } from '../services/util.service';
-import demoData from '../temp/demo.json';
-import { useSelector, useDispatch } from 'react-redux';
-import { loadWines } from '../store/actions/wineAction';
+import { useEffect, useState } from "react";
+import { sentenceToKababCase } from "../services/util.service";
+import demoData from "../temp/demo.json";
+import { useSelector, useDispatch } from "react-redux";
+import { loadWines } from "../store/actions/wineAction";
 
 export const HomePage = () => {
   const [selectColor, setSelectColor] = useState(1);
@@ -35,11 +35,11 @@ export const HomePage = () => {
             backgroundImage:
               selectColor === 1
                 ? `url(${
-                    require('../assets/imgs/icons/coinwhite.svg').default
+                    require("../assets/imgs/icons/coinwhite.svg").default
                   })`
-                : `url(${require('../assets/imgs/icons/coin.svg').default})`,
+                : `url(${require("../assets/imgs/icons/coin.svg").default})`,
 
-            backgroundColor: selectColor === 1 ? '#ba1628' : '',
+            backgroundColor: selectColor === 1 ? "#ba1628" : "",
           }}
         ></button>
         <button
@@ -49,13 +49,13 @@ export const HomePage = () => {
             backgroundImage:
               selectColor === 2
                 ? `url(${
-                    require('../assets/imgs/icons/doublecoinwhite.svg').default
+                    require("../assets/imgs/icons/doublecoinwhite.svg").default
                   })`
                 : `url(${
-                    require('../assets/imgs/icons/doublecoin.svg').default
+                    require("../assets/imgs/icons/doublecoin.svg").default
                   })`,
 
-            backgroundColor: selectColor === 2 ? '#ba1628' : '',
+            backgroundColor: selectColor === 2 ? "#ba1628" : "",
           }}
         ></button>
         <button
@@ -65,13 +65,13 @@ export const HomePage = () => {
             backgroundImage:
               selectColor === 3
                 ? `url(${
-                    require('../assets/imgs/icons/threecoinwhite.svg').default
+                    require("../assets/imgs/icons/threecoinwhite.svg").default
                   })`
                 : `url(${
-                    require('../assets/imgs/icons/threecoin.svg').default
+                    require("../assets/imgs/icons/threecoin.svg").default
                   })`,
 
-            backgroundColor: selectColor === 3 ? '#ba1628' : '',
+            backgroundColor: selectColor === 3 ? "#ba1628" : "",
           }}
         ></button>
       </div>
@@ -98,7 +98,7 @@ export const HomePage = () => {
             className="carousel-control left-control"
             onClick={() => onChangePage(currentPage + 1)}
           >
-            <svg style={{ transform: 'rotate(180deg)' }} viewBox="0 0 7 14">
+            <svg style={{ transform: "rotate(180deg)" }} viewBox="0 0 7 14">
               <g>
                 <path
                   d="M-0.000,13.281 L6.568,7.001 L-0.000,0.722 "
@@ -110,24 +110,24 @@ export const HomePage = () => {
             </svg>
           </div>
         ) : null}
-        <div style={{ overflow: 'hidden' }}>
+        <div style={{ overflow: "hidden" }}>
           <div
             className="wines-carousel flex"
             style={{
               transform: `translateX(${currentPage * 100}%)`,
-              width: 'calc(100% - 10px)',
+              width: "calc(100% - 10px)",
             }}
           >
             {demoData.wines.map((wine, idx) => (
               <div
                 className="wine-card"
-                style={{ width: 'calc(25% - 16px)' }}
-                key={'WINE_' + idx}
+                style={{ width: "calc(25% - 16px)" }}
+                key={"WINE_" + idx}
               >
                 <div className="upper-card flex ">
                   <div className="wine-img hover-wine">
                     <img
-                      src={require('../assets/imgs/icons/1wine.png')}
+                      src={require("../assets/imgs/icons/1wine.png")}
                       alt=""
                     />
                   </div>
@@ -140,18 +140,16 @@ export const HomePage = () => {
                     <div
                       className="wine-title"
                       style={
-                        wine.price ? { color: '#046057' } : { color: '#b03000' }
+                        wine.price ? { color: "#046057" } : { color: "#b03000" }
                       }
                     >
-                      {wine.price ? wine.price + '$' : 'Sold Out'}
+                      {wine.price ? wine.price + "$" : "Sold Out"}
                     </div>
                   </div>
                 </div>
                 <div className="wine-details wine-title ">
                   <p>{wine.winery}</p>
-                  <p>
-                    {wine.name} {wine.vintage}
-                  </p>
+                  <p>{wine.name}</p>
                 </div>
                 <div className="wine-location flex align-center ">
                   <img
