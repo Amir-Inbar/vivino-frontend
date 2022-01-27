@@ -10,7 +10,7 @@ function getDescription(mentions) {
 }
 
 export function TasteFill(props) {
-  const { tastes, setTaste, click } = props;
+  const { tastes, setTaste } = props;
   const [position, setPosition] = useState(0);
   if (!tastes) return null;
 
@@ -26,7 +26,7 @@ export function TasteFill(props) {
           onClick={() => setTaste(taste)}
         >
           <div className="picture" style={{ backgroundColor: taste.color }}>
-            <img src={url} />
+            <img src={url} alt={taste.name} />
           </div>
           <h3>{getDescription(taste.mentions)}</h3>
           <p>

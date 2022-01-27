@@ -102,7 +102,7 @@ export function TastePreview(props) {
           style={{ backgroundColor: taste.color }}
         >
           <button onClick={() => setTaste(null)}>X</button>
-          <img src={url} />
+          <img src={url} alt={taste.name} />
           <h2>{taste.name}</h2>
         </section>
         <section className="taste-keywords">{keywords()}</section>

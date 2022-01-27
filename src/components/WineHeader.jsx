@@ -41,7 +41,7 @@ export function WineHeader(props) {
     <div className="wine-header full">
       <div className="information fit-media">
         <div className="picture">
-          <img src={wine.image} />
+          <img src={wine.image} alt={wine.name} />
         </div>
         <div className="content">
           <h2>{wine.winery}</h2>

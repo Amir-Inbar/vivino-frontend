@@ -41,6 +41,7 @@
       .tags {
         padding-bottom: 62px;
         .tag {
+          text-transform: capitalize;
           padding: 2px 8px 0 0;
           &:not(:last-child):after {
             margin-inline-start: 8px;
@@ -430,6 +431,7 @@
             color: $clr5;
           }
           .wine-country {
+            text-transform: capitalize;
             padding-top: 4px;
             display: flex;
             gap: 4px;
