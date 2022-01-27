@@ -6,8 +6,8 @@ export const wineService = {
 
 const API = 'wine';
 
-async function query(filter = {}) {
-  return httpService.get(API, { params: filter });
+async function query(queries) {
+  return httpService.get(API, null, queries);
 }
 
 // async function getBoardById(id) {

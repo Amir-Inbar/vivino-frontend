@@ -1,20 +1,26 @@
 import React, { useState } from "react";
-import { sentenceToKababCase } from "../services/util.service";
+import { sentenceToKababCase, tryRequire } from "../services/util.service";
 import { StarRate } from "./StarRate";
 
 export function WineSlider(props) {
-  const { reviews, wines } = props;
+  const { wines } = props;
   const [position, setPosition] = useState(0);
   const itemPerPage = 4;
 
   const display = () => {
     return wines.map((item, idx) => {
-      const wineReviews =
-        reviews?.filter((review) => review.wineId === item.id) || [];
-      const avgRate = (
-        wineReviews.reduce((sum, review) => (sum = sum + review.rate), 0) /
-        wineReviews.length
-      ).toFixed(1);
+      const WineRate = ({ rate, ratings }) => {
+        console.log(rate);
+        return rate ? (
+          <>
+            <p className="avg-rate">{rate.toFixed(1)}</p>
+            <StarRate rate={rate.toFixed(1)} />
+            {ratings ? (
+              <p className="total-ratings">{item.ratings} ratings</p>
+            ) : null}
+          </>
+        ) : null;
+      };
       return (
         <div className="wine-preview" key={"WINE_" + idx}>
           {item.background ? <img src={item.background} /> : ""}
@@ -24,10 +30,8 @@ export function WineSlider(props) {
               <img src={item.image} />
             </div>
             <div className="wine-rate">
-              <p className="avg-rate">{avgRate}</p>
-              <StarRate rate={avgRate} />
-              <p className="total-ratings">{wineReviews.length} ratings</p>
-              <p className="sale-status">Sold out</p>
+              <WineRate rate={item.rate} ratings={item.ratings} />
+              {/* <p className="sale-status">Sold out</p> */}
             </div>
           </div>
           <div className="preview-info">

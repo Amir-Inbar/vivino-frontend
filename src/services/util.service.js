@@ -1,3 +1,12 @@
+export function tryRequire(path) {
+    try {
+        return require(`${path}`);
+    } catch (err) {
+        console.log(err);
+        return null;
+    }
+};
+
 async function getCurrentPosition() {
     try {
         const geolocation = await new Promise((resolve, reject) => {
@@ -109,6 +118,7 @@ export function isHexColorLight(color) {
 }
 
 export function sentenceToKababCase(str) {
+    if (!str) return;
     return str
         .match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
         .map(x => x.toLowerCase())
@@ -116,6 +126,7 @@ export function sentenceToKababCase(str) {
 }
 
 export function sentenceToCamelCase(str) {
+    if (!str) return;
     return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
         return index === 0 ? word.toLowerCase() : word.toUpperCase();
     }).replace(/\s+/g, '');

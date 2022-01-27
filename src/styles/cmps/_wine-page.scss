@@ -208,7 +208,7 @@
   display: flex;
   justify-content: center;
   .taste-content {
-    border-radius: 16px;
+    border-radius: $frmrad;
     background-color: $clrwht;
     width: 80%;
     height: max-content;
@@ -331,7 +331,7 @@
       .wine-preview {
         > img {
           height: 150px;
-          border-radius: 16px 16px 0 0;
+          border-radius: $frmrad $frmrad 0 0;
           @include card-wave;
         }
         // background: linear-gradient(
@@ -354,7 +354,7 @@
           }
         }
         .preview-header {
-          border-radius: 16px;
+          border-radius: $frmrad;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -378,6 +378,7 @@
           }
           .wine-rate {
             padding-top: 40%;
+            margin-inline-start: -25%;
             flex: 1;
             text-align: center;
             display: flex;
@@ -394,9 +395,6 @@
               color: $clr2;
               font-weight: 700;
             }
-            > *:not(.stars-container) {
-              margin-inline-start: -33%;
-            }
           }
         }
         .preview-info {
@@ -405,6 +403,8 @@
           display: flex;
           flex-direction: column;
           text-align: left;
+          white-space: break-spaces;
+          margin: 8px 0;
           h4 {
             margin: 0;
             font-size: 1em;
@@ -420,6 +420,7 @@
             display: flex;
             gap: 4px;
             img {
+              margin-top: -1px;
               border-radius: 50%;
               height: 16px;
               width: 16px;

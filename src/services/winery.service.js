@@ -2,6 +2,7 @@ import { httpService } from './http.service';
 
 export const wineryService = {
   query,
+  getById
 };
 
 const API = 'winery';
@@ -10,9 +11,9 @@ async function query(filter = {}) {
   return httpService.get(API, { params: filter });
 }
 
-// async function getBoardById(id) {
-//   return serverService.get(API + id);
-// }
+async function getById(id) {
+  return httpService.get(API + '/' + id);
+}
 
 // async function remove(id) {
 //   return serverService.delete(API + id);

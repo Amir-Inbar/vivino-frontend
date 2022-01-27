@@ -7,7 +7,6 @@ const INITIAL_STATE = {
 };
 
 export function wineReducer(state = INITIAL_STATE, action) {
-  console.log(action);
   switch (action.type) {
     case 'SET_WINES':
       return {

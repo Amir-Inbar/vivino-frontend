@@ -8,8 +8,8 @@ var axios = Axios.create({
 });
 
 export const httpService = {
-  get(endpoint, data) {
-    return ajax(endpoint, 'GET', data);
+  get(endpoint, data, query) {
+    return ajax(endpoint, 'GET', data, query);
   },
   post(endpoint, data, query) {
     return ajax(endpoint, 'POST', data, query);
@@ -37,7 +37,6 @@ async function ajax(endpoint, method = 'GET', data = null, query = null) {
     if (err.response) {
       switch (err.response.status) {
         case 401:
-          console.log('dasdsa');
           break;
         default:
           break;

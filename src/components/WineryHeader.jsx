@@ -2,9 +2,9 @@ import React from "react";
 import { sentenceToKababCase } from "../services/util.service";
 
 export function WineryHeader(props) {
-  const { winery, wines, reviews, rate } = props;
+  const { winery } = props;
 
-  function WineryMap({ winery }) {
+  const WineryMap = ({ winery }) => {
     return (
       <div className="winery-map">
         {winery.lat && winery.lng ? (
@@ -18,15 +18,31 @@ export function WineryHeader(props) {
         ) : null}
       </div>
     );
-  }
+  };
+
+  const WineryRating = ({ winery }) => {
+    return winery.rate || winery.ratings ? (
+      <div className="average-rate">
+        <p>Average Rating</p>
+        <p className="rate">
+          {winery.rate ? <span>{winery.rate.toFixed(1)} </span> : null}
+          {winery.ratings ? <span>({winery.ratings} Ratings)</span> : null}
+        </p>
+      </div>
+    ) : null;
+  };
 
   return (
     <header
       className="winery-header full"
-      style={{
-        background: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,1)), url(${winery.image}) no-repeat center`,
-        backgroundSize: "cover",
-      }}
+      style={
+        winery.image
+          ? {
+              background: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,1)), url(${winery.image}) no-repeat center`,
+              backgroundSize: "cover",
+            }
+          : {}
+      }
     >
       <WineryMap winery={winery} />
       <div className="winery-information fit-media">
@@ -43,15 +59,10 @@ export function WineryHeader(props) {
           </p>
         </div>
         <div className="more-information">
-          <div className="average-rate">
-            <p>Average Rating</p>
-            <p className="rate">
-              <span>{rate}</span> <span>({reviews.length} Ratings)</span>
-            </p>
-          </div>
+          <WineryRating winery={winery} />
           <div className="wines-count">
             <p>Wines</p>
-            <p>{wines.length}</p>
+            <p>{winery.wines.length}</p>
           </div>
         </div>
       </div>

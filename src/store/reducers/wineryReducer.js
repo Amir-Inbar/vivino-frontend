@@ -1,8 +1,10 @@
 const INITIAL_STATE = {
+  winery: null,
   wineries: null,
 };
 
 export function wineryReducer(state = INITIAL_STATE, action) {
+  console.log(action);
   switch (action.type) {
     case 'SET_WINERIES':
       return {
@@ -10,6 +12,11 @@ export function wineryReducer(state = INITIAL_STATE, action) {
         wineries: [...action.wineries.data],
         page: { ...action.wineries.page },
         total: action.wineries.total,
+      };
+    case 'SET_WINERY':
+      return {
+        ...state,
+        winery: action.winery
       };
     case 'ADD_WINE':
       return {

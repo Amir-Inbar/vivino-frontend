@@ -1,50 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { WineryHeader } from "../components/WineryHeader";
 import { WineryWines } from "../components/WineryWines";
+import { loadWinery } from "../store/actions/wineryAction";
 import demo from "../temp/demo.json";
 
 export function WineryPage() {
-  const [winery, setWinery] = useState(demo.winery[0]);
-  const [wines, setWines] = useState([]);
-  const [reviews, setReviews] = useState([]);
-  const [rateAvg, setRateAvg] = useState(0);
-
-  // demo.reviews.forEach((review) => {
-  //   const { reviewer, description, rate } = review;
-  //   console.log(`INSERT INTO reviews (userId,wineId,wineryId,reviewer,description,rate)
-  // VALUES(NULL,2,1,"${reviewer}","${description}",${rate})`);
-  // });
+  const dispatch = useDispatch();
+  const { winery } = useSelector((state) => state.wineryModule);
 
   useEffect(() => {
-    setWines(demo.wines.filter((wine) => wine.wineryId === winery.id));
-  }, [winery]);
+    dispatch(loadWinery(3));
+  }, [dispatch]);
 
-  useEffect(() => {
-    const wineIds = wines.map((wine) => wine.id);
-    setReviews(
-      demo.reviews.filter((review) => wineIds.includes(review.wineId))
-    );
-  }, [wines]);
-
-  useEffect(() => {
-    setRateAvg(
-      (
-        reviews
-          .map((review) => review.rate)
-          .reduce((sum, rate) => sum + rate, 0) / reviews.length
-      ).toFixed(1)
-    );
-  }, [reviews]);
-
-  return (
+  return winery ? (
     <>
-      <WineryHeader
-        winery={winery}
-        wines={wines}
-        reviews={reviews}
-        rate={rateAvg}
-      />
-      <WineryWines winery={winery} wines={wines} reviews={reviews} />
+      <WineryHeader winery={winery} />
+      <WineryWines winery={winery} max={8} />
     </>
-  );
+  ) : null;
 }

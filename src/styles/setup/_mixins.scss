@@ -92,7 +92,7 @@
 @mixin hover-box {
   box-shadow: 0 0 0 1px rgba(87, 87, 87, 0.1),
     0 8px 8px 0 rgba(234, 224, 218, 0.3);
-  border-radius: 16px;
+  border-radius: $frmrad;
   transition: all 0.1s ease-in-out;
   @media not all and (pointer: coarse) {
     &:hover {
