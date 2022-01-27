@@ -2,7 +2,7 @@ import { ScaleRate } from "./ScaleRate";
 import { TasteFill } from "./TasteFills";
 
 export function TasteLike(props) {
-  const { wine, setTaste } = props;
+  const { wine, setTaste, tasteFillClick } = props;
 
   return (
     <div className="taste-like">

@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   getShortSentence,
   sentenceToKababCase,
 } from "../services/util.service";
 
+function getDescription(mentions) {
+  const desc = mentions.map((taste) => taste.keyword).join(", ");
+  return getShortSentence(desc);
+}
+
 export function TasteFill(props) {
-  const { tastes, setTaste } = props;
+  const { tastes, setTaste, click } = props;
   const [position, setPosition] = useState(0);
   if (!tastes) return null;
 
@@ -23,7 +28,7 @@ export function TasteFill(props) {
           <div className="picture" style={{ backgroundColor: taste.color }}>
             <img src={url} />
           </div>
-          <h3>{taste.description}</h3>
+          <h3>{getDescription(taste.mentions)}</h3>
           <p>
             {taste.total} mentions of{" "}
             <span style={{ color: taste.color }}>{taste.name}</span> notes

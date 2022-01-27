@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { innerHtml } from "../services/html.service";
 import { sentenceToKababCase } from "../services/util.service";
 import { StarRate } from "./StarRate";
 
 export function TastePreview(props) {
-  const { taste, setTaste } = props;
+  const { taste, reviews, setTaste } = props;
   const [keyword, setKeyword] = useState("");
   if (!taste) return null;
+
   const url = require(`../assets/imgs/icons/taste/${sentenceToKababCase(
     taste.name
   )}.svg`);
-  const reviews = [];
 
   function display() {
     if (
@@ -49,8 +49,8 @@ export function TastePreview(props) {
               <div dangerouslySetInnerHTML={{ __html: desc }}></div>
             </div>
             <div className="summerize">
-              <div class="reviewer">{review.reviewer}</div>
-              <div class="rating">
+              <div className="reviewer">{review.reviewer}</div>
+              <div className="rating">
                 <StarRate rate={review.rate} />
               </div>
             </div>
@@ -82,10 +82,8 @@ export function TastePreview(props) {
         <button
           key={"KEYWORD_" + idx}
           style={buttonStyle()}
-          onClick={
-            keyword === mention.keyword
-              ? () => setKeyword("")
-              : () => setKeyword(mention.keyword)
+          onClick={() =>
+            setKeyword(keyword === mention.keyword ? "" : mention.keyword)
           }
         >
           <div className="count" style={countStyle()}>
