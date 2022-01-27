@@ -24,6 +24,7 @@
         padding: 25px;
         max-height: 300px;
         transition: transform 2s;
+        mix-blend-mode: darken;
       }
     }
     .content {
@@ -378,6 +379,7 @@
               height: 300px;
               padding: 0 16px;
               transition: transform 1s;
+              mix-blend-mode: darken;
               &:not(:last-child) {
                 position: absolute;
               }

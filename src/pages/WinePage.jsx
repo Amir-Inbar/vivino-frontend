@@ -17,7 +17,7 @@ export const WinePage = () => {
   const { reviews } = useSelector((state) => state.reviewModule);
 
   useEffect(() => {
-    dispatch(loadWine(2));
+    dispatch(loadWine(8));
     dispatch(loadReview(2, { page: { size: 4 } }));
   }, [dispatch]);
 

@@ -3,8 +3,9 @@ import { StarRate } from "./StarRate";
 export function WineHeader(props) {
   const { wine } = props;
 
+  console.log(wine);
+
   const keywords = () => {
-    return null;
     return [
       wine.country,
       wine.region,
@@ -25,9 +26,9 @@ export function WineHeader(props) {
 
   const WineRate = ({ wine }) => {
     const { rate, ratings } = wine;
-    return rate & ratings ? (
+    return rate && ratings ? (
       <div className="rate">
-        <div className="avg">{rate}</div>
+        <div className="avg">{rate.toFixed(1)}</div>
         <div className="more-info">
           <StarRate rate={rate} />
           <div className="num-ratings">{wine.ratings} ratings</div>
