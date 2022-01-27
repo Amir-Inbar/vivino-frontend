@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { sentenceToKababCase, tryRequire } from "../services/util.service";
+import { useHistory } from "react-router-dom";
+import { sentenceToKababCase } from "../services/util.service";
 import { StarRate } from "./StarRate";
 
 export function WineSlider(props) {
   const { wines } = props;
   const [position, setPosition] = useState(0);
   const itemPerPage = 4;
+  const history = useHistory();
 
   const display = () => {
     return wines.map((item, idx) => {
@@ -21,7 +23,11 @@ export function WineSlider(props) {
         ) : null;
       };
       return (
-        <div className="wine-preview" key={"WINE_" + idx}>
+        <div
+          className="wine-preview"
+          key={"WINE_" + idx}
+          onClick={() => history.push(`/wine/${item._id}`)}
+        >
           {item.background ? <img src={item.background} /> : ""}
           <div className="preview-header">
             <div className="wine-bottle">

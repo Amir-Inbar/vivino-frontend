@@ -1,7 +1,9 @@
 import { StarRate } from "./StarRate";
+import { useHistory } from "react-router-dom";
 
 export function WineHeader(props) {
   const { wine } = props;
+  const history = useHistory();
 
   console.log(wine);
 
@@ -9,7 +11,6 @@ export function WineHeader(props) {
     return [
       wine.country,
       wine.region,
-      wine.winery.name || wine.winery,
       wine.type,
       ...wine.grapes.split("|").map((grape) =>
         grape
@@ -44,7 +45,9 @@ export function WineHeader(props) {
           <img src={wine.image} alt={wine.name} />
         </div>
         <div className="content">
-          <h2>{wine.winery}</h2>
+          <h2 onClick={() => history.push(`/winery/${wine.wineryId}`)}>
+            {wine.winery}
+          </h2>
           <h1>
             {wine.name} {wine.vintage}
           </h1>

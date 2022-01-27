@@ -8,6 +8,7 @@ import { TasteLike } from "../components/WineTasteLike";
 import { loadWine } from "../store/actions/wineAction";
 import { loadWinery } from "../store/actions/wineryAction";
 import { loadReview } from "../store/actions/reviewAction";
+import { useHistory } from "react-router-dom";
 
 export const WinePage = (props) => {
   const [taste, setTaste] = useState(null);
@@ -15,6 +16,7 @@ export const WinePage = (props) => {
   const { wine } = useSelector((state) => state.wineModule);
   const { winery } = useSelector((state) => state.wineryModule);
   const { reviews } = useSelector((state) => state.reviewModule);
+  const history = useHistory();
 
   useEffect(() => {
     const { id } = props.match.params;
@@ -23,13 +25,21 @@ export const WinePage = (props) => {
   }, [props.match.params.id]);
 
   useEffect(() => {
+    console.log(props.location.search);
+  }, [props.location.search]);
+
+  useEffect(() => {
     if (wine?.wineryId) dispatch(loadWinery(wine.wineryId));
   }, [wine]);
 
   const tasteClick = (category) => {
     setTaste(category);
+    if (!category) {
+      history.push(`/wine/${wine._id}`);
+      return;
+    }
+    history.push(`?taste=${category.name}`);
     category = category.mentions.map((mention) => mention.keyword).join("|");
-    console.log(category);
     dispatch(loadReview(wine._id, { filter: { inDescription: category } }));
   };
 
@@ -38,7 +48,7 @@ export const WinePage = (props) => {
       <WineHeader wine={wine} />
       <WineryPreview winery={winery} />
       <TasteLike wine={wine} setTaste={tasteClick} />
-      <TastePreview taste={taste} setTaste={setTaste} reviews={reviews} />
+      <TastePreview taste={taste} setTaste={tasteClick} reviews={reviews} />
       <MoreWines winery={winery} activeId={wine?._id} />
     </>
   ) : null;

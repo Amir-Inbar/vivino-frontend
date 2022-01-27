@@ -59,12 +59,13 @@ export function PopupMenu(props) {
   };
 
   return config ? (
-    <div
-      className="popup-menu"
-      style={{ top: `${top()}px`, left: `${left()}px` }}
-      onClick={close}
-    >
-      {tableRender("wines")}
+    <div class="background-dimm" onClick={close}>
+      <div
+        className="popup-menu"
+        style={{ top: `${top()}px`, left: `${left()}px` }}
+      >
+        {tableRender("wines")}
+      </div>
     </div>
   ) : (
     ""
