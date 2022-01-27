@@ -347,6 +347,7 @@
         > img {
           height: 150px;
           border-radius: $frmrad $frmrad 0 0;
+          object-fit: cover;
           @include card-wave;
         }
         // background: linear-gradient(
@@ -393,7 +394,7 @@
             }
           }
           .wine-rate {
-            padding-top: 40%;
+            padding-top: 20px;
             margin-inline-start: -25%;
             flex: 1;
             text-align: center;
