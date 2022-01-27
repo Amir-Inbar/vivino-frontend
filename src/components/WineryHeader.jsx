@@ -38,7 +38,7 @@ export function WineryHeader(props) {
       style={
         winery.image
           ? {
-              background: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,1)), url(${winery.image}) no-repeat center`,
+              background: `linear-gradient(rgba(255, 255, 255, 0.5), rgb(255, 255, 255)) 0% 0% / cover, url("${winery.image}") center center no-repeat`,
               backgroundSize: "cover",
             }
           : {}

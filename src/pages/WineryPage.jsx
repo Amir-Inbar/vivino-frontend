@@ -9,7 +9,7 @@ export function WineryPage() {
   const { winery } = useSelector((state) => state.wineryModule);
 
   useEffect(() => {
-    dispatch(loadWinery(2));
+    dispatch(loadWinery(4));
   }, [dispatch]);
 
   return winery ? (
