@@ -55,10 +55,37 @@
 
 .popup-menu {
   position: absolute;
+  margin: 0;
+  margin-top: 2px;
   z-index: 100;
-  width: 600px;
-  height: 400px;
-  background-color: red;
-  padding: 16px;
-  border-radius: $frmrad;
+  max-width: 90vw;
+  background-color: $clr4;
+  border-radius: 8px;
+  display: flex;
+  padding: 0 16px;
+  @include hover-box;
+  > ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding: 12px 14px;
+    li {
+      font-size: 1.2em;
+      padding: 6px;
+      &.bold {
+        font-weight: 700;
+      }
+    }
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    left: 30px;
+    top: -8px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid $clr4;
+  }
 }

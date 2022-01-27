@@ -4,7 +4,6 @@ import { MoreWines } from "../components/MoreWines";
 import { TastePreview } from "../components/TastePreview";
 import { WineHeader } from "../components/WineHeader";
 import { WineryPreview } from "../components/WineryPreview";
-import { WineSlider } from "../components/WineSlider";
 import { TasteLike } from "../components/WineTasteLike";
 import { loadWine } from "../store/actions/wineAction";
 import { loadWinery } from "../store/actions/wineryAction";
@@ -16,7 +15,7 @@ export const WinePage = () => {
   const { winery } = useSelector((state) => state.wineryModule);
 
   useEffect(() => {
-    dispatch(loadWine(2));
+    dispatch(loadWine(3));
   }, [dispatch]);
 
   useEffect(() => {
@@ -29,7 +28,7 @@ export const WinePage = () => {
       <WineryPreview winery={winery} />
       <TasteLike wine={wine} setTaste={setTaste} />
       <TastePreview reviews={wine.reviews} taste={taste} setTaste={setTaste} />
-      <MoreWines winery={winery} />
+      <MoreWines winery={winery} activeId={wine?._id} />
     </>
   ) : null;
 };

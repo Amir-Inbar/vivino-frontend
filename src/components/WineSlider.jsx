@@ -10,7 +10,6 @@ export function WineSlider(props) {
   const display = () => {
     return wines.map((item, idx) => {
       const WineRate = ({ rate, ratings }) => {
-        console.log(rate);
         return rate ? (
           <>
             <p className="avg-rate">{rate.toFixed(1)}</p>
