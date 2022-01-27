@@ -15,6 +15,12 @@ export function wineReducer(state = INITIAL_STATE, action) {
         page: { ...action.wines.page },
         total: action.wines.total,
       };
+    case 'SET_WINE': {
+      return {
+        ...state,
+        wine: action.wine,
+      }
+    }
     case 'ADD_WINE':
       return {
         ...state,

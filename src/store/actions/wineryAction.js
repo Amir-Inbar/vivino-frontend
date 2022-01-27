@@ -12,6 +12,8 @@ export function loadWineries() {
   };
 }
 
+loadWinery(1);
+
 export function loadWinery(id) {
   return async (dispatch) => {
     try {

@@ -2,6 +2,7 @@ import { httpService } from './http.service';
 
 export const wineService = {
   query,
+  getById,
 };
 
 const API = 'wine';
@@ -10,9 +11,9 @@ async function query(queries) {
   return httpService.get(API, null, queries);
 }
 
-// async function getBoardById(id) {
-//   return serverService.get(API + id);
-// }
+async function getById(id) {
+  return httpService.get(API + '/' + id);
+}
 
 // async function remove(id) {
 //   return serverService.delete(API + id);

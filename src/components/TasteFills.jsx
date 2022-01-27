@@ -7,10 +7,7 @@ import {
 export function TasteFill(props) {
   const { tastes, reviews, setTaste } = props;
   const [position, setPosition] = useState(0);
-
-  // useEffect(() => {
-  //   display();
-  // }, [position]);
+  if (!reviews) return null;
 
   function getDescription(mentions) {
     const desc = mentions.map((taste) => taste.keyword).join(", ");

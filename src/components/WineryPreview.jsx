@@ -3,7 +3,7 @@ import { sentenceToKababCase } from "../services/util.service";
 
 export function WineryPreview(props) {
   const { winery } = props;
-  return winery.id ? (
+  return winery?.overview ? (
     <section className="winery-preview">
       <section className="information">
         <h2>{winery.name}</h2>

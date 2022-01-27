@@ -12,3 +12,14 @@ export function loadWines() {
   };
 }
 
+export function loadWine(id) {
+  return async (dispatch) => {
+    try {
+      const wine = await wineService.getById(id);
+      dispatch({ type: 'SET_WINE', wine });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+

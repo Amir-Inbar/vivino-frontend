@@ -4,35 +4,20 @@ import sections from "../assets/json/scale-sections.json";
 export function ScaleRate(props) {
   const { wine } = props;
 
-  const basedOn = () =>
-    `The taste profile of ${wine.winery.name || wine.winery} ${
-      wine.name
-    } is based on ${wine.reviews.length} user reviews`;
-
-  const scaleReducer = sections.map((scale) => {
-    const count = wine.reviews.reduce(
-      (sum, review) => {
-        const desc = review.description;
-        const decrease = new RegExp(`(${scale.decrease.join("|")})`, "gi");
-        const increase = new RegExp(`(${scale.increase.join("|")})`, "gi");
-        sum[scale.min] += desc.match(decrease)?.length || 0;
-        sum[scale.max] += desc.match(increase)?.length || 0;
-        return sum;
-      },
-      { [scale.min]: 0, [scale.max]: 0 }
-    );
-    const avg = count[scale.max] / (count[scale.min] + count[scale.max]);
-    return { min: scale.min, max: scale.max, avg: avg || 0.5 };
-  });
+  const BasedOn = ({ wine }) => {
+    const content = `The taste profile of ${wine.winery} ${wine.name} is based on ${wine.ratings} user reviews`;
+    return wine.ratings ? (
+      <div className="more">
+        <h4>Members taste summary</h4>
+        <p>{content}</p>
+      </div>
+    ) : null;
+  };
 
   const scales = () => {
     const barWidth = 15;
     const slideRange = 100 - barWidth;
-    return scaleReducer.map((scale, idx) => {
-      const avg = wine[scale.max]
-        ? scale.avg * slideRange * 0.3 +
-          (wine[scale.max] / 100) * slideRange * 0.7
-        : scale.avg * slideRange || 0.5 * slideRange;
+    return sections.map((scale, idx) => {
       return wine[scale.max] ? (
         <tr key={"SCALE_RATE_" + idx}>
           <td>{camelCaseToSentence(scale.min)}</td>
@@ -63,10 +48,7 @@ export function ScaleRate(props) {
         <table>
           <tbody>{data}</tbody>
         </table>
-        <div className="more">
-          <h4>Wine lovers taste summary</h4>
-          <p>{basedOn()}</p>
-        </div>
+        <BasedOn wine={wine} />
       </div>
     </>
   ) : null;

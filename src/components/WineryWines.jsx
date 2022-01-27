@@ -8,10 +8,10 @@ export function WineryWines({ winery, max = 8 }) {
     .slice(0, max);
   return (
     <div className="winery-details">
-      <h2>Most Popular</h2>
+      <h2>Most popular</h2>
       <p>From {winery.name}</p>
       <WineSlider wines={mostPopular} />
-      <h2>Best Rated</h2>
+      <h2>Best rated</h2>
       <p>From {winery.name}</p>
       <WineSlider wines={bestRated} />
     </div>
