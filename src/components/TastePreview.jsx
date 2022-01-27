@@ -40,10 +40,14 @@ export function TastePreview(props) {
         return (
           <div className="taste-review" key={"REVIEW_" + idx}>
             <div className="content">
-              <StarRate rate={review.rate} />
               <div dangerouslySetInnerHTML={{ __html: desc }}></div>
             </div>
-            <div className="reviewer">{review.reviewer}</div>
+            <div className="summerize">
+              <div class="reviewer">{review.reviewer}</div>
+              <div class="rating">
+                <StarRate rate={review.rate} />
+              </div>
+            </div>
           </div>
         );
       });

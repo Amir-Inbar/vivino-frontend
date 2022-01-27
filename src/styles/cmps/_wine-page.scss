@@ -276,8 +276,17 @@
         > * {
           display: inline-block;
         }
-        .reviewer {
+        .summerize {
+          display: flex;
           padding: 0 32px;
+          justify-content: space-between;
+          .reviewer {
+            font-size: 1em;
+          }
+          .rating {
+            width: 82.5px;
+            justify-content: initial;
+          }
         }
         .content {
           display: block;
