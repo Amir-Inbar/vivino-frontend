@@ -87,6 +87,7 @@
       color: $clr5;
       font-size: 1.25em;
       text-transform: uppercase;
+      opacity: 0.8;
     }
     .name {
       font-size: 3.2em;
@@ -120,6 +121,7 @@
           }
           :not(:first-child) {
             color: $clr5;
+            opacity: 0.8;
           }
         }
       }
@@ -145,5 +147,6 @@
   }
   > p {
     color: $clr5;
+    opacity: 0.8;
   }
 }
