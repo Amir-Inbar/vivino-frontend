@@ -59,7 +59,7 @@ export function PopupMenu(props) {
   };
 
   return config ? (
-    <div class="background-dimm" onClick={close}>
+    <div className="background-dimm" onClick={close}>
       <div
         className="popup-menu"
         style={{ top: `${top()}px`, left: `${left()}px` }}

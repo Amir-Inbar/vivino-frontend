@@ -33,17 +33,9 @@ export function WineryHeader(props) {
   };
 
   return (
-    <header
-      className="winery-header full"
-      style={
-        winery.image
-          ? {
-              background: `linear-gradient(rgba(255, 255, 255, 0.5), rgb(255, 255, 255)) 0% 0% / cover, url("${winery.image}") center center no-repeat`,
-              backgroundSize: "cover",
-            }
-          : {}
-      }
-    >
+    <header className="winery-header full">
+      <div className="cover" />
+      {winery.image ? <img className="cover" src={winery.image} /> : null}
       <WineryMap winery={winery} />
       <div className="winery-information fit-media">
         <p className="title">Winery</p>
