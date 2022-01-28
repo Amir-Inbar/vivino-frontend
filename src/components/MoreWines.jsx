@@ -2,8 +2,10 @@ import React from "react";
 import { WineSlider } from "./WineSlider";
 
 export function MoreWines({ wines, winery, title, activeId }) {
-  if (!wines && !winery?.wines) return null;
-  const list = (wines || winery.wines).filter((wine) => wine._id !== activeId);
+  // return null;
+  const moreWines = wines || winery?.wines.popular;
+  if (!moreWines) return null;
+  const list = moreWines.filter((wine) => wine._id !== activeId);
   return list.length ? (
     <div className="more-wines">
       <h2>{title ? title : "More wines"}</h2>
