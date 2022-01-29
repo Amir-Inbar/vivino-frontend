@@ -5,9 +5,9 @@ export const WineReviews = (props) => {
   const [reviewSection, setReviewSection] = useState(0);
 
   const setCurrReviewSection = (currSection) => {
-    console.log(currSection);
     setReviewSection(currSection);
   };
+  console.log(reviews);
   const reviewMenu = () => {
     const reviewSections = ['Helpful', 'Recent', 'Friends', 'You'];
     return (
@@ -24,10 +24,33 @@ export const WineReviews = (props) => {
       </div>
     );
   };
+
+  const reviewsPreview = (reviews) => {
+    return (
+      <div>
+        {reviews.map((el, idx) => (
+          <div className="review-card ">
+            <div
+              className="user-rating flex align-center"
+              style={{ backgroundColor: '#f9f7d6', color: '#a26f01' }}
+            >
+              <img
+                src={require('../assets/imgs/icons/single-star.svg').default}
+                alt="star"
+              />
+              <span className="review-rate-title">{el.rate}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
   return (
     <div className="comunity-reviews">
       <h1>Community reviews</h1>
       {reviewMenu()}
+
+      <div className="reviews-section">{reviewsPreview(reviews)}</div>
     </div>
   );
 };
