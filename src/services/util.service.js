@@ -138,6 +138,11 @@ export function camelCaseToSentence(input, isOnlyFirst = true) {
     return input.map(key => key.replace(/[A-Z]/g, letter => (isOnlyFirst) ? ` ${letter.toLowerCase()}` : ` ${letter}`).replace(/[a-z]/, letter => letter.toUpperCase())).join(' » ')
 };
 
+export function kababCaseToSentence(str) {
+    if (!str) return;
+    return str.replace('-', ' ');
+}
+
 export function deepCopy(obj) {
     return JSON.parse(JSON.stringify(obj))
 };
