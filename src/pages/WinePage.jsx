@@ -11,6 +11,7 @@ import { loadReview } from '../store/actions/reviewAction';
 import { useHistory } from 'react-router-dom';
 import { wineService } from '../services/wine.service';
 import { reviewService } from '../services/review.service';
+import { WineReviews } from '../components/WineReviews';
 
 export const WinePage = (props) => {
   const [taste, setTaste] = useState(null);
@@ -67,6 +68,7 @@ export const WinePage = (props) => {
       <TasteLike wine={wine} setTaste={tasteClick} />
       <TastePreview taste={taste} setTaste={tasteClick} />
       <MoreWines wines={wines} activeId={wine?._id} />
+      <WineReviews reviews={reviews} />
     </>
   ) : null;
 };
