@@ -10,6 +10,7 @@ import { loadWinery } from "../store/actions/wineryAction";
 import { loadReview } from "../store/actions/reviewAction";
 import { useHistory } from "react-router-dom";
 import { wineService } from "../services/wine.service";
+import { reviewService } from "../services/review.service";
 
 export const WinePage = (props) => {
   const [taste, setTaste] = useState(null);
@@ -43,15 +44,20 @@ export const WinePage = (props) => {
     setWines(res);
   };
 
-  const tasteClick = (category) => {
-    setTaste(category);
+  const tasteClick = async (category) => {
     if (!category) {
       history.push(`/wine/${wine._id}`);
+      setTaste(null);
       return;
     }
     history.push(`?taste=${category.name}`);
-    category = category.mentions.map((mention) => mention.keyword).join("|");
-    dispatch(loadReview(wine._id, { filter: { inDescription: category } }));
+    const searchQuery = category.mentions
+      .map((mention) => mention.keyword)
+      .join("|");
+    const res = await reviewService.getByWineId(wine._id, {
+      filter: { inDescription: searchQuery },
+    });
+    setTaste({ category, reviews: res?.data });
   };
 
   return wine ? (
@@ -59,7 +65,7 @@ export const WinePage = (props) => {
       <WineHeader wine={wine} />
       <WineryPreview winery={winery} />
       <TasteLike wine={wine} setTaste={tasteClick} />
-      <TastePreview taste={taste} setTaste={tasteClick} reviews={reviews} />
+      <TastePreview taste={taste} setTaste={tasteClick} />
       <MoreWines wines={wines} activeId={wine?._id} />
     </>
   ) : null;
