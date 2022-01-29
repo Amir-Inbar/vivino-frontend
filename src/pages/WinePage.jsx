@@ -9,9 +9,11 @@ import { loadWine } from "../store/actions/wineAction";
 import { loadWinery } from "../store/actions/wineryAction";
 import { loadReview } from "../store/actions/reviewAction";
 import { useHistory } from "react-router-dom";
+import { wineService } from "../services/wine.service";
 
 export const WinePage = (props) => {
   const [taste, setTaste] = useState(null);
+  const [wines, setWines] = useState(null);
   const dispatch = useDispatch();
   const { wine } = useSelector((state) => state.wineModule);
   const { winery } = useSelector((state) => state.wineryModule);
@@ -30,7 +32,16 @@ export const WinePage = (props) => {
 
   useEffect(() => {
     if (wine?.wineryId) dispatch(loadWinery(wine.wineryId));
+    loadMoreWines();
   }, [wine]);
+
+  const loadMoreWines = async () => {
+    const res = await wineService.query({
+      filter: { eqCountry: wine.country, eqWinery: wine.winery },
+      page: { size: 8 },
+    });
+    setWines(res);
+  };
 
   const tasteClick = (category) => {
     setTaste(category);
@@ -49,7 +60,7 @@ export const WinePage = (props) => {
       <WineryPreview winery={winery} />
       <TasteLike wine={wine} setTaste={tasteClick} />
       <TastePreview taste={taste} setTaste={tasteClick} reviews={reviews} />
-      <MoreWines winery={winery} activeId={wine?._id} />
+      <MoreWines wines={wines} activeId={wine?._id} />
     </>
   ) : null;
 };
