@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getUnsplash } from "../services/media.service";
-import {
-  kababCaseToSentence,
-  sentenceToKababCase,
-  tryRequire,
-} from "../services/util.service";
+import { sentenceToKababCase, tryRequire } from "../services/util.service";
 
 export const WinePairings = (props) => {
   const { wine } = props;
@@ -24,8 +19,9 @@ export const WinePairings = (props) => {
         <div className="content">
           <h2>Food that goes well with this wine</h2>
           <p>
-            Our wine experts think this <span>{wine.style || wine.name}</span>{" "}
-            wine would be a match made in heaven with these dishes.
+            Our team of wine experts thinks this
+            <span> {wine.style || wine.name} </span>
+            would be a perfect match with these dishes.
           </p>
         </div>
         <img src={wine.image} />
