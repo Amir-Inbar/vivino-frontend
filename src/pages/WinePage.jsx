@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { MoreWines } from "../components/MoreWines";
-import { TastePreview } from "../components/TastePreview";
-import { WineHeader } from "../components/WineHeader";
-import { WineryPreview } from "../components/WineryPreview";
-import { TasteLike } from "../components/WineTasteLike";
-import { loadWine } from "../store/actions/wineAction";
-import { loadWinery } from "../store/actions/wineryAction";
-import { loadReview } from "../store/actions/reviewAction";
-import { useHistory } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { MoreWines } from '../components/MoreWines';
+import { TastePreview } from '../components/TastePreview';
+import { WineHeader } from '../components/WineHeader';
+import { WineryPreview } from '../components/WineryPreview';
+import { TasteLike } from '../components/WineTasteLike';
+import { loadWine } from '../store/actions/wineAction';
+import { loadWinery } from '../store/actions/wineryAction';
+import { loadReview } from '../store/actions/reviewAction';
+import { useHistory } from 'react-router-dom';
+import { WineReviews } from '../components/WineReviews';
 
 export const WinePage = (props) => {
   const [taste, setTaste] = useState(null);
@@ -39,7 +40,7 @@ export const WinePage = (props) => {
       return;
     }
     history.push(`?taste=${category.name}`);
-    category = category.mentions.map((mention) => mention.keyword).join("|");
+    category = category.mentions.map((mention) => mention.keyword).join('|');
     dispatch(loadReview(wine._id, { filter: { inDescription: category } }));
   };
 
@@ -50,6 +51,7 @@ export const WinePage = (props) => {
       <TasteLike wine={wine} setTaste={tasteClick} />
       <TastePreview taste={taste} setTaste={tasteClick} reviews={reviews} />
       <MoreWines winery={winery} activeId={wine?._id} />
+      <WineReviews reviews={reviews} />
     </>
   ) : null;
 };
