@@ -21,8 +21,8 @@ export const WinePage = (props) => {
   const { wine } = useSelector((state) => state.wineModule);
   const { winery } = useSelector((state) => state.wineryModule);
   const { reviews } = useSelector((state) => state.reviewModule);
+  console.log(reviews);
   const history = useHistory();
-
   useEffect(() => {
     const { id } = props.match.params;
     dispatch(loadWine(id));

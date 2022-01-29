@@ -23,6 +23,59 @@
       align-items: center;
       background-color: #f9f7d6;
       border-radius: 24px;
+      padding: 4px 8px;
+      .review-rate-title {
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 500;
+        color: #a26f01;
+        display: inline-block;
+        margin-left: 4px;
+      }
+      img {
+        max-height: 18px;
+      }
+    }
+    .review-desc {
+      font-size: 24px;
+      line-height: 40px;
+    }
+  }
+  .review-user {
+    .bottom-card {
+      font-size: 23px;
+      padding: 8px 24px 16px;
+
+      .user-info {
+        img {
+          max-height: 2rem;
+          background-color: #dfe5e4;
+          background-size: cover;
+          border-radius: 50%;
+        }
+        a {
+          color: #8e041a;
+          margin: 0 4px 0 10px;
+          font-size: 16px;
+          line-height: 24px;
+          font-weight: 600;
+        }
+        .date {
+          font-size: 1rem;
+        }
+      }
+      .review-comments {
+        .reviews-btn {
+          border-radius: 24px;
+          border: 1px solid #eae0da;
+          padding: 8px;
+          margin: 0 3px;
+          cursor: pointer;
+          span {
+            margin: 0 5px;
+          }
+        }
+      }
     }
   }
 }
