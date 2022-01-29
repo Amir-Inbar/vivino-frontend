@@ -41,6 +41,31 @@
       line-height: 40px;
     }
   }
+  .user-reply {
+    padding: 15px;
+    img {
+      max-height: 32px;
+      border-radius: 50%;
+      margin-inline-end: 10px;
+    }
+    textarea {
+      font-size: 2em;
+      line-height: 28px;
+      font-weight: 400;
+      background-color: $clrwht;
+      color: $clrblk;
+      margin: 0;
+      padding: 20px 0 50px 20px;
+      outline: none;
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid #f7f3f0;
+      border-bottom: 2px solid #eae0da;
+      height: 40px;
+      overflow: hidden;
+      resize: none;
+    }
+  }
   .review-user {
     .bottom-card {
       font-size: 23px;

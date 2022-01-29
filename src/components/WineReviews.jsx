@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { makeId } from '../services/util.service';
+import { makeId, tryRequire } from '../services/util.service';
 export const WineReviews = (props) => {
   var moment = require('moment');
   const { reviews } = props;
@@ -30,20 +30,25 @@ export const WineReviews = (props) => {
     console.log('das');
   };
 
-  const OnReply = () => {
-    if (!activeReview) return null;
+  const OnReply = ({ review }) => {
+    if (activeReview !== review) return null;
     return (
-      <div className="flex">
-        {
-          <img
-            src={
-              activeReview.picture
-                ? activeReview.picture
-                : require('../assets/imgs/icons/user-profile.png')
-            }
-            alt=""
-          />
-        }
+      <div className="user-reply flex align-center space-between">
+        <img
+          src={
+            activeReview.picture
+              ? activeReview.picture
+              : tryRequire('imgs/icons/user-profile.png')
+          }
+          alt=""
+        />
+        <textarea
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+          placeholder="Leave a comment"
+        ></textarea>
       </div>
     );
   };
@@ -67,7 +72,11 @@ export const WineReviews = (props) => {
           {btnNames.map((el, idx) => (
             <div
               className="reviews-btn flex align-center"
-              onClick={() => (!idx ? setLike(review) : setActiveReview(review))}
+              onClick={() =>
+                !idx
+                  ? setLike(review)
+                  : setActiveReview(activeReview === review ? null : review)
+              }
               key={'REPLY_' + makeId()}
             >
               <img src={require(`../assets/imgs/icons/${el}.svg`)} alt="" />
@@ -100,7 +109,7 @@ export const WineReviews = (props) => {
             <div className="review-user">
               <UserInfo review={el} />
             </div>
-            <OnReply />
+            <OnReply review={el} />
           </div>
         ))}
       </div>
