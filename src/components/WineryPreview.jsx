@@ -1,8 +1,10 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { sentenceToKababCase } from "../services/util.service";
 
 export function WineryPreview(props) {
   const { winery } = props;
+  const history = useHistory();
   return winery?.overview ? (
     <section className="winery-preview">
       <section className="information">
@@ -16,7 +18,12 @@ export function WineryPreview(props) {
           <p>{winery.country}</p>
         </div>
         <p className="short-description">{winery.overview}</p>
-        <button className="more">Read more</button>
+        <button
+          className="more"
+          onClick={() => history.push(`/winery/${winery._id}`)}
+        >
+          Read more
+        </button>
       </section>
       <section className="image">
         <img src={winery.image} />

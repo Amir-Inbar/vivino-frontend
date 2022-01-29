@@ -4,18 +4,20 @@ import { sentenceToKababCase } from "../services/util.service";
 import { StarRate } from "./StarRate";
 
 export function TastePreview(props) {
-  const { taste, reviews, setTaste } = props;
+  const { taste, setTaste } = props;
   const [keyword, setKeyword] = useState("");
   if (!taste) return null;
+  const { category, reviews } = taste;
+  console.log(category, reviews);
 
   const url = require(`../assets/imgs/icons/taste/${sentenceToKababCase(
-    taste.name
+    category.name
   )}.svg`);
 
   function display() {
     if (
       keyword &&
-      !taste.mentions.find((mention) => mention.keyword === keyword)
+      !category.mentions.find((mention) => mention.keyword === keyword)
     )
       setKeyword("");
     return reviews
@@ -27,7 +29,7 @@ export function TastePreview(props) {
         return re.exec(review.description);
       })
       .map((review, idx) => {
-        const keywords = taste.mentions.map((mention) =>
+        const keywords = category.mentions.map((mention) =>
           mention.keyword !== mention.keyword.replace(" ", "")
             ? `${mention.keyword}|${mention.keyword.replace(" ", "")}`
             : mention.keyword
@@ -40,7 +42,7 @@ export function TastePreview(props) {
           (keyword) =>
             (desc = desc.replace(
               keyword,
-              `<span style="color:${taste.color};font-weight:700;">${keyword}</span>`
+              `<span style="color:${category.color};font-weight:700;">${keyword}</span>`
             ))
         );
         return (
@@ -60,22 +62,22 @@ export function TastePreview(props) {
   }
 
   const keywords = () =>
-    taste.mentions.map((mention, idx) => {
+    category.mentions.map((mention, idx) => {
       const buttonStyle = () =>
         keyword === mention.keyword
           ? {
               backgroundColor: "#fff",
-              color: taste.color,
-              borderColor: taste.color,
+              color: category.color,
+              borderColor: category.color,
             }
-          : { backgroundColor: taste.color };
+          : { backgroundColor: category.color };
       const countStyle = () => {
         return keyword === mention.keyword
-          ? { backgroundColor: taste.color, color: "#fff" }
+          ? { backgroundColor: category.color, color: "#fff" }
           : {
               backgroundColor: "#fff",
-              color: taste.color,
-              borderColor: taste.color,
+              color: category.color,
+              borderColor: category.color,
             };
       };
       return (
@@ -99,11 +101,11 @@ export function TastePreview(props) {
       <div className="taste-content" onClick={(e) => e.stopPropagation()}>
         <section
           className="taste-header"
-          style={{ backgroundColor: taste.color }}
+          style={{ backgroundColor: category.color }}
         >
           <button onClick={() => setTaste(null)}>X</button>
-          <img src={url} alt={taste.name} />
-          <h2>{taste.name}</h2>
+          <img src={url} alt={category.name} />
+          <h2>{category.name}</h2>
         </section>
         <section className="taste-keywords">{keywords()}</section>
         <section className="taste-reviews">{display()}</section>
