@@ -1,15 +1,15 @@
 import { useState } from 'react';
-
+import { makeId } from '../services/util.service';
 export const WineReviews = (props) => {
-  const { reviews } = props;
   var moment = require('moment');
+  const { reviews } = props;
   const [reviewSection, setReviewSection] = useState(0);
-
+  const [activeReview, setActiveReview] = useState(null);
   const setCurrReviewSection = (currSection) => {
     setReviewSection(currSection);
   };
 
-  const reviewMenu = () => {
+  const ReviewMenu = () => {
     const reviewSections = ['Helpful', 'Recent', 'Friends', 'You'];
     return (
       <div className="review-menu flex">
@@ -17,7 +17,7 @@ export const WineReviews = (props) => {
           <span
             onClick={() => setCurrReviewSection(idx)}
             style={{ color: reviewSection === idx ? '#ba1628' : '#1e1e1e' }}
-            key={`c-${idx}`}
+            key={`COMMENT_${idx}`}
           >
             {title}
           </span>
@@ -29,10 +29,25 @@ export const WineReviews = (props) => {
   const setLike = () => {
     console.log('das');
   };
-  const setComment = () => {
-    console.log('das');
+
+  const OnReply = () => {
+    if (!activeReview) return null;
+    return (
+      <div className="flex">
+        {
+          <img
+            src={
+              activeReview.picture
+                ? activeReview.picture
+                : require('../assets/imgs/icons/user-profile.png')
+            }
+            alt=""
+          />
+        }
+      </div>
+    );
   };
-  const userInfo = (review) => {
+  const UserInfo = ({ review }) => {
     const btnNames = ['like', 'comment'];
     return (
       <div className="bottom-card flex space-between">
@@ -52,7 +67,8 @@ export const WineReviews = (props) => {
           {btnNames.map((el, idx) => (
             <div
               className="reviews-btn flex align-center"
-              onClick={() => (!idx ? setLike() : setComment())}
+              onClick={() => (!idx ? setLike(review) : setActiveReview(review))}
+              key={'REPLY_' + makeId()}
             >
               <img src={require(`../assets/imgs/icons/${el}.svg`)} alt="" />
               <span>{review.userId}</span>
@@ -62,11 +78,11 @@ export const WineReviews = (props) => {
       </div>
     );
   };
-  const reviewsPreview = (reviews) => {
+  const ReviewsPreview = ({ reviews }) => {
     return (
       <div>
         {reviews.map((el, idx) => (
-          <div className="review-card-main" key={el._id}>
+          <div className="review-card-main" key={'REVIEW_' + idx}>
             <div className="review-card">
               <div
                 className="user-rating flex align-center"
@@ -81,7 +97,10 @@ export const WineReviews = (props) => {
               </div>
               <span className="review-desc">{el.description}</span>
             </div>
-            <div className="review-user">{userInfo(el)}</div>
+            <div className="review-user">
+              <UserInfo review={el} />
+            </div>
+            <OnReply />
           </div>
         ))}
       </div>
@@ -91,8 +110,8 @@ export const WineReviews = (props) => {
   return (
     <div className="comunity-reviews">
       <h1>Community reviews</h1>
-      {reviewMenu()}
-      <div>{reviewsPreview(reviews)}</div>
+      <ReviewMenu />
+      <ReviewsPreview reviews={reviews} />
     </div>
   );
 };
