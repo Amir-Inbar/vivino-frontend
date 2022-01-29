@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { innerHtml } from "../services/html.service";
-import { sentenceToKababCase } from "../services/util.service";
+import { sentenceToKababCase, tryRequire } from "../services/util.service";
 import { StarRate } from "./StarRate";
 
 export function TastePreview(props) {
@@ -10,9 +10,9 @@ export function TastePreview(props) {
   const { category, reviews } = taste;
   console.log(category, reviews);
 
-  const url = require(`../assets/imgs/icons/taste/${sentenceToKababCase(
-    category.name
-  )}.svg`);
+  const url = tryRequire(
+    `imgs/icons/taste/${sentenceToKababCase(category.name)}.svg`
+  );
 
   function display() {
     if (

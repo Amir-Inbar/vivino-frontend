@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { tryRequire } from "../services/util.service";
 import { PopupMenu } from "./PopupMenu";
 
 export function AppHeader() {
@@ -14,7 +15,7 @@ export function AppHeader() {
       <PopupMenu config={popupConfig} close={() => setPopupConfig(null)} />
       <div className="control-bar">
         <div className="logo">
-          <img src={require("../assets/imgs/logo.svg").default} />
+          <img src={tryRequire("imgs/logo.svg")} />
         </div>
         <div className="search">
           <input placeholder="Search any wine"></input>
@@ -23,23 +24,23 @@ export function AppHeader() {
       <nav>
         <ul>
           <li className="wines" onClick={(ev) => toggleMenu(ev, "wines")}>
-            <img src={require("../assets/imgs/icons/wines.svg").default} />
+            <img src={tryRequire("imgs/icons/wines.svg")} />
             <span>Wines</span>
           </li>
           <li className="pairings">
-            <img src={require("../assets/imgs/icons/cheese.svg").default} />
+            <img src={tryRequire("imgs/icons/cheese.svg")} />
             <span>Pairings</span>
           </li>
           <li className="grapes">
-            <img src={require("../assets/imgs/icons/grapes.svg").default} />
+            <img src={tryRequire("imgs/icons/grapes.svg")} />
             <span>Grapes</span>
           </li>
           <li className="regions">
-            <img src={require("../assets/imgs/icons/regions.svg").default} />
+            <img src={tryRequire("imgs/icons/regions.svg")} />
             <span>Regions</span>
           </li>
           <li className="awards">
-            <img src={require("../assets/imgs/icons/awards.svg").default} />
+            <img src={tryRequire("imgs/icons/awards.svg")} />
             <span>Awards</span>
           </li>
         </ul>

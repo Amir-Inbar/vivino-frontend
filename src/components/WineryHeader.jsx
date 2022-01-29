@@ -1,5 +1,5 @@
 import React from "react";
-import { sentenceToKababCase } from "../services/util.service";
+import { sentenceToKababCase, tryRequire } from "../services/util.service";
 
 export function WineryHeader(props) {
   const { winery } = props;
@@ -42,9 +42,9 @@ export function WineryHeader(props) {
         <h1 className="name">{winery.name}</h1>
         <div className="country">
           <img
-            src={require(`../assets/imgs/icons/flags/${sentenceToKababCase(
-              winery.country
-            )}.png`)}
+            src={tryRequire(
+              `imgs/icons/flags/${sentenceToKababCase(winery.country)}.png`
+            )}
           />
           <p>
             {winery.region}, {winery.country}

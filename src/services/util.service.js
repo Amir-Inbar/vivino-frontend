@@ -1,6 +1,6 @@
 export function tryRequire(path) {
     try {
-        return require(`${path}`);
+        return require(`../assets/${path}`);
     } catch (err) {
         console.log(err);
         return null;
