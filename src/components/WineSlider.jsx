@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { sentenceToKababCase } from "../services/util.service";
+import { sentenceToKababCase, tryRequire } from "../services/util.service";
 import { StarRate } from "./StarRate";
 
 const WinePreviews = ({ wines }) => {
@@ -39,9 +39,9 @@ const WinePreviews = ({ wines }) => {
           <h4>{item.name}</h4>
           <div className="wine-country">
             <img
-              src={require(`../assets/imgs/icons/flags/${sentenceToKababCase(
-                item.country
-              )}.png`)}
+              src={tryRequire(
+                `imgs/icons/flags/${sentenceToKababCase(item.country)}.png`
+              )}
             />
             <span>
               {item.region}, {item.country}

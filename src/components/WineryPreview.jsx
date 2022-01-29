@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { sentenceToKababCase } from "../services/util.service";
+import { sentenceToKababCase, tryRequire } from "../services/util.service";
 
 export function WineryPreview(props) {
   const { winery } = props;
@@ -11,9 +11,9 @@ export function WineryPreview(props) {
         <h2>{winery.name}</h2>
         <div className="country">
           <img
-            src={require(`../assets/imgs/icons/flags/${sentenceToKababCase(
-              winery.country
-            )}.png`)}
+            src={tryRequire(
+              `imgs/icons/flags/${sentenceToKababCase(winery.country)}.png`
+            )}
           />
           <p>{winery.country}</p>
         </div>
