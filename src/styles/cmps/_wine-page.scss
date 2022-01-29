@@ -459,3 +459,60 @@
     color: $clr5;
   }
 }
+
+.wine-pairings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  @include for-tablet-layout {
+    flex-direction: column;
+  }
+  .information {
+    max-height: 180px;
+    display: flex;
+    flex: 1;
+    min-width: 300px;
+    max-width: calc(60ch + 70px);
+    .content {
+      flex: 1;
+      h2 {
+        font-size: 1.75em;
+        font-weight: 700;
+      }
+      p {
+        span {
+          text-transform: capitalize;
+        }
+        max-width: 55ch;
+        line-height: 1.3em;
+      }
+    }
+    > img {
+      object-fit: contain;
+      max-width: 100px;
+    }
+  }
+  .meals {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .meal {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-width: 150px;
+      img {
+        padding: 10px;
+        object-fit: cover;
+        max-height: 150px;
+        max-width: 150px;
+        border-radius: 50%;
+      }
+      h3 {
+        text-align: center;
+        text-transform: capitalize;
+      }
+    }
+  }
+}

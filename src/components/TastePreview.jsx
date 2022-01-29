@@ -97,7 +97,7 @@ export function TastePreview(props) {
     });
 
   return taste ? (
-    <div className="taste-preview" onClick={() => setTaste(null)}>
+    <section className="taste-preview" onClick={() => setTaste(null)}>
       <div className="taste-content" onClick={(e) => e.stopPropagation()}>
         <section
           className="taste-header"
@@ -110,6 +110,6 @@ export function TastePreview(props) {
         <section className="taste-keywords">{keywords()}</section>
         <section className="taste-reviews">{display()}</section>
       </div>
-    </div>
+    </section>
   ) : null;
 }

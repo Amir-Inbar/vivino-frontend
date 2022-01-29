@@ -8,21 +8,23 @@ export function WineHeader(props) {
   console.log(wine);
 
   const keywords = () => {
-    return [
-      wine.country,
-      wine.region,
-      wine.type,
-      ...wine.grapes.split("|").map((grape) =>
-        grape
-          .split(" ")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")
-      ),
-    ].map((keyword, idx) => (
-      <a className="tag" key={"KEYWORD_" + idx}>
-        {keyword}
-      </a>
-    ));
+    const grapes = wine.grapes
+      ? wine.grapes.split("|").map((grape) =>
+          grape
+            .split(" ")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ")
+        )
+      : null;
+    return [wine.country, wine.region, wine.type, grapes].map(
+      (keyword, idx) => {
+        return keyword ? (
+          <a className="tag" key={"KEYWORD_" + idx}>
+            {keyword}
+          </a>
+        ) : null;
+      }
+    );
   };
 
   const WineRate = ({ wine }) => {
@@ -39,7 +41,7 @@ export function WineHeader(props) {
   };
 
   return (
-    <div className="wine-header full">
+    <section className="wine-header full">
       <div className="information fit-media">
         <div className="picture">
           <img src={wine.image} alt={wine.name} />
@@ -55,6 +57,6 @@ export function WineHeader(props) {
           <WineRate wine={wine} />
         </div>
       </div>
-    </div>
+    </section>
   );
 }
