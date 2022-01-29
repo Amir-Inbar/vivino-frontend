@@ -8,9 +8,6 @@ import {
 
 export const WinePairings = (props) => {
   const { wine } = props;
-  const [pair, setPair] = useState(null);
-
-  useEffect(() => console.log(pair), [pair]);
 
   const FoodPairing = ({ wine }) => {
     return wine.pairings.split("|").map((food, idx) => (
@@ -36,7 +33,6 @@ export const WinePairings = (props) => {
       <div className="meals">
         <FoodPairing wine={wine} />
       </div>
-      {/* {pair} */}
     </section>
   ) : null;
 };
