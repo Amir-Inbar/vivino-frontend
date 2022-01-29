@@ -43,9 +43,8 @@ export const WinePairings = (props) => {
         <div className="content">
           <h2>Food that goes well with this wine</h2>
           <p>
-            Our wine experts think this{" "}
-            <span>{kababCaseToSentence(wine.seo) || wine.name}</span> wine would
-            be a match made in heaven with these dishes.
+            Our wine experts think this <span>{wine.style || wine.name}</span>{" "}
+            wine would be a match made in heaven with these dishes.
           </p>
         </div>
         <img src={wine.image} />

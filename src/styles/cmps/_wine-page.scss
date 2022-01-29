@@ -480,6 +480,9 @@
         font-weight: 700;
       }
       p {
+        span {
+          text-transform: capitalize;
+        }
         max-width: 55ch;
         line-height: 1.3em;
       }
