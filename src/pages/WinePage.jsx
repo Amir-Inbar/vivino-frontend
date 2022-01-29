@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { MoreWines } from '../components/MoreWines';
-import { TastePreview } from '../components/TastePreview';
-import { WineHeader } from '../components/WineHeader';
-import { WineryPreview } from '../components/WineryPreview';
-import { TasteLike } from '../components/WineTasteLike';
-import { loadWine } from '../store/actions/wineAction';
-import { loadWinery } from '../store/actions/wineryAction';
-import { loadReview } from '../store/actions/reviewAction';
-import { useHistory } from 'react-router-dom';
-import { wineService } from '../services/wine.service';
-import { reviewService } from '../services/review.service';
-import { WinePairings } from '../components/WinePairings';
-import { WineReviews } from '../components/WineReviews';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { MoreWines } from "../components/MoreWines";
+import { TastePreview } from "../components/TastePreview";
+import { WineHeader } from "../components/WineHeader";
+import { WineryPreview } from "../components/WineryPreview";
+import { TasteLike } from "../components/WineTasteLike";
+import { loadWine } from "../store/actions/wineAction";
+import { loadWinery } from "../store/actions/wineryAction";
+import { loadReview } from "../store/actions/reviewAction";
+import { useHistory } from "react-router-dom";
+import { wineService } from "../services/wine.service";
+import { reviewService } from "../services/review.service";
+import { WinePairings } from "../components/WinePairings";
+import { WineReviews } from "../components/WineReviews";
 
 export const WinePage = (props) => {
   const [taste, setTaste] = useState(null);
@@ -39,8 +39,13 @@ export const WinePage = (props) => {
   }, [wine]);
 
   const loadMoreWines = async () => {
+    if (!wine) return;
     const res = await wineService.query({
-      filter: { eqCountry: wine.country, eqWinery: wine.winery },
+      filter: {
+        eqCountry: wine.country,
+        eqWinery: wine.winery,
+        ne_id: wine._id,
+      },
       page: { size: 8 },
     });
     setWines(res);
@@ -55,7 +60,7 @@ export const WinePage = (props) => {
     history.push(`?taste=${category.name}`);
     const searchQuery = category.mentions
       .map((mention) => mention.keyword)
-      .join('|');
+      .join("|");
     const res = await reviewService.getByWineId(wine._id, {
       filter: { inDescription: searchQuery },
     });

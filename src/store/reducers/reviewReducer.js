@@ -7,9 +7,9 @@ export function reviewReducer(state = INITIAL_STATE, action) {
     case 'SET_REVIEWS':
       return {
         ...state,
-        reviews: [...action.reviews.data],
-        page: { ...action.reviews.page },
-        total: action.reviews.total,
+        reviews: [...action.reviews?.data],
+        page: { ...action.reviews?.page },
+        total: action.reviews?.total,
       };
     case 'ADD_WINE':
       return {
