@@ -58,7 +58,7 @@ button {
     pointer-events: none;
   }
   align-self: flex-start;
-  padding: 6px 12px;
+  padding: 6px 12px 7px 6px;
   color: $clr5;
   border-radius: 3em;
   background-color: $clr4;
@@ -72,7 +72,14 @@ button {
 
 button.more {
   &::after {
-    content: "→";
+    content: "";
+    border: solid $clr3;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    margin-top: 4px;
+    padding: 3px;
+    transform: rotate(-45deg);
+
     position: absolute;
     right: 12px;
     transition: opacity 0.8s;
@@ -80,7 +87,7 @@ button.more {
   }
   &:focus,
   &:hover {
-    padding-inline-end: 2.2em;
+    padding-inline-end: 2em;
     &::after {
       opacity: 1;
     }
