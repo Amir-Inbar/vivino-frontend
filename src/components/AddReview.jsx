@@ -105,7 +105,7 @@ export const AddReview = ({ wine, close, set, rate: inRate, reviews }) => {
               onChange={(val) => setDescription(val.target.value)}
               maxLength={512}
             ></textarea>
-            <p className="chars-left">{512 - description.length}</p>
+            <p className="chars-left">{512 - description?.length}</p>
             {/* <p className="warning">* Description cannot be blank</p> */}
           </label>
         </form>

@@ -4,15 +4,22 @@ import fullStar from "../assets/imgs/icons/full-star.svg";
 import { makeId } from "../services/util.service";
 
 export function StarRate(props) {
-  const { rate, total = 5, size = 16, style, isEditable = false, set } = props;
+  const {
+    rate: inRate,
+    total = 5,
+    size = 16,
+    style,
+    isEditable = false,
+    set,
+  } = props;
   const box = total * size;
-  const [rated, setRated] = useState(rate || total);
-  const [varRate, setVarRate] = useState(null);
+  const [rated, setRated] = useState(inRate || total);
+  const [rate, setVarRate] = useState(null);
 
   const styleStar = { width: size + "px", height: size + "px" };
   const styleFullStar = {
-    width: box * ((varRate || rated) / total) + "px",
-    marginInlineStart: box * ((varRate || rated) / total) - box + "px",
+    width: box * ((rate || rated) / total) + "px",
+    marginInlineStart: box * ((rate || rated) / total) - box + "px",
   };
 
   const hover = (el) => {
@@ -24,8 +31,8 @@ export function StarRate(props) {
 
   const click = () => {
     if (!isEditable) return;
-    setRated(varRate);
-    set(varRate);
+    setRated(rate);
+    set(rate);
   };
 
   return (
