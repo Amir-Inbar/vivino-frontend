@@ -13,6 +13,14 @@
   gap: 20px;
   overflow: hidden;
   @include hover-box;
+  &:hover {
+    .image {
+      img {
+        height: 105%;
+        width: 105%;
+      }
+    }
+  }
   .information {
     position: relative;
     z-index: 1;
@@ -65,6 +73,7 @@
       height: 100%;
       width: 100%;
       opacity: 0.5;
+      transition: 3s ease-in-out;
       &.logo {
         height: 64px;
         width: 64px;

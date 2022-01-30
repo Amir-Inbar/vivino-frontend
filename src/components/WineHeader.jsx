@@ -5,8 +5,6 @@ export function WineHeader(props) {
   const { wine } = props;
   const history = useHistory();
 
-  console.log(wine);
-
   const keywords = () => {
     const grapes = wine.grapes
       ? wine.grapes.split("|").map((grape) =>

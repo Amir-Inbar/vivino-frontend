@@ -6,16 +6,27 @@
   height: 20px;
   display: flex;
   justify-content: center;
+  padding: 2px;
   .stars {
     position: absolute;
-    padding: 2px;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
     overflow: hidden;
+    transition: 0.2s;
     > * {
       height: 16px;
       width: 16px;
+    }
+    svg {
+      &.empty-star {
+        path {
+          fill: #e3e3e3;
+        }
+      }
+      &.full-star {
+        path {
+          fill: $clr1;
+        }
+      }
     }
   }
 }

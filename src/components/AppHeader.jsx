@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { tryRequire } from "../services/util.service";
 import { PopupMenu } from "./PopupMenu";
 
 export function AppHeader() {
+  const location = useLocation();
   const [popupConfig, setPopupConfig] = useState(0);
+  if (location.pathname === "/login") return null;
 
   const toggleMenu = (ev, type) =>
     popupConfig?.type === type

@@ -6,6 +6,7 @@ import { WinePage } from "./pages/WinePage";
 import { WineryPage } from "./pages/WineryPage";
 import { HomePage } from "./pages/HomePage";
 import "./styles/global.scss";
+import { LoginPage } from "./pages/LoginPage";
 export function App() {
   return (
     <Router>
@@ -15,6 +16,7 @@ export function App() {
           <Switch>
             <Route component={WinePage} path="/wine/:id" />
             <Route component={WineryPage} path="/winery/:id" />
+            <Route component={LoginPage} path="/login" />
             <Route component={HomePage} path="/" />
           </Switch>
         </main>

@@ -13,15 +13,21 @@ import { wineService } from "../services/wine.service";
 import { reviewService } from "../services/review.service";
 import { WinePairings } from "../components/WinePairings";
 import { WineReviews } from "../components/WineReviews";
+import { StarRate } from "../components/StarRate";
+import { AddReview } from "../components/AddReview";
+import { authService } from "../services/auth.service";
 
 export const WinePage = (props) => {
+  const [userReviews, setReviews] = useState([]);
   const [taste, setTaste] = useState(null);
   const [wines, setWines] = useState(null);
+  const [rate, setRate] = useState(null);
+
   const dispatch = useDispatch();
   const { wine } = useSelector((state) => state.wineModule);
   const { winery } = useSelector((state) => state.wineryModule);
   const { reviews } = useSelector((state) => state.reviewModule);
-  console.log(reviews);
+
   const history = useHistory();
   useEffect(() => {
     const { id } = props.match.params;
@@ -36,6 +42,7 @@ export const WinePage = (props) => {
   useEffect(() => {
     if (wine?.wineryId) dispatch(loadWinery(wine.wineryId));
     loadMoreWines();
+    loadUserReviews();
   }, [wine]);
 
   const loadMoreWines = async () => {
@@ -49,6 +56,15 @@ export const WinePage = (props) => {
       page: { size: 8 },
     });
     setWines(res);
+  };
+
+  const loadUserReviews = async () => {
+    const { _id: userId } = authService.getLoggedinUser();
+    if (!wine || !userId) return;
+    const res = await reviewService.getByWineId(wine._id, {
+      filter: { eqUserId: userId },
+    });
+    setReviews(res || []);
   };
 
   const tasteClick = async (category) => {
@@ -76,6 +92,13 @@ export const WinePage = (props) => {
       <WinePairings wine={wine} />
       <MoreWines wines={wines} activeId={wine?._id} />
       <WineReviews reviews={reviews} />
+      <StarRate size={24} rate={rate} isEditable={true} set={setRate} />
+      <AddReview
+        wine={wine}
+        rate={rate}
+        close={() => setRate(null)}
+        set={setRate}
+      />
     </>
   ) : null;
 };

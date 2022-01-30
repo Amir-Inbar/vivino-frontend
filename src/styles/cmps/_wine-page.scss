@@ -8,7 +8,7 @@
     rgba(247, 243, 240, 0) 100%
   );
   .information {
-    &:hover img {
+    &:hover > .picture > img {
       transform: rotateZ(-3deg);
     }
     display: flex;
@@ -497,6 +497,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     .meal {
+      cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -518,5 +519,88 @@
         text-transform: capitalize;
       }
     }
+  }
+}
+
+.wine-add-review {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: $frmrad;
+  width: 80vw;
+  height: 320px;
+  background: $clr4;
+  display: flex;
+  flex-direction: column;
+  .close-btn {
+    cursor: pointer;
+    font-weight: 700;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    width: 25px;
+    background-color: $clrwht;
+    border-radius: 50%;
+    right: 8px;
+    top: 8px;
+  }
+  form {
+    padding: 25px 25px 0 25px;
+    display: flex;
+    flex-direction: column;
+    label {
+      position: relative;
+      span {
+        font-weight: 700;
+      }
+      display: flex;
+      &:not(:last-child) {
+        margin: 8px 0;
+        gap: 40px;
+        .stars-container {
+          width: 160px;
+        }
+      }
+      &:last-child {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      input,
+      textarea {
+        border: 0;
+        // border: 1px solid $clr3;
+        outline-color: $clr1;
+        border-radius: calc($frmrad / 2);
+      }
+      input {
+        padding: 0 0 2px 8px;
+        height: 1.5em;
+      }
+      textarea {
+        padding: calc($frmrad / 2);
+        resize: none;
+        height: 140px;
+      }
+      p.chars-left {
+        font-size: 0.875em;
+        position: absolute;
+        bottom: 2px;
+        right: 12px;
+        opacity: 0.5;
+      }
+      p.warning {
+        position: absolute;
+        bottom: -1.8em;
+        color: red;
+      }
+    }
+  }
+  button {
+    margin: 12px 25px;
+    align-self: flex-end;
   }
 }

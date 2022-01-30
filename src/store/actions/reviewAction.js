@@ -16,11 +16,9 @@ export function loadReview(id, queries) {
   return async (dispatch) => {
     try {
       const reviews = await reviewService.getByWineId(id, queries);
-      console.log('reviews >>>', reviews);
       dispatch({ type: 'SET_REVIEWS', reviews });
     } catch (err) {
       console.log(err);
     }
   };
 }
-
