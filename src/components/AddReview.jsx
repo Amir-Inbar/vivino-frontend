@@ -1,36 +1,58 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { authService } from "../services/auth.service";
 import { reviewService } from "../services/review.service";
 import { StarRate } from "./StarRate";
 
-export const AddReview = ({ wine, close, set, rate: inRate, review }) => {
-  const [id, setId] = useState(review?._id || null);
-  const [rate, setRate] = useState(review?.rate || inRate);
-  const [vintage, setVintage] = useState(
-    review?.vintage || new Date().getFullYear()
-  );
-  const [description, setDescription] = useState(review?.description || "");
+export const AddReview = ({ wine, close, set, rate: inRate, reviews }) => {
+  const [id, setId] = useState(null);
+  const [rate, setRate] = useState(inRate);
+  const [vintage, setVintage] = useState();
+  const [description, setDescription] = useState("");
+  const [review, setReview] = useState(null);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!reviews) return;
+    const review = (reviews.data || reviews).find(
+      (review) => review.vintage === vintage
+    );
+    if (review) {
+      setDescription(review.description);
+      setRate(review.rate);
+      setId(review._id);
+      setReview(review);
+    } else if (id) {
+      setDescription("");
+      setId(null);
+    }
+  }, [vintage]);
+
   if (!inRate) return null;
   if (inRate !== rate) setRate(inRate);
 
   const submit = async () => {
-    if (!description) return;
+    if (!description || !vintage) return;
     try {
-      const review = id
-        ? { _id: id, wineId: wine._id, vintage, rate, description }
-        : { wineId: wine._id, vintage, rate, description };
-      const recent = await reviewService.set(review);
+      const sendReview = {
+        wineId: wine._id,
+        vintage,
+        rate,
+        description,
+      };
+      const recent = await reviewService.set(
+        id ? { _id: id, ...sendReview } : sendReview
+      );
       dispatch({
         type: "SET_WINE",
         wine: {
           ...wine,
-          rate: (wine.rate * wine.ratings + rate) / (wine.ratings + 1),
-          ratings: wine.ratings + 1,
+          rate: id
+            ? (wine.rate * wine.ratings - review.rate + rate) / wine.ratings
+            : (wine.rate * wine.ratings + rate) / (wine.ratings + 1),
+          ratings: id ? wine.ratings : wine.ratings + 1,
         },
       });
-      close();
+      close(recent);
     } catch (err) {
       console.log(err);
     }
@@ -62,12 +84,7 @@ export const AddReview = ({ wine, close, set, rate: inRate, review }) => {
         <form>
           <label>
             <span>Rate:</span>
-            <StarRate
-              rate={rate}
-              isEditable={true}
-              size={24}
-              set={(rate) => set(rate)}
-            />
+            <StarRate rate={rate} isEditable={true} size={24} set={set} />
           </label>
           <label>
             <span>Vintage:</span>

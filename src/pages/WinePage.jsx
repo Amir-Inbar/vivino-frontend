@@ -83,6 +83,14 @@ export const WinePage = (props) => {
     setTaste({ category, reviews: res?.data });
   };
 
+  const reviewUpdate = (result) => {
+    const reviewIdx = userReviews.find((review) => review._id === result._id);
+    if (reviewIdx > -1) setReviews(userReviews.splice(reviewIdx, 1, result));
+    else setReviews([result, ...userReviews]);
+    dispatch(loadReview(wine._id, { page: { size: 4 } }));
+    setRate(null);
+  };
+
   return wine ? (
     <>
       <WineHeader wine={wine} />
@@ -94,10 +102,11 @@ export const WinePage = (props) => {
       <WineReviews reviews={reviews} />
       <StarRate size={24} rate={rate} isEditable={true} set={setRate} />
       <AddReview
-        wine={wine}
         rate={rate}
-        close={() => setRate(null)}
+        wine={wine}
+        reviews={userReviews}
         set={setRate}
+        close={(review) => reviewUpdate(review)}
       />
     </>
   ) : null;
