@@ -100,6 +100,7 @@ export const WinePage = (props) => {
       <WinePairings wine={wine} />
       <MoreWines wines={wines} activeId={wine?._id} />
       <WineReviews reviews={reviews} />
+
       <StarRate size={24} rate={rate} isEditable={true} set={setRate} />
       <AddReview
         rate={rate}

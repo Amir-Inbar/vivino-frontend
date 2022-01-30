@@ -58,7 +58,7 @@ button {
     pointer-events: none;
   }
   align-self: flex-start;
-  padding: 6px 12px 7px 6px;
+  padding: 6px 12px 8px 6px;
   color: $clr5;
   border-radius: 3em;
   background-color: $clr4;
@@ -74,9 +74,9 @@ button.more {
   &::after {
     content: "";
     border: solid $clr3;
-    border-width: 0 3px 3px 0;
+    border-width: 0 2px 2px 0;
     display: inline-block;
-    margin-top: 4px;
+    margin-top: 6px;
     padding: 3px;
     transform: rotate(-45deg);
 
