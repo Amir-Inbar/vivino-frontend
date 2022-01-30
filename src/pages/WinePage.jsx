@@ -35,9 +35,9 @@ export const WinePage = (props) => {
     dispatch(loadReview(id, { page: { size: 4 } }));
   }, [props.match.params.id]);
 
-  useEffect(() => {
-    console.log(props.location.search);
-  }, [props.location.search]);
+  // useEffect(() => {
+  //   console.log(props.location.search);
+  // }, [props.location.search]);
 
   useEffect(() => {
     if (wine?.wineryId) dispatch(loadWinery(wine.wineryId));
@@ -64,7 +64,7 @@ export const WinePage = (props) => {
     const res = await reviewService.getByWineId(wine._id, {
       filter: { eqUserId: userId },
     });
-    setReviews(res || []);
+    setReviews(res.data ? [] : res || []);
   };
 
   const tasteClick = async (category) => {
@@ -84,11 +84,12 @@ export const WinePage = (props) => {
   };
 
   const reviewUpdate = (result) => {
+    setRate(null);
+    if (!result || !userReviews) return;
     const reviewIdx = userReviews.find((review) => review._id === result._id);
     if (reviewIdx > -1) setReviews(userReviews.splice(reviewIdx, 1, result));
     else setReviews([result, ...userReviews]);
     dispatch(loadReview(wine._id, { page: { size: 4 } }));
-    setRate(null);
   };
 
   return wine ? (

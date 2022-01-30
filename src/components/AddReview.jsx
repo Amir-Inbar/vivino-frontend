@@ -6,29 +6,31 @@ import { StarRate } from "./StarRate";
 export const AddReview = ({ wine, close, set, rate: inRate, reviews }) => {
   const [id, setId] = useState(null);
   const [rate, setRate] = useState(inRate);
-  const [vintage, setVintage] = useState();
+  const [vintage, setVintage] = useState(new Date().getFullYear());
   const [description, setDescription] = useState("");
   const [review, setReview] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!reviews) return;
-    const review = (reviews.data || reviews).find(
-      (review) => review.vintage === vintage
-    );
+    if (!vintage) setReview(null);
+    else setReview(reviews.find((review) => review.vintage === vintage));
+  }, [vintage]);
+
+  useEffect(() => {
     if (review) {
       setDescription(review.description);
       setRate(review.rate);
       setId(review._id);
-      setReview(review);
     } else if (id) {
       setDescription("");
       setId(null);
     }
-  }, [vintage]);
+  }, [review]);
 
   if (!inRate) return null;
   if (inRate !== rate) setRate(inRate);
+  window.scrollTo(0, 0);
 
   const submit = async () => {
     if (!description || !vintage) return;

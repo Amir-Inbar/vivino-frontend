@@ -8,7 +8,6 @@ export function TastePreview(props) {
   const [keyword, setKeyword] = useState("");
   if (!taste) return null;
   const { category, reviews } = taste;
-  console.log(category, reviews);
 
   const url = tryRequire(
     `imgs/icons/taste/${sentenceToKababCase(category.name)}.svg`
