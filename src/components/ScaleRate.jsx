@@ -16,7 +16,10 @@ export function ScaleRate(props) {
     isFirstRun.current = true;
     setScale(null);
     if (!wine) return;
-    const res = await reviewService.getByWineId(wine._id, { structure: true });
+    const res = await reviewService.query({
+      structure: true,
+      wineId: wine._id,
+    });
     setScale(
       res || {
         bold: wine.bold,
