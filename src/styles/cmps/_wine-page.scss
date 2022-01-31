@@ -101,22 +101,30 @@
           flex: 1;
           display: flex;
           align-items: center;
+          padding: 0 6px;
           div.scale {
             border-radius: 8px;
             color: $clr4;
             background-color: $clr4;
             width: 100%;
             height: 7px;
-            div {
+            div.thumb {
               animation: hover-zoom 1s 2 ease-in-out;
               position: relative;
               top: -3px;
               font-size: 0;
               width: 15%;
               border-radius: 6px;
-              background-color: $clr2;
               height: 12px;
               transition: transform 0.5s;
+              background-color: $clr1;
+              &.self {
+                background-color: $clr2;
+              }
+              &.unrated {
+                background-color: $clr5;
+                opacity: 0.3;
+              }
               &:hover {
                 transform: scale(102%);
               }

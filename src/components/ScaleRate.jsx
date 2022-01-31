@@ -1,6 +1,6 @@
 import { camelCaseToSentence, debounce } from "../services/util.service";
 import sections from "../assets/json/scale-sections.json";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { reviewService } from "../services/review.service";
 import { useLayoutEffect } from "react";
 
@@ -9,14 +9,26 @@ export function ScaleRate(props) {
   const isFirstRun = useRef(true);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [targetElement, setTargetElement] = useState(null);
-  const [wineScale, setScale] = useState({
-    bold: wine.bold,
-    tannic: wine.tannic,
-    sweet: wine.sweet,
-    acidic: wine.acidic,
-  });
+  const [wineScale, setScale] = useState();
+  const [isSelfRate, setIsSelfRate] = useState({});
+
+  useEffect(async () => {
+    isFirstRun.current = true;
+    if (!wine) return;
+    const res = await reviewService.getByWineId(wine._id, { structure: true });
+    setScale(
+      res || {
+        bold: wine.bold,
+        tannic: wine.tannic,
+        sweet: wine.sweet,
+        acidic: wine.acidic,
+      }
+    );
+    setIsSelfRate(!!res);
+  }, [wine]);
 
   useLayoutEffect(() => {
+    if (!wineScale) return;
     if (isFirstRun.current) {
       isFirstRun.current = false;
       return;
@@ -33,6 +45,7 @@ export function ScaleRate(props) {
     );
   }, [wineScale]);
 
+  if (!wine || !wineScale) return null;
   const BasedOn = ({ wine }) => {
     const content = `The taste profile of ${wine.winery} ${wine.name} is based on ${wine.ratings} user reviews`;
     return wine.ratings ? (
@@ -58,6 +71,9 @@ export function ScaleRate(props) {
           <td className="scale-container">
             <div className="scale">
               <div
+                className={`thumb ${isSelfRate ? "self" : ""} ${
+                  !wineScale[scale.max] ? "unrated" : ""
+                }`}
                 style={{
                   marginInlineStart:
                     Math.max((wineScale[scale.max] / 100) * slideRange, 0) +
