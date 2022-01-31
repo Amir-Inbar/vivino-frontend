@@ -54,7 +54,7 @@ export function WineryHeader(props) {
           <WineryRating winery={winery} />
           <div className="wines-count">
             <p>Wines</p>
-            <p>{winery.wines.length}</p>
+            <p>{winery.wines}</p>
           </div>
         </div>
       </div>

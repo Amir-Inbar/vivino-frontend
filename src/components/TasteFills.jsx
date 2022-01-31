@@ -52,14 +52,16 @@ export function TasteFill(props) {
   return (
     <div className="taste-fill">
       {tastes.length > position * 3 + 3 ? (
-        <button className="next" onClick={() => setPosition(position + 1)}>
-          -
-        </button>
+        <button
+          className="next"
+          onClick={() => setPosition(position + 1)}
+        ></button>
       ) : null}
       {position ? (
-        <button className="prev" onClick={() => setPosition(position - 1)}>
-          -
-        </button>
+        <button
+          className="back"
+          onClick={() => setPosition(position - 1)}
+        ></button>
       ) : null}
       <div className="taste-cards">
         <div className="taste-slider" style={sliderStyle()}>

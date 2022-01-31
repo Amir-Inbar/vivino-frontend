@@ -79,14 +79,16 @@ export const WineSlider = (props) => {
   return (
     <div className="wine-container">
       {wines.length > position * itemPerPage + itemPerPage ? (
-        <button className="next" onClick={() => setPosition(position + 1)}>
-          -
-        </button>
+        <button
+          className="next"
+          onClick={() => setPosition(position + 1)}
+        ></button>
       ) : null}
       {position ? (
-        <button className="prev" onClick={() => setPosition(position - 1)}>
-          -
-        </button>
+        <button
+          className="back"
+          onClick={() => setPosition(position - 1)}
+        ></button>
       ) : null}
       <div className="wine-cards">
         <div className="wine-slider" style={sliderStyle()}>

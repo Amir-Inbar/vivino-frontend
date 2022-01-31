@@ -147,6 +147,15 @@
     position: relative;
     padding: 48px 0;
     button {
+      &::after {
+        content: "";
+        border: solid $clr5;
+        border-width: 0 2px 2px 0;
+        display: inline-block;
+        padding: 3px;
+        position: absolute;
+        left: 15px;
+      }
       position: absolute;
       z-index: 1;
       border: 0;
@@ -160,10 +169,12 @@
       box-shadow: 0 4px 20px 0 rgba(66, 66, 66, 0.2);
       top: calc(55% - 30px);
       &.next {
+        transform: rotate(-45deg);
         left: calc(100% - 50px);
       }
-      &.prev {
+      &.back {
         left: 5px;
+        transform: rotate(-225deg);
       }
     }
     .taste-cards {
@@ -324,6 +335,15 @@
 .wine-container {
   position: relative;
   button {
+    &::after {
+      content: "";
+      border: solid $clr5;
+      border-width: 0 2px 2px 0;
+      display: inline-block;
+      padding: 3px;
+      position: absolute;
+      left: 15px;
+    }
     position: absolute;
     z-index: 1;
     border: 0;
@@ -337,10 +357,12 @@
     box-shadow: 0 4px 20px 0 rgba(66, 66, 66, 0.2);
     top: calc(55% - 30px);
     &.next {
+      transform: rotate(-45deg);
       left: calc(100% - 50px);
     }
-    &.prev {
+    &.back {
       left: 5px;
+      transform: rotate(-225deg);
     }
   }
   @include for-normal-layout {
