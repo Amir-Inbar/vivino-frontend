@@ -76,7 +76,7 @@ export function ScaleRate(props) {
             <div className="scale">
               <div
                 className={`thumb ${isSelfRate ? "self" : ""} ${
-                  !wineScale[scale.max] ? "unrated" : ""
+                  typeof wineScale[scale.max] !== "number" ? "unrated" : ""
                 }`}
                 style={{
                   marginInlineStart:
