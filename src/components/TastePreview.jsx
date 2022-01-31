@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { innerHtml } from "../services/html.service";
 import { reviewService } from "../services/review.service";
-import { sentenceToKababCase, tryRequire } from "../services/util.service";
+import {
+  debounce,
+  sentenceToKababCase,
+  tryRequire,
+} from "../services/util.service";
 import { StarRate } from "./StarRate";
 
 export function TastePreview(props) {
   const { taste, category, setTaste, wineId } = props;
   const [keyword, setKeyword] = useState("");
   const [reviews, setReviews] = useState(null);
+  const [searchQuery, setSearchQuery] = useState(null);
   var moment = require("moment");
 
   useEffect(() => {
@@ -16,14 +21,17 @@ export function TastePreview(props) {
 
   useEffect(async () => {
     if (!taste) return;
-    const searchQuery = category.mentions
-      .map((mention) => mention.keyword)
-      .join("|");
-    const res = await reviewService.getByWineId(wineId, {
+    setReviews(await loadReviews());
+    setSearchQuery(
+      category.mentions.map((mention) => mention.keyword).join("|")
+    );
+  }, [taste]);
+
+  const loadReviews = async () => {
+    return await reviewService.getByWineId(wineId, {
       filter: { inDescription: searchQuery },
     });
-    setReviews(res);
-  }, [taste]);
+  };
 
   if (!taste || !reviews) return null;
   const url = tryRequire(
@@ -123,6 +131,26 @@ export function TastePreview(props) {
       );
     });
 
+  const scrollDown = async (ev) => {
+    debounce(
+      async () => {
+        if (reviews.page.index < reviews.page.total - 1) {
+          const { scrollTop, scrollHeight, clientHeight } = ev.target;
+          if (scrollHeight - clientHeight - scrollTop < clientHeight * 0.1) {
+            const res = await reviewService.getByWineId(wineId, {
+              filter: { inDescription: searchQuery },
+              page: { index: reviews.page.index + 1 },
+            });
+            if (res)
+              setReviews({ ...res, data: [...reviews.data, ...res.data] });
+          }
+        }
+      },
+      "TASTE-SCROLL",
+      1000
+    );
+  };
+
   return taste ? (
     <section className="taste-preview" onClick={() => setTaste(null)}>
       <div className="taste-content" onClick={(e) => e.stopPropagation()}>
@@ -135,7 +163,9 @@ export function TastePreview(props) {
           <h2>{taste.name}</h2>
         </section>
         <section className="taste-keywords">{keywords()}</section>
-        <section className="taste-reviews">{display()}</section>
+        <section className="taste-reviews" onScroll={scrollDown}>
+          {display()}
+        </section>
       </div>
     </section>
   ) : null;
