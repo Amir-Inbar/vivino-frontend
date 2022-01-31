@@ -26,8 +26,11 @@ const WinePreviews = ({ wines }) => {
         {item.background ? <img src={item.background} /> : ""}
         <div className="preview-header">
           <div className="wine-bottle">
-            <img className="bottle-img" src={item.image} />
-            <img src={item.image} />
+            <img
+              className="bottle-img"
+              src={item.image || tryRequire("imgs/bottle.png")}
+            />
+            <img src={item.image || tryRequire("imgs/bottle.png")} />
           </div>
           <div className="wine-rate">
             <WineRate rate={item.rate} ratings={item.ratings} />

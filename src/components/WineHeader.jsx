@@ -1,20 +1,13 @@
 import { StarRate } from "./StarRate";
 import { useHistory } from "react-router-dom";
+import { tryRequire } from "../services/util.service";
 
 export function WineHeader(props) {
   const { wine } = props;
   const history = useHistory();
 
   const keywords = () => {
-    const grapes = wine.grapes
-      ? wine.grapes.split("|").map((grape) =>
-          grape
-            .split(" ")
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ")
-        )
-      : null;
-    return [wine.country, wine.region, wine.type, grapes].map(
+    return [wine.country, wine.region, wine.type, ...wine.grapes].map(
       (keyword, idx) => {
         return keyword ? (
           <a className="tag" key={"KEYWORD_" + idx}>
@@ -42,7 +35,10 @@ export function WineHeader(props) {
     <section className="wine-header full">
       <div className="information fit-media">
         <div className="picture">
-          <img src={wine.image} alt={wine.name} />
+          <img
+            src={wine.image ? wine.image : tryRequire("imgs/bottle.png")}
+            alt={wine.name}
+          />
         </div>
         <div className="content">
           <h2 onClick={() => history.push(`/winery/${wine.wineryId}`)}>

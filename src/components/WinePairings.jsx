@@ -5,7 +5,7 @@ export const WinePairings = (props) => {
   const { wine } = props;
 
   const FoodPairing = ({ wine }) => {
-    return wine.pairings.split("|").map((food, idx) => (
+    return wine.pairings.map((food, idx) => (
       <div className="meal" key={"FOOD_PAIR_" + idx}>
         <img src={tryRequire(`imgs/food/${sentenceToKababCase(food)}.jpg`)} />
         <h3>{food}</h3>

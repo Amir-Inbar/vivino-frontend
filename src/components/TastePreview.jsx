@@ -7,6 +7,7 @@ export function TastePreview(props) {
   const { taste, setTaste } = props;
   const [keyword, setKeyword] = useState("");
   if (!taste) return null;
+  var moment = require("moment");
   const { category, reviews } = taste;
 
   const url = tryRequire(
@@ -50,7 +51,13 @@ export function TastePreview(props) {
               <div dangerouslySetInnerHTML={{ __html: desc }}></div>
             </div>
             <div className="summerize">
-              <div className="reviewer">{review.reviewer}</div>
+              <div className="reviewer">
+                <span className="name">{review.reviewer} </span>
+                <span className="reviews">({review.ratings} ratings) </span>
+                <span className="time">
+                  {moment(review.createdAt).format("ll")}
+                </span>
+              </div>
               <div className="rating">
                 <StarRate rate={review.rate} />
               </div>

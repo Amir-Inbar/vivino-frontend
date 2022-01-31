@@ -285,6 +285,11 @@
           justify-content: space-between;
           .reviewer {
             font-size: 1em;
+            .name,
+            .reviews {
+              font-weight: 700;
+              color: $clr1;
+            }
           }
           .rating {
             width: 82.5px;
