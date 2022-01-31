@@ -8,8 +8,8 @@ export const reviewService = {
 
 const API = 'review';
 
-async function query(filter = {}) {
-  return httpService.get(API, { params: filter });
+async function query(queries) {
+  return httpService.get(API, null, queries);
 }
 
 async function getByWineId(id, queries) {

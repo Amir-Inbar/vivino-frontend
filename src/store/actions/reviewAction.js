@@ -1,10 +1,9 @@
 import { reviewService } from '../../services/review.service';
 
-export function loadReviews() {
-  return async (dispatch, getState) => {
-    const { filterBy } = getState().review.Module;
+export function loadReviews(queries) {
+  return async (dispatch) => {
     try {
-      const reviews = await reviewService.query(filterBy);
+      const reviews = await reviewService.query(queries);
       if (reviews)
         dispatch({ type: 'SET_REVIEWS', reviews });
     } catch (err) {

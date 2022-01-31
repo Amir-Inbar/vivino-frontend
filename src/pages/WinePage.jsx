@@ -61,9 +61,10 @@ export const WinePage = (props) => {
   const loadUserReviews = async () => {
     const user = authService.getLoggedinUser();
     if (!wine || !user?._id) return;
-    const res = await reviewService.getByWineId(wine._id, {
-      filter: { eqUserId: user._id },
-    });
+    const res = await reviewService.query({ filter: { eqWineId: wine._id } });
+    // getByWineId(wine._id, {
+    //   filter: { eqUserId: user._id },
+    // });
     setReviews(res.data ? [] : res || []);
   };
 
