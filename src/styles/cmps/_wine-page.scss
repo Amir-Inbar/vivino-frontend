@@ -92,9 +92,10 @@
       padding: 0 12px;
       tr {
         display: flex;
+        align-items: center;
+        height: 30px;
         td {
           min-width: 50px;
-          padding: 14px 4px 0 0;
         }
         td.scale-container {
           flex: 1;
@@ -115,6 +116,10 @@
               border-radius: 6px;
               background-color: $clr2;
               height: 12px;
+              transition: transform 0.5s;
+              &:hover {
+                transform: scale(102%);
+              }
             }
           }
         }

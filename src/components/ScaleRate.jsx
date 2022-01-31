@@ -8,6 +8,7 @@ export function ScaleRate(props) {
   const { wine } = props;
   const isFirstRun = useRef(true);
   const [isMouseDown, setIsMouseDown] = useState(false);
+  const [targetElement, setTargetElement] = useState(null);
   const [wineScale, setScale] = useState({
     bold: wine.bold,
     tannic: wine.tannic,
@@ -47,19 +48,23 @@ export function ScaleRate(props) {
     const slideRange = 100 - barWidth;
     return sections.map((scale, idx) => {
       return (
-        <tr key={"SCALE_RATE_" + idx}>
+        <tr
+          key={"SCALE_RATE_" + idx}
+          onMouseMove={(ev) => setMouse(ev, scale.max)}
+          onMouseUp={stopDrag}
+          onMouseLeave={() => stopDrag}
+        >
           <td>{camelCaseToSentence(scale.min)}</td>
           <td className="scale-container">
             <div className="scale">
               <div
                 style={{
                   marginInlineStart:
-                    (wineScale[scale.max] / 100) * slideRange + "%",
+                    Math.max((wineScale[scale.max] / 100) * slideRange, 0) +
+                    "%",
                   width: barWidth + "%",
                 }}
-                onMouseDown={() => setIsMouseDown(true)}
-                onMouseUp={() => setIsMouseDown(false)}
-                onMouseMoveCapture={(ev) => setMouse(ev, scale.max)}
+                onMouseDown={startDrag}
               ></div>
             </div>
           </td>
@@ -69,12 +74,22 @@ export function ScaleRate(props) {
     });
   };
 
+  const startDrag = ({ target }) => {
+    setIsMouseDown(true);
+    setTargetElement(target);
+  };
+
+  const stopDrag = () => {
+    setIsMouseDown(false);
+    setTargetElement(null);
+  };
+
   const setMouse = (ev, scale) => {
     if (!isMouseDown) return;
-    const bondClient = ev.target.parentElement.getBoundingClientRect();
-    const thumbClient = ev.target.getBoundingClientRect();
+    const bondClient = targetElement.parentElement.getBoundingClientRect();
+    const thumbClient = targetElement.getBoundingClientRect();
     const scaleMin = bondClient.left;
-    const scaleWidth = ev.target.parentElement.offsetWidth;
+    const scaleWidth = targetElement.parentElement.offsetWidth;
     const thumbLeft = (ev.pageX - thumbClient.left) / 2;
     const currPos = Math.min(ev.pageX + thumbLeft - scaleMin, scaleWidth);
     setScale({
@@ -88,11 +103,7 @@ export function ScaleRate(props) {
   return data.filter((scale) => scale).length ? (
     <>
       <h2>What does this wine taste like?</h2>
-      <div
-        className="details"
-        onMouseLeave={() => setIsMouseDown(false)}
-        onMouseUp={() => setIsMouseDown(false)}
-      >
+      <div className="details">
         <table>
           <tbody>{data}</tbody>
         </table>

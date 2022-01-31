@@ -10,6 +10,10 @@ export function TastePreview(props) {
   const [reviews, setReviews] = useState(null);
   var moment = require("moment");
 
+  useEffect(() => {
+    if (!taste) setReviews(null);
+  }, [taste]);
+
   useEffect(async () => {
     if (!taste) return;
     const searchQuery = category.mentions
