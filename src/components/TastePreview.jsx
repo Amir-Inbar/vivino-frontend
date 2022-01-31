@@ -1,89 +1,106 @@
 import React, { useEffect, useState } from "react";
 import { innerHtml } from "../services/html.service";
+import { reviewService } from "../services/review.service";
 import { sentenceToKababCase, tryRequire } from "../services/util.service";
 import { StarRate } from "./StarRate";
 
 export function TastePreview(props) {
-  const { taste, setTaste } = props;
+  const { taste, category, setTaste, wineId } = props;
   const [keyword, setKeyword] = useState("");
-  if (!taste) return null;
+  const [reviews, setReviews] = useState(null);
   var moment = require("moment");
-  const { category, reviews } = taste;
 
+  useEffect(async () => {
+    if (!taste) return;
+    const searchQuery = category.mentions
+      .map((mention) => mention.keyword)
+      .join("|");
+    const res = await reviewService.getByWineId(wineId, {
+      filter: { inDescription: searchQuery },
+    });
+    setReviews(res);
+  }, [taste]);
+
+  if (!taste || !reviews) return null;
   const url = tryRequire(
-    `imgs/icons/taste/${sentenceToKababCase(category.name)}.svg`
+    `imgs/icons/taste/${sentenceToKababCase(taste.name)}.svg`
   );
 
   function display() {
     if (
       keyword &&
-      !category.mentions.find((mention) => mention.keyword === keyword)
+      !taste.mentions.find((mention) => mention.keyword === keyword)
     )
       setKeyword("");
     return reviews
-      .filter((review) => {
-        const re = new RegExp(
-          `\\b(${keyword}|${keyword.replace(" ", "")})\\b`,
-          "gi"
-        );
-        return re.exec(review.description);
-      })
-      .map((review, idx) => {
-        const keywords = category.mentions.map((mention) =>
-          mention.keyword !== mention.keyword.replace(" ", "")
-            ? `${mention.keyword}|${mention.keyword.replace(" ", "")}`
-            : mention.keyword
-        );
-        const re = new RegExp(`\\b(${keywords.join("|")})\\b`, "gi");
-        const match = review.description.match(re) || [];
-        review.description = review.description.replaceAll(/<[{1}^>]*>/g, "");
-        let desc = innerHtml(review.description);
-        match.forEach(
-          (keyword) =>
-            (desc = desc.replace(
-              keyword,
-              `<span style="color:${category.color};font-weight:700;">${keyword}</span>`
-            ))
-        );
-        return (
-          <div className="taste-review" key={"REVIEW_" + idx}>
-            <div className="content">
-              <div dangerouslySetInnerHTML={{ __html: desc }}></div>
-            </div>
-            <div className="summerize">
-              <div className="reviewer">
-                <span className="name">{review.reviewer} </span>
-                <span className="reviews">({review.ratings} ratings) </span>
-                <span className="time">
-                  {moment(review.createdAt).format("ll")}
-                </span>
+      ? reviews.data
+          .filter((review) => {
+            const re = new RegExp(
+              `\\b(${keyword}|${keyword.replace(" ", "")})\\b`,
+              "gi"
+            );
+            return re.exec(review.description);
+          })
+          .map((review, idx) => {
+            const keywords = taste.mentions.map((mention) =>
+              mention.keyword !== mention.keyword.replace(" ", "")
+                ? `${mention.keyword}|${mention.keyword.replace(" ", "")}`
+                : mention.keyword
+            );
+            const re = new RegExp(`\\b(${keywords.join("|")})\\b`, "gi");
+            const match = review.description.match(re) || [];
+            review.description = review.description.replaceAll(
+              /<[{1}^>]*>/g,
+              ""
+            );
+            let desc = innerHtml(review.description);
+            match.forEach(
+              (keyword) =>
+                (desc = desc.replace(
+                  keyword,
+                  `<span style="color:${taste.color};font-weight:700;">${keyword}</span>`
+                ))
+            );
+            return (
+              <div className="taste-review" key={"REVIEW_" + idx}>
+                <div className="content">
+                  <div dangerouslySetInnerHTML={{ __html: desc }}></div>
+                </div>
+                <div className="summerize">
+                  <div className="reviewer">
+                    <span className="name">{review.reviewer} </span>
+                    <span className="reviews">({review.ratings} ratings) </span>
+                    <span className="time">
+                      {moment(review.createdAt).format("ll")}
+                    </span>
+                  </div>
+                  <div className="rating">
+                    <StarRate rate={review.rate} />
+                  </div>
+                </div>
               </div>
-              <div className="rating">
-                <StarRate rate={review.rate} />
-              </div>
-            </div>
-          </div>
-        );
-      });
+            );
+          })
+      : null;
   }
 
   const keywords = () =>
-    category.mentions.map((mention, idx) => {
+    taste.mentions.map((mention, idx) => {
       const buttonStyle = () =>
         keyword === mention.keyword
           ? {
               backgroundColor: "#fff",
-              color: category.color,
-              borderColor: category.color,
+              color: taste.color,
+              borderColor: taste.color,
             }
-          : { backgroundColor: category.color };
+          : { backgroundColor: taste.color };
       const countStyle = () => {
         return keyword === mention.keyword
-          ? { backgroundColor: category.color, color: "#fff" }
+          ? { backgroundColor: taste.color, color: "#fff" }
           : {
               backgroundColor: "#fff",
-              color: category.color,
-              borderColor: category.color,
+              color: taste.color,
+              borderColor: taste.color,
             };
       };
       return (
@@ -107,11 +124,11 @@ export function TastePreview(props) {
       <div className="taste-content" onClick={(e) => e.stopPropagation()}>
         <section
           className="taste-header"
-          style={{ backgroundColor: category.color }}
+          style={{ backgroundColor: taste.color }}
         >
           <button onClick={() => setTaste(null)}>X</button>
-          <img src={url} alt={category.name} />
-          <h2>{category.name}</h2>
+          <img src={url} alt={taste.name} />
+          <h2>{taste.name}</h2>
         </section>
         <section className="taste-keywords">{keywords()}</section>
         <section className="taste-reviews">{display()}</section>

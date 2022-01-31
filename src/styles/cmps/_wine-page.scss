@@ -87,6 +87,7 @@
   .details {
     display: flex;
     table {
+      user-select: none;
       flex: 1;
       padding: 0 12px;
       tr {
@@ -100,7 +101,7 @@
           display: flex;
           align-items: center;
           div.scale {
-            border-radius: 6px;
+            border-radius: 8px;
             color: $clr4;
             background-color: $clr4;
             width: 100%;
@@ -108,12 +109,12 @@
             div {
               animation: hover-zoom 1s 2 ease-in-out;
               position: relative;
-              top: -0.5px;
+              top: -3px;
               font-size: 0;
               width: 15%;
               border-radius: 6px;
               background-color: $clr2;
-              height: 8px;
+              height: 12px;
             }
           }
         }

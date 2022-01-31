@@ -16,8 +16,8 @@ async function getByWineId(id, queries) {
   return httpService.get(API + '/' + id, null, queries);
 }
 
-async function set(review) {
-  return httpService.post(API, review);
+async function set(wineId, review, queries) {
+  return httpService.post(API + '/' + wineId, review, queries);
 }
 
 // async function remove(id) {

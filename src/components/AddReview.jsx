@@ -35,14 +35,15 @@ export const AddReview = ({ wine, close, set, rate: inRate, reviews }) => {
   const submit = async () => {
     if (!description || !vintage) return;
     try {
-      const sendReview = {
-        wineId: wine._id,
+      const body = {
         vintage,
         rate,
         description,
       };
       const recent = await reviewService.set(
-        id ? { _id: id, ...sendReview } : sendReview
+        wine._id,
+        id ? { _id: id, ...body } : body,
+        { type: "review" }
       );
       dispatch({
         type: "SET_WINE",

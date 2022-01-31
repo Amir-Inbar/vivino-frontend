@@ -74,13 +74,7 @@ export const WinePage = (props) => {
       return;
     }
     history.push(`?taste=${category.name}`);
-    const searchQuery = category.mentions
-      .map((mention) => mention.keyword)
-      .join("|");
-    const res = await reviewService.getByWineId(wine._id, {
-      filter: { inDescription: searchQuery },
-    });
-    setTaste({ category, reviews: res?.data });
+    setTaste(category);
   };
 
   const reviewUpdate = (result) => {
@@ -97,7 +91,12 @@ export const WinePage = (props) => {
       <WineHeader wine={wine} />
       <WineryPreview winery={winery} />
       <TasteLike wine={wine} setTaste={tasteClick} />
-      <TastePreview taste={taste} setTaste={tasteClick} />
+      <TastePreview
+        taste={taste}
+        category={taste}
+        setTaste={tasteClick}
+        wineId={wine._id}
+      />
       <WinePairings wine={wine} />
       <MoreWines wines={wines} activeId={wine?._id} />
       <WineReviews reviews={reviews} />
