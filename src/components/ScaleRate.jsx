@@ -14,6 +14,7 @@ export function ScaleRate(props) {
 
   useEffect(async () => {
     isFirstRun.current = true;
+    setScale(null);
     if (!wine) return;
     const res = await reviewService.getByWineId(wine._id, { structure: true });
     setScale(
