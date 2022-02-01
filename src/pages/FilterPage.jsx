@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { WineAvgRateFilter } from "../components/WineAvgRateFilter";
+import { WineCountryFilter } from "../components/WineCountryFilter";
 import { WineGrapesFilter } from "../components/WineGrapesFilter";
 import { WinePreviews } from "../components/WinePreview";
 import { WineRegionFilter } from "../components/WineRegionFilter";
+import { WineStyleFilter } from "../components/WineStyleFilter";
 import { WineTypesFilter } from "../components/WineTypeFilter";
 import { debounce } from "../services/util.service";
 import { wineService } from "../services/wine.service";
@@ -19,9 +21,11 @@ export const FilterPage = (props) => {
     const queryParams = new URLSearchParams(props.location.search);
     dispatch(
       setFilterBy({
-        eqType: queryParams.get("type"),
-        inRegion: queryParams.get("region"),
-        "in+Grapes": queryParams.get("grapes"),
+        eqType: queryParams.get("type")?.split("-").join("|"),
+        inRegion: queryParams.get("region")?.split("-").join("|"),
+        "in+Grapes": queryParams.get("grapes")?.split("-").join("|"),
+        inCountry: queryParams.get("country")?.split("-").join("|"),
+        inSeo: queryParams.get("style"),
       })
     );
   }, [props.location.search]);
@@ -75,9 +79,11 @@ export const FilterPage = (props) => {
           }
         ></input>
         <WineTypesFilter filter={filter} />
-        {/* <WineAvgRateFilter filter={filter} /> */}
+        <WineAvgRateFilter filter={filter} />
         <WineGrapesFilter filter={filter} />
         <WineRegionFilter filter={filter} />
+        <WineCountryFilter filter={filter} />
+        <WineStyleFilter filter={filter} />
       </nav>
       <div className="wines-result" onScroll={scrollDown} ref={tableEl}>
         <WinePreviews wines={wines.data} />

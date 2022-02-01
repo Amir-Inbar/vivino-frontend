@@ -3,11 +3,11 @@ import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { wineService } from "../services/wine.service";
 
-export const WineRegionFilter = ({ filter }) => {
+export const WineStyleFilter = ({ filter }) => {
   const [select, setSelect] = useState(
-    filter?.inRegion ? filter?.inRegion.split("|") : []
+    filter?.inSeo ? filter?.inSeo.split("|") : []
   );
-  const [region, setRegion] = useState([]);
+  const [style, setStyle] = useState([]);
 
   const location = useLocation();
   const history = useHistory();
@@ -20,15 +20,15 @@ export const WineRegionFilter = ({ filter }) => {
   };
 
   useEffect(async () => {
-    if (!region.length)
+    if (!style.length)
       try {
-        const res = await wineService.query({ listOf: "region" });
-        if (res) setRegion(res.map((data) => data.region));
+        const res = await wineService.query({ listOf: "seo" });
+        if (res) setStyle(res.map((data) => data.seo));
       } catch {}
-  }, [region]);
+  }, [style]);
 
   useEffect(() => {
-    setQuery("region", select.join("-"));
+    setQuery("style", select.join("|"));
   }, [select]);
 
   const toggleSelect = (type) => {
@@ -37,21 +37,21 @@ export const WineRegionFilter = ({ filter }) => {
   };
 
   const TypeButton = () =>
-    region
+    style
       .map((type, idx) => (
         <button
-          key={"REGION_BUTTON_" + idx}
+          key={"STYLE_BUTTON_" + idx}
           className={`${select.includes(type) ? "selected" : ""}`}
           onClick={() => toggleSelect(type)}
         >
-          {type}
+          {type.replaceAll("-", " ")}
         </button>
       ))
       .slice(0, 9);
 
   return (
     <section className="wine-select-buttons">
-      <h2>Regions</h2>
+      <h2>Wine styles</h2>
       <TypeButton />
     </section>
   );

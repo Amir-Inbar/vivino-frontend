@@ -3,11 +3,11 @@ import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { wineService } from "../services/wine.service";
 
-export const WineRegionFilter = ({ filter }) => {
+export const WineCountryFilter = ({ filter }) => {
   const [select, setSelect] = useState(
-    filter?.inRegion ? filter?.inRegion.split("|") : []
+    filter?.inCountry ? filter?.inCountry.split("|") : []
   );
-  const [region, setRegion] = useState([]);
+  const [country, setCountry] = useState([]);
 
   const location = useLocation();
   const history = useHistory();
@@ -20,15 +20,15 @@ export const WineRegionFilter = ({ filter }) => {
   };
 
   useEffect(async () => {
-    if (!region.length)
+    if (!country.length)
       try {
-        const res = await wineService.query({ listOf: "region" });
-        if (res) setRegion(res.map((data) => data.region));
+        const res = await wineService.query({ listOf: "country" });
+        if (res) setCountry(res.map((data) => data.country));
       } catch {}
-  }, [region]);
+  }, [country]);
 
   useEffect(() => {
-    setQuery("region", select.join("-"));
+    setQuery("country", select.join("-"));
   }, [select]);
 
   const toggleSelect = (type) => {
@@ -37,10 +37,10 @@ export const WineRegionFilter = ({ filter }) => {
   };
 
   const TypeButton = () =>
-    region
+    country
       .map((type, idx) => (
         <button
-          key={"REGION_BUTTON_" + idx}
+          key={"COUNTRY_BUTTON_" + idx}
           className={`${select.includes(type) ? "selected" : ""}`}
           onClick={() => toggleSelect(type)}
         >
@@ -51,7 +51,7 @@ export const WineRegionFilter = ({ filter }) => {
 
   return (
     <section className="wine-select-buttons">
-      <h2>Regions</h2>
+      <h2>Countries</h2>
       <TypeButton />
     </section>
   );

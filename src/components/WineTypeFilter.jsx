@@ -19,7 +19,7 @@ export const WineTypesFilter = (props) => {
   };
 
   useEffect(() => {
-    setQuery("type", select.join("|"));
+    setQuery("type", select.join("-"));
   }, [select]);
 
   const toggleSelect = (type) => {

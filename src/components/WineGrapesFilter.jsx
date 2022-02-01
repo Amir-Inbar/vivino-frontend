@@ -19,7 +19,7 @@ export const WineGrapesFilter = ({ filter }) => {
   };
 
   useEffect(() => {
-    setQuery("grapes", select.join("|"));
+    setQuery("grapes", select.join("-"));
   }, [select]);
 
   const toggleSelect = (type) => {
