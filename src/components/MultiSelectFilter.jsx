@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
-export const WineTypesFilter = (props) => {
-  const { filter } = props;
-  const [select, setSelect] = useState(
-    filter?.eqType ? filter?.eqType.split("|") : []
-  );
-
+export const MultiSelectFilter = ({ title, query, data }) => {
   const location = useLocation();
   const history = useHistory();
+
+  const getQuery = (name) => {
+    const queryParams = new URLSearchParams(location.search);
+    return queryParams.get(name)?.split("-") || [];
+  };
 
   const setQuery = (name, value) => {
     const queryParams = new URLSearchParams(location.search);
@@ -18,8 +18,10 @@ export const WineTypesFilter = (props) => {
     history.replace({ search: queryParams.toString() });
   };
 
+  const [select, setSelect] = useState(getQuery(query) || []);
+
   useEffect(() => {
-    setQuery("type", select.join("-"));
+    setQuery(query, select.join("-"));
   }, [select]);
 
   const toggleSelect = (type) => {
@@ -28,21 +30,19 @@ export const WineTypesFilter = (props) => {
   };
 
   const TypeButton = () =>
-    ["red", "white", "rose", "sparkling", "dessert", "fortifield"].map(
-      (type, idx) => (
-        <button
-          key={"TYPE_BUTTON_" + idx}
-          className={`${select.includes(type) ? "selected" : ""}`}
-          onClick={() => toggleSelect(type)}
-        >
-          {type}
-        </button>
-      )
-    );
+    data.map((type, idx) => (
+      <button
+        key={`BUTTON_${query}${idx}`}
+        className={`${select.includes(type) ? "selected" : ""}`}
+        onClick={() => toggleSelect(type)}
+      >
+        {type}
+      </button>
+    ));
 
   return (
     <section className="wine-select-buttons">
-      <h2>Wine types</h2>
+      <h2>{title}</h2>
       <TypeButton />
     </section>
   );

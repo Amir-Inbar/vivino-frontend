@@ -21,16 +21,16 @@ export function ScaleRate(props) {
         structure: true,
         wineId: wine._id,
       });
-      setScale(res);
+      if (res) setScale(res);
       setIsSelfRate(!!res);
-    } catch (err) {
+    } catch (err) {}
+    if (!wineScale)
       setScale({
         bold: wine.bold,
         tannic: wine.tannic,
         sweet: wine.sweet,
         acidic: wine.acidic,
       });
-    }
   }, [wine]);
 
   useLayoutEffect(() => {

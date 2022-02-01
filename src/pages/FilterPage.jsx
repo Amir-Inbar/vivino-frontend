@@ -1,21 +1,37 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { WineAvgRateFilter } from "../components/WineAvgRateFilter";
-import { WineCountryFilter } from "../components/WineCountryFilter";
-import { WineGrapesFilter } from "../components/WineGrapesFilter";
+import { MultiSelectFilter } from "../components/MultiSelectFilter";
 import { WinePreviews } from "../components/WinePreview";
-import { WineRegionFilter } from "../components/WineRegionFilter";
-import { WineStyleFilter } from "../components/WineStyleFilter";
-import { WineTypesFilter } from "../components/WineTypeFilter";
 import { debounce } from "../services/util.service";
 import { wineService } from "../services/wine.service";
 import { saveWines, setFilterBy } from "../store/actions/wineAction";
 
+import grapes from "../assets/json/grapes.json";
+import { ScaleRangeFilter } from "../components/ScaleRangeFilter";
+
 export const FilterPage = (props) => {
   const dispatch = useDispatch();
   const [wines, setWines] = useState(null);
+  const [regions, setRegions] = useState([]);
+  const [countries, setCountries] = useState([]);
+  const [styles, setStyles] = useState([]);
   const { filter } = useSelector((state) => state.wineModule);
   const tableEl = useRef(null);
+
+  useEffect(async () => {
+    setCountries(await getListOf("country"));
+    setRegions(await getListOf("region"));
+    setStyles(await getListOf("seo"));
+  }, [tableEl]);
+
+  const getListOf = async (key) => {
+    try {
+      const res = await wineService.query({ listOf: key });
+      return res.map((data) => data[key]);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     const queryParams = new URLSearchParams(props.location.search);
@@ -40,7 +56,7 @@ export const FilterPage = (props) => {
           tableEl.current.scrollTo(0, 0);
         },
         "GET_WINES",
-        500
+        1000
       );
     } catch {}
   }, [filter]);
@@ -70,12 +86,16 @@ export const FilterPage = (props) => {
   return wines ? (
     <section className="wines-filter">
       <nav className="filter-menu">
-        <WineTypesFilter filter={filter} />
-        <WineAvgRateFilter filter={filter} />
-        <WineGrapesFilter filter={filter} />
-        <WineRegionFilter filter={filter} />
-        <WineCountryFilter filter={filter} />
-        <WineStyleFilter filter={filter} />
+        <MultiSelectFilter
+          title="Wine type"
+          query="type"
+          data={["red", "white", "rose", "sparkling", "dessert", "fortifield"]}
+        />
+        <ScaleRangeFilter title="Average rate" fromQuery="from" toQuery="to" />
+        <MultiSelectFilter title="Grapes" query="grapes" data={grapes} />
+        <MultiSelectFilter title="Regions" query="region" data={regions} />
+        <MultiSelectFilter title="Countries" query="country" data={countries} />
+        <MultiSelectFilter title="Wine styles" query="style" data={styles} />
       </nav>
       <div className="wines-result" onScroll={scrollDown} ref={tableEl}>
         <WinePreviews wines={wines.data} />
