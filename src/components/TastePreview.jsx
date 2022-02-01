@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { reviewService } from "../services/review.service";
 import {
   debounce,
@@ -8,31 +10,56 @@ import {
 import { StarRate } from "./StarRate";
 
 export function TastePreview(props) {
-  const { taste, category, setTaste, wineId } = props;
+  const { wine, query } = props;
+  const [taste, setTaste] = useState(null);
   const [keyword, setKeyword] = useState("");
   const [reviews, setReviews] = useState(null);
   const [searchQuery, setSearchQuery] = useState(null);
   var moment = require("moment");
+  const location = useLocation();
+  const history = useHistory();
 
-  useEffect(() => {
-    if (!taste) setReviews(null);
-  }, [taste]);
-
-  useEffect(async () => {
-    if (!taste) return;
-    setReviews(await loadReviews());
-    setSearchQuery(
-      category.mentions.map((mention) => mention.keyword).join("|")
-    );
-  }, [taste]);
-
-  const loadReviews = async () => {
-    return await reviewService.getByWineId(wineId, {
-      filter: { inDescription: searchQuery },
-    });
+  const getQuery = (name) => {
+    const queryParams = new URLSearchParams(location.search);
+    return queryParams.get(name)?.split("-") || [];
   };
 
-  if (!taste || !reviews) return null;
+  const setQuery = (name, value) => {
+    const queryParams = new URLSearchParams(location.search);
+    if (value) queryParams.set(name, value);
+    else queryParams.delete(name);
+    history.replace({ search: queryParams.toString() });
+  };
+
+  useEffect(async () => {
+    if (!query) {
+      setTaste(null);
+      setReviews(null);
+      return;
+    }
+    setTaste(wine.tastes.find((taste) => taste.name === query));
+  }, [query]);
+
+  useEffect(
+    async () =>
+      setSearchQuery(
+        taste
+          ? taste.mentions.map((mention) => mention.keyword).join("|")
+          : null
+      ),
+    [taste]
+  );
+
+  useEffect(async () => {
+    if (searchQuery)
+      setReviews(
+        await reviewService.getByWineId(wine._id, {
+          filter: { inDescription: searchQuery },
+        })
+      );
+  }, [searchQuery]);
+
+  if (!query || !reviews || !taste) return null;
   const url = tryRequire(
     `imgs/icons/taste/${sentenceToKababCase(taste.name)}.svg`
   );
@@ -136,7 +163,7 @@ export function TastePreview(props) {
         if (reviews.page.index < reviews.page.total - 1) {
           const { scrollTop, scrollHeight, clientHeight } = ev.target;
           if (scrollHeight - clientHeight - scrollTop < clientHeight * 0.1) {
-            const res = await reviewService.getByWineId(wineId, {
+            const res = await reviewService.getByWineId(wine._id, {
               filter: { inDescription: searchQuery },
               page: { index: reviews.page.index + 1 },
             });
@@ -151,13 +178,13 @@ export function TastePreview(props) {
   };
 
   return taste ? (
-    <section className="taste-preview" onClick={() => setTaste(null)}>
+    <section className="taste-preview" onClick={() => setQuery("taste")}>
       <div className="taste-content" onClick={(e) => e.stopPropagation()}>
         <section
           className="taste-header"
           style={{ backgroundColor: taste.color }}
         >
-          <button onClick={() => setTaste(null)}>X</button>
+          <button onClick={() => setQuery("taste")}>X</button>
           <img src={url} alt={taste.name} />
           <h2>{taste.name}</h2>
         </section>

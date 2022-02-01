@@ -16,6 +16,7 @@ import { WineReviews } from "../components/WineReviews";
 import { StarRate } from "../components/StarRate";
 import { AddReview } from "../components/AddReview";
 import { authService } from "../services/auth.service";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 export const WinePage = (props) => {
   const [userReviews, setReviews] = useState([]);
@@ -29,15 +30,18 @@ export const WinePage = (props) => {
   const { reviews } = useSelector((state) => state.reviewModule);
 
   const history = useHistory();
+  const location = useLocation();
+
+  const getQuery = (name) => {
+    const queryParams = new URLSearchParams(location.search);
+    return queryParams.get(name)?.split("-") || [];
+  };
+
   useEffect(() => {
     const { id } = props.match.params;
     dispatch(loadWine(id));
     dispatch(loadReview(id, { page: { size: 4 } }));
   }, [props.match.params.id]);
-
-  // useEffect(() => {
-  //   console.log(props.location.search);
-  // }, [props.location.search]);
 
   useEffect(() => {
     if (wine?.wineryId) dispatch(loadWinery(wine.wineryId));
@@ -89,16 +93,10 @@ export const WinePage = (props) => {
       <WineHeader wine={wine} />
       <WineryPreview winery={winery} />
       <TasteLike wine={wine} setTaste={tasteClick} />
-      <TastePreview
-        taste={taste}
-        category={taste}
-        setTaste={tasteClick}
-        wineId={wine._id}
-      />
+      <TastePreview wine={wine} query={getQuery("taste").toString()} />
       <WinePairings wine={wine} />
       <MoreWines wines={wines} activeId={wine?._id} />
       <WineReviews reviews={reviews} />
-
       <StarRate size={24} rate={rate} isEditable={true} set={setRate} />
       <AddReview
         rate={rate}

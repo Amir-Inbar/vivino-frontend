@@ -3,6 +3,7 @@ import sections from "../assets/json/scale-sections.json";
 import { useEffect, useRef, useState } from "react";
 import { reviewService } from "../services/review.service";
 import { useLayoutEffect } from "react";
+import { authService } from "../services/auth.service";
 
 export function ScaleRate(props) {
   const { wine } = props;
@@ -16,14 +17,15 @@ export function ScaleRate(props) {
     isFirstRun.current = true;
     setScale(null);
     if (!wine) return;
-    try {
-      const res = await reviewService.query({
-        structure: true,
-        wineId: wine._id,
-      });
-      if (res) setScale(res);
-      setIsSelfRate(!!res);
-    } catch (err) {}
+    if (authService.getLoggedinUser())
+      try {
+        const res = await reviewService.query({
+          structure: true,
+          wineId: wine._id,
+        });
+        if (res) setScale(res);
+        setIsSelfRate(!!res);
+      } catch (err) {}
     if (!wineScale)
       setScale({
         bold: wine.bold,
@@ -66,7 +68,7 @@ export function ScaleRate(props) {
     const barWidth = 15;
     const slideRange = 100 - barWidth;
     return sections.map((scale, idx) => {
-      return (
+      return wineScale[scale.max] || authService.getLoggedinUser() ? (
         <tr
           key={"SCALE_RATE_" + idx}
           onMouseMove={(ev) => setMouse(ev, scale.max)}
@@ -92,12 +94,12 @@ export function ScaleRate(props) {
           </td>
           <td>{camelCaseToSentence(scale.max)}</td>
         </tr>
-      );
+      ) : null;
     });
   };
 
   const startDrag = ({ target }) => {
-    if (isMouseDown) return;
+    if (isMouseDown || !authService.getLoggedinUser()) return;
     setIsMouseDown(true);
     setTargetElement(target);
   };
@@ -122,7 +124,6 @@ export function ScaleRate(props) {
   };
 
   const data = scales();
-
   return data.filter((scale) => scale).length ? (
     <>
       <h2>What does this wine taste like?</h2>

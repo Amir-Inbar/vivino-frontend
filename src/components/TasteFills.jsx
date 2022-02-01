@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import {
   getShortSentence,
   sentenceToKababCase,
@@ -10,9 +12,18 @@ function getDescription(mentions) {
 }
 
 export function TasteFill(props) {
-  const { tastes, setTaste } = props;
+  const location = useLocation();
+  const history = useHistory();
+  const { tastes } = props;
   const [position, setPosition] = useState(0);
   if (!tastes) return null;
+
+  const setQuery = (name, value) => {
+    const queryParams = new URLSearchParams(location.search);
+    if (value) queryParams.set(name, value);
+    else queryParams.delete(name);
+    history.replace({ search: queryParams.toString() });
+  };
 
   const display = () => {
     return tastes.map((taste, idx) => {
@@ -23,7 +34,7 @@ export function TasteFill(props) {
         <div
           className="taste-fill-preview"
           key={"TASTE_FILL_" + idx}
-          onClick={() => setTaste(taste)}
+          onClick={() => setQuery("taste", taste.name)}
         >
           <div className="picture" style={{ backgroundColor: taste.color }}>
             <img src={url} alt={taste.name} />
