@@ -43,7 +43,8 @@ export function WineryHeader(props) {
         <div className="country">
           <img
             src={tryRequire(
-              `imgs/icons/flags/${sentenceToKababCase(winery.country)}.png`
+              `imgs/icons/flags/${sentenceToKababCase(winery.country)}.png`,
+              `imgs/icons/flags/other.png`
             )}
           />
           <p>

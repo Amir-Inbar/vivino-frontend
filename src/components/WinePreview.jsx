@@ -43,7 +43,8 @@ export const WinePreviews = ({ wines }) => {
           <div className="wine-country">
             <img
               src={tryRequire(
-                `imgs/icons/flags/${sentenceToKababCase(item.country)}.png`
+                `imgs/icons/flags/${sentenceToKababCase(item.country)}.png`,
+                `imgs/icons/flags/other.png`
               )}
             />
             <span>
