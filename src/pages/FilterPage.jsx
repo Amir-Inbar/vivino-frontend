@@ -4,7 +4,11 @@ import { MultiSelectFilter } from "../components/MultiSelectFilter";
 import { WinePreviews } from "../components/WinePreview";
 import { debounce } from "../services/util.service";
 import { wineService } from "../services/wine.service";
-import { saveWines, setFilterBy } from "../store/actions/wineAction";
+import {
+  saveWines,
+  setFilterBy,
+  setKeywords,
+} from "../store/actions/wineAction";
 
 import grapes from "../assets/json/grapes.json";
 import { ScaleRangeFilter } from "../components/ScaleRangeFilter";
@@ -12,26 +16,18 @@ import { ScaleRangeFilter } from "../components/ScaleRangeFilter";
 export const FilterPage = (props) => {
   const dispatch = useDispatch();
   const [wines, setWines] = useState(null);
-  const [regions, setRegions] = useState([]);
-  const [countries, setCountries] = useState([]);
-  const [styles, setStyles] = useState([]);
-  const { filter } = useSelector((state) => state.wineModule);
+  const { filter, keywords } = useSelector((state) => state.wineModule);
   const tableEl = useRef(null);
 
   useEffect(async () => {
-    setCountries(await getListOf("country"));
-    setRegions(await getListOf("region"));
-    setStyles(await getListOf("seo"));
+    if (!keywords)
+      try {
+        const res = await wineService.query({ keywords: true });
+        dispatch(setKeywords(res));
+      } catch (err) {
+        console.log(err);
+      }
   }, [tableEl]);
-
-  const getListOf = async (key) => {
-    try {
-      const res = await wineService.query({ listOf: key });
-      return res.map((data) => data[key]);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   useEffect(() => {
     debounce(
@@ -89,13 +85,25 @@ export const FilterPage = (props) => {
         <MultiSelectFilter
           title="Wine type"
           query="type"
-          data={["red", "white", "rose", "sparkling", "dessert", "fortifield"]}
+          data={keywords.types}
         />
         <ScaleRangeFilter title="Average rate" fromQuery="from" toQuery="to" />
         <MultiSelectFilter title="Grapes" query="grapes" data={grapes} />
-        <MultiSelectFilter title="Regions" query="region" data={regions} />
-        <MultiSelectFilter title="Countries" query="country" data={countries} />
-        <MultiSelectFilter title="Wine styles" query="style" data={styles} />
+        <MultiSelectFilter
+          title="Regions"
+          query="region"
+          data={keywords.regions}
+        />
+        <MultiSelectFilter
+          title="Countries"
+          query="country"
+          data={keywords.countries}
+        />
+        <MultiSelectFilter
+          title="Wine styles"
+          query="style"
+          data={keywords.styles}
+        />
       </nav>
       <div className="wines-result" onScroll={scrollDown} ref={tableEl}>
         <WinePreviews wines={wines.data} />

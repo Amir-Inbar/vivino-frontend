@@ -6,6 +6,12 @@ export function setFilterBy(filter) {
   }
 }
 
+export function setKeywords(keywords) {
+  return (dispatch) => {
+    dispatch({ type: 'SET_KEYWORDS', keywords });
+  }
+}
+
 export function saveWines(wines) {
   return (dispatch) => {
     dispatch({ type: 'SET_WINES', wines });

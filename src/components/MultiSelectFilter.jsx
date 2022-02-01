@@ -36,7 +36,7 @@ export const MultiSelectFilter = ({ title, query, data }) => {
         className={`${select.includes(type) ? "selected" : ""}`}
         onClick={() => toggleSelect(type)}
       >
-        {type}
+        {type.replaceAll("-", " ")}
       </button>
     ));
 

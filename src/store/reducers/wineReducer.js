@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   wine: null,
   total: null,
   filter: null,
+  keywords: null,
 };
 
 export function wineReducer(state = INITIAL_STATE, action) {
@@ -21,8 +22,13 @@ export function wineReducer(state = INITIAL_STATE, action) {
         wine: action.wine,
       }
     }
+    case 'SET_KEYWORDS': {
+      return {
+        ...state,
+        keywords: action.keywords,
+      }
+    }
     case 'SET_FILTER': {
-      console.log(action);
       return {
         ...state,
         filter: action.filter,
