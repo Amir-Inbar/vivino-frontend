@@ -1,8 +1,8 @@
-export function tryRequire(path) {
+export function tryRequire(path, alt) {
     try {
         return require(`../assets/${path}`);
     } catch (err) {
-        console.log(err);
+        if (alt) tryRequire(alt);
         return null;
     }
 };

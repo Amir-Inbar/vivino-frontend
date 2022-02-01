@@ -1,5 +1,17 @@
 import { wineService } from '../../services/wine.service';
 
+export function setFilterBy(filter) {
+  return (dispatch) => {
+    dispatch({ type: 'SET_FILTER', filter });
+  }
+}
+
+export function saveWines(wines) {
+  return (dispatch) => {
+    dispatch({ type: 'SET_WINES', wines });
+  }
+}
+
 export function loadWines() {
   return async (dispatch, getState) => {
     const { filterBy } = getState().wineModule;

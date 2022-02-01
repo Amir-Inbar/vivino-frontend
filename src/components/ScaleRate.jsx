@@ -16,19 +16,21 @@ export function ScaleRate(props) {
     isFirstRun.current = true;
     setScale(null);
     if (!wine) return;
-    const res = await reviewService.query({
-      structure: true,
-      wineId: wine._id,
-    });
-    setScale(
-      res || {
+    try {
+      const res = await reviewService.query({
+        structure: true,
+        wineId: wine._id,
+      });
+      setScale(res);
+      setIsSelfRate(!!res);
+    } catch (err) {
+      setScale({
         bold: wine.bold,
         tannic: wine.tannic,
         sweet: wine.sweet,
         acidic: wine.acidic,
-      }
-    );
-    setIsSelfRate(!!res);
+      });
+    }
   }, [wine]);
 
   useLayoutEffect(() => {
@@ -69,7 +71,7 @@ export function ScaleRate(props) {
           key={"SCALE_RATE_" + idx}
           onMouseMove={(ev) => setMouse(ev, scale.max)}
           onMouseUp={stopDrag}
-          onMouseLeave={() => stopDrag}
+          onMouseLeave={stopDrag}
         >
           <td>{camelCaseToSentence(scale.min)}</td>
           <td className="scale-container">
@@ -95,6 +97,7 @@ export function ScaleRate(props) {
   };
 
   const startDrag = ({ target }) => {
+    if (isMouseDown) return;
     setIsMouseDown(true);
     setTargetElement(target);
   };
@@ -114,7 +117,7 @@ export function ScaleRate(props) {
     const currPos = Math.min(ev.pageX + thumbLeft - scaleMin, scaleWidth);
     setScale({
       ...wineScale,
-      [scale]: (currPos / scaleWidth) * 100,
+      [scale]: Math.max((currPos / scaleWidth) * 100, 0),
     });
   };
 
@@ -124,7 +127,7 @@ export function ScaleRate(props) {
     <>
       <h2>What does this wine taste like?</h2>
       <div className="details">
-        <table>
+        <table onMouseLeave={stopDrag}>
           <tbody>{data}</tbody>
         </table>
         <BasedOn wine={wine} />

@@ -7,6 +7,7 @@ import { WineryPage } from "./pages/WineryPage";
 import { HomePage } from "./pages/HomePage";
 import "./styles/global.scss";
 import { LoginPage } from "./pages/LoginPage";
+import { FilterPage } from "./pages/FilterPage";
 
 export function App() {
   return (
@@ -16,6 +17,7 @@ export function App() {
           <AppHeader />
           <Switch>
             <Route component={WinePage} path="/wine/:id" />
+            <Route component={FilterPage} path="/wine" />
             <Route component={WineryPage} path="/winery/:id" />
             <Route component={LoginPage} path="/login" />
             <Route component={HomePage} path="/" />

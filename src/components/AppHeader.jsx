@@ -1,17 +1,29 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import { tryRequire } from "../services/util.service";
+import { debounce, tryRequire } from "../services/util.service";
+import { setFilterBy } from "../store/actions/wineAction";
 import { PopupMenu } from "./PopupMenu";
 
 export function AppHeader() {
   const location = useLocation();
   const [popupConfig, setPopupConfig] = useState(0);
+  const { filter } = useSelector((state) => state.wineModule);
+  const dispatch = useDispatch();
   if (location.pathname === "/login") return null;
 
   const toggleMenu = (ev, type) =>
     popupConfig?.type === type
       ? setPopupConfig(null)
       : setPopupConfig({ target: ev.target, type });
+
+  const searchInput = ({ target }) => {
+    debounce(
+      () => dispatch(setFilterBy({ ...filter, search: target.value })),
+      "SET_FILTER",
+      1000
+    );
+  };
 
   return (
     <header className="app-header">
@@ -21,7 +33,7 @@ export function AppHeader() {
           <img src={tryRequire("imgs/logo.svg")} />
         </div>
         <div className="search">
-          <input placeholder="Search any wine"></input>
+          <input placeholder="Search any wine" onInput={searchInput}></input>
         </div>
       </div>
       <nav>
