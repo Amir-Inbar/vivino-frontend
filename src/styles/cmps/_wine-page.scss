@@ -649,10 +649,19 @@
 }
 
 .wines-filter {
+  height: 85vh;
+  overflow-y: hidden;
   display: flex;
+  @include for-mobile-layout {
+    flex-direction: column;
+    height: auto;
+  }
   .filter-menu {
     min-width: 280px;
     max-width: 30%;
+    @include for-mobile-layout {
+      max-width: 100%;
+    }
     > * {
       margin: 24px 8px 32px 8px;
     }

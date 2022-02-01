@@ -56,7 +56,7 @@ export const FilterPage = (props) => {
       if (
         leftToEnd &
         (leftToEnd * (wines.page.index + 1) <
-          (clientHeight / (wines.page.index + 1)) * 0.3)
+          (clientHeight / (wines.page.index + 1)) * 0.8)
       ) {
         const res = await wineService.query({
           filter,
