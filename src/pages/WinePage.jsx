@@ -20,7 +20,6 @@ import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 export const WinePage = (props) => {
   const [userReviews, setReviews] = useState([]);
-  const [taste, setTaste] = useState(null);
   const [wines, setWines] = useState(null);
   const [rate, setRate] = useState(null);
 
@@ -29,9 +28,7 @@ export const WinePage = (props) => {
   const { winery } = useSelector((state) => state.wineryModule);
   const { reviews } = useSelector((state) => state.reviewModule);
 
-  const history = useHistory();
   const location = useLocation();
-
   const getQuery = (name) => {
     const queryParams = new URLSearchParams(location.search);
     return queryParams.get(name)?.split("-") || [];
@@ -69,16 +66,6 @@ export const WinePage = (props) => {
     setReviews(res.data ? [] : res || []);
   };
 
-  const tasteClick = async (category) => {
-    if (!category) {
-      history.push(`/wine/${wine._id}`);
-      setTaste(null);
-      return;
-    }
-    history.push(`?taste=${category.name}`);
-    setTaste(category);
-  };
-
   const reviewUpdate = (result) => {
     setRate(null);
     if (!result || !userReviews) return;
@@ -92,7 +79,7 @@ export const WinePage = (props) => {
     <>
       <WineHeader wine={wine} />
       <WineryPreview winery={winery} />
-      <TasteLike wine={wine} setTaste={tasteClick} />
+      <TasteLike wine={wine} />
       <TastePreview wine={wine} query={getQuery("taste").toString()} />
       <WinePairings wine={wine} />
       <MoreWines wines={wines} activeId={wine?._id} />

@@ -34,30 +34,30 @@ export const FilterPage = (props) => {
   };
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(props.location.search);
-    dispatch(
-      setFilterBy({
-        eqType: queryParams.get("type")?.split("-").join("|"),
-        inRegion: queryParams.get("region")?.split("-").join("|"),
-        "in+Grapes": queryParams.get("grapes")?.split("-").join("|"),
-        inCountry: queryParams.get("country")?.split("-").join("|"),
-        inSeo: queryParams.get("style"),
-      })
+    debounce(
+      () => {
+        const queryParams = new URLSearchParams(props.location.search);
+        dispatch(
+          setFilterBy({
+            eqType: queryParams.get("type")?.split("-").join("|"),
+            inRegion: queryParams.get("region")?.split("-").join("|"),
+            "in+Grapes": queryParams.get("grapes")?.split("-").join("|"),
+            inCountry: queryParams.get("country")?.split("-").join("|"),
+            inSeo: queryParams.get("style"),
+          })
+        );
+      },
+      "SET_FILTER",
+      filter ? 500 : 0
     );
   }, [props.location.search]);
 
   useEffect(async () => {
     try {
-      debounce(
-        async () => {
-          const wines = await wineService.query({ filter });
-          setWines(wines);
-          dispatch(saveWines(wines));
-          tableEl.current.scrollTo(0, 0);
-        },
-        "GET_WINES",
-        1000
-      );
+      const wines = await wineService.query({ filter });
+      setWines(wines);
+      dispatch(saveWines(wines));
+      tableEl.current.scrollTo(0, 0);
     } catch {}
   }, [filter]);
 
