@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setFilterBy } from "../store/actions/wineAction";
+import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import grapes from "../assets/json/grapes.json";
 
 export const WineGrapesFilter = ({ filter }) => {
-  const dispatch = useDispatch();
-  const [isChanged, setIsChanged] = useState(false);
   const [select, setSelect] = useState(
     filter?.["in+Grapes"] ? filter?.["in+Grapes"].split("|") : []
   );
 
+  const location = useLocation();
+  const history = useHistory();
+
+  const setQuery = (name, value) => {
+    const queryParams = new URLSearchParams(location.search);
+    if (value) queryParams.set(name, value);
+    else queryParams.delete(name);
+    history.replace({ search: queryParams.toString() });
+  };
+
   useEffect(() => {
-    if (!isChanged) return;
-    setIsChanged(false);
-    dispatch(setFilterBy({ ...filter, "in+Grapes": select.join("|") }));
+    setQuery("grapes", select.join("|"));
   }, [select]);
 
   const toggleSelect = (type) => {
     if (select.includes(type)) setSelect(select.filter((val) => val !== type));
     else setSelect([...select, type]);
-    setIsChanged(true);
   };
 
   const TypeButton = () =>

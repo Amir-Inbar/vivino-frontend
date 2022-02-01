@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { wineService } from "../services/wine.service";
-import { setFilterBy } from "../store/actions/wineAction";
 
 export const WineRegionFilter = ({ filter }) => {
-  const dispatch = useDispatch();
-  const [isChanged, setIsChanged] = useState(false);
   const [select, setSelect] = useState(
     filter?.inRegion ? filter?.inRegion.split("|") : []
   );
   const [region, setRegion] = useState([]);
+
+  const location = useLocation();
+  const history = useHistory();
+
+  const setQuery = (name, value) => {
+    const queryParams = new URLSearchParams(location.search);
+    if (value) queryParams.set(name, value);
+    else queryParams.delete(name);
+    history.replace({ search: queryParams.toString() });
+  };
 
   useEffect(async () => {
     if (!region.length)
@@ -20,15 +28,12 @@ export const WineRegionFilter = ({ filter }) => {
   }, [region]);
 
   useEffect(() => {
-    if (!isChanged) return;
-    setIsChanged(false);
-    dispatch(setFilterBy({ ...filter, inRegion: select.join("|") }));
+    setQuery("region", select.join("|"));
   }, [select]);
 
   const toggleSelect = (type) => {
     if (select.includes(type)) setSelect(select.filter((val) => val !== type));
     else setSelect([...select, type]);
-    setIsChanged(true);
   };
 
   const TypeButton = () =>

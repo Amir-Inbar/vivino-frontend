@@ -9,11 +9,22 @@ import { debounce } from "../services/util.service";
 import { wineService } from "../services/wine.service";
 import { saveWines, setFilterBy } from "../store/actions/wineAction";
 
-export const FilterPage = () => {
+export const FilterPage = (props) => {
   const dispatch = useDispatch();
   const [wines, setWines] = useState(null);
   const { filter } = useSelector((state) => state.wineModule);
   const tableEl = useRef(null);
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(props.location.search);
+    dispatch(
+      setFilterBy({
+        eqType: queryParams.get("type"),
+        inRegion: queryParams.get("region"),
+        "in+Grapes": queryParams.get("grapes"),
+      })
+    );
+  }, [props.location.search]);
 
   useEffect(async () => {
     try {
@@ -25,7 +36,7 @@ export const FilterPage = () => {
           tableEl.current.scrollTo(0, 0);
         },
         "GET_WINES",
-        1000
+        500
       );
     } catch {}
   }, [filter]);
@@ -64,7 +75,7 @@ export const FilterPage = () => {
           }
         ></input>
         <WineTypesFilter filter={filter} />
-        <WineAvgRateFilter filter={filter} />
+        {/* <WineAvgRateFilter filter={filter} /> */}
         <WineGrapesFilter filter={filter} />
         <WineRegionFilter filter={filter} />
       </nav>
