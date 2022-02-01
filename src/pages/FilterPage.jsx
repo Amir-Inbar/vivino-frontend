@@ -70,14 +70,6 @@ export const FilterPage = (props) => {
   return wines ? (
     <section className="wines-filter">
       <nav className="filter-menu">
-        <input
-          type="number"
-          min={1}
-          max={5}
-          onChange={(ev) =>
-            dispatch(setFilterBy({ ...filter, gtRate: ev.target.value }))
-          }
-        ></input>
         <WineTypesFilter filter={filter} />
         <WineAvgRateFilter filter={filter} />
         <WineGrapesFilter filter={filter} />

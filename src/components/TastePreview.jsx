@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { innerHtml } from "../services/html.service";
 import { reviewService } from "../services/review.service";
 import {
   debounce,
@@ -65,7 +64,7 @@ export function TastePreview(props) {
               /<[{1}^>]*>/g,
               ""
             );
-            let desc = innerHtml(review.description);
+            let desc = review.description;
             match.forEach(
               (keyword) =>
                 (desc = desc.replace(
