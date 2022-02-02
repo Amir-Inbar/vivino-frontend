@@ -1,13 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import React, { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { extractConditionKey } from "../services/util.service";
 
 export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
   const location = useLocation();
   const history = useHistory();
+  const { filter } = useSelector((state) => state.wineModule);
   const queries = new URLSearchParams(location.search);
-
-  const getQuery = (useCallback = () => (name) => queries.get(name) || []);
 
   const setQuery = (name, value) => {
     if (value) queries.set(name, value);
@@ -15,11 +16,13 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
     history.replace({ search: queries.toString() });
   };
 
-  const [select, setSelect] = useState(getQuery(query) || []);
+  const [select, setSelect] = useState([]);
 
   useEffect(() => {
-    setQuery(query, select.join('|'));
+    setQuery(extractConditionKey(query)?.key, select.join("|"));
   }, [select]);
+
+  useEffect(() => setSelect(filter[query]?.split("|") || []), [filter[query]]);
 
   const toggleSelect = (type) => {
     if (select.includes(type)) setSelect(select.filter((val) => val !== type));
@@ -30,15 +33,18 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
     <section className="wine-select-buttons">
       <h2>{title}</h2>
       {data
-        .map((type, idx) => (
-          <button
-            key={`BUTTON_${query}${idx}`}
-            className={`${select.includes(type) ? 'selected' : ''}`}
-            onClick={() => toggleSelect(type)}
-          >
-            {type.replaceAll('-', ' ')}
-          </button>
-        ))
+        .map((type, idx) => {
+          type = type.toLowerCase();
+          return (
+            <button
+              key={`BUTTON_${query}${idx}`}
+              className={`${select.includes(type) ? "selected" : ""}`}
+              onClick={() => toggleSelect(type)}
+            >
+              {type.replaceAll("-", " ")}
+            </button>
+          );
+        })
         .slice(0, max)}
     </section>
   ) : null;

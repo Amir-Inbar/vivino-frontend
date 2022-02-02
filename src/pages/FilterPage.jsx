@@ -41,7 +41,7 @@ export const FilterPage = (props) => {
             inRegion: queries.get("region"),
             "in+Grapes": queries.get("grapes"),
             inCountry: queries.get("country"),
-            inSeo: queries.get("style"),
+            inSeo: queries.get("seo"),
           })
         );
       },
@@ -98,7 +98,7 @@ export const FilterPage = (props) => {
         <div className="title">filters</div>
         <MultiSelectFilter
           title="wine type"
-          query="type"
+          query="eqType"
           data={keywords.types}
         />
         <ScaleRangeFilter
@@ -106,22 +106,22 @@ export const FilterPage = (props) => {
           fromQuery="from"
           toQuery="to"
         />
-        <MultiSelectFilter title="Grapes" query="grapes" data={grapes} />
+        <MultiSelectFilter title="Grapes" query="in+Grapes" data={grapes} />
         <MultiSelectFilter
           title="regions"
-          query="region"
+          query="inRegion"
           data={keywords.regions.map((val) => val.name)}
           max={6}
         />
         <MultiSelectFilter
           title="countries"
-          query="country"
+          query="inCountry"
           data={[...new Set(keywords.regions.map((val) => val.country))]}
           max={6}
         />
         <MultiSelectFilter
           title="wine styles"
-          query="style"
+          query="inSeo"
           data={keywords.styles.map((val) => val.seo)}
         />
         <div className="apply">
