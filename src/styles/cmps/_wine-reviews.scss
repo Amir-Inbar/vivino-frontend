@@ -134,10 +134,16 @@
       }
       img {
         height: 16px;
+        margin: 0 1px;
       }
       .background-bar {
         width: 134px;
-        background-color: lightgoldenrodyellow;
+        background-color: $clr6;
+        // margin-inline-end: 5px;
+        margin: 0 5px;
+        .background-fill {
+          background-color: $clr2;
+        }
       }
     }
   }
