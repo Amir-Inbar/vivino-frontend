@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { MoreWines } from "../components/MoreWines";
-import { TastePreview } from "../components/TastePreview";
-import { WineHeader } from "../components/WineHeader";
-import { WineryPreview } from "../components/WineryPreview";
-import { TasteLike } from "../components/WineTasteLike";
-import { loadWine } from "../store/actions/wineAction";
-import { loadWinery } from "../store/actions/wineryAction";
-import { loadReview } from "../store/actions/reviewAction";
-import { useHistory } from "react-router-dom";
-import { wineService } from "../services/wine.service";
-import { reviewService } from "../services/review.service";
-import { WinePairings } from "../components/WinePairings";
-import { WineReviews } from "../components/WineReviews";
-import { StarRate } from "../components/StarRate";
-import { AddReview } from "../components/AddReview";
-import { authService } from "../services/auth.service";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { MoreWines } from '../components/MoreWines';
+import { TastePreview } from '../components/TastePreview';
+import { WineHeader } from '../components/WineHeader';
+import { WineryPreview } from '../components/WineryPreview';
+import { TasteLike } from '../components/WineTasteLike';
+import { loadWine } from '../store/actions/wineAction';
+import { loadWinery } from '../store/actions/wineryAction';
+import { loadReview } from '../store/actions/reviewAction';
+import { useHistory } from 'react-router-dom';
+import { wineService } from '../services/wine.service';
+import { reviewService } from '../services/review.service';
+import { WinePairings } from '../components/WinePairings';
+import { WineReviews } from '../components/WineReviews';
+import { StarRate } from '../components/StarRate';
+import { AddReview } from '../components/AddReview';
+import { authService } from '../services/auth.service';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 export const WinePage = (props) => {
   const [userReviews, setReviews] = useState([]);
@@ -31,7 +31,7 @@ export const WinePage = (props) => {
   const location = useLocation();
   const getQuery = (name) => {
     const queryParams = new URLSearchParams(location.search);
-    return queryParams.get(name)?.split("-") || [];
+    return queryParams.get(name)?.split('-') || [];
   };
 
   useEffect(() => {
@@ -80,10 +80,10 @@ export const WinePage = (props) => {
       <WineHeader wine={wine} />
       <WineryPreview winery={winery} />
       <TasteLike wine={wine} />
-      <TastePreview wine={wine} query={getQuery("taste").toString()} />
+      <TastePreview wine={wine} query={getQuery('taste').toString()} />
       <WinePairings wine={wine} />
       <MoreWines wines={wines} activeId={wine?._id} />
-      <WineReviews reviews={reviews} />
+      <WineReviews wineId={wine._id} />
       <StarRate size={24} rate={rate} isEditable={true} set={setRate} />
       <AddReview
         rate={rate}

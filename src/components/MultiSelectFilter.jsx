@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import React, { useCallback, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
   const location = useLocation();
@@ -18,7 +18,7 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
   const [select, setSelect] = useState(getQuery(query) || []);
 
   useEffect(() => {
-    setQuery(query, select.join("|"));
+    setQuery(query, select.join('|'));
   }, [select]);
 
   const toggleSelect = (type) => {
@@ -33,10 +33,10 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
         .map((type, idx) => (
           <button
             key={`BUTTON_${query}${idx}`}
-            className={`${select.includes(type) ? "selected" : ""}`}
+            className={`${select.includes(type) ? 'selected' : ''}`}
             onClick={() => toggleSelect(type)}
           >
-            {type.replaceAll("-", " ")}
+            {type.replaceAll('-', ' ')}
           </button>
         ))
         .slice(0, max)}

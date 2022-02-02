@@ -4,6 +4,7 @@ export const reviewService = {
   query,
   getByWineId,
   set,
+  update,
 };
 
 const API = 'review';
@@ -20,11 +21,9 @@ async function set(wineId, review, queries) {
   return httpService.post(API + '/' + wineId, review, queries);
 }
 
+async function update(reviewId, queries) {
+  return httpService.put(API + '/' + reviewId, null, { like: reviewId });
+}
 // async function remove(id) {
 //   return serverService.delete(API + id);
-// }
-
-
-// async function update(board) {
-//   return serverService.put(API + board._id, board);
 // }

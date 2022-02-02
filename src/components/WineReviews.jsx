@@ -1,13 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getLoggedinUser } from '../services/auth.service';
+import { reviewService } from '../services/review.service';
 import { makeId, tryRequire } from '../services/util.service';
-export const WineReviews = (props) => {
+
+export const WineReviews = ({ wineId }) => {
   var moment = require('moment');
-  const { reviews } = props;
+  const [reviews, setReviews] = useState([]);
   const [reviewSection, setReviewSection] = useState(0);
   const [activeReview, setActiveReview] = useState(null);
+  const logInUser = getLoggedinUser();
   const setCurrReviewSection = (currSection) => {
     setReviewSection(currSection);
   };
+
+  useEffect(async () => {
+    const res = await reviewService.getByWineId(wineId, {
+      page: { size: 4 },
+    });
+    const { data } = res;
+    setReviews(data);
+  }, [wineId]);
 
   const ReviewMenu = () => {
     const reviewSections = ['Helpful', 'Recent', 'Friends', 'You'];
@@ -26,9 +38,24 @@ export const WineReviews = (props) => {
     );
   };
 
-  const setLike = () => {
-    console.log('das');
+  const setLike = (reviewId) => {
+    const review = reviews.find((review) => review._id === reviewId);
+    console.log(review.likes.split(','));
+    if (review.likes.split(',').includes('' + logInUser._id)) {
+      review.likes = review.likes
+        .split(',')
+        .filter((like) => like !== '' + logInUser._id)
+        .join(',');
+    } else {
+      review.likes += ',' + logInUser._id;
+    }
+    setReviews(reviews.map((rv) => (rv._id === review._id ? review : rv)));
+    reviewService.update(review._id);
   };
+
+  useEffect(() => {
+    console.log(reviews);
+  }, [reviews]);
 
   const OnReply = ({ review }) => {
     if (activeReview !== review) return null;
@@ -65,7 +92,9 @@ export const WineReviews = (props) => {
             }
             alt=""
           />
-          <a href="google.com">{review.reviewer} (180 ratings)</a>
+          <a href="google.com">
+            {review.reviewer} (ratings {review.ratings})
+          </a>
           <span className="date"> {moment(review.createdAt).format('ll')}</span>
         </div>
         <div className="review-comments flex">
@@ -74,13 +103,20 @@ export const WineReviews = (props) => {
               className="reviews-btn flex align-center"
               onClick={() =>
                 !idx
-                  ? setLike(review)
+                  ? setLike(review._id)
                   : setActiveReview(activeReview === review ? null : review)
               }
               key={'REPLY_' + makeId()}
             >
               <img src={require(`../assets/imgs/icons/${el}.svg`)} alt="" />
-              <span>{review.userId}</span>
+              <span>
+                {!idx
+                  ? review.likes?.split(',').filter((like) => like).length
+                  : review.replies?.split(',').filter((like) => like).length}
+                {console.log(
+                  review.likes?.split(',').filter((like) => like).length
+                )}
+              </span>
             </div>
           ))}
         </div>
@@ -88,6 +124,7 @@ export const WineReviews = (props) => {
     );
   };
   const ReviewsPreview = ({ reviews }) => {
+    if (!reviews) return null;
     return (
       <div>
         {reviews.map((el, idx) => (
