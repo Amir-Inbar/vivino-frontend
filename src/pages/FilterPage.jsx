@@ -35,6 +35,7 @@ export const FilterPage = (props) => {
         const queryParams = new URLSearchParams(props.location.search);
         dispatch(
           setFilterBy({
+            ...filter,
             eqType: queryParams.get("type")?.split("-").join("|"),
             inRegion: queryParams.get("region")?.split("-").join("|"),
             "in+Grapes": queryParams.get("grapes")?.split("-").join("|"),
