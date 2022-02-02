@@ -7,7 +7,7 @@ export function WineHeader(props) {
   const history = useHistory();
 
   const keywords = () => {
-    return [wine.country, wine.region, wine.type, ...wine.grapes].map(
+    return [wine.country, wine.region, wine.type, ...(wine.grapes || [])].map(
       (keyword, idx) => {
         return keyword ? (
           <a className="tag" key={"KEYWORD_" + idx}>
