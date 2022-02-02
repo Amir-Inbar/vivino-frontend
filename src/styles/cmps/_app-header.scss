@@ -59,7 +59,6 @@
   margin: 0;
   margin-top: 2px;
   z-index: 100;
-  max-width: 90vw;
   background-color: $clr4;
   border-radius: 8px;
   display: flex;
@@ -74,8 +73,15 @@
     list-style-type: none;
     padding: 12px 14px;
     li {
-      font-size: 1.2em;
-      padding: 6px;
+      cursor: pointer;
+      @include until-normal-layout {
+        font-size: 1em;
+        padding: 2px;
+      }
+      @include form-normal-layout {
+        font-size: 1.2em;
+        padding: 6px;
+      }
       &.bold {
         font-weight: 700;
       }

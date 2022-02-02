@@ -42,6 +42,12 @@
   }
 }
 
+@mixin until-tablet-layout {
+  @media (max-width: $tablet-breakpoint) {
+    @content;
+  }
+}
+
 @mixin for-normal-layout {
   @media (max-width: $normal-breakpoint) {
     @content;
@@ -49,7 +55,7 @@
 }
 
 @mixin until-normal-layout {
-  @media (max-width: $tablet-breakpoint) {
+  @media (max-width: $normal-breakpoint) {
     @content;
   }
 }

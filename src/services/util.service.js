@@ -61,7 +61,7 @@ export function camelCaseToSentence(input, isOnlyFirst = true) {
 
 export function kababCaseToSentence(str) {
     if (!str) return;
-    return str.replace('-', ' ');
+    return str.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 }
 
 export function typeOf(obj) {

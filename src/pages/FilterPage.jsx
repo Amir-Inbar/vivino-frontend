@@ -15,7 +15,9 @@ import { ScaleRangeFilter } from "../components/ScaleRangeFilter";
 
 export const FilterPage = (props) => {
   const dispatch = useDispatch();
+  const queries = new URLSearchParams(props.location.search);
   const [wines, setWines] = useState(null);
+  const [isShowFilter, setIsShowFilter] = useState(null);
   const { filter, keywords } = useSelector((state) => state.wineModule);
   const tableEl = useRef(null);
 
@@ -32,15 +34,14 @@ export const FilterPage = (props) => {
   useEffect(() => {
     debounce(
       () => {
-        const queryParams = new URLSearchParams(props.location.search);
         dispatch(
           setFilterBy({
             ...filter,
-            eqType: queryParams.get("type")?.split("-").join("|"),
-            inRegion: queryParams.get("region")?.split("-").join("|"),
-            "in+Grapes": queryParams.get("grapes")?.split("-").join("|"),
-            inCountry: queryParams.get("country")?.split("-").join("|"),
-            inSeo: queryParams.get("style"),
+            eqType: queries.get("type"),
+            inRegion: queries.get("region"),
+            "in+Grapes": queries.get("grapes"),
+            inCountry: queries.get("country"),
+            inSeo: queries.get("style"),
           })
         );
       },
@@ -82,34 +83,58 @@ export const FilterPage = (props) => {
 
   return wines ? (
     <section className="wines-filter">
-      <nav className="filter-menu">
+      <div className="control-panel">
+        <button
+          onClick={() => setIsShowFilter(true)}
+          className={`${queries.toString() ? "marked" : ""}`}
+        >
+          filter
+        </button>
+        <button>sort</button>
+      </div>
+      <nav
+        className="filter-menu"
+        style={isShowFilter ? { display: "block" } : null}
+      >
+        <div className="title">filters</div>
         <MultiSelectFilter
-          title="Wine type"
+          title="wine type"
           query="type"
           data={keywords.types}
         />
-        <ScaleRangeFilter title="Average rate" fromQuery="from" toQuery="to" />
+        <ScaleRangeFilter
+          title="average rating"
+          fromQuery="from"
+          toQuery="to"
+        />
         <MultiSelectFilter title="Grapes" query="grapes" data={grapes} />
         <MultiSelectFilter
-          title="Regions"
+          title="regions"
           query="region"
-          data={keywords.regions}
+          data={keywords.regions.map((val) => val.name)}
           max={6}
         />
         <MultiSelectFilter
-          title="Countries"
+          title="countries"
           query="country"
-          data={keywords.countries}
+          data={[...new Set(keywords.regions.map((val) => val.country))]}
           max={6}
         />
         <MultiSelectFilter
-          title="Wine styles"
+          title="wine styles"
           query="style"
-          data={keywords.styles}
+          data={keywords.styles.map((val) => val.seo)}
         />
+        <div className="apply">
+          <button onClick={() => setIsShowFilter(false)}>close</button>
+        </div>
       </nav>
       <div className="wines-result" onScroll={scrollDown} ref={tableEl}>
-        <WinePreviews wines={wines.data} />
+        {wines.total ? (
+          <WinePreviews wines={wines.data} />
+        ) : (
+          <div>No results</div>
+        )}
       </div>
     </section>
   ) : null;

@@ -652,16 +652,40 @@
   height: 85vh;
   overflow-y: hidden;
   display: flex;
-  @include for-mobile-layout {
+  @include until-tablet-layout {
     flex-direction: column;
-    height: auto;
+  }
+  .control-panel {
+    display: flex;
+    @include form-normal-layout {
+      display: none;
+    }
+    gap: 20px;
+    justify-content: center;
+    padding: 12px 0;
+    button {
+      max-width: 180px;
+      flex: 1;
+      text-transform: capitalize;
+      &.marked {
+        border-color: $clr1;
+        color: $clrwht;
+        background-color: $clr1;
+      }
+    }
   }
   .filter-menu {
-    // @include form-normal-layout {
-    min-width: 280px;
-    max-width: 40%;
-    > * {
-      margin: 24px 8px 32px 8px;
+    .title {
+      @include form-normal-layout {
+        display: none;
+      }
+      margin: 12px 0;
+      text-align: center;
+      width: calc(100% - 12px);
+      color: $clr5;
+      text-transform: capitalize;
+      padding-bottom: 10px;
+      border-bottom: 1px solid $clr5;
     }
     h2 {
       font-size: 1.5em;
@@ -669,23 +693,52 @@
       text-transform: capitalize;
       width: 100%;
     }
-    button {
-      border: 0;
-      min-width: 80px;
-      text-transform: capitalize;
-      color: $clrwht;
-      background-color: $clr1;
-      &.selected {
-        background-color: $clr2;
-        color: $clrwht;
-      }
-    }
     .wine-select-buttons {
       display: flex;
       flex-wrap: wrap;
+      // justify-content: space-around;
       gap: 10px;
+      button {
+        border: 0;
+        min-width: 80px;
+        text-transform: capitalize;
+        color: $clrwht;
+        background-color: $clr1;
+        &.selected {
+          background-color: $clr2;
+          color: $clrwht;
+        }
+      }
     }
-    // }
+    > * {
+      margin: 24px 8px 32px 8px;
+    }
+    @include until-tablet-layout {
+      display: none;
+      min-height: 100%;
+      max-height: 100%;
+      position: fixed;
+      top: 0;
+      background-color: $clrwht;
+      z-index: 3;
+      overflow-y: scroll;
+    }
+    @include form-normal-layout {
+      min-width: 280px;
+      max-width: 40%;
+    }
+    .apply {
+      display: flex;
+      justify-content: center;
+      button {
+        max-width: 160px;
+        flex: 1;
+        text-transform: capitalize;
+      }
+      @include form-normal-layout {
+        display: none;
+      }
+    }
   }
   .wines-result {
     overflow-y: scroll;
