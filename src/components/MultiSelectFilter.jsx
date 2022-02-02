@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
-export const MultiSelectFilter = ({ title, query, data }) => {
+export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
   const location = useLocation();
   const history = useHistory();
 
@@ -29,21 +29,20 @@ export const MultiSelectFilter = ({ title, query, data }) => {
     else setSelect([...select, type]);
   };
 
-  const TypeButton = () =>
-    data.map((type, idx) => (
-      <button
-        key={`BUTTON_${query}${idx}`}
-        className={`${select.includes(type) ? "selected" : ""}`}
-        onClick={() => toggleSelect(type)}
-      >
-        {type.replaceAll("-", " ")}
-      </button>
-    ));
-
-  return (
+  return data ? (
     <section className="wine-select-buttons">
       <h2>{title}</h2>
-      <TypeButton />
+      {data
+        .map((type, idx) => (
+          <button
+            key={`BUTTON_${query}${idx}`}
+            className={`${select.includes(type) ? "selected" : ""}`}
+            onClick={() => toggleSelect(type)}
+          >
+            {type.replaceAll("-", " ")}
+          </button>
+        ))
+        .slice(0, max)}
     </section>
-  );
+  ) : null;
 };

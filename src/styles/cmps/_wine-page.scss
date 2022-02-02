@@ -657,11 +657,9 @@
     height: auto;
   }
   .filter-menu {
+    // @include form-normal-layout {
     min-width: 280px;
-    max-width: 30%;
-    @include for-mobile-layout {
-      max-width: 100%;
-    }
+    max-width: 40%;
     > * {
       margin: 24px 8px 32px 8px;
     }
@@ -687,6 +685,7 @@
       flex-wrap: wrap;
       gap: 10px;
     }
+    // }
   }
   .wines-result {
     overflow-y: scroll;

@@ -93,11 +93,13 @@ export const FilterPage = (props) => {
           title="Regions"
           query="region"
           data={keywords.regions}
+          max={6}
         />
         <MultiSelectFilter
           title="Countries"
           query="country"
           data={keywords.countries}
+          max={6}
         />
         <MultiSelectFilter
           title="Wine styles"
