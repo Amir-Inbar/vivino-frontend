@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -7,7 +7,7 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
   const history = useHistory();
   const queries = new URLSearchParams(location.search);
 
-  const getQuery = (name) => queries.get(name) || [];
+  const getQuery = (useCallback = () => (name) => queries.get(name) || []);
 
   const setQuery = (name, value) => {
     if (value) queries.set(name, value);

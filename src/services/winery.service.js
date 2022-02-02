@@ -7,12 +7,11 @@ export const wineryService = {
 
 const API = 'winery';
 
-async function query(filter = {}) {
-  return httpService.get(API, { params: filter });
+async function query(queries) {
+  return httpService.get(API, null, queries);
 }
 
 async function getById(id, queries) {
-  console.log(queries);
   return httpService.get(API + '/' + id, null, queries);
 }
 
