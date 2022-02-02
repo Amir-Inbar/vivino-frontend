@@ -11,8 +11,9 @@ async function query(filter = {}) {
   return httpService.get(API, { params: filter });
 }
 
-async function getById(id) {
-  return httpService.get(API + '/' + id);
+async function getById(id, queries) {
+  console.log(queries);
+  return httpService.get(API + '/' + id, null, queries);
 }
 
 // async function remove(id) {

@@ -1,3 +1,4 @@
+import { getCurrentPosition } from '../../services/util.service';
 import { wineryService } from '../../services/winery.service';
 
 export function loadWineries() {
@@ -17,7 +18,8 @@ loadWinery(1);
 export function loadWinery(id) {
   return async (dispatch) => {
     try {
-      const winery = await wineryService.getById(id);
+      const location = await getCurrentPosition();
+      const winery = await wineryService.getById(id, { ...location });
       dispatch({ type: 'SET_WINERY', winery });
     } catch (err) {
       console.log(err);

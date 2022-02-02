@@ -7,7 +7,7 @@ export function tryRequire(path, alt) {
     }
 };
 
-async function getCurrentPosition() {
+export async function getCurrentPosition() {
     try {
         const geolocation = await new Promise((resolve, reject) => {
             navigator.geolocation.getCurrentPosition(coords => { resolve(coords) }, err => { reject(err) });
