@@ -54,7 +54,6 @@ export const FilterPage = (props) => {
     try {
       const wines = await wineService.query({ filter });
       setWines(wines);
-      dispatch(saveWines(wines));
       tableEl.current.scrollTo(0, 0);
     } catch {}
   }, [filter]);

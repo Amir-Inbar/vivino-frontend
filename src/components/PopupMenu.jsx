@@ -55,8 +55,6 @@ export function PopupMenu(props) {
     setMenu({ ...menus, [name]: data });
   };
 
-  useEffect(() => console.log(menus), [menus]);
-
   useEffect(() => {
     if (!keywords) return;
     addTable("wines");
