@@ -103,4 +103,42 @@
       }
     }
   }
+  .review-stat {
+    flex-basis: 100%;
+    padding: 50px 20px 0 20px;
+    justify-content: center;
+
+    .rate {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .avg {
+        font-size: 2.5em;
+      }
+    }
+    .saperate {
+      margin: 16px 0;
+      width: 224px;
+      height: 1px;
+      background-color: $clr5;
+    }
+    .rate-line {
+      justify-content: space-evenly;
+      &:not(:first-child) {
+        margin: 0 -20px;
+      }
+      .stars {
+        width: 90px;
+        margin-inline-start: 15px;
+        justify-content: flex-end;
+      }
+      img {
+        height: 16px;
+      }
+      .background-bar {
+        width: 134px;
+        background-color: lightgoldenrodyellow;
+      }
+    }
+  }
 }

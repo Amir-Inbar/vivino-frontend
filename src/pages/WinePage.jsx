@@ -83,7 +83,7 @@ export const WinePage = (props) => {
       <TastePreview wine={wine} query={getQuery('taste').toString()} />
       <WinePairings wine={wine} />
       <MoreWines wines={wines} activeId={wine?._id} />
-      <WineReviews wineId={wine._id} />
+      <WineReviews wineId={wine._id} wine={wine} />
       <StarRate size={24} rate={rate} isEditable={true} set={setRate} />
       <AddReview
         rate={rate}

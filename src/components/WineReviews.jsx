@@ -4,7 +4,7 @@ import { reviewService } from '../services/review.service';
 import { makeId, tryRequire } from '../services/util.service';
 import { ReviewStat } from './ReviewStat';
 
-export const WineReviews = ({ wineId }) => {
+export const WineReviews = ({ wineId, wine }) => {
   var moment = require('moment');
   const [reviews, setReviews] = useState([]);
   const [reviewSection, setReviewSection] = useState(0);
@@ -155,11 +155,15 @@ export const WineReviews = ({ wineId }) => {
   };
   if (!reviews) return <div></div>;
   return (
-    <div className="comunity-reviews">
-      <h1>Community reviews</h1>
-      <ReviewMenu />
-      <ReviewsPreview reviews={reviews} />
-      <ReviewStat reviews={reviews} />
+    <div className="comunity-reviews flex">
+      <div>
+        <h1>Community reviews</h1>
+        <ReviewMenu />
+        <ReviewsPreview reviews={reviews} />
+      </div>
+      <div className="review-stat">
+        <ReviewStat wine={wine} />
+      </div>
     </div>
   );
 };

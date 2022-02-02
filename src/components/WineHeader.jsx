@@ -1,6 +1,7 @@
-import { StarRate } from "./StarRate";
-import { useHistory } from "react-router-dom";
-import { tryRequire } from "../services/util.service";
+import { StarRate } from './StarRate';
+import { useHistory } from 'react-router-dom';
+import { tryRequire } from '../services/util.service';
+import { WineRate } from './WineRatePreview';
 
 export function WineHeader(props) {
   const { wine } = props;
@@ -10,7 +11,7 @@ export function WineHeader(props) {
     return [wine.country, wine.region, wine.type, ...(wine.grapes || [])].map(
       (keyword, idx) => {
         return keyword ? (
-          <a className="tag" key={"KEYWORD_" + idx}>
+          <a className="tag" key={'KEYWORD_' + idx}>
             {keyword}
           </a>
         ) : null;
@@ -18,25 +19,12 @@ export function WineHeader(props) {
     );
   };
 
-  const WineRate = ({ wine }) => {
-    const { rate, ratings } = wine;
-    return rate && ratings ? (
-      <div className="rate">
-        <div className="avg">{rate.toFixed(1)}</div>
-        <div className="more-info">
-          <StarRate rate={rate} />
-          <div className="num-ratings">{wine.ratings} ratings</div>
-        </div>
-      </div>
-    ) : null;
-  };
-
   return (
     <section className="wine-header full">
       <div className="information fit-media">
         <div className="picture">
           <img
-            src={wine.image ? wine.image : tryRequire("imgs/bottle.png")}
+            src={wine.image ? wine.image : tryRequire('imgs/bottle.png')}
             alt={wine.name}
           />
         </div>
@@ -48,7 +36,7 @@ export function WineHeader(props) {
             {wine.name} {wine.vintage}
           </h1>
           <div className="tags">{keywords()}</div>
-          <WineRate wine={wine} />
+          <WineRate rate={wine.rate} ratings={wine.ratings} />
         </div>
       </div>
     </section>
