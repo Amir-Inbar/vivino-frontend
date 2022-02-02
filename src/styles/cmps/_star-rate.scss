@@ -12,10 +12,6 @@
     display: flex;
     overflow: hidden;
     transition: 0.2s;
-    > * {
-      height: 16px;
-      width: 16px;
-    }
     svg {
       &.empty-star {
         path {
