@@ -124,7 +124,7 @@ export function ScaleRate(props) {
   };
 
   const data = scales();
-  return data.filter((scale) => scale).length ? (
+  return (
     <>
       <h2>What does this wine taste like?</h2>
       <div className="details">
@@ -134,5 +134,5 @@ export function ScaleRate(props) {
         <BasedOn wine={wine} />
       </div>
     </>
-  ) : null;
+  );
 }
