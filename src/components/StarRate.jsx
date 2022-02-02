@@ -9,11 +9,14 @@ export function StarRate(props) {
   const [rate, setRate] = useState(inRate || total);
   const [tempRate, setTempRate] = useState(null);
 
+  const style = isEditable ? { cursor: "pointer" } : {};
   const styleStar = { width: size + "px", height: size + "px" };
   const styleFullStar = {
     width: box * ((tempRate || rate) / total) + "px",
     marginInlineStart: box * ((tempRate || rate) / total) - box + "px",
+    ...style,
   };
+  const styleEmptyStar = { width: box + "px", ...style };
 
   const hover = (el) => {
     if (!isEditable) return;
@@ -35,7 +38,7 @@ export function StarRate(props) {
       onBlur={() => setTempRate(null)}
       onMouseLeave={() => setTempRate(null)}
     >
-      <div className="stars" style={{ width: box + "px" }} onMouseMove={hover}>
+      <div className="stars" style={styleEmptyStar} onMouseMove={hover}>
         {[...Array(total)].map(() => (
           <img
             style={styleStar}
