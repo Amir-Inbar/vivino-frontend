@@ -13,26 +13,26 @@ export function StarRate(props) {
     set,
   } = props;
   const box = total * size;
-  const [rated, setRated] = useState(inRate || total);
-  const [rate, setVarRate] = useState(null);
+  const [rate, setRate] = useState(inRate || total);
+  const [tempRate, setTempRate] = useState(null);
 
   const styleStar = { width: size + "px", height: size + "px" };
   const styleFullStar = {
-    width: box * ((rate || rated) / total) + "px",
-    marginInlineStart: box * ((rate || rated) / total) - box + "px",
+    width: box * ((tempRate || rate) / total) + "px",
+    marginInlineStart: box * ((tempRate || rate) / total) - box + "px",
   };
 
   const hover = (el) => {
     if (!isEditable) return;
     const { left } = el.target.parentElement.getBoundingClientRect();
     const position = Math.min(el.pageX - left, box);
-    setVarRate(Math.max(Math.round(position / (size / 2) + 0.5) / 2, 1));
+    setTempRate(Math.max(Math.round(position / (size / 2) + 0.5) / 2, 1));
   };
 
   const click = () => {
     if (!isEditable) return;
-    setRated(rate);
-    set(rate);
+    setRate(tempRate);
+    set(tempRate);
   };
 
   return (
@@ -40,8 +40,8 @@ export function StarRate(props) {
       className="stars-container"
       style={style}
       onClick={click}
-      onBlur={() => setVarRate(null)}
-      onMouseLeave={() => setVarRate(null)}
+      onBlur={() => setTempRate(null)}
+      onMouseLeave={() => setTempRate(null)}
     >
       <div className="stars" style={{ width: box + "px" }} onMouseMove={hover}>
         {[...Array(total)].map(() => (
