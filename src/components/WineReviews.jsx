@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getLoggedinUser } from '../services/auth.service';
 import { reviewService } from '../services/review.service';
 import { makeId, tryRequire } from '../services/util.service';
+import { ReviewStat } from './ReviewStat';
 
 export const WineReviews = ({ wineId }) => {
   var moment = require('moment');
@@ -158,6 +159,7 @@ export const WineReviews = ({ wineId }) => {
       <h1>Community reviews</h1>
       <ReviewMenu />
       <ReviewsPreview reviews={reviews} />
+      <ReviewStat reviews={reviews} />
     </div>
   );
 };
