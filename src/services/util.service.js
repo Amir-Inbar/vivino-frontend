@@ -89,3 +89,11 @@ export function makeId(length = 8) {
     }
     return text;
 }
+
+export function extractConditionKey(cKey) {
+    const idx = /([A-Z]|\_)/g.exec(cKey)?.index;
+    let key = cKey.slice(idx);
+    key = key.charAt(0).toLowerCase() + key.slice(1);
+    let condition = cKey.slice(0, idx);
+    return { key, condition };
+}  

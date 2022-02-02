@@ -4,14 +4,7 @@ import fullStar from "../assets/imgs/icons/full-star.svg";
 import { makeId } from "../services/util.service";
 
 export function StarRate(props) {
-  const {
-    rate: inRate,
-    total = 5,
-    size = 16,
-    style,
-    isEditable = false,
-    set,
-  } = props;
+  const { rate: inRate, total = 5, size = 16, isEditable = false, set } = props;
   const box = total * size;
   const [rate, setRate] = useState(inRate || total);
   const [tempRate, setTempRate] = useState(null);
@@ -38,7 +31,6 @@ export function StarRate(props) {
   return (
     <div
       className="stars-container"
-      style={style}
       onClick={click}
       onBlur={() => setTempRate(null)}
       onMouseLeave={() => setTempRate(null)}
