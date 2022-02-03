@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
@@ -7,6 +7,7 @@ import { extractConditionKey } from "../services/util.service";
 export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
   const location = useLocation();
   const history = useHistory();
+  const isFirstLoad = useRef(true);
   const { filter } = useSelector((state) => state.wineModule);
   const queries = new URLSearchParams(location.search);
 
@@ -19,6 +20,10 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
   const [select, setSelect] = useState([]);
 
   useEffect(() => {
+    if (isFirstLoad.content) {
+      isFirstLoad.content = false;
+      return;
+    }
     setQuery(extractConditionKey(query)?.key, select.join("|"));
   }, [select]);
 

@@ -17,10 +17,18 @@ export const ReviewStat = ({ wine }) => {
       <div className="rate-line flex column ">
         {[...Array(total)].map((el, idx) => {
           return (
-            <div className="flex" style={{ "margin-block-end": "20px" }}>
+            <div
+              className="flex"
+              style={{ "margin-block-end": "20px" }}
+              key={`STAT_SCALE_${idx}`}
+            >
               <div className="stars flex">
-                {[...Array(total - idx)].map(() => (
-                  <img src={tryRequire("imgs/icons/single-star.svg")} alt="" />
+                {[...Array(total - idx)].map((el, idx2) => (
+                  <img
+                    src={tryRequire("imgs/icons/single-star.svg")}
+                    alt="star"
+                    key={`IMG_STAT_${idx}_${idx2}`}
+                  />
                 ))}
               </div>
               <div className="background-bar">

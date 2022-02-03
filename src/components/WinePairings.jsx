@@ -1,17 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { sentenceToKababCase, tryRequire } from "../services/util.service";
 
 export const WinePairings = (props) => {
+  const { keywords } = useSelector((state) => state.wineModule);
   const { wine } = props;
+  const history = useHistory();
 
-  const FoodPairing = ({ wine }) => {
-    return wine.pairings.map((food, idx) => (
-      <div className="meal" key={"FOOD_PAIR_" + idx}>
-        <img src={tryRequire(`imgs/food/${sentenceToKababCase(food)}.jpg`)} />
-        <h3>{food}</h3>
-      </div>
-    ));
-  };
+  const FoodPairing = ({ wine }) =>
+    wine.pairings.map((seo, idx) => {
+      const name = keywords.food.find((val) => val.seo === seo)?.name;
+      return (
+        <div
+          onClick={() => history.push(`/wine?pairings=${seo}`)}
+          className="meal"
+          key={"FOOD_PAIR_" + idx}
+        >
+          <img src={tryRequire(`imgs/food/${seo}.jpg`)} />
+          <h3>{name}</h3>
+        </div>
+      );
+    });
 
   return wine.pairings ? (
     <section className="wine-pairings">

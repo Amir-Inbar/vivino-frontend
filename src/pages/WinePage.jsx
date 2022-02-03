@@ -5,8 +5,6 @@ import { TastePreview } from "../components/TastePreview";
 import { WineHeader } from "../components/WineHeader";
 import { WineryPreview } from "../components/WineryPreview";
 import { TasteLike } from "../components/WineTasteLike";
-import { loadWine } from "../store/actions/wineAction";
-import { loadWinery } from "../store/actions/wineryAction";
 import { loadReview } from "../store/actions/reviewAction";
 import { useHistory } from "react-router-dom";
 import { wineService } from "../services/wine.service";
@@ -37,15 +35,17 @@ export const WinePage = (props) => {
   useEffect(async () => {
     const { id } = props.match.params;
     const wine = await wineService.getById(id);
-    if (wine?.wineryId) {
-      const location = await getCurrentPosition();
-      const winery = await wineryService.getById(wine.wineryId, {
-        ...location,
-      });
-      setWinery(winery);
+    if (wine) {
+      if (wine?.wineryId) {
+        const location = await getCurrentPosition();
+        const winery = await wineryService.getById(wine.wineryId, {
+          ...location,
+        });
+        setWinery(winery);
+      }
+      await loadMoreWines();
+      await loadUserReviews();
     }
-    await loadMoreWines();
-    await loadUserReviews();
     setWine(wine);
     dispatch(loadReview(id, { page: { size: 4 } }));
   }, [props.match.params.id]);
