@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { sentenceToKababCase, tryRequire } from "../services/util.service";
+import { tryRequire } from "../services/util.service";
 
 export const WinePairings = (props) => {
   const { keywords } = useSelector((state) => state.wineModule);

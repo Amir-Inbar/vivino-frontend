@@ -704,8 +704,10 @@
         color: $clrwht;
         background-color: $clr1;
         &.selected {
+          transition: color 0.3s, background-color 0.3s;
           background-color: $clr2;
           color: $clrwht;
+          animation: flicker 0.3s 3 ease-in-out;
         }
       }
     }

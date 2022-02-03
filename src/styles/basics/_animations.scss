@@ -41,6 +41,17 @@
   }
 }
 
+@keyframes flicker {
+  from {
+    background-color: $clr2;
+    color: $clrwht;
+  }
+  to {
+    color: $clrwht;
+    background-color: $clr1;
+  }
+}
+
 @keyframes fadeout {
   from {
     opacity: 1;

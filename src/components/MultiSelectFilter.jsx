@@ -1,13 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import { extractConditionKey } from "../services/util.service";
+import { debounce, extractConditionKey } from "../services/util.service";
 
 export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
   const location = useLocation();
   const history = useHistory();
-  const isFirstLoad = useRef(true);
   const { filter } = useSelector((state) => state.wineModule);
   const queries = new URLSearchParams(location.search);
 
@@ -19,15 +18,21 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
 
   const [select, setSelect] = useState([]);
 
-  useEffect(() => {
-    if (isFirstLoad.content) {
-      isFirstLoad.content = false;
-      return;
-    }
-    setQuery(extractConditionKey(query)?.key, select.join("|"));
-  }, [select]);
+  useEffect(
+    () =>
+      debounce(
+        () => setQuery(extractConditionKey(query)?.key, select.join("|")),
+        query,
+        500
+      ),
+    [select]
+  );
 
-  useEffect(() => setSelect(filter[query]?.split("|") || []), [filter[query]]);
+  useEffect(
+    () =>
+      debounce(() => setSelect(filter[query]?.split("|") || []), query, 500),
+    [filter[query]]
+  );
 
   const toggleSelect = (type) => {
     if (!type) return;
