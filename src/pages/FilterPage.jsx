@@ -19,6 +19,19 @@ export const FilterPage = (props) => {
   const { filter, keywords } = useSelector((state) => state.wineModule);
   const tableEl = useRef(null);
 
+  const queryToFilter = () =>
+    dispatch(
+      setFilterBy({
+        ...filter,
+        eqType: queries.get("type"),
+        inRegion: queries.get("region"),
+        "in+Grapes": queries.get("grapes"),
+        inCountry: queries.get("country"),
+        inSeo: queries.get("seo"),
+        inPairings: queries.get("pairings"),
+      })
+    );
+
   useEffect(async () => {
     if (!keywords)
       try {
@@ -30,23 +43,7 @@ export const FilterPage = (props) => {
   }, [tableEl]);
 
   useEffect(() => {
-    debounce(
-      () => {
-        dispatch(
-          setFilterBy({
-            ...filter,
-            eqType: queries.get("type"),
-            inRegion: queries.get("region"),
-            "in+Grapes": queries.get("grapes"),
-            inCountry: queries.get("country"),
-            inSeo: queries.get("seo"),
-            inPairings: queries.get("pairings"),
-          })
-        );
-      },
-      "SET_FILTER",
-      filter ? 500 : 0
-    );
+    debounce(() => queryToFilter(), "SET_FILTER", filter ? 500 : 0);
   }, [props.location.search]);
 
   useEffect(async () => {
