@@ -37,11 +37,6 @@ export const WinePage = (props) => {
   useEffect(async () => {
     const { id } = props.match.params;
     const wine = await wineService.getById(id);
-    setWine(wine);
-    dispatch(loadReview(id, { page: { size: 4 } }));
-  }, [props.match.params.id]);
-
-  useEffect(async () => {
     if (wine?.wineryId) {
       const location = await getCurrentPosition();
       const winery = await wineryService.getById(wine.wineryId, {
@@ -49,9 +44,11 @@ export const WinePage = (props) => {
       });
       setWinery(winery);
     }
-    loadMoreWines();
-    loadUserReviews();
-  }, [wine]);
+    await loadMoreWines();
+    await loadUserReviews();
+    setWine(wine);
+    dispatch(loadReview(id, { page: { size: 4 } }));
+  }, [props.match.params.id]);
 
   const loadMoreWines = async () => {
     if (!wine) return;

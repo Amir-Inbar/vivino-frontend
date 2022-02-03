@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { reviewService } from "../services/review.service";
+import { getCurrentPosition } from "../services/util.service";
 import { StarRate } from "./StarRate";
 
 export const AddReview = ({ wine, close, set, rate: inRate, reviews }) => {
@@ -35,10 +36,12 @@ export const AddReview = ({ wine, close, set, rate: inRate, reviews }) => {
   const submit = async () => {
     if (!description || !vintage) return;
     try {
+      const location = (await getCurrentPosition()) || {};
       const body = {
         vintage,
         rate,
         description,
+        ...location,
       };
       const recent = await reviewService.set(
         wine._id,

@@ -40,6 +40,7 @@ export const FilterPage = (props) => {
             "in+Grapes": queries.get("grapes"),
             inCountry: queries.get("country"),
             inSeo: queries.get("seo"),
+            inPairings: queries.get("pairings"),
           })
         );
       },
@@ -107,7 +108,7 @@ export const FilterPage = (props) => {
         <MultiSelectFilter
           title="Grapes"
           query="in+Grapes"
-          data={keywords.grapes.sort((a, b) => b.count - a.count)}
+          data={keywords.grapes}
         />
         <MultiSelectFilter
           title="regions"
@@ -126,7 +127,12 @@ export const FilterPage = (props) => {
         <MultiSelectFilter
           title="wine styles"
           query="inSeo"
-          data={keywords.styles.sort((a, b) => b.count - a.count)}
+          data={keywords.styles}
+        />
+        <MultiSelectFilter
+          title="food pairings"
+          query="inPairings"
+          data={keywords.food}
         />
         <div className="apply">
           <button onClick={() => setIsShowFilter(false)}>close</button>
