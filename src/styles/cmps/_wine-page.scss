@@ -663,7 +663,7 @@
     @include form-normal-layout {
       display: none;
     }
-    gap: 20px;
+    gap: 10px;
     justify-content: center;
     padding: 12px 0;
     button {
@@ -700,8 +700,9 @@
       display: flex;
       flex-wrap: wrap;
       // justify-content: space-around;
-      gap: 10px;
+      gap: 8px;
       button {
+        padding: 6px 8px;
         border: 0;
         min-width: 80px;
         text-transform: capitalize;

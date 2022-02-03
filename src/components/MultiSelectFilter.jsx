@@ -2,12 +2,12 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import useChangeEffect from "../extensions/useChangeEffect";
 import { extractConditionKey } from "../services/util.service";
 
 export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
   const location = useLocation();
   const history = useHistory();
-  const isFirstLoad = useRef(true);
   const { filter } = useSelector((state) => state.wineModule);
   const queries = new URLSearchParams(location.search);
 
@@ -19,11 +19,10 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
 
   const [select, setSelect] = useState([]);
 
-  useEffect(() => {
-    if (!isFirstLoad.current)
-      setQuery(extractConditionKey(query)?.key, select.join("|"));
-    else isFirstLoad.current = false;
-  }, [select]);
+  useChangeEffect(
+    () => setQuery(extractConditionKey(query)?.key, select.join("|")),
+    [select]
+  );
 
   useEffect(() => setSelect(filter[query]?.split("|") || []), [filter[query]]);
 
