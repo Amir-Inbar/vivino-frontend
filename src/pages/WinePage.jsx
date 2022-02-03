@@ -6,7 +6,6 @@ import { WineHeader } from "../components/WineHeader";
 import { WineryPreview } from "../components/WineryPreview";
 import { TasteLike } from "../components/WineTasteLike";
 import { loadReview } from "../store/actions/reviewAction";
-import { useHistory } from "react-router-dom";
 import { wineService } from "../services/wine.service";
 import { reviewService } from "../services/review.service";
 import { WinePairings } from "../components/WinePairings";

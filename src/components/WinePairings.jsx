@@ -1,23 +1,27 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { tryRequire } from "../services/util.service";
+import { setFilterBy } from "../store/actions/wineAction";
 
 export const WinePairings = (props) => {
-  const { keywords } = useSelector((state) => state.wineModule);
+  const dispatch = useDispatch();
+  const { filter, keywords } = useSelector((state) => state.wineModule);
   const { wine } = props;
   const history = useHistory();
 
   const FoodPairing = ({ wine }) =>
     wine.pairings.map((seo, idx) => {
       const name = keywords.food.find((val) => val.seo === seo)?.name;
+      const goTo = () => {
+        dispatch(setFilterBy({ inPairings: seo }));
+        history.push(`/wine?pairings=${seo}`);
+      };
       return (
-        <div
-          onClick={() => history.push(`/wine?pairings=${seo}`)}
-          className="meal"
-          key={"FOOD_PAIR_" + idx}
-        >
-          <img src={tryRequire(`imgs/food/${seo}.jpg`)} />
+        <div onClick={goTo} className="meal" key={"FOOD_PAIR_" + idx}>
+          <div className="image-container">
+            <img src={tryRequire(`imgs/food/${seo}.jpg`)} />
+          </div>
           <h3>{name}</h3>
         </div>
       );

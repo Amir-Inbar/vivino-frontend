@@ -30,7 +30,7 @@ export function AppHeader() {
       <PopupMenu config={popupConfig} close={() => setPopupConfig(null)} />
       <div className="control-bar">
         <div className="logo">
-          <img src={tryRequire("imgs/logo.svg")} />
+          {/* <img src={tryRequire("imgs/logo.svg")} /> */}
         </div>
         <div className="search">
           <input placeholder="Search any wine" onInput={searchInput}></input>

@@ -545,16 +545,20 @@
       align-items: center;
       flex-direction: column;
       min-width: 150px;
-      transition: transform 1s;
-      &:hover {
-        transform: scale(105%);
-      }
-      img {
-        padding: 10px;
-        object-fit: cover;
-        max-height: 150px;
-        max-width: 150px;
+      .image-container {
+        height: 120px;
+        width: 120px;
         border-radius: 50%;
+        overflow: hidden;
+        margin: 12px 8px;
+        img {
+          max-height: 100%;
+          max-width: 100%;
+          transition: transform 1s;
+          &:hover {
+            transform: scale(102%);
+          }
+        }
       }
       h3 {
         text-align: center;
@@ -707,12 +711,16 @@
           transition: color 0.3s, background-color 0.3s;
           background-color: $clr2;
           color: $clrwht;
-          animation: flicker 0.3s 3 ease-in-out;
+          animation: flicker 0.2s 3 ease-in-out;
         }
       }
     }
     > * {
       margin: 24px 8px 32px 8px;
+    }
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none;
     }
     @include until-tablet-layout {
       display: none;
