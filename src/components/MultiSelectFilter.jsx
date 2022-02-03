@@ -25,6 +25,8 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
   useEffect(() => setSelect(filter[query]?.split("|") || []), [filter[query]]);
 
   const toggleSelect = (type) => {
+    if (!type) return;
+    type = type.toLowerCase();
     if (select.includes(type)) setSelect(select.filter((val) => val !== type));
     else setSelect([...select, type]);
   };
@@ -33,15 +35,17 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
     <section className="wine-select-buttons">
       <h2>{title}</h2>
       {data
-        .map((type, idx) => {
-          type = type.toLowerCase();
+        .map((item, idx) => {
+          const { name, seo } = item;
           return (
             <button
               key={`BUTTON_${query}${idx}`}
-              className={`${select.includes(type) ? "selected" : ""}`}
-              onClick={() => toggleSelect(type)}
+              className={`${
+                select.includes(seo || name?.toLowerCase()) ? "selected" : ""
+              }`}
+              onClick={() => toggleSelect(seo || name)}
             >
-              {type.replaceAll("-", " ")}
+              {name}
             </button>
           );
         })

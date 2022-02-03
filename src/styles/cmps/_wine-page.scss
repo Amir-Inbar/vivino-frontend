@@ -144,6 +144,7 @@
       .tags {
         padding-bottom: 62px;
         .tag {
+          cursor: pointer;
           text-transform: capitalize;
           padding: 2px 8px 0 0;
           &:not(:last-child):after {

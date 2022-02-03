@@ -16,7 +16,7 @@ export function TasteFill(props) {
   const history = useHistory();
   const { tastes } = props;
   const [position, setPosition] = useState(0);
-  if (!tastes) return null;
+  if (!tastes || !tastes.length) return null;
 
   const setQuery = (name, value) => {
     const queryParams = new URLSearchParams(location.search);

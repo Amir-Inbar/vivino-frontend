@@ -24,8 +24,8 @@ export function PopupMenu(props) {
           },
           ...keywords.styles
             .filter(({ type }) => type === "red")
-            .map(({ seo }) => ({
-              title: kababCaseToSentence(seo),
+            .map(({ name, seo }) => ({
+              title: name,
               img: "",
               path: `/wine?style=${seo}`,
             })),
@@ -34,18 +34,18 @@ export function PopupMenu(props) {
           { title: "White", path: "/wine?type=white", img: "", isBold: true },
           ...keywords.styles
             .filter(({ type }) => type === "white")
-            .map(({ seo }) => ({
-              title: kababCaseToSentence(seo),
+            .map(({ name, seo }) => ({
+              title: name,
               img: "",
               path: `/wine?style=${seo}`,
             })),
         ],
         [
           ...keywords.types
-            .filter((type) => type !== "red" && type !== "white")
-            .map((type) => ({
-              title: kababCaseToSentence(type),
-              path: `/wine?type=${type}`,
+            .filter(({ name }) => name !== "red" && name !== "white")
+            .map(({ name }) => ({
+              title: kababCaseToSentence(name),
+              path: `/wine?type=${name}`,
               img: "",
               isBold: true,
             })),

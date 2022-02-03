@@ -9,8 +9,6 @@ import {
   setFilterBy,
   setKeywords,
 } from "../store/actions/wineAction";
-
-import grapes from "../assets/json/grapes.json";
 import { ScaleRangeFilter } from "../components/ScaleRangeFilter";
 
 export const FilterPage = (props) => {
@@ -106,23 +104,29 @@ export const FilterPage = (props) => {
           fromQuery="from"
           toQuery="to"
         />
-        <MultiSelectFilter title="Grapes" query="in+Grapes" data={grapes} />
+        <MultiSelectFilter
+          title="Grapes"
+          query="in+Grapes"
+          data={keywords.grapes.sort((a, b) => b.count - a.count)}
+        />
         <MultiSelectFilter
           title="regions"
           query="inRegion"
-          data={keywords.regions.map((val) => val.name)}
+          data={keywords.regions}
           max={6}
         />
         <MultiSelectFilter
           title="countries"
           query="inCountry"
-          data={[...new Set(keywords.regions.map((val) => val.country))]}
+          data={[...new Set(keywords.regions.map((val) => val.country))].map(
+            (val) => ({ name: val })
+          )}
           max={6}
         />
         <MultiSelectFilter
           title="wine styles"
           query="inSeo"
-          data={keywords.styles.map((val) => val.seo)}
+          data={keywords.styles.sort((a, b) => b.count - a.count)}
         />
         <div className="apply">
           <button onClick={() => setIsShowFilter(false)}>close</button>

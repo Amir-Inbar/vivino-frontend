@@ -1,22 +1,35 @@
-import { StarRate } from './StarRate';
-import { useHistory } from 'react-router-dom';
-import { tryRequire } from '../services/util.service';
-import { WineRate } from './WineRatePreview';
+import { StarRate } from "./StarRate";
+import { useHistory } from "react-router-dom";
+import { kababCaseToSentence, tryRequire } from "../services/util.service";
+import { WineRate } from "./WineRatePreview";
 
 export function WineHeader(props) {
   const { wine } = props;
   const history = useHistory();
 
   const keywords = () => {
-    return [wine.country, wine.region, wine.type, ...(wine.grapes || [])].map(
-      (keyword, idx) => {
-        return keyword ? (
-          <a className="tag" key={'KEYWORD_' + idx}>
-            {keyword}
-          </a>
-        ) : null;
-      }
-    );
+    const linkMap = [
+      {
+        title: wine.country,
+        path: `/wine?country=${wine.country.toLowerCase()}`,
+      },
+      { title: wine.region, path: `/wine?region=${wine.region.toLowerCase()}` },
+      ...(wine.grapes || []).map((grape) => ({
+        title: kababCaseToSentence(grape),
+        path: `/wine?grapes=${grape}`,
+      })),
+    ];
+    return linkMap.map((keyword, idx) => {
+      return keyword ? (
+        <span
+          onClick={() => history.push(keyword.path)}
+          className="tag"
+          key={"KEYWORD_" + idx}
+        >
+          {keyword.title}
+        </span>
+      ) : null;
+    });
   };
 
   return (
@@ -24,7 +37,7 @@ export function WineHeader(props) {
       <div className="information fit-media">
         <div className="picture">
           <img
-            src={wine.image ? wine.image : tryRequire('imgs/bottle.png')}
+            src={wine.image ? wine.image : tryRequire("imgs/bottle.png")}
             alt={wine.name}
           />
         </div>
