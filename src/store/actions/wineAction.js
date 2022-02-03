@@ -2,6 +2,7 @@ import { wineService } from '../../services/wine.service';
 
 export function setFilterBy(filter) {
   return (dispatch) => {
+    filter = Object.fromEntries(Object.entries(filter).filter(([key, val]) => val));
     dispatch({ type: 'SET_FILTER', filter });
   }
 }
