@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { WineryHeader } from "../components/WineryHeader";
-import { WineryWines } from "../components/WineryWines";
+import { WineryHeader } from "../components/Winery/WineryHeader";
+import { WineryWines } from "../components/Winery/WineryWines";
 import { getCurrentPosition } from "../services/util.service";
 import { wineService } from "../services/wine.service";
 import { loadWinery } from "../store/actions/wineryAction";

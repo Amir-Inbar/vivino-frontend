@@ -19,11 +19,6 @@ export function TastePreview(props) {
   const location = useLocation();
   const history = useHistory();
 
-  const getQuery = (name) => {
-    const queryParams = new URLSearchParams(location.search);
-    return queryParams.get(name)?.split("-") || [];
-  };
-
   const setQuery = (name, value) => {
     const queryParams = new URLSearchParams(location.search);
     if (value) queryParams.set(name, value);
