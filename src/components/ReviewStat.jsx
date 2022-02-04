@@ -1,8 +1,8 @@
-import { tryRequire } from "../services/util.service";
-import { WineRate } from "./WineRatePreview";
+import { tryRequire } from '../services/util.service';
+import { WineRate } from './WineRatePreview';
 
 export const ReviewStat = ({ wine }) => {
-  console.log("wine :>> ", wine);
+  console.log('wine :>> ', wine);
 
   const setRatingBar = (rating) => {
     if (!parseInt(rating)) return 0;
@@ -19,13 +19,13 @@ export const ReviewStat = ({ wine }) => {
           return (
             <div
               className="flex"
-              style={{ "margin-block-end": "20px" }}
+              style={{ marginBlockEnd: '20px' }}
               key={`STAT_SCALE_${idx}`}
             >
               <div className="stars flex">
                 {[...Array(total - idx)].map((el, idx2) => (
                   <img
-                    src={tryRequire("imgs/icons/single-star.svg")}
+                    src={tryRequire('imgs/icons/single-star.svg')}
                     alt="star"
                     key={`IMG_STAT_${idx}_${idx2}`}
                   />
@@ -37,8 +37,8 @@ export const ReviewStat = ({ wine }) => {
                   style={{
                     width:
                       setRatingBar(`${wine[`rate${total - idx}`]}`) * 134 +
-                      "px",
-                    height: "16px",
+                      'px',
+                    height: '16px',
                   }}
                 ></div>
               </div>

@@ -103,8 +103,10 @@
       }
     }
   }
+  .reviews-list {
+    flex-grow: 1;
+  }
   .review-stat {
-    flex-basis: 100%;
     padding: 50px 20px 0 20px;
     justify-content: center;
 
@@ -139,7 +141,6 @@
       .background-bar {
         width: 134px;
         background-color: $clr6;
-        // margin-inline-end: 5px;
         margin: 0 5px;
         .background-fill {
           background-color: $clr2;

@@ -1,15 +1,20 @@
-import { useEffect, useState } from 'react';
-import { getLoggedinUser } from '../services/auth.service';
+import React, { useEffect, useState } from 'react';
+import { authService, getLoggedinUser } from '../services/auth.service';
 import { reviewService } from '../services/review.service';
 import { makeId, tryRequire } from '../services/util.service';
+import { loadReview } from '../store/actions/reviewAction';
 import { AddReview } from './AddReview';
 import { ReviewStat } from './ReviewStat';
+import { StarRate } from './StarRate';
 
 export const WineReviews = ({ wineId, wine }) => {
   var moment = require('moment');
   const [reviews, setReviews] = useState([]);
   const [reviewSection, setReviewSection] = useState(0);
   const [activeReview, setActiveReview] = useState(null);
+  const [rate, setRate] = useState(null);
+  const [userReviews, setUserReviews] = useState([]);
+
   const logInUser = getLoggedinUser();
   const setCurrReviewSection = (currSection) => {
     setReviewSection(currSection);
@@ -21,7 +26,16 @@ export const WineReviews = ({ wineId, wine }) => {
     });
     const { data } = res;
     setReviews(data);
+    await loadUserReviews();
+
   }, [wineId]);
+
+  const reviewUpdate = (result) => {
+    if (!result || !userReviews) return;
+    const reviewIdx = userReviews.find((review) => review._id === result._id);
+    if (reviewIdx > -1) setUserReviews(userReviews.splice(reviewIdx, 1, result));
+    else setUserReviews([result, ...userReviews]);
+  };
 
   const ReviewMenu = () => {
     const reviewSections = ['Helpful', 'Recent', 'Friends', 'You'];
@@ -38,6 +52,13 @@ export const WineReviews = ({ wineId, wine }) => {
         ))}
       </div>
     );
+  };
+
+  const loadUserReviews = async () => {
+    const user = authService.getLoggedinUser();
+    if (!wine || !user?._id) return;
+    const res = await reviewService.query({ filter: { eqWineId: wine._id } });
+    setUserReviews(res.data ? [] : res || []);
   };
 
   const setLike = (reviewId) => {
@@ -156,16 +177,25 @@ export const WineReviews = ({ wineId, wine }) => {
   };
   if (!reviews) return <div></div>;
   return (
-    <div className="comunity-reviews flex">
-      <div>
-        <h1>Community reviews</h1>
-        <ReviewMenu />
-        <ReviewsPreview reviews={reviews} />
+    <>
+      <div className="comunity-reviews flex">
+        <div className="reviews-list">
+          <h1>Community reviews</h1>
+          <ReviewMenu />
+          <ReviewsPreview reviews={reviews} />
+        </div>
+        <div className="review-stat">
+          <ReviewStat wine={wine} />
+          <StarRate size={24} rate={rate} isEditable={true} set={setRate} />
+        </div>
       </div>
-      <div className="review-stat">
-        <ReviewStat wine={wine} />
-      </div>
-      <AddReview />
-    </div>
+      <AddReview
+        rate={rate}
+        wine={wine}
+        reviews={userReviews}
+        set={setRate}
+        close={(review) => reviewUpdate(review)}
+      />
+    </>
   );
 };
