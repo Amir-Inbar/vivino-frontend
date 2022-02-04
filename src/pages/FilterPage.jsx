@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MultiSelectFilter } from "../components/MultiSelectFilter";
 import { WinePreviews } from "../components/WinePreview";
@@ -16,7 +16,8 @@ export const FilterPage = (props) => {
   const queries = new URLSearchParams(props.location.search);
   const [wines, setWines] = useState(null);
   const [isShowFilter, setIsShowFilter] = useState(null);
-  const { filter, keywords } = useSelector((state) => state.wineModule);
+  const filter = useSelector((state) => state.wineModule.filter);
+  const keywords = useSelector((state) => state.wineModule.keywords);
   const tableEl = useRef(null);
 
   const queryToFilter = () =>
@@ -32,15 +33,17 @@ export const FilterPage = (props) => {
       })
     );
 
-  useEffect(async () => {
-    if (!keywords)
-      try {
-        const res = await wineService.query({ keywords: true });
-        dispatch(setKeywords(res));
-      } catch (err) {
-        console.log(err);
-      }
-  }, [tableEl]);
+  useLayoutEffect(() => {
+    (async () => {
+      if (!keywords)
+        try {
+          const res = await wineService.query({ keywords: true });
+          dispatch(setKeywords(res));
+        } catch (err) {
+          console.log(err);
+        }
+    })();
+  }, []);
 
   useEffect(() => {
     debounce(() => queryToFilter(), "SET_FILTER", filter ? 500 : 0);
@@ -54,9 +57,9 @@ export const FilterPage = (props) => {
     } catch {}
   }, [filter]);
 
-  useEffect(() => {
-    if (wines) dispatch(saveWines(wines));
-  }, [wines]);
+  // useEffect(() => {
+  //   if (wines) dispatch(saveWines(wines));
+  // }, [wines]);
 
   const scrollDown = async (ev) => {
     if (wines.page.index < wines.page.total - 1) {
