@@ -31,7 +31,6 @@ export const AddReview = ({ wine, close, set, rate: inRate, reviews }) => {
 
   if (!inRate) return null;
   if (inRate !== rate) setRate(inRate);
-  window.scrollTo(0, 0);
 
   const submit = async () => {
     if (!description || !vintage) return;
@@ -79,10 +78,17 @@ export const AddReview = ({ wine, close, set, rate: inRate, reviews }) => {
       className="background-dimm full"
       onClick={close}
       onKeyDown={handleKeyDown}
+      style={{ height: document.documentElement.scrollHeight + "px" }}
     >
       <section
         className="wine-add-review"
         onClick={(ev) => ev.stopPropagation()}
+        style={{
+          top:
+            document.documentElement.scrollTop +
+            document.documentElement.clientHeight * 0.5 +
+            "px",
+        }}
       >
         <div className="close-btn" onClick={close}>
           X
