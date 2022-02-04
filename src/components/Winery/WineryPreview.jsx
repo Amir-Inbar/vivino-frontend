@@ -4,8 +4,8 @@ import {
   getCurrentPosition,
   sentenceToKababCase,
   tryRequire,
-} from "../services/util.service";
-import { wineryService } from "../services/winery.service";
+} from "../../services/util.service";
+import { wineryService } from "../../services/winery.service";
 
 export function WineryPreview({ wine }) {
   const history = useHistory();

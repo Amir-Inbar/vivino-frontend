@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { MoreWines } from "../components/WineMoreFrom";
 import { TastePreview } from "../components/WineTastePreview";
 import { WineHeader } from "../components/WineHeader";
-import { WineryPreview } from "../components/WineryPreview";
+import { WineryPreview } from "../components/Winery/WineryPreview";
 import { TasteLike } from "../components/WineTasteLike";
 import { wineService } from "../services/wine.service";
 import { WinePairings } from "../components/WinePairings";

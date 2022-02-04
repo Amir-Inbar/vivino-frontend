@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import useChangeEffect from "../hooks/useChangeEffect";
-import { extractConditionKey } from "../services/util.service";
+import useChangeEffect from "../../hooks/useChangeEffect";
+import { extractConditionKey } from "../../services/util.service";
 
 export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
   const location = useLocation();

@@ -83,7 +83,11 @@ export function PopupMenu(props) {
   };
 
   return config && menus ? (
-    <div className="background-dimm" onClick={close}>
+    <div
+      className="background-dimm"
+      onClick={close}
+      style={{ height: document.documentElement.scrollHeight + "px" }}
+    >
       <div
         className="popup-menu"
         style={{ top: `${top()}px`, left: `${left()}px` }}

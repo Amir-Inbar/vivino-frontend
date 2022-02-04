@@ -1,5 +1,5 @@
 import React from "react";
-import { sentenceToKababCase, tryRequire } from "../services/util.service";
+import { sentenceToKababCase, tryRequire } from "../../services/util.service";
 
 export function WineryHeader(props) {
   const { winery } = props;
