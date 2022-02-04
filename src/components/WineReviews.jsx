@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getLoggedinUser } from '../services/auth.service';
 import { reviewService } from '../services/review.service';
 import { makeId, tryRequire } from '../services/util.service';
+import { AddReview } from './AddReview';
 import { ReviewStat } from './ReviewStat';
 
 export const WineReviews = ({ wineId, wine }) => {
@@ -164,6 +165,7 @@ export const WineReviews = ({ wineId, wine }) => {
       <div className="review-stat">
         <ReviewStat wine={wine} />
       </div>
+      <AddReview />
     </div>
   );
 };
