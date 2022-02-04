@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { sentenceToKababCase, tryRequire } from "../services/util.service";
+import {
+  getCurrentPosition,
+  sentenceToKababCase,
+  tryRequire,
+} from "../services/util.service";
+import { wineryService } from "../services/winery.service";
 
-export function WineryPreview(props) {
-  const { winery } = props;
+export function WineryPreview({ wine }) {
   const history = useHistory();
+  const [winery, setWinery] = useState(null);
+
+  useEffect(async () => {
+    if (wine?.wineryId) {
+      const location = await getCurrentPosition();
+      const winery = await wineryService.getById(wine.wineryId, {
+        ...location,
+      });
+      setWinery(winery);
+    }
+  }, [wine]);
+
   return winery?.overview ? (
     <section className="winery-preview">
       <section className="information">

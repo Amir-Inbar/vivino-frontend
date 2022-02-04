@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MultiSelectFilter } from "../components/MultiSelectFilter";
 import { WinePreviews } from "../components/WinePreview";
@@ -6,6 +6,7 @@ import { debounce } from "../services/util.service";
 import { wineService } from "../services/wine.service";
 import { setFilterBy } from "../store/actions/wineAction";
 import { ScaleRangeFilter } from "../components/ScaleRangeFilter";
+import useInfinityScroll from "../hooks/useInfinityScroll";
 
 export const FilterPage = (props) => {
   const dispatch = useDispatch();
@@ -14,7 +15,18 @@ export const FilterPage = (props) => {
   const [isShowFilter, setIsShowFilter] = useState(null);
   const filter = useSelector((state) => state.wineModule.filter);
   const keywords = useSelector((state) => state.wineModule.keywords);
-  const tableEl = useRef(null);
+
+  useInfinityScroll(
+    async () => {
+      const res = await wineService.query({
+        filter,
+        page: { index: wines.page.index + 1 },
+      });
+      if (res) setWines({ ...res, data: [...wines.data, ...res.data] });
+    },
+    [wines],
+    wines?.page?.index < wines?.page?.total
+  );
 
   const queryToFilter = () =>
     dispatch(
@@ -38,27 +50,28 @@ export const FilterPage = (props) => {
       try {
         const wines = await wineService.query({ filter });
         setWines(wines);
-        tableEl.current.scrollTo(0, 0);
+        window.scrollTo(0, 0);
       } catch {}
     })();
   }, [filter]);
 
   const scrollDown = async (ev) => {
-    if (wines.page.index < wines.page.total - 1) {
-      const { scrollTop, scrollHeight, clientHeight } = ev.target;
-      const leftToEnd = scrollHeight - clientHeight - scrollTop;
-      if (
-        leftToEnd &
-        (leftToEnd * (wines.page.index + 1) <
-          (clientHeight / (wines.page.index + 1)) * 0.8)
-      ) {
-        const res = await wineService.query({
-          filter,
-          page: { index: wines.page.index + 1 },
-        });
-        if (res) setWines({ ...res, data: [...wines.data, ...res.data] });
-      }
-    }
+    console.log(ev);
+    // if (wines.page.index < wines.page.total - 1) {
+    //   const { scrollTop, scrollHeight, clientHeight } = ev.target;
+    //   const leftToEnd = scrollHeight - clientHeight - scrollTop;
+    //   if (
+    //     leftToEnd &
+    //     (leftToEnd * (wines.page.index + 1) <
+    //       (clientHeight / (wines.page.index + 1)) * 0.8)
+    //   ) {
+    //     const res = await wineService.query({
+    //       filter,
+    //       page: { index: wines.page.index + 1 },
+    //     });
+    //     if (res) setWines({ ...res, data: [...wines.data, ...res.data] });
+    //   }
+    // }
   };
 
   return wines && keywords ? (
@@ -120,7 +133,7 @@ export const FilterPage = (props) => {
           <button onClick={() => setIsShowFilter(false)}>close</button>
         </div>
       </nav>
-      <div className="wines-result" onScroll={scrollDown} ref={tableEl}>
+      <div className="wines-result" onScrollCapture={scrollDown}>
         {wines.total ? (
           <WinePreviews wines={wines.data} />
         ) : (

@@ -652,8 +652,6 @@
 }
 
 .wines-filter {
-  height: 85vh;
-  overflow-y: hidden;
   display: flex;
   @include until-tablet-layout {
     flex-direction: column;
@@ -699,7 +697,6 @@
     .wine-select-buttons {
       display: flex;
       flex-wrap: wrap;
-      // justify-content: space-around;
       gap: 8px;
       button {
         padding: 6px 8px;
@@ -751,7 +748,7 @@
     }
   }
   .wines-result {
-    overflow-y: scroll;
+    // overflow-y: scroll;
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
