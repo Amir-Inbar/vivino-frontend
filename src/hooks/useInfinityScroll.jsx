@@ -5,7 +5,7 @@ const useInfinityScroll = (cb, deps, isEnabled) => {
     if (
       document.documentElement.scrollTop +
         document.documentElement.clientHeight >=
-      document.documentElement.scrollHeight * 0.7
+      document.documentElement.scrollHeight * 0.8
     ) {
       window.removeEventListener("scroll", infinityScroll);
       await cb();
