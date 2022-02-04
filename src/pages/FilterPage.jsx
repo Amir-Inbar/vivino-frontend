@@ -4,7 +4,7 @@ import { MultiSelectFilter } from "../components/MultiSelectFilter";
 import { WinePreviews } from "../components/WinePreview";
 import { debounce } from "../services/util.service";
 import { wineService } from "../services/wine.service";
-import { setFilterBy, setKeywords } from "../store/actions/wineAction";
+import { setFilterBy } from "../store/actions/wineAction";
 import { ScaleRangeFilter } from "../components/ScaleRangeFilter";
 
 export const FilterPage = (props) => {
@@ -29,28 +29,18 @@ export const FilterPage = (props) => {
       })
     );
 
-  // useLayoutEffect(() => {
-  //   (async () => {
-  //     if (!keywords)
-  //       try {
-  //         const res = await wineService.query({ keywords: true });
-  //         dispatch(setKeywords(res));
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //   })();
-  // }, []);
-
   useEffect(() => {
     debounce(() => queryToFilter(), "SET_FILTER", filter ? 500 : 0);
   }, [props.location.search]);
 
-  useEffect(async () => {
-    try {
-      const wines = await wineService.query({ filter });
-      setWines(wines);
-      tableEl.current.scrollTo(0, 0);
-    } catch {}
+  useEffect(() => {
+    (async () => {
+      try {
+        const wines = await wineService.query({ filter });
+        setWines(wines);
+        tableEl.current.scrollTo(0, 0);
+      } catch {}
+    })();
   }, [filter]);
 
   const scrollDown = async (ev) => {
