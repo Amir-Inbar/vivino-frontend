@@ -13,6 +13,11 @@ export const AddReview = ({ wine, close, set, rate: inRate, reviews }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (inRate) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "initial";
+  }, [inRate]);
+
+  useEffect(() => {
     if (!reviews) return;
     if (!vintage) setReview(null);
     else setReview(reviews.find((review) => review.vintage === vintage));

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { debounce, tryRequire } from "../services/util.service";
@@ -10,6 +10,12 @@ export function AppHeader() {
   const [popupConfig, setPopupConfig] = useState(0);
   const { filter } = useSelector((state) => state.wineModule);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (popupConfig) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "initial";
+  }, [popupConfig]);
+
   if (location.pathname === "/login") return null;
 
   const toggleMenu = (ev, type) =>
