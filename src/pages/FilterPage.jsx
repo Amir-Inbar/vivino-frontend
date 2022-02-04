@@ -29,17 +29,17 @@ export const FilterPage = (props) => {
       })
     );
 
-  useLayoutEffect(() => {
-    (async () => {
-      if (!keywords)
-        try {
-          const res = await wineService.query({ keywords: true });
-          dispatch(setKeywords(res));
-        } catch (err) {
-          console.log(err);
-        }
-    })();
-  }, []);
+  // useLayoutEffect(() => {
+  //   (async () => {
+  //     if (!keywords)
+  //       try {
+  //         const res = await wineService.query({ keywords: true });
+  //         dispatch(setKeywords(res));
+  //       } catch (err) {
+  //         console.log(err);
+  //       }
+  //   })();
+  // }, []);
 
   useEffect(() => {
     debounce(() => queryToFilter(), "SET_FILTER", filter ? 500 : 0);
@@ -71,7 +71,7 @@ export const FilterPage = (props) => {
     }
   };
 
-  return wines ? (
+  return wines && keywords ? (
     <section className="wines-filter">
       <div className="control-panel">
         <button

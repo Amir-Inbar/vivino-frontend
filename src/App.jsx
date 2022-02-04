@@ -13,18 +13,18 @@ import { setKeywords } from "./store/actions/wineAction";
 import { useEffect } from "react";
 
 export function App() {
-  const { keywords } = useSelector((state) => state.wineModule);
+  const keywords = useSelector((state) => state.wineModule.keywords);
   const dispatch = useDispatch();
 
-  // useEffect(async () => {
-  //   if (!keywords)
-  //     try {
-  //       const res = await wineService.query({ keywords: true });
-  //       dispatch(setKeywords(res));
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  // }, [keywords]);
+  useEffect(async () => {
+    if (!keywords)
+      try {
+        const res = await wineService.query({ keywords: true });
+        dispatch(setKeywords(res));
+      } catch (err) {
+        console.log(err);
+      }
+  }, [keywords]);
 
   return (
     <Router>
