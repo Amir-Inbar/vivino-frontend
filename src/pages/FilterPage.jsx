@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MultiSelectFilter } from "../components/MultiSelectFilter";
+import { MultiSelectFilter } from "../components/FilterMultiSelect";
 import { WinePreviews } from "../components/WinePreview";
 import { debounce } from "../services/util.service";
 import { wineService } from "../services/wine.service";
 import { setFilterBy } from "../store/actions/wineAction";
-import { ScaleRangeFilter } from "../components/ScaleRangeFilter";
+import { ScaleRangeFilter } from "../components/FilterSelectRange";
 import useInfinityScroll from "../hooks/useInfinityScroll";
 
 export const FilterPage = (props) => {

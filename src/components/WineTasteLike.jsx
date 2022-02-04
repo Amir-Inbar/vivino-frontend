@@ -1,5 +1,5 @@
-import { ScaleRate } from "./ScaleRate";
-import { TasteFill } from "./TasteFills";
+import { ScaleRate } from "./WineScaleRate";
+import { TasteFill } from "./WineTasteFills";
 
 export function TasteLike(props) {
   const { wine } = props;
