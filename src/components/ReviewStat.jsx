@@ -2,11 +2,8 @@ import { tryRequire } from '../services/util.service';
 import { WineRate } from './WineRatePreview';
 
 export const ReviewStat = ({ wine }) => {
-  console.log('wine :>> ', wine);
-
   const setRatingBar = (rating) => {
     if (!parseInt(rating)) return 0;
-    console.log(parseInt(rating) / wine.ratings);
     return parseInt(rating) / wine.ratings;
   };
   const total = 5;

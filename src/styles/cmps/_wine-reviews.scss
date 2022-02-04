@@ -107,9 +107,23 @@
     flex-grow: 1;
   }
   .review-stat {
-    padding: 50px 20px 0 20px;
-    justify-content: center;
+    padding: 40px 20px 0 20px;
+    justify-content: flex-start;
 
+    .rating-feedback {
+      text-align: center;
+      font-size: 14px;
+      line-height: 16px;
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+
+    .user-rating-selection {
+      .user-profile {
+        border-radius: 50%;
+        margin: 0 85px 0 -80px;
+      }
+    }
     .rate {
       display: flex;
       flex-direction: column;
