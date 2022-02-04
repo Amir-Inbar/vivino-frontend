@@ -4,11 +4,7 @@ import { MultiSelectFilter } from "../components/MultiSelectFilter";
 import { WinePreviews } from "../components/WinePreview";
 import { debounce } from "../services/util.service";
 import { wineService } from "../services/wine.service";
-import {
-  saveWines,
-  setFilterBy,
-  setKeywords,
-} from "../store/actions/wineAction";
+import { setFilterBy, setKeywords } from "../store/actions/wineAction";
 import { ScaleRangeFilter } from "../components/ScaleRangeFilter";
 
 export const FilterPage = (props) => {
@@ -56,10 +52,6 @@ export const FilterPage = (props) => {
       tableEl.current.scrollTo(0, 0);
     } catch {}
   }, [filter]);
-
-  // useEffect(() => {
-  //   if (wines) dispatch(saveWines(wines));
-  // }, [wines]);
 
   const scrollDown = async (ev) => {
     if (wines.page.index < wines.page.total - 1) {

@@ -6,13 +6,13 @@ import { setFilterBy } from "../store/actions/wineAction";
 
 export const WinePairings = (props) => {
   const dispatch = useDispatch();
-  const { filter, keywords } = useSelector((state) => state.wineModule);
+  const keywords = useSelector((state) => state.wineModule.keywords);
   const { wine } = props;
   const history = useHistory();
 
   const FoodPairing = ({ wine }) =>
     wine.pairings.map((seo, idx) => {
-      const name = keywords.food.find((val) => val.seo === seo)?.name;
+      const name = keywords?.food?.find((val) => val.seo === seo)?.name;
       const goTo = () => {
         dispatch(setFilterBy({ inPairings: seo }));
         history.push(`/wine?pairings=${seo}`);
