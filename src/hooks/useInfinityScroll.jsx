@@ -8,7 +8,7 @@ const useInfinityScroll = (cb, deps, isEnabled) => {
       document.documentElement.scrollHeight * 0.7
     ) {
       window.removeEventListener("scroll", infinityScroll);
-      cb();
+      await cb();
     }
   };
 
