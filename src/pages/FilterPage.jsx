@@ -25,7 +25,7 @@ export const FilterPage = (props) => {
       if (res) setWines({ ...res, data: [...wines.data, ...res.data] });
     },
     [wines],
-    wines?.page?.index < wines?.page?.total
+    wines?.page.index < wines?.page.total
   );
 
   const queryToFilter = () =>
