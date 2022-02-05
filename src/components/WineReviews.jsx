@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { authService, getLoggedinUser } from '../services/auth.service';
-import { reviewService } from '../services/review.service';
-import { tryRequire } from '../services/util.service';
-import { AddReview } from './AddReview';
-import { ReviewsPreview } from './ReviewsPreview';
-import { ReviewStat } from './ReviewStat';
-import { StarRate } from './StarRate';
+import React, { useEffect, useState } from "react";
+import { authService, getLoggedinUser } from "../services/auth.service";
+import { reviewService } from "../services/review.service";
+import { tryRequire } from "../services/util.service";
+import { AddReview } from "./WineAddReview";
+import { ReviewsPreview } from "./WineReviewPreview";
+import { ReviewStat } from "./WineReviewStat";
+import { StarRate } from "./StarRate";
 
 export const WineReviews = ({ wineId, wine }) => {
   const [helpfulReviews, setHelpfulReviews] = useState(null);
   const [userReviews, setUserReviews] = useState(null);
   const [recentReviews, setRecentReviews] = useState(null);
-  const [reviewSection, setReviewSection] = useState('Helpful');
+  const [reviewSection, setReviewSection] = useState("Helpful");
   const [rate, setRate] = useState(null);
 
   const reviewsSections = {
@@ -70,7 +70,7 @@ export const WineReviews = ({ wineId, wine }) => {
   };
 
   const ReviewMenu = () => {
-    const reviewSections = ['Helpful', 'Recent', 'You'];
+    const reviewSections = ["Helpful", "Recent", "You"];
     return (
       <div className="review-menu flex">
         {reviewSections.map((title, idx) => (
@@ -78,7 +78,7 @@ export const WineReviews = ({ wineId, wine }) => {
             onClick={() => setReviewSection(reviewSections[idx])}
             style={{
               color:
-                reviewSection === reviewSections[idx] ? '#ba1628' : '#1e1e1e',
+                reviewSection === reviewSections[idx] ? "#ba1628" : "#1e1e1e",
             }}
             key={`COMMENT_${idx}`}
           >
@@ -101,13 +101,13 @@ export const WineReviews = ({ wineId, wine }) => {
     const review = helpfulReviews.data.find(
       (review) => review._id === reviewId
     );
-    if (review.likes.split(',').includes('' + logInUser._id)) {
+    if (review.likes.split(",").includes("" + logInUser._id)) {
       review.likes = review.likes
-        .split(',')
-        .filter((like) => like !== '' + logInUser._id)
-        .join(',');
+        .split(",")
+        .filter((like) => like !== "" + logInUser._id)
+        .join(",");
     } else {
-      review.likes += logInUser._id + ',';
+      review.likes += logInUser._id + ",";
     }
     // setHelpfulReviews(
     //   helpfulReviews.data.map((rv) => (rv._id === review._id ? review : rv))
@@ -139,7 +139,7 @@ export const WineReviews = ({ wineId, wine }) => {
           <div className="user-rating-selection flex align-center ">
             <img
               className="user-profile"
-              src={tryRequire('imgs/icons/user-profile.png')}
+              src={tryRequire("imgs/icons/user-profile.png")}
               alt="user-profile"
             />
             <StarRate size={30} rate={rate} isEditable={true} set={setRate} />
