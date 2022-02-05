@@ -4,6 +4,7 @@ import { sentenceToKababCase, tryRequire } from "../services/util.service";
 import { StarRate } from "./StarRate";
 
 export const WinePreviews = ({ wines }) => {
+  const rtl = document.dir === "rtl";
   const history = useHistory();
   return wines.map((item, idx) => {
     const WineRate = ({ rate, ratings }) => {
@@ -23,7 +24,14 @@ export const WinePreviews = ({ wines }) => {
         key={"WINE_" + idx}
         onClick={() => history.push(`/wine/${item._id}`)}
       >
-        {item.background ? <img src={item.background} /> : ""}
+        {item.background ? (
+          <img
+            src={item.background}
+            className={rtl ? "card-wave-rtl" : "card-wave"}
+          />
+        ) : (
+          ""
+        )}
         <div className="preview-header">
           <div className="wine-bottle">
             <img

@@ -6,13 +6,13 @@ import { useLayoutEffect } from "react";
 import { authService } from "../services/auth.service";
 
 export function ScaleRate(props) {
+  const rtl = document.dir === "rtl";
   const { wine } = props;
   const isFirstRun = useRef(true);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [targetElement, setTargetElement] = useState(null);
   const [wineScale, setScale] = useState();
   const [isSelfRate, setIsSelfRate] = useState({});
-  const rtl = document.dir === "rtl";
 
   useEffect(async () => {
     isFirstRun.current = true;

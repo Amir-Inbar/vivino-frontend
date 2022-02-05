@@ -4,12 +4,12 @@ import fullStar from "../assets/imgs/icons/full-star.svg";
 import { makeId } from "../services/util.service";
 
 export function StarRate(props) {
+  const rtl = document.dir === "rtl";
   const { rate: inRate, total = 5, size = 16, isEditable = false, set } = props;
   const box = total * size;
   const [rate, setRate] = useState(inRate || total);
   const [tempRate, setTempRate] = useState(null);
 
-  const rtl = document.dir === "rtl";
   const style = isEditable ? { cursor: "pointer" } : {};
   const styleStar = { width: size + "px", height: size + "px" };
   const styleEmptyStar = { width: box + "px", ...style };

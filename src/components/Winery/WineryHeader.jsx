@@ -2,11 +2,12 @@ import React from "react";
 import { sentenceToKababCase, tryRequire } from "../../services/util.service";
 
 export function WineryHeader(props) {
+  const rtl = document.dir === "rtl";
   const { winery } = props;
 
   const WineryMap = ({ winery }) => {
     return (
-      <div className="winery-map">
+      <div className={`winery-map ${rtl ? "header-wave-rtl" : "header-wave"}`}>
         {winery.lat && winery.lng ? (
           <iframe
             src={`https://maps.google.com/maps?q=${winery.lat},${winery.lng}&t=&z=10&ie=UTF8&iwloc=&output=embed`}

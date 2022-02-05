@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { WinePreviews } from "./WinePreview";
 
 export const WineSlider = (props) => {
+  const rtl = document.dir === "rtl";
   const { wines } = props;
   const [position, setPosition] = useState(0);
   const itemPerPage = 4;
-  const rtl = document.dir === "rtl";
 
   const sliderStyle = () => {
     const sec = 2;
