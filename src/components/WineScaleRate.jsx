@@ -69,6 +69,9 @@ export function ScaleRate(props) {
     const barWidth = 15;
     const slideRange = 100 - barWidth;
     return sections.map((scale, idx) => {
+      const position = rtl
+        ? Math.max((wineScale[scale.max] / 100) * slideRange, 0)
+        : Math.max((wineScale[scale.max] / 100) * slideRange, 0);
       return wineScale[scale.max] || authService.getLoggedinUser() ? (
         <tr
           key={"SCALE_RATE_" + idx}
@@ -84,9 +87,7 @@ export function ScaleRate(props) {
                   typeof wineScale[scale.max] !== "number" ? "unrated" : ""
                 }`}
                 style={{
-                  marginInlineStart:
-                    Math.max((wineScale[scale.max] / 100) * slideRange, 0) +
-                    "%",
+                  [rtl ? "right" : "left"]: position + "%",
                   width: barWidth + "%",
                 }}
                 onMouseDown={startDrag}
@@ -114,10 +115,15 @@ export function ScaleRate(props) {
     if (!isMouseDown) return;
     const bondClient = targetElement.parentElement.getBoundingClientRect();
     const thumbClient = targetElement.getBoundingClientRect();
+    const scaleWidth = targetElement.parentElement.offsetWidth;
     if (rtl) {
+      const currPos = Math.min(ev.pageX - bondClient.left, scaleWidth);
+      setScale({
+        ...wineScale,
+        [scale]: Math.min((1 - currPos / scaleWidth) * 100, 100),
+      });
     } else {
       const scaleMin = bondClient.left;
-      const scaleWidth = targetElement.parentElement.offsetWidth;
       const thumbLeft = (ev.pageX - thumbClient.left) / 2;
       const currPos = Math.min(ev.pageX + thumbLeft - scaleMin, scaleWidth);
       setScale({
