@@ -16,6 +16,7 @@ export function TasteFill(props) {
   const history = useHistory();
   const { tastes } = props;
   const [position, setPosition] = useState(0);
+  const rtl = document.dir === "rtl";
   if (!tastes || !tastes.length) return null;
 
   const setQuery = (name, value) => {
@@ -55,23 +56,26 @@ export function TasteFill(props) {
       ? -((Math.min((position + 1) * 3, tastes.length) / 3) * 100 - 100)
       : 0;
     return {
-      transform: `translateX(${pos}%)`,
+      transform: `translateX(${rtl ? -pos : pos}%)`,
       transition: `${-pos % 100 ? sec / (100 / (-pos % 100)) : sec}s`,
     };
   };
 
+  const nextEnabled = () => (rtl ? position : tastes.length > position * 3 + 3);
+  const backEnabled = () => (rtl ? tastes.length > position * 3 + 3 : position);
+
   return (
     <div className="taste-fill">
-      {tastes.length > position * 3 + 3 ? (
+      {nextEnabled() ? (
         <button
           className="next"
-          onClick={() => setPosition(position + 1)}
+          onClick={() => setPosition(rtl ? position - 1 : position + 1)}
         ></button>
       ) : null}
-      {position ? (
+      {backEnabled() ? (
         <button
           className="back"
-          onClick={() => setPosition(position - 1)}
+          onClick={() => setPosition(rtl ? position + 1 : position - 1)}
         ></button>
       ) : null}
       <div className="taste-cards">

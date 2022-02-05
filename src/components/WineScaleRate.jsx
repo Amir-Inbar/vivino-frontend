@@ -12,6 +12,7 @@ export function ScaleRate(props) {
   const [targetElement, setTargetElement] = useState(null);
   const [wineScale, setScale] = useState();
   const [isSelfRate, setIsSelfRate] = useState({});
+  const rtl = document.dir === "rtl";
 
   useEffect(async () => {
     isFirstRun.current = true;
@@ -113,14 +114,17 @@ export function ScaleRate(props) {
     if (!isMouseDown) return;
     const bondClient = targetElement.parentElement.getBoundingClientRect();
     const thumbClient = targetElement.getBoundingClientRect();
-    const scaleMin = bondClient.left;
-    const scaleWidth = targetElement.parentElement.offsetWidth;
-    const thumbLeft = (ev.pageX - thumbClient.left) / 2;
-    const currPos = Math.min(ev.pageX + thumbLeft - scaleMin, scaleWidth);
-    setScale({
-      ...wineScale,
-      [scale]: Math.max((currPos / scaleWidth) * 100, 0),
-    });
+    if (rtl) {
+    } else {
+      const scaleMin = bondClient.left;
+      const scaleWidth = targetElement.parentElement.offsetWidth;
+      const thumbLeft = (ev.pageX - thumbClient.left) / 2;
+      const currPos = Math.min(ev.pageX + thumbLeft - scaleMin, scaleWidth);
+      setScale({
+        ...wineScale,
+        [scale]: Math.max((currPos / scaleWidth) * 100, 0),
+      });
+    }
   };
 
   const data = scales();

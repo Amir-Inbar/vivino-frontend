@@ -10,7 +10,6 @@ export function StarRate(props) {
   const [tempRate, setTempRate] = useState(null);
 
   const rtl = document.dir === "rtl";
-
   const style = isEditable ? { cursor: "pointer" } : {};
   const styleStar = { width: size + "px", height: size + "px" };
   const styleEmptyStar = { width: box + "px", ...style };
