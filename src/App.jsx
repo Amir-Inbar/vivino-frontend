@@ -15,6 +15,7 @@ import { useEffect } from "react";
 export function App() {
   const keywords = useSelector((state) => state.wineModule.keywords);
   const dispatch = useDispatch();
+  // document.dir = "rtl";
 
   useEffect(async () => {
     if (!keywords)
