@@ -9,6 +9,8 @@ export function StarRate(props) {
   const [rate, setRate] = useState(inRate || total);
   const [tempRate, setTempRate] = useState(null);
 
+  const rtl = document.dir === "rtl";
+
   const style = isEditable ? { cursor: "pointer" } : {};
   const styleStar = { width: size + "px", height: size + "px" };
   const styleEmptyStar = { width: box + "px", ...style };
@@ -21,10 +23,7 @@ export function StarRate(props) {
   const hover = (el) => {
     if (!isEditable) return;
     const { left, right } = el.target.parentElement.getBoundingClientRect();
-    const position = Math.min(
-      document.dir === "rtl" ? right - el.pageX : el.pageX - left,
-      box
-    );
+    const position = Math.min(rtl ? right - el.pageX : el.pageX - left, box);
     setTempRate(Math.max(Math.round(position / (size / 2) + 0.5) / 2, 1));
   };
 

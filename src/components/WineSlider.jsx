@@ -5,6 +5,7 @@ export const WineSlider = (props) => {
   const { wines } = props;
   const [position, setPosition] = useState(0);
   const itemPerPage = 4;
+  const rtl = document.dir === "rtl";
 
   const sliderStyle = () => {
     const sec = 2;
@@ -16,23 +17,28 @@ export const WineSlider = (props) => {
         )
       : 0;
     return {
-      transform: `translateX(${pos}%)`,
+      transform: `translateX(${rtl ? -pos : pos}%)`,
       transition: `${-pos % 100 ? sec / (100 / (-pos % 100)) : sec}s`,
     };
   };
 
+  const nextEnabled = () =>
+    rtl ? position : wines.length > position * itemPerPage + itemPerPage;
+  const backEnabled = () =>
+    rtl ? wines.length > position * itemPerPage + itemPerPage : position;
+
   return (
     <div className="wine-container">
-      {wines.length > position * itemPerPage + itemPerPage ? (
+      {nextEnabled() ? (
         <button
           className="next"
-          onClick={() => setPosition(position + 1)}
+          onClick={() => setPosition(rtl ? position - 1 : position + 1)}
         ></button>
       ) : null}
-      {position ? (
+      {backEnabled() ? (
         <button
           className="back"
-          onClick={() => setPosition(position - 1)}
+          onClick={() => setPosition(rtl ? position + 1 : position - 1)}
         ></button>
       ) : null}
       <div className="wine-cards">
