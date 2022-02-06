@@ -21,6 +21,7 @@ export const WinePreviews = ({ wines }) => {
     return (
       <div
         className="wine-preview"
+        style={rtl ? { "flex-direction": "row-reverse" } : null}
         key={"WINE_" + idx}
         onClick={() => history.push(`/wine/${item._id}`)}
       >
