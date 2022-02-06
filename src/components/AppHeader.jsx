@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  useHistory,
+  useLocation,
+} from "react-router-dom/cjs/react-router-dom.min";
+import { getLoggedinUser } from "../services/auth.service";
 import { tryRequire } from "../services/util.service";
 import { PopupMenu } from "./PopupMenu";
 import { SearchPopup } from "./SearchPopup";
 
 export function AppHeader() {
   const location = useLocation();
+  const history = useHistory();
   const [popupConfig, setPopupConfig] = useState(0);
 
   useEffect(() => {
@@ -26,7 +31,22 @@ export function AppHeader() {
         <img src={tryRequire("imgs/logo.png")} />
       </div>
       <div className="control-bar">
-        <SearchPopup />
+        <div className="main-controls">
+          <SearchPopup />
+          <div className="side-controls">
+            <img
+              className="login"
+              src={
+                getLoggedinUser()?.image ||
+                tryRequire("imgs/icons/user-profile.png")
+              }
+              onClick={() => history.push("/login")}
+              onError={({ target }) =>
+                (target.src = tryRequire("imgs/icons/user-profile.png"))
+              }
+            />
+          </div>
+        </div>
         <PopupMenu config={popupConfig} close={() => setPopupConfig(null)} />
         <nav>
           <ul>

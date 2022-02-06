@@ -12,7 +12,6 @@
     color: $clr1;
     img {
       height: 64px;
-      transform: rotate(-28deg);
     }
   }
   .control-bar {
@@ -21,26 +20,40 @@
     font-size: 1em;
     display: flex;
     flex-direction: column;
-    .search {
-      flex: 1;
-      border: 1px solid #dedede;
-      background-color: $clrwht;
-      background-image: url("../../assets/imgs/icons/search.svg");
-      background-position: 16px;
-      background-size: 16px;
-      background-repeat: no-repeat;
-      border-radius: 3em;
+    .main-controls {
       display: flex;
-      max-width: 300px;
-      input {
-        height: 36px;
-        background: transparent;
-        outline: none;
-        border: 0;
-        margin-inline-start: 50px;
+      justify-content: space-between;
+      .search {
+        flex: 1;
+        border: 1px solid #dedede;
+        background-color: $clrwht;
+        background-image: url("../../assets/imgs/icons/search.svg");
+        background-position: 16px;
+        background-size: 16px;
+        background-repeat: no-repeat;
+        border-radius: 3em;
+        display: flex;
+        max-width: 300px;
+        input {
+          height: 36px;
+          background: transparent;
+          outline: none;
+          border: 0;
+          margin-inline-start: 50px;
+        }
+      }
+      .side-controls {
+        text-transform: capitalize;
+        img {
+          cursor: pointer;
+          border-radius: 50%;
+          height: 32px;
+          width: 32px;
+        }
       }
     }
     nav {
+      max-width: 800px;
       ul {
         padding: 0;
         display: flex;

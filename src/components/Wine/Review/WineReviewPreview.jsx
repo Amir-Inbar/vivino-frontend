@@ -51,11 +51,12 @@ export const ReviewsPreview = ({ reviews, setLike }) => {
     return (
       <div className="user-reply flex align-center space-between">
         <img
-          src={activeReview.picture}
+          src={
+            activeReview.picture || tryRequire("imgs/icons/user-profile.png")
+          }
           onError={({ target }) =>
             (target.src = tryRequire("imgs/icons/user-profile.png"))
           }
-          alt="Profile picture not exists"
         />
         <textarea
           name=""

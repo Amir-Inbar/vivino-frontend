@@ -38,13 +38,13 @@ export const WinePreviews = ({ wines }) => {
           <div className="wine-bottle">
             <img
               className="bottle-img"
-              src={item.image}
+              src={item.image || tryRequire("imgs/bottle.png")}
               onError={({ target }) =>
                 (target.src = tryRequire("imgs/bottle.png"))
               }
             />
             <img
-              src={item.image}
+              src={item.image || tryRequire("imgs/bottle.png")}
               onError={({ target }) =>
                 (target.src = tryRequire("imgs/bottle.png"))
               }
