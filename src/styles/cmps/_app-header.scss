@@ -33,13 +33,17 @@
         background-repeat: no-repeat;
         border-radius: 3em;
         display: flex;
-        max-width: 300px;
+        max-width: calc(100% - 40px);
+        @include from-tablet-layout {
+          max-width: 300px;
+        }
         input {
           height: 36px;
           background: transparent;
           outline: none;
           border: 0;
           margin-inline-start: 50px;
+          width: 100%;
         }
       }
       .side-controls {
