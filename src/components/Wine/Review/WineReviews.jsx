@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { authService, getLoggedinUser } from "../services/auth.service";
-import { reviewService } from "../services/review.service";
-import { tryRequire } from "../services/util.service";
+import { authService, getLoggedinUser } from "../../../services/auth.service";
+import { reviewService } from "../../../services/review.service";
+import { tryRequire } from "../../../services/util.service";
 import { AddReview } from "./WineAddReview";
 import { ReviewsPreview } from "./WineReviewPreview";
 import { ReviewStat } from "./WineReviewStat";
-import { StarRate } from "./StarRate";
+import { StarRate } from "../../StarRate";
 
 export const WineReviews = ({ wineId, wine }) => {
   const [helpfulReviews, setHelpfulReviews] = useState(null);

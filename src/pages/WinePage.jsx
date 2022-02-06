@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { MoreWines } from "../components/WineMoreFrom";
-import { TastePreview } from "../components/WineTastePreview";
-import { WineHeader } from "../components/WineHeader";
+import { MoreWines } from "../components/Wine/WineMoreFrom";
+import { TastePreview } from "../components/Wine/Taste/WineTastePreview";
+import { WineHeader } from "../components/Wine/WineHeader";
 import { WineryPreview } from "../components/Winery/WineryPreview";
-import { TasteLike } from "../components/WineTasteLike";
+import { TasteLike } from "../components/Wine/Taste/WineTasteLike";
 import { wineService } from "../services/wine.service";
-import { WinePairings } from "../components/WinePairings";
-import { WineReviews } from "../components/WineReviews";
+import { WinePairings } from "../components/Wine/WinePairings/WinePairings";
+import { WineReviews } from "../components/Wine/Review/WineReviews";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 export const WinePage = (props) => {

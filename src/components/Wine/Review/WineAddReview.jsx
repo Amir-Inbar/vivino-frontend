@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { reviewService } from "../services/review.service";
-import { getCurrentPosition } from "../services/util.service";
-import { StarRate } from "./StarRate";
+import { reviewService } from "../../../services/review.service";
+import { getCurrentPosition } from "../../../services/util.service";
+import { StarRate } from "../../StarRate";
 
 export const AddReview = ({ wine, close, set, rate: inRate, reviews }) => {
   const [id, setId] = useState(null);

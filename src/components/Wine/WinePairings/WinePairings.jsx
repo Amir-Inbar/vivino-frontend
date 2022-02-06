@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { tryRequire } from "../services/util.service";
-import { setFilterBy } from "../store/actions/wineAction";
+import { tryRequire } from "../../../services/util.service";
+import { setFilterBy } from "../../../store/actions/wineAction";
 
 export const WinePairings = (props) => {
   const dispatch = useDispatch();

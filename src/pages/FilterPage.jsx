@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MultiSelectFilter } from "../components/Filter/FilterMultiSelect";
-import { WinePreviews } from "../components/WinePreview";
+import { WinePreviews } from "../components/Wine/WinePreview";
 import { debounce } from "../services/util.service";
 import { wineService } from "../services/wine.service";
 import { setFilterBy } from "../store/actions/wineAction";

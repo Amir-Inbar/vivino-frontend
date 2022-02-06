@@ -1,5 +1,5 @@
 import React from "react";
-import { WineSlider } from "../WineSlider";
+import { WineSlider } from "../Wine/WineSlider";
 
 export function WineryWines({ winery, top, popular, max = 8 }) {
   return (

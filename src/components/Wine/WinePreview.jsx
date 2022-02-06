@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { sentenceToKababCase, tryRequire } from "../services/util.service";
-import { StarRate } from "./StarRate";
+import { sentenceToKababCase, tryRequire } from "../../services/util.service";
+import { StarRate } from "../StarRate";
 
 export const WinePreviews = ({ wines }) => {
   const rtl = document.dir === "rtl";

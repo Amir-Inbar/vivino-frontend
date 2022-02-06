@@ -1,4 +1,4 @@
-import { StarRate } from './StarRate';
+import { StarRate } from "../../StarRate";
 
 export const WineRate = ({ rate, ratings }) => {
   return rate && ratings ? (

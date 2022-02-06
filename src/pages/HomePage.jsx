@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from "react";
-import { WineSlider } from "../components/WineSlider";
+import { WineSlider } from "../components/Wine/WineSlider";
 import { tryRequire } from "../services/util.service";
 import { wineService } from "../services/wine.service";
 
@@ -37,7 +37,7 @@ export const HomePage = () => {
 
   return (
     <section className="primary-wines">
-      <h1>Top lists in your area</h1>
+      <h1>Top rated in your area</h1>
       <PriceRangeSwitcher />
       <WineSlider wines={wines?.data} />
     </section>

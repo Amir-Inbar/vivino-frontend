@@ -1,7 +1,7 @@
-import { StarRate } from "./StarRate";
+import { StarRate } from "../StarRate";
 import { useHistory } from "react-router-dom";
-import { kababCaseToSentence, tryRequire } from "../services/util.service";
-import { WineRate } from "./WineRatePreview";
+import { kababCaseToSentence, tryRequire } from "../../services/util.service";
+import { WineRate } from "./Review/WineRatePreview";
 
 export function WineHeader(props) {
   const { wine } = props;

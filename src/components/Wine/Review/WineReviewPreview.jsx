@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { makeId, tryRequire } from "../services/util.service";
+import { makeId, tryRequire } from "../../../services/util.service";
 export const ReviewsPreview = ({ reviews, setLike }) => {
   var moment = require("moment");
   const [activeReview, setActiveReview] = useState(null);
@@ -13,7 +13,7 @@ export const ReviewsPreview = ({ reviews, setLike }) => {
             src={
               review.picture
                 ? review.picture
-                : require("../assets/imgs/icons/user-profile.png")
+                : tryRequire("imgs/icons/user-profile.png")
             }
             alt=""
           />
@@ -33,7 +33,7 @@ export const ReviewsPreview = ({ reviews, setLike }) => {
               }
               key={"REPLY_" + makeId()}
             >
-              <img src={require(`../assets/imgs/icons/${el}.svg`)} alt="" />
+              <img src={tryRequire(`imgs/icons/${el}.svg`)} alt="" />
               <span>
                 {!idx
                   ? review.likes?.split(",").filter((like) => like).length
@@ -79,10 +79,7 @@ export const ReviewsPreview = ({ reviews, setLike }) => {
               className="user-rating flex align-center"
               style={{ backgroundColor: "#f9f7d6", color: "#a26f01" }}
             >
-              <img
-                src={require("../assets/imgs/icons/single-star.svg").default}
-                alt="star"
-              />
+              <img src={tryRequire("imgs/icons/single-star.svg")} alt="star" />
 
               <span className="review-rate-title">{el.rate}</span>
             </div>

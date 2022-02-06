@@ -1,9 +1,9 @@
-import { camelCaseToSentence, debounce } from "../services/util.service";
-import sections from "../assets/json/scale-sections.json";
+import { camelCaseToSentence, debounce } from "../../../services/util.service";
+import sections from "../../../assets/json/scale-sections.json";
 import { useEffect, useRef, useState } from "react";
-import { reviewService } from "../services/review.service";
+import { reviewService } from "../../../services/review.service";
 import { useLayoutEffect } from "react";
-import { authService } from "../services/auth.service";
+import { authService } from "../../../services/auth.service";
 
 export function ScaleRate(props) {
   const rtl = document.dir === "rtl";

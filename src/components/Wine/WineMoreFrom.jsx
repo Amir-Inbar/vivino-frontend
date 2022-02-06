@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { wineService } from "../services/wine.service";
+import { wineService } from "../../services/wine.service";
 import { WineSlider } from "./WineSlider";
 
 export function MoreWines({ title, wine }) {

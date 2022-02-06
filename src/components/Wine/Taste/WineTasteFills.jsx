@@ -4,7 +4,8 @@ import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import {
   getShortSentence,
   sentenceToKababCase,
-} from "../services/util.service";
+  tryRequire,
+} from "../../../services/util.service";
 
 function getDescription(mentions) {
   const desc = mentions.map((taste) => taste.keyword).join(", ");
@@ -28,9 +29,9 @@ export function TasteFill(props) {
 
   const display = () => {
     return tastes.map((taste, idx) => {
-      const url = require(`../assets/imgs/icons/taste/${sentenceToKababCase(
-        taste.name
-      )}.svg`);
+      const url = tryRequire(
+        `imgs/icons/taste/${sentenceToKababCase(taste.name)}.svg`
+      );
       return (
         <div
           className="taste-fill-preview"

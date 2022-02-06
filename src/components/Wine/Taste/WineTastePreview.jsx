@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import { reviewService } from "../services/review.service";
+import { reviewService } from "../../../services/review.service";
 import {
   debounce,
   sentenceToKababCase,
   tryRequire,
-} from "../services/util.service";
-import { StarRate } from "./StarRate";
+} from "../../../services/util.service";
+import { StarRate } from "../../StarRate";
 
 export function TastePreview(props) {
   const { wine, query } = props;
