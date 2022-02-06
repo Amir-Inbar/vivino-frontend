@@ -25,6 +25,7 @@ export function WineHeader(props) {
           onClick={() => history.push(keyword.path)}
           className="tag"
           key={"KEYWORD_" + idx}
+          data-trans={keyword.title.toLowerCase()}
         >
           {keyword.title}
         </span>

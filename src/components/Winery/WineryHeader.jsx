@@ -24,7 +24,7 @@ export function WineryHeader(props) {
   const WineryRating = ({ winery }) => {
     return winery.rate || winery.ratings ? (
       <div className="average-rate">
-        <p>Average Rating</p>
+        <p data-trans="average-rating">Average Rating</p>
         <p className="rate">
           {winery.rate ? <span>{winery.rate.toFixed(1)} </span> : null}
           {winery.ratings ? <span>({winery.ratings} Ratings)</span> : null}
@@ -39,7 +39,9 @@ export function WineryHeader(props) {
       {winery.image ? <img className="cover" src={winery.image} /> : null}
       <WineryMap winery={winery} />
       <div className="winery-information fit-media">
-        <p className="title">Winery</p>
+        <p className="title" data-trans="winery">
+          winery
+        </p>
         <h1 className="name">{winery.name}</h1>
         <div className="country">
           <img
@@ -55,7 +57,7 @@ export function WineryHeader(props) {
         <div className="more-information">
           <WineryRating winery={winery} />
           <div className="wines-count">
-            <p>Wines</p>
+            <p data-trans="wines">Wines</p>
             <p>{winery.wines}</p>
           </div>
         </div>

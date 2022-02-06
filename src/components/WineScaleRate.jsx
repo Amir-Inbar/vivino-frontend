@@ -79,7 +79,7 @@ export function ScaleRate(props) {
           onMouseUp={stopDrag}
           onMouseLeave={stopDrag}
         >
-          <td>{camelCaseToSentence(scale.min)}</td>
+          <td data-trans={scale.min}>{camelCaseToSentence(scale.min)}</td>
           <td className="scale-container">
             <div className="scale">
               <div
@@ -94,7 +94,7 @@ export function ScaleRate(props) {
               ></div>
             </div>
           </td>
-          <td>{camelCaseToSentence(scale.max)}</td>
+          <td data-trans={scale.max}>{camelCaseToSentence(scale.max)}</td>
         </tr>
       ) : null;
     });

@@ -18,6 +18,7 @@ export const WineryPage = (props) => {
   useEffect(() => loadMoreWines(), [winery]);
 
   const loadMoreWines = async () => {
+    if (!winery) return;
     const top = await wineService.query({
       filter: { eqCountry: winery.country, eqWinery: winery.name },
       sort: { rate: 0 },
