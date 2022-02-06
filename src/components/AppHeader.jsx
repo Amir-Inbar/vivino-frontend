@@ -28,7 +28,10 @@ export function AppHeader() {
   return (
     <header className="app-header">
       <div className="logo">
-        <img src={tryRequire("imgs/logo.png")} />
+        <img
+          src={tryRequire("imgs/logo.png")}
+          onClick={() => history.push("/")}
+        />
       </div>
       <div className="control-bar">
         <div className="main-controls">

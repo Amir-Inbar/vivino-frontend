@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
@@ -15,20 +16,28 @@ export function SearchPopup(props) {
   const [wines, setWines] = useState(null);
   const filter = useSelector((state) => state.wineModule.filter);
   const [position, setPosition] = useState({});
+  const elSearch = useRef(null);
 
-  const SearchResult = ({ result, position, close, search }) => {
+  const SearchResult = ({ result, close, search }) => {
     const filter = useSelector((state) => state.wineModule.filter);
     if (location.pathname === "/wine") return null;
     if (!filter?.search || !result?.length) return null;
+    const el = elSearch.current;
+    const top = el.offsetTop + el.clientHeight + 16;
+    const left = el.offsetLeft;
+    const right = window.innerWidth - (el.offsetLeft + el.clientWidth);
+    const height = document.documentElement.scrollHeight;
+    const style = { top: `${top}px` };
+    if (window.innerWidth > 540)
+      if (rtl) style.right = `${right}px`;
+      else style.left = `${left}px`;
     return (
       <div
         className="background-dimm"
-        style={{
-          height: document.documentElement.scrollHeight + "px",
-        }}
+        style={{ height: height + "px" }}
         onClick={close}
       >
-        <div className="quick-search-result" style={position}>
+        <div className="quick-search-result" style={style}>
           <ul>
             {result.map((wine, idx) => {
               const re = new RegExp(`(${search})`, "gi");
@@ -67,19 +76,12 @@ export function SearchPopup(props) {
       cleanUp();
       return;
     }
-    const top =
-      target.parentElement.offsetTop + target.parentElement.clientHeight + 16;
-    const left = target.parentElement.offsetLeft;
-    const right =
-      window.innerWidth -
-      (target.parentElement.offsetLeft + target.parentElement.clientWidth);
+    // const el = target.parentElement;
+    // const top = el.offsetTop + el.clientHeight + 16;
+    // const left = el.offsetLeft;
+    // const right = window.innerWidth - (el.offsetLeft + el.clientWidth);
     debounce(
       () => {
-        setPosition(
-          rtl
-            ? { top: `${top}px`, right: `${right}px` }
-            : { top: `${top}px`, left: `${left}px` }
-        );
         dispatch(setFilterBy({ ...filter, search: target.value }));
       },
       "SET_FILTER",
@@ -104,7 +106,7 @@ export function SearchPopup(props) {
 
   return (
     <>
-      <div className="search" style={searchStyle}>
+      <div className="search" style={searchStyle} ref={elSearch}>
         <input
           placeholder="Search any wine"
           onInput={searchInput}
@@ -114,7 +116,6 @@ export function SearchPopup(props) {
       </div>
       <SearchResult
         result={wines?.data}
-        position={position}
         search={filter?.search}
         close={cleanUp}
       />
