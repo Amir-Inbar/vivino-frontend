@@ -70,6 +70,7 @@ export const WineReviews = ({ wineId, wine }) => {
   };
 
   const reviewUpdate = (result) => {
+    setRate(null);
     if (!result || !userReviews?.data) return;
     const reviewIdx = userReviews.data.find(
       (review) => review._id === result._id
@@ -77,7 +78,6 @@ export const WineReviews = ({ wineId, wine }) => {
     if (reviewIdx > -1)
       setUserReviews(userReviews.data.splice(reviewIdx, 1, result));
     else setUserReviews([result, ...userReviews.data]);
-    setRate(null);
   };
 
   const ReviewMenu = () => {
