@@ -34,7 +34,7 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
 
   return data ? (
     <section className="wine-select-buttons">
-      <h2>{title}</h2>
+      <h2 data-trans={title.toLowerCase().replace(" ", "-")}>{title}</h2>
       {data
         .map((item, idx) => {
           const { name, seo } = item;
@@ -45,6 +45,7 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
                 select.includes(seo || name.toLowerCase()) ? "selected" : ""
               }`}
               onClick={() => toggleSelect(seo || name)}
+              data-trans={seo || name.toLowerCase().replace(" ", "-")}
             >
               {name}
             </button>

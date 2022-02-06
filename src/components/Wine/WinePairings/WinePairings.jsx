@@ -22,7 +22,7 @@ export const WinePairings = (props) => {
           <div className="image-container">
             <img src={tryRequire(`imgs/food/${seo}.jpg`)} />
           </div>
-          <h3>{name}</h3>
+          <h3 data-trans={seo}>{name}</h3>
         </div>
       );
     });

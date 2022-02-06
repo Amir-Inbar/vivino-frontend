@@ -4,13 +4,11 @@ import { useHistory } from "react-router-dom";
 import { kababCaseToSentence } from "../services/util.service";
 
 export function PopupMenu(props) {
+  const rtl = document.dir === "rtl";
   const { config, close } = props;
   const history = useHistory();
   const { keywords } = useSelector((state) => state.wineModule);
   const [menus, setMenu] = useState({});
-
-  const top = () => config.target.offsetTop + config.target.clientHeight + 8;
-  const left = () => config.target.offsetLeft - 20;
 
   const addTable = (name) => {
     const data = {
@@ -27,7 +25,8 @@ export function PopupMenu(props) {
             .map(({ name, seo }) => ({
               title: name,
               img: "",
-              path: `/wine?style=${seo}`,
+              seo,
+              path: `/wine?seo=${seo}`,
             })),
         ],
         [
@@ -37,7 +36,8 @@ export function PopupMenu(props) {
             .map(({ name, seo }) => ({
               title: name,
               img: "",
-              path: `/wine?style=${seo}`,
+              seo,
+              path: `/wine?seo=${seo}`,
             })),
         ],
         [
@@ -60,10 +60,18 @@ export function PopupMenu(props) {
     addTable("wines");
   }, [keywords]);
 
+  if (!config || !menus) return null;
+
+  const top = () => config.target.offsetTop + config.target.clientHeight + 8;
+  const left = () => config.target.offsetLeft - 20;
+  const right = () =>
+    window.innerWidth -
+    (config.target.offsetLeft + config.target.clientWidth + 20);
+
   const tableRender = () => {
     const menu = menus[config.type];
     return menu.table.map((data, idx1) => {
-      return data.length > 1 ? (
+      return data.length > 0 ? (
         <ul key={"MENU_" + idx1}>
           {data.map((cell, idx2) => {
             return (
@@ -73,7 +81,7 @@ export function PopupMenu(props) {
                 onClick={() => history.push(cell.path)}
               >
                 {cell.img ? <img src={cell.img} /> : null}
-                <span>{cell.title}</span>
+                <span data-trans={cell.seo}>{cell.title}</span>
               </li>
             );
           })}
@@ -82,20 +90,21 @@ export function PopupMenu(props) {
     });
   };
 
-  return config && menus ? (
+  const position = rtl
+    ? { top: `${top()}px`, right: `${right()}px` }
+    : { top: `${top()}px`, left: `${left()}px` };
+
+  console.log(position);
+
+  return (
     <div
       className="background-dimm"
       onClick={close}
       style={{ height: document.documentElement.scrollHeight + "px" }}
     >
-      <div
-        className="popup-menu"
-        style={{ top: `${top()}px`, left: `${left()}px` }}
-      >
+      <div className="popup-menu" style={position}>
         {tableRender("wines")}
       </div>
     </div>
-  ) : (
-    ""
   );
 }

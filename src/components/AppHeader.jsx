@@ -46,23 +46,23 @@ export function AppHeader() {
         <ul>
           <li className="wines" onClick={(ev) => toggleMenu(ev, "wines")}>
             <img src={tryRequire("imgs/icons/wines.svg")} />
-            <span>Wines</span>
+            <span data-trans="wines">wines</span>
           </li>
           <li className="pairings">
             <img src={tryRequire("imgs/icons/cheese.svg")} />
-            <span>Pairings</span>
+            <span data-trans="pairings">pairings</span>
           </li>
           <li className="grapes">
             <img src={tryRequire("imgs/icons/grapes.svg")} />
-            <span>Grapes</span>
+            <span data-trans="grapes">grapes</span>
           </li>
           <li className="regions">
             <img src={tryRequire("imgs/icons/regions.svg")} />
-            <span>Regions</span>
+            <span data-trans="regions">regions</span>
           </li>
           <li className="awards">
             <img src={tryRequire("imgs/icons/awards.svg")} />
-            <span>Awards</span>
+            <span data-trans="awards">awards</span>
           </li>
         </ul>
       </nav>
