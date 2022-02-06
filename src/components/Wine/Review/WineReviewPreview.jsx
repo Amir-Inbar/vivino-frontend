@@ -75,10 +75,7 @@ export const ReviewsPreview = ({ reviews, setLike }) => {
       {reviews.map((el, idx) => (
         <div className="review-card-main" key={"REVIEW_" + idx}>
           <div className="review-card">
-            <div
-              className="user-rating flex align-center"
-              style={{ backgroundColor: "#f9f7d6", color: "#a26f01" }}
-            >
+            <div className="user-rating flex align-center">
               <img src={tryRequire("imgs/icons/single-star.svg")} alt="star" />
 
               <span className="review-rate-title">{el.rate}</span>
