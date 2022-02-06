@@ -31,8 +31,8 @@ export const WinePage = (props) => {
       <TasteLike wine={wine} />
       <TastePreview wine={wine} query={getQuery("taste").toString()} />
       <WinePairings wine={wine} />
-      <MoreWines wine={wine} />
       <WineReviews wineId={wine._id} wine={wine} />
+      <MoreWines wine={wine} />
     </>
   ) : null;
 };

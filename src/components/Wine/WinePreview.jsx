@@ -28,6 +28,7 @@ export const WinePreviews = ({ wines }) => {
           <img
             src={item.background}
             className={rtl ? "card-wave-rtl" : "card-wave"}
+            onError={({ target }) => (target.style.visibility = "hidden")}
           />
         ) : (
           ""
@@ -36,13 +37,13 @@ export const WinePreviews = ({ wines }) => {
           <div className="wine-bottle">
             <img
               className="bottle-img"
-              src={item.image || tryRequire("imgs/bottle.png")}
+              src={item.image}
               onError={({ target }) =>
                 (target.src = tryRequire("imgs/bottle.png"))
               }
             />
             <img
-              src={item.image || tryRequire("imgs/bottle.png")}
+              src={item.image}
               onError={({ target }) =>
                 (target.src = tryRequire("imgs/bottle.png"))
               }
@@ -50,7 +51,6 @@ export const WinePreviews = ({ wines }) => {
           </div>
           <div className="wine-rate">
             <WineRate rate={item.rate} ratings={item.ratings} />
-            {/* <p className="sale-status">Sold out</p> */}
           </div>
         </div>
         <div className="preview-info">
