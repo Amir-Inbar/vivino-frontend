@@ -33,12 +33,11 @@ export const WineReviews = ({ wineId, wine }) => {
     };
     try {
       const recent = await reviewService.getByWineId(wineId, recentParams);
-      // setRecentReviews(
-      //   recentReviews
-      //     ? { ...recent, data: [...recentReviews.data, ...recent.data] }
-      //     : recent
-      // );
-      setRecentReviews(recent);
+      setRecentReviews(
+        index
+          ? { ...recent, data: [...recentReviews.data, ...recent.data] }
+          : recent
+      );
     } catch (err) {
       console.log(err);
     }
@@ -51,15 +50,23 @@ export const WineReviews = ({ wineId, wine }) => {
     };
     try {
       const helpful = await reviewService.getByWineId(wineId, helpfulParams);
-      // setHelpfulReviews(
-      //   helpfulReviews
-      //     ? { ...helpful, data: [...helpfulReviews.data, ...helpful.data] }
-      //     : helpful
-      // );
-      setHelpfulReviews(helpful);
+      setHelpfulReviews(
+        index
+          ? { ...helpful, data: [...helpfulReviews.data, ...helpful.data] }
+          : helpful
+      );
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const loadUserReviews = async () => {
+    const user = authService.getLoggedinUser();
+    if (!wine || !user._id) return;
+    try {
+      const res = await reviewService.query({ filter: { eqWineId: wine._id } });
+      setUserReviews({ data: res });
+    } catch (err) {}
   };
 
   const reviewUpdate = (result) => {
@@ -91,17 +98,6 @@ export const WineReviews = ({ wineId, wine }) => {
         ))}
       </div>
     );
-  };
-
-  const loadUserReviews = async () => {
-    const user = authService.getLoggedinUser();
-    if (!wine || !user?._id) return;
-    try {
-      const res = await reviewService.query({ filter: { eqWineId: wine._id } });
-      setUserReviews({ data: res });
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   const setLike = async (reviewId) => {
