@@ -359,7 +359,12 @@
   .taste-content {
     border-radius: $frmrad;
     background-color: $clrwht;
-    width: 80%;
+    @include from-tablet-layout {
+      width: 80%;
+    }
+    @include for-mobile-layout {
+      width: calc(100% - 16px);
+    }
     height: max-content;
     margin-top: 5vh;
     height: 90vh;
@@ -599,18 +604,18 @@
 }
 
 .wine-add-review {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: $frmrad;
   @include from-tablet-layout {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     width: 80vw;
     height: 320px;
-    border-radius: $frmrad;
   }
   @include until-tablet-layout {
-    width: 100%;
-    height: 100vh;
+    width: calc(100% - 16px);
+    height: 90vh;
   }
   background: $clr4;
   display: flex;
@@ -667,7 +672,7 @@
         resize: none;
         height: 140px;
         @include until-tablet-layout {
-          height: calc(100vh - 180px);
+          height: calc(100vh - 285px);
         }
       }
       p.chars-left {
