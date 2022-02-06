@@ -129,7 +129,7 @@ export const WineReviews = ({ wineId, wine }) => {
     }
   };
 
-  if (!reviewsSections[reviewSection]) return <div></div>;
+  // if (!reviewsSections[reviewSection]) return <div></div>;
   let reviewsToDisplay = reviewsSections[reviewSection];
   return (
     <>
@@ -137,7 +137,7 @@ export const WineReviews = ({ wineId, wine }) => {
         <div className="reviews-list">
           <h1>Community reviews</h1>
           <ReviewMenu />
-          <ReviewsPreview reviews={reviewsToDisplay.data} setLike={setLike} />
+          <ReviewsPreview reviews={reviewsToDisplay?.data} setLike={setLike} />
         </div>
         <div className="review-stat flex column align-center">
           <ReviewStat wine={wine} />

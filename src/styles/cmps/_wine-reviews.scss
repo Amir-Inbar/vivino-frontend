@@ -1,6 +1,7 @@
 .comunity-reviews {
   gap: 40px;
   align-items: center;
+  align-items: baseline;
   @include until-tablet-layout {
     flex-direction: column-reverse;
   }
@@ -117,7 +118,7 @@
   }
   .review-stat {
     max-width: 280px;
-    justify-content: flex-start;
+    align-items: center;
     .rating-feedback {
       padding: 0 16px;
       width: 100%;
