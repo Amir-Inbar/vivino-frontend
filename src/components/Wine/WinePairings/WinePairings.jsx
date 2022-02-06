@@ -38,7 +38,10 @@ export const WinePairings = (props) => {
             would be a perfect match with these dishes.
           </p>
         </div>
-        <img src={wine.image} />
+        <img
+          src={wine.image}
+          onError={({ target }) => (target.style.visibility = "hidden")}
+        />
       </div>
       <div className="meals">
         <FoodPairing wine={wine} />

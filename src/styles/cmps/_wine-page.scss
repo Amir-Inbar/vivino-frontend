@@ -526,7 +526,12 @@
     flex-direction: column;
   }
   .information {
-    max-height: 180px;
+    @include for-mobile-layout {
+      max-height: 120px;
+    }
+    @include from-tablet-layout {
+      max-height: 180px;
+    }
     display: flex;
     flex: 1;
     min-width: 300px;
@@ -541,13 +546,17 @@
         span {
           text-transform: capitalize;
         }
-        max-width: 55ch;
         line-height: 1.3em;
       }
     }
     > img {
-      object-fit: contain;
-      max-width: 100px;
+      @include from-normal-layout {
+        object-fit: contain;
+        max-width: 50px;
+      }
+      @include until-normal-layout {
+        display: none;
+      }
     }
   }
   .meals {
@@ -560,10 +569,15 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      min-width: 150px;
       .image-container {
-        height: 120px;
-        width: 120px;
+        @include for-mobile-layout {
+          height: 90px;
+          width: 90px;
+        }
+        @include from-tablet-layout {
+          height: 120px;
+          width: 120px;
+        }
         border-radius: 50%;
         overflow: hidden;
         margin: 12px 8px;
