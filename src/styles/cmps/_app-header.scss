@@ -1,21 +1,28 @@
 .app-header {
   user-select: none;
   display: flex;
-  flex-direction: column;
+  .logo {
+    margin: 12px 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 1.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $clr1;
+    img {
+      height: 64px;
+      transform: rotate(-28deg);
+    }
+  }
   .control-bar {
+    margin: 12px;
+    flex: 1;
     font-size: 1em;
     display: flex;
-    height: 64px;
-    .logo {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 120px;
-      margin-inline-end: 24px;
-    }
+    flex-direction: column;
     .search {
       flex: 1;
-      margin: 12px;
       border: 1px solid #dedede;
       background-color: $clrwht;
       background-image: url("../../assets/imgs/icons/search.svg");
@@ -26,29 +33,30 @@
       display: flex;
       max-width: 300px;
       input {
+        height: 36px;
         background: transparent;
         outline: none;
         border: 0;
         margin-inline-start: 50px;
       }
     }
-  }
-  nav {
-    ul {
-      display: flex;
-      justify-content: space-between;
-      max-width: 490px;
-      list-style-type: none;
-      li {
-        cursor: pointer;
+    nav {
+      ul {
+        padding: 0;
         display: flex;
-        align-items: center;
-        background-repeat: no-repeat;
-        gap: 4px;
-        text-transform: capitalize;
-        img {
-          height: 20px;
-          width: 20px;
+        justify-content: space-between;
+        list-style-type: none;
+        li {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          background-repeat: no-repeat;
+          gap: 4px;
+          text-transform: capitalize;
+          img {
+            height: 20px;
+            width: 20px;
+          }
         }
       }
     }

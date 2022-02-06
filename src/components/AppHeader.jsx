@@ -22,37 +22,37 @@ export function AppHeader() {
 
   return (
     <header className="app-header">
-      <PopupMenu config={popupConfig} close={() => setPopupConfig(null)} />
-      <div className="control-bar">
-        <div className="logo">
-          {/* <img src={tryRequire("imgs/logo.svg")} /> */}
-        </div>
-        <SearchPopup />
+      <div className="logo">
+        <img src={tryRequire("imgs/logo.png")} />
       </div>
-      <nav>
-        <ul>
-          <li className="wines" onClick={(ev) => toggleMenu(ev, "wines")}>
-            <img src={tryRequire("imgs/icons/wines.svg")} />
-            <span data-trans="wines">wines</span>
-          </li>
-          <li className="pairings">
-            <img src={tryRequire("imgs/icons/cheese.svg")} />
-            <span data-trans="pairings">pairings</span>
-          </li>
-          <li className="grapes">
-            <img src={tryRequire("imgs/icons/grapes.svg")} />
-            <span data-trans="grapes">grapes</span>
-          </li>
-          <li className="regions">
-            <img src={tryRequire("imgs/icons/regions.svg")} />
-            <span data-trans="regions">regions</span>
-          </li>
-          <li className="awards">
-            <img src={tryRequire("imgs/icons/awards.svg")} />
-            <span data-trans="awards">awards</span>
-          </li>
-        </ul>
-      </nav>
+      <div className="control-bar">
+        <SearchPopup />
+        <PopupMenu config={popupConfig} close={() => setPopupConfig(null)} />
+        <nav>
+          <ul>
+            <li className="wines" onClick={(ev) => toggleMenu(ev, "wines")}>
+              <img src={tryRequire("imgs/icons/wines.svg")} />
+              <span data-trans="wines">wines</span>
+            </li>
+            <li className="pairings">
+              <img src={tryRequire("imgs/icons/cheese.svg")} />
+              <span data-trans="pairings">pairings</span>
+            </li>
+            <li className="grapes">
+              <img src={tryRequire("imgs/icons/grapes.svg")} />
+              <span data-trans="grapes">grapes</span>
+            </li>
+            <li className="regions">
+              <img src={tryRequire("imgs/icons/regions.svg")} />
+              <span data-trans="regions">regions</span>
+            </li>
+            <li className="awards">
+              <img src={tryRequire("imgs/icons/awards.svg")} />
+              <span data-trans="awards">awards</span>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 }
