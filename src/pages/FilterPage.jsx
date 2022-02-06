@@ -55,25 +55,6 @@ export const FilterPage = (props) => {
     })();
   }, [filter]);
 
-  const scrollDown = async (ev) => {
-    console.log(ev);
-    // if (wines.page.index < wines.page.total - 1) {
-    //   const { scrollTop, scrollHeight, clientHeight } = ev.target;
-    //   const leftToEnd = scrollHeight - clientHeight - scrollTop;
-    //   if (
-    //     leftToEnd &
-    //     (leftToEnd * (wines.page.index + 1) <
-    //       (clientHeight / (wines.page.index + 1)) * 0.8)
-    //   ) {
-    //     const res = await wineService.query({
-    //       filter,
-    //       page: { index: wines.page.index + 1 },
-    //     });
-    //     if (res) setWines({ ...res, data: [...wines.data, ...res.data] });
-    //   }
-    // }
-  };
-
   return wines && keywords ? (
     <section className="wines-filter">
       <div className="control-panel">
@@ -133,7 +114,7 @@ export const FilterPage = (props) => {
           <button onClick={() => setIsShowFilter(false)}>close</button>
         </div>
       </nav>
-      <div className="wines-result" onScrollCapture={scrollDown}>
+      <div className="wines-result">
         {wines.total ? (
           <WinePreviews wines={wines.data} />
         ) : (
