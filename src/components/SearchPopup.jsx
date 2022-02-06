@@ -99,7 +99,7 @@ export function SearchPopup(props) {
 
   const searchStyle =
     filter?.search && location.pathname !== "/wine"
-      ? { position: "relative", "z-index": "100" }
+      ? { position: "relative", zIndex: "100" }
       : {};
 
   return (
