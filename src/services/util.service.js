@@ -14,7 +14,7 @@ export async function getCurrentPosition() {
         });
         return { lat: geolocation.coords.latitude, lng: geolocation.coords.longitude };
     } catch (err) {
-        throw new Error(`can't load location`);
+        console.log(err);
     }
 }
 
