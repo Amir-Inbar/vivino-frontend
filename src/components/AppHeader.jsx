@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import { debounce, tryRequire } from "../services/util.service";
-import { setFilterBy } from "../store/actions/wineAction";
+import { tryRequire } from "../services/util.service";
 import { PopupMenu } from "./PopupMenu";
+import { SearchPopup } from "./SearchPopup";
 
 export function AppHeader() {
   const location = useLocation();
   const [popupConfig, setPopupConfig] = useState(0);
-  const { filter } = useSelector((state) => state.wineModule);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (popupConfig) document.body.style.overflow = "hidden";
@@ -23,14 +20,6 @@ export function AppHeader() {
       ? setPopupConfig(null)
       : setPopupConfig({ target: ev.target, type });
 
-  const searchInput = ({ target }) => {
-    debounce(
-      () => dispatch(setFilterBy({ ...filter, search: target.value })),
-      "SET_FILTER",
-      1000
-    );
-  };
-
   return (
     <header className="app-header">
       <PopupMenu config={popupConfig} close={() => setPopupConfig(null)} />
@@ -38,9 +27,7 @@ export function AppHeader() {
         <div className="logo">
           {/* <img src={tryRequire("imgs/logo.svg")} /> */}
         </div>
-        <div className="search">
-          <input placeholder="Search any wine" onInput={searchInput}></input>
-        </div>
+        <SearchPopup />
       </div>
       <nav>
         <ul>
