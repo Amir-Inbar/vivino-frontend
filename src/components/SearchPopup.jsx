@@ -9,14 +9,14 @@ import { setFilterBy } from "../store/actions/wineAction";
 
 export function SearchPopup(props) {
   const rtl = document.dir === "rtl";
+  const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
   const [wines, setWines] = useState(null);
   const filter = useSelector((state) => state.wineModule.filter);
   const [position, setPosition] = useState({});
 
-  const SearchResult = ({ result, position, close }) => {
-    const location = useLocation();
+  const SearchResult = ({ result, position, close, search }) => {
     const filter = useSelector((state) => state.wineModule.filter);
     if (location.pathname === "/wine") return null;
     if (!filter?.search || !result?.length) return null;
@@ -31,15 +31,23 @@ export function SearchPopup(props) {
         <div className="quick-search-result" style={position}>
           <ul>
             {result.map((wine, idx) => {
+              const re = new RegExp(`(${search})`, "gi");
+              const title = {
+                __html: `${wine.winery.replace(
+                  re,
+                  `<span class="bold">$1</span>`
+                )} ${wine.name.replace(re, `<span class="bold">$1</span>`)}`,
+              };
               return (
                 <li
                   key={"SEARCH_RESULT_" + idx}
                   onClick={() => history.push(`/wine/${wine._id}`)}
                 >
                   <img src={wine.image} />
-                  <span data-trans={wine.name}>
-                    {wine.winery} {wine.name}
-                  </span>
+                  <p
+                    data-trans={`${wine.winery}-${wine.name}`}
+                    dangerouslySetInnerHTML={title}
+                  ></p>
                 </li>
               );
             })}
@@ -55,6 +63,10 @@ export function SearchPopup(props) {
   };
 
   const searchInput = ({ target }) => {
+    if (!target.value) {
+      cleanUp();
+      return;
+    }
     const top =
       target.parentElement.offsetTop + target.parentElement.clientHeight + 16;
     const left = target.parentElement.offsetLeft;
@@ -85,16 +97,27 @@ export function SearchPopup(props) {
     })();
   }, [filter]);
 
+  const searchStyle =
+    filter?.search && location.pathname !== "/wine"
+      ? { position: "relative", "z-index": "100" }
+      : {};
+
   return (
     <>
-      <div className="search">
+      <div className="search" style={searchStyle}>
         <input
           placeholder="Search any wine"
           onInput={searchInput}
           onFocus={searchInput}
+          spellCheck="false"
         ></input>
       </div>
-      <SearchResult result={wines?.data} position={position} close={cleanUp} />
+      <SearchResult
+        result={wines?.data}
+        position={position}
+        search={filter?.search}
+        close={cleanUp}
+      />
     </>
   );
 }

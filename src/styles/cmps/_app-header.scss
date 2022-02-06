@@ -14,12 +14,10 @@
       margin-inline-end: 24px;
     }
     .search {
-      position: relative;
-      background-color: $clr4;
-      z-index: 100;
       flex: 1;
       margin: 12px;
       border: 1px solid #dedede;
+      background-color: $clrwht;
       background-image: url("../../assets/imgs/icons/search.svg");
       background-position: 16px;
       background-size: 16px;
@@ -143,7 +141,11 @@
         height: 48px;
         transform: rotate(90deg);
       }
-      span {
+      p {
+        span.bold {
+          color: $clr1;
+          font-weight: 700;
+        }
         font-size: 0.8125em;
         margin-inline-start: 32px;
       }
