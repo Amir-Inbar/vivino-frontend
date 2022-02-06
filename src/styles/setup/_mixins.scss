@@ -36,7 +36,7 @@
   }
 }
 
-@mixin form-tablet-layout {
+@mixin from-tablet-layout {
   @media (min-width: $mobile-breakpoint) {
     @content;
   }
@@ -60,7 +60,7 @@
   }
 }
 
-@mixin form-normal-layout {
+@mixin from-normal-layout {
   @media (min-width: $tablet-breakpoint) {
     @content;
   }

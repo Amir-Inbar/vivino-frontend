@@ -21,13 +21,9 @@ export const WineReviews = ({ wineId, wine }) => {
   };
 
   useEffect(async () => {
-    try {
-      await loadUserReviews();
-      await loadRecentReviews();
-      await loadHelpfulReviews();
-    } catch (err) {
-      console.log(err);
-    }
+    await loadUserReviews();
+    await loadRecentReviews();
+    await loadHelpfulReviews();
   }, [wineId]);
 
   const loadRecentReviews = async (index = 0) => {
@@ -35,13 +31,17 @@ export const WineReviews = ({ wineId, wine }) => {
       page: { size: 4, index },
       sort: { createdAt: 0 },
     };
-    const recent = await reviewService.getByWineId(wineId, recentParams);
-    // setRecentReviews(
-    //   recentReviews
-    //     ? { ...recent, data: [...recentReviews.data, ...recent.data] }
-    //     : recent
-    // );
-    setRecentReviews(recent);
+    try {
+      const recent = await reviewService.getByWineId(wineId, recentParams);
+      // setRecentReviews(
+      //   recentReviews
+      //     ? { ...recent, data: [...recentReviews.data, ...recent.data] }
+      //     : recent
+      // );
+      setRecentReviews(recent);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const loadHelpfulReviews = async (index = 0) => {
@@ -49,13 +49,17 @@ export const WineReviews = ({ wineId, wine }) => {
       page: { size: 4, index },
       sort: { likes: 0 },
     };
-    const helpful = await reviewService.getByWineId(wineId, helpfulParams);
-    // setHelpfulReviews(
-    //   helpfulReviews
-    //     ? { ...helpful, data: [...helpfulReviews.data, ...helpful.data] }
-    //     : helpful
-    // );
-    setHelpfulReviews(helpful);
+    try {
+      const helpful = await reviewService.getByWineId(wineId, helpfulParams);
+      // setHelpfulReviews(
+      //   helpfulReviews
+      //     ? { ...helpful, data: [...helpfulReviews.data, ...helpful.data] }
+      //     : helpful
+      // );
+      setHelpfulReviews(helpful);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const reviewUpdate = (result) => {
@@ -92,8 +96,12 @@ export const WineReviews = ({ wineId, wine }) => {
   const loadUserReviews = async () => {
     const user = authService.getLoggedinUser();
     if (!wine || !user?._id) return;
-    const res = await reviewService.query({ filter: { eqWineId: wine._id } });
-    setUserReviews({ data: res });
+    try {
+      const res = await reviewService.query({ filter: { eqWineId: wine._id } });
+      setUserReviews({ data: res });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const setLike = async (reviewId) => {
@@ -112,13 +120,17 @@ export const WineReviews = ({ wineId, wine }) => {
     // setHelpfulReviews(
     //   helpfulReviews.data.map((rv) => (rv._id === review._id ? review : rv))
     // );
-    setHelpfulReviews({
-      ...helpfulReviews,
-      data: helpfulReviews.data.map((rv) =>
-        rv._id === review._id ? review : rv
-      ),
-    });
-    await reviewService.update(review._id);
+    try {
+      await reviewService.update(review._id);
+      setHelpfulReviews({
+        ...helpfulReviews,
+        data: helpfulReviews.data.map((rv) =>
+          rv._id === review._id ? review : rv
+        ),
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   if (!reviewsSections[reviewSection]) return <div></div>;
@@ -134,7 +146,7 @@ export const WineReviews = ({ wineId, wine }) => {
         <div className="review-stat flex column align-center">
           <ReviewStat wine={wine} />
           <p className="rating-feedback">
-            Add your own rating and help other Vivino users pick the right wine!
+            Add your own rating and help other users pick the right wine!
           </p>
           <div className="user-rating-selection flex align-center ">
             <img
