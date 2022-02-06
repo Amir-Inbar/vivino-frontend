@@ -37,8 +37,16 @@ export const WinePreviews = ({ wines }) => {
             <img
               className="bottle-img"
               src={item.image || tryRequire("imgs/bottle.png")}
+              onError={({ target }) =>
+                (target.src = tryRequire("imgs/bottle.png"))
+              }
             />
-            <img src={item.image || tryRequire("imgs/bottle.png")} />
+            <img
+              src={item.image || tryRequire("imgs/bottle.png")}
+              onError={({ target }) =>
+                (target.src = tryRequire("imgs/bottle.png"))
+              }
+            />
           </div>
           <div className="wine-rate">
             <WineRate rate={item.rate} ratings={item.ratings} />
