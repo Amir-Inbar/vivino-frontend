@@ -23,8 +23,12 @@ export function StarRate(props) {
 
   const hover = (el) => {
     if (!isEditable) return;
-    const { left, right } = el.target.parentElement.getBoundingClientRect();
-    const position = Math.min(rtl ? right - el.pageX : el.pageX - left, box);
+    const { left, right, width } =
+      el.target.parentElement.getBoundingClientRect();
+    const position = Math.min(
+      rtl ? width - (right - el.pageX) : el.pageX - left,
+      box
+    );
     setTempRate(Math.max(Math.round(position / (size / 2) + 0.5) / 2, 1));
   };
 

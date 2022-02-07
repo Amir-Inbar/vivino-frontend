@@ -1,30 +1,24 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import {
   useHistory,
   useLocation,
 } from "react-router-dom/cjs/react-router-dom.min";
-import { authService, getLoggedinUser } from "../services/auth.service";
 import { tryRequire } from "../services/util.service";
-import { setUser } from "../store/actions/userActions";
 import { PopupMenu } from "./PopupMenu";
 import { SearchPopup } from "./SearchPopup";
+import { UserPopupMenu } from "./UserPopupMenu";
 
 export const mediaQuery = { mobile: 540 };
 
 export function AppHeader() {
   const location = useLocation();
   const history = useHistory();
-  const dispatch = useDispatch();
   const [popupConfig, setPopupConfig] = useState(0);
-  const user = useSelector((state) => state.userModule.user);
 
   useEffect(() => {
     if (popupConfig) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "initial";
   }, [popupConfig]);
-
-  useEffect(() => console.log(user), [user]);
 
   if (location.pathname === "/login") return null;
 
@@ -32,13 +26,6 @@ export function AppHeader() {
     popupConfig?.type === type
       ? setPopupConfig(null)
       : setPopupConfig({ target: ev.target, type });
-
-  const toggleUserMenu = async ({ target }) => {
-    if (getLoggedinUser()) {
-      await authService.logout();
-      dispatch(setUser(null));
-    } else history.push("/login");
-  };
 
   return (
     <header className="app-header">
@@ -52,14 +39,7 @@ export function AppHeader() {
         <div className="main-controls">
           <SearchPopup />
           <div className="side-controls">
-            <img
-              className="login"
-              src={user?.image || tryRequire("imgs/icons/user-profile.png")}
-              onClick={toggleUserMenu}
-              // onError={({ target }) =>
-              //   (target.src = tryRequire("imgs/icons/user-profile.png"))
-              // }
-            />
+            <UserPopupMenu />
           </div>
         </div>
         <PopupMenu config={popupConfig} close={() => setPopupConfig(null)} />

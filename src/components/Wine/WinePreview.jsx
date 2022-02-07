@@ -30,7 +30,7 @@ export const WinePreviews = ({ wines }) => {
     return (
       <div
         className="wine-preview"
-        style={rtl ? { "flex-direction": "row-reverse" } : null}
+        style={rtl ? { flexDirection: "row-reverse" } : null}
         key={"WINE_" + idx}
         onClick={() => goTo(item._id)}
       >
