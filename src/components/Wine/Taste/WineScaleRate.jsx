@@ -85,7 +85,6 @@ export function ScaleRate({ wine, set }) {
   };
 
   const setPosition = (ev, scale, isTouch = false) => {
-    console.log(ev);
     if (!isDragging) return;
     const bondClient = targetElement.parentElement.getBoundingClientRect();
     const thumbClient = targetElement.getBoundingClientRect();
