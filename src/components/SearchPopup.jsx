@@ -7,6 +7,7 @@ import useChangeEffect from "../hooks/useChangeEffect";
 import { debounce } from "../services/util.service";
 import { wineService } from "../services/wine.service";
 import { setFilterBy } from "../store/actions/wineAction";
+import { mediaQuery } from "./AppHeader";
 
 export function SearchPopup(props) {
   const rtl = document.dir === "rtl";
@@ -27,7 +28,7 @@ export function SearchPopup(props) {
     const right = window.innerWidth - (el.offsetLeft + el.clientWidth);
     const height = document.documentElement.scrollHeight;
     const style = { top: `${top}px` };
-    if (window.innerWidth > 540)
+    if (window.innerWidth > mediaQuery.mobile)
       if (rtl) style.right = `${right}px`;
       else style.left = `${left}px`;
     return (

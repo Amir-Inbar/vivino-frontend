@@ -16,7 +16,7 @@ export function WineHeader(props) {
       },
       { title: wine.region, path: `/wine?region=${wine.region.toLowerCase()}` },
       ...(wine.grapes || []).map((grape) => {
-        const { name } = keywords.grapes.find((g) => g.seo === grape);
+        const { name } = keywords?.grapes?.find((g) => g.seo === grape);
         return {
           title: name || kababCaseToSentence(grape),
           path: `/wine?grapes=${grape}`,

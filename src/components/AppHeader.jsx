@@ -8,6 +8,8 @@ import { tryRequire } from "../services/util.service";
 import { PopupMenu } from "./PopupMenu";
 import { SearchPopup } from "./SearchPopup";
 
+export const mediaQuery = { mobile: 540 };
+
 export function AppHeader() {
   const location = useLocation();
   const history = useHistory();
