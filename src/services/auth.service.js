@@ -9,21 +9,33 @@ export const authService = {
 }
 
 async function login(user) {
-    const loggedInUser = await httpService.post('auth/login', user)
-    if (loggedInUser) {
-        return _saveLocalUser(loggedInUser);
+    try {
+        const loggedInUser = await httpService.post('auth/login', user)
+        if (loggedInUser) {
+            return _saveLocalUser(loggedInUser);
+        }
+    } catch (err) {
+        console.log(err);
     }
 }
 
 async function signup(user) {
-    const signedUser = await httpService.post('auth/signup', user)
-    return _saveLocalUser(signedUser)
+    try {
+        const signedUser = await httpService.post('auth/signup', user)
+        return _saveLocalUser(signedUser)
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 async function logout() {
-    sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
-    const res = await httpService.post('auth/logout');
-    return res;
+    try {
+        sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
+        const res = await httpService.post('auth/logout');
+        return res;
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 function _saveLocalUser(user) {

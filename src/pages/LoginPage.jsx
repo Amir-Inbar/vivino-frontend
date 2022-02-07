@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { authService } from "../services/auth.service";
+import { setUser } from "../store/actions/userActions";
 
 export const LoginPage = () => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
@@ -8,13 +10,18 @@ export const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [fullname, setFullname] = useState("");
   const history = useHistory();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.wineModule.user);
 
   const submit = async () => {
     try {
       const user = isSignUpMode
         ? await authService.signup({ username, fullname, password })
         : await authService.login({ username, password });
-      if (user) history.goBack();
+      if (user) {
+        dispatch(setUser(user));
+        history.goBack();
+      }
     } catch (err) {
       console.log(err);
     }
