@@ -6,7 +6,7 @@ import { WineryPage } from "./pages/WineryPage";
 import { HomePage } from "./pages/HomePage";
 import "./styles/global.scss";
 import { LoginPage } from "./pages/LoginPage";
-import { FilterPage } from "./pages/FilterPage";
+import { FilterPage } from "./pages/WineFilterPage";
 import { useDispatch, useSelector } from "react-redux";
 import { wineService } from "./services/wine.service";
 import { setKeywords } from "./store/actions/wineAction";
