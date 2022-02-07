@@ -15,13 +15,7 @@ export function ScaleRate(props) {
   const [isSelfRate, setIsSelfRate] = useState({});
   const user = useSelector((state) => state.userModule.user);
 
-  useEffect(async () => {
-    isManualChange.current = false;
-    setScale(null);
-    if (!wine) return;
-  }, [wine]);
-
-  useEffect(() => {
+  const onSystemChange = () => {
     if (!wine) return;
     isManualChange.current = false;
     (async () => {
@@ -34,15 +28,25 @@ export function ScaleRate(props) {
           if (res) setScale(res);
           setIsSelfRate(!!res);
         } catch (err) {}
-      } else {
-        setScale({
-          bold: wine.bold,
-          tannic: wine.tannic,
-          sweet: wine.sweet,
-          acidic: wine.acidic,
-        });
       }
     })();
+  };
+
+  useEffect(async () => {
+    isManualChange.current = false;
+    if (!wineScale) {
+      setScale({
+        bold: wine.bold,
+        tannic: wine.tannic,
+        sweet: wine.sweet,
+        acidic: wine.acidic,
+      });
+    }
+    onSystemChange();
+  }, [wine]);
+
+  useEffect(() => {
+    onSystemChange();
   }, [user]);
 
   useLayoutEffect(() => {
@@ -81,7 +85,7 @@ export function ScaleRate(props) {
       const position = rtl
         ? Math.max((wineScale[scale.max] / 100) * slideRange, 0)
         : Math.max((wineScale[scale.max] / 100) * slideRange, 0);
-      return wineScale[scale.max] || user ? (
+      return typeof wineScale[scale.max] === "number" || user ? (
         <tr
           key={"SCALE_RATE_" + idx}
           onMouseMove={(ev) => setMouse(ev, scale.max)}

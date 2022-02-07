@@ -23,10 +23,19 @@ export const WineReviews = ({ wineId, wine }) => {
   };
 
   useEffect(async () => {
-    await loadUserReviews();
     await loadRecentReviews();
     await loadHelpfulReviews();
   }, [wineId]);
+
+  useEffect(() => {
+    (async () => {
+      if (user) {
+        await loadUserReviews();
+      } else {
+        setUserReviews(null);
+      }
+    })();
+  }, [user]);
 
   const loadRecentReviews = async (index = 0) => {
     const recentParams = {
