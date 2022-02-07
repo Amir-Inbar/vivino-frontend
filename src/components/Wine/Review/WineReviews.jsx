@@ -6,8 +6,10 @@ import { AddReview } from "./WineAddReview";
 import { ReviewsPreview } from "./WineReviewPreview";
 import { ReviewStat } from "./WineReviewStat";
 import { StarRate } from "../../StarRate";
+import { useSelector } from "react-redux";
 
 export const WineReviews = ({ wineId, wine }) => {
+  const user = useSelector((state) => state.userModule.user);
   const [helpfulReviews, setHelpfulReviews] = useState(null);
   const [userReviews, setUserReviews] = useState(null);
   const [recentReviews, setRecentReviews] = useState(null);
@@ -61,7 +63,6 @@ export const WineReviews = ({ wineId, wine }) => {
   };
 
   const loadUserReviews = async () => {
-    const user = authService.getLoggedinUser();
     if (!wine || !user?._id) return;
     try {
       const res = await reviewService.query({ filter: { eqWineId: wine._id } });
@@ -101,17 +102,16 @@ export const WineReviews = ({ wineId, wine }) => {
   };
 
   const setLike = async (reviewId) => {
-    const logInUser = getLoggedinUser();
     const review = helpfulReviews.data.find(
       (review) => review._id === reviewId
     );
-    if (review.likes.split(",").includes("" + logInUser._id)) {
+    if (review.likes.split(",").includes("" + user._id)) {
       review.likes = review.likes
         .split(",")
-        .filter((like) => like !== "" + logInUser._id)
+        .filter((like) => like !== "" + user._id)
         .join(",");
     } else {
-      review.likes += logInUser._id + ",";
+      review.likes += user._id + ",";
     }
     // setHelpfulReviews(
     //   helpfulReviews.data.map((rv) => (rv._id === review._id ? review : rv))

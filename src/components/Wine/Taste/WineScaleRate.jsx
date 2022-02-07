@@ -3,43 +3,52 @@ import sections from "../../../assets/json/scale-sections.json";
 import { useEffect, useRef, useState } from "react";
 import { reviewService } from "../../../services/review.service";
 import { useLayoutEffect } from "react";
-import { authService } from "../../../services/auth.service";
+import { useSelector } from "react-redux";
 
 export function ScaleRate(props) {
   const rtl = document.dir === "rtl";
   const { wine } = props;
-  const isFirstRun = useRef(true);
+  const isManualChange = useRef(false);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [targetElement, setTargetElement] = useState(null);
   const [wineScale, setScale] = useState();
   const [isSelfRate, setIsSelfRate] = useState({});
+  const user = useSelector((state) => state.userModule.user);
 
   useEffect(async () => {
-    isFirstRun.current = true;
+    isManualChange.current = false;
     setScale(null);
     if (!wine) return;
-    if (authService.getLoggedinUser())
-      try {
-        const res = await reviewService.query({
-          structure: true,
-          wineId: wine._id,
-        });
-        if (res) setScale(res);
-        setIsSelfRate(!!res);
-      } catch (err) {}
-    if (!wineScale)
-      setScale({
-        bold: wine.bold,
-        tannic: wine.tannic,
-        sweet: wine.sweet,
-        acidic: wine.acidic,
-      });
   }, [wine]);
+
+  useEffect(() => {
+    if (!wine) return;
+    isManualChange.current = false;
+    (async () => {
+      if (user) {
+        try {
+          const res = await reviewService.query({
+            structure: true,
+            wineId: wine._id,
+          });
+          if (res) setScale(res);
+          setIsSelfRate(!!res);
+        } catch (err) {}
+      } else {
+        setScale({
+          bold: wine.bold,
+          tannic: wine.tannic,
+          sweet: wine.sweet,
+          acidic: wine.acidic,
+        });
+      }
+    })();
+  }, [user]);
 
   useLayoutEffect(() => {
     if (!wineScale) return;
-    if (isFirstRun.current) {
-      isFirstRun.current = false;
+    if (!isManualChange.current) {
+      isManualChange.current = true;
       return;
     }
     debounce(
@@ -72,7 +81,7 @@ export function ScaleRate(props) {
       const position = rtl
         ? Math.max((wineScale[scale.max] / 100) * slideRange, 0)
         : Math.max((wineScale[scale.max] / 100) * slideRange, 0);
-      return wineScale[scale.max] || authService.getLoggedinUser() ? (
+      return wineScale[scale.max] || user ? (
         <tr
           key={"SCALE_RATE_" + idx}
           onMouseMove={(ev) => setMouse(ev, scale.max)}
@@ -103,7 +112,7 @@ export function ScaleRate(props) {
   };
 
   const startDrag = ({ target }) => {
-    if (isMouseDown || !authService.getLoggedinUser()) return;
+    if (isMouseDown || !user) return;
     setIsMouseDown(true);
     setTargetElement(target);
   };
