@@ -10,6 +10,7 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
   const history = useHistory();
   const filter = useSelector((state) => state.wineModule.filter);
   const queries = new URLSearchParams(location.search);
+  const [dataToShow, setDataToShow] = useState([]);
 
   const [select, setSelect] = useState([]);
 
@@ -23,7 +24,23 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
   }, [select]);
 
   useEffect(() => {
-    setSelect(filter[query]?.split("|") || []);
+    const selected = filter[query]?.split("|") || [];
+    setSelect(selected);
+    const exists = data.filter(
+      (val) =>
+        selected.includes(val.seo) || selected.includes(val.name?.toLowerCase())
+    );
+    const add =
+      exists.length < max
+        ? data
+            .filter(
+              (val) =>
+                !selected.includes(val.seo) &&
+                !selected.includes(val.name?.toLowerCase())
+            )
+            .slice(0, max - exists.length)
+        : [];
+    setDataToShow([...exists, ...add]);
   }, [filter[query]]);
 
   const toggleSelect = (type) => {
@@ -35,23 +52,21 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
   return data ? (
     <section className="wine-select-buttons">
       <h2 data-trans={title.toLowerCase().replace(" ", "-")}>{title}</h2>
-      {data
-        .map((item, idx) => {
-          const { name, seo } = item;
-          return (
-            <button
-              key={`BUTTON_${query}${idx}`}
-              className={`${
-                select.includes(seo || name.toLowerCase()) ? "selected" : ""
-              }`}
-              onClick={() => toggleSelect(seo || name)}
-              data-trans={seo || name.toLowerCase().replace(" ", "-")}
-            >
-              {name}
-            </button>
-          );
-        })
-        .slice(0, max)}
+      {dataToShow.map((item, idx) => {
+        const { name, seo } = item;
+        return (
+          <button
+            key={`BUTTON_${query}${idx}`}
+            className={`${
+              select.includes(seo || name.toLowerCase()) ? "selected" : ""
+            }`}
+            onClick={() => toggleSelect(seo || name)}
+            data-trans={seo || name.toLowerCase().replace(" ", "-")}
+          >
+            {name}
+          </button>
+        );
+      })}
     </section>
   ) : null;
 };

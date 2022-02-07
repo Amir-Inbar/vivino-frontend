@@ -14,8 +14,10 @@ export function StarRate(props) {
   const styleStar = { width: size + "px", height: size + "px" };
   const styleEmptyStar = { width: box + "px", ...style };
   const styleFullStar = {
-    width: box * ((tempRate || rate) / total) + "px",
-    marginInlineStart: box * ((tempRate || rate) / total) - box + "px",
+    width: box,
+    clipPath: `inset(0 ${box - box * ((tempRate || rate) / total)}px 0 0)`,
+    // width: box * ((tempRate || rate) / total) + "px",
+    // marginInlineStart: box * ((tempRate || rate) / total) - box + "px",
     ...style,
   };
 

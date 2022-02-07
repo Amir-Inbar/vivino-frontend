@@ -62,7 +62,7 @@ export const WineReviews = ({ wineId, wine }) => {
 
   const loadUserReviews = async () => {
     const user = authService.getLoggedinUser();
-    if (!wine || !user._id) return;
+    if (!wine || !user?._id) return;
     try {
       const res = await reviewService.query({ filter: { eqWineId: wine._id } });
       setUserReviews({ data: res });

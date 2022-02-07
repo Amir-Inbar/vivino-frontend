@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import { debounce, tryRequire } from "../services/util.service";
-import { setFilterBy } from "../store/actions/wineAction";
+import {
+  useHistory,
+  useLocation,
+} from "react-router-dom/cjs/react-router-dom.min";
+import { getLoggedinUser } from "../services/auth.service";
+import { tryRequire } from "../services/util.service";
 import { PopupMenu } from "./PopupMenu";
+import { SearchPopup } from "./SearchPopup";
+
+export const mediaQuery = { mobile: 540 };
 
 export function AppHeader() {
   const location = useLocation();
+  const history = useHistory();
   const [popupConfig, setPopupConfig] = useState(0);
-  const { filter } = useSelector((state) => state.wineModule);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (popupConfig) document.body.style.overflow = "hidden";
@@ -23,49 +27,57 @@ export function AppHeader() {
       ? setPopupConfig(null)
       : setPopupConfig({ target: ev.target, type });
 
-  const searchInput = ({ target }) => {
-    debounce(
-      () => dispatch(setFilterBy({ ...filter, search: target.value })),
-      "SET_FILTER",
-      1000
-    );
-  };
-
   return (
     <header className="app-header">
-      <PopupMenu config={popupConfig} close={() => setPopupConfig(null)} />
-      <div className="control-bar">
-        <div className="logo">
-          {/* <img src={tryRequire("imgs/logo.svg")} /> */}
-        </div>
-        <div className="search">
-          <input placeholder="Search any wine" onInput={searchInput}></input>
-        </div>
+      <div className="logo">
+        <img
+          src={tryRequire("imgs/logo.png")}
+          onClick={() => history.push("/")}
+        />
       </div>
-      <nav>
-        <ul>
-          <li className="wines" onClick={(ev) => toggleMenu(ev, "wines")}>
-            <img src={tryRequire("imgs/icons/wines.svg")} />
-            <span data-trans="wines">wines</span>
-          </li>
-          <li className="pairings">
-            <img src={tryRequire("imgs/icons/cheese.svg")} />
-            <span data-trans="pairings">pairings</span>
-          </li>
-          <li className="grapes">
-            <img src={tryRequire("imgs/icons/grapes.svg")} />
-            <span data-trans="grapes">grapes</span>
-          </li>
-          <li className="regions">
-            <img src={tryRequire("imgs/icons/regions.svg")} />
-            <span data-trans="regions">regions</span>
-          </li>
-          <li className="awards">
-            <img src={tryRequire("imgs/icons/awards.svg")} />
-            <span data-trans="awards">awards</span>
-          </li>
-        </ul>
-      </nav>
+      <div className="control-bar">
+        <div className="main-controls">
+          <SearchPopup />
+          <div className="side-controls">
+            <img
+              className="login"
+              src={
+                getLoggedinUser()?.image ||
+                tryRequire("imgs/icons/user-profile.png")
+              }
+              onClick={() => history.push("/login")}
+              onError={({ target }) =>
+                (target.src = tryRequire("imgs/icons/user-profile.png"))
+              }
+            />
+          </div>
+        </div>
+        <PopupMenu config={popupConfig} close={() => setPopupConfig(null)} />
+        <nav>
+          <ul>
+            <li className="wines" onClick={(ev) => toggleMenu(ev, "wines")}>
+              <img src={tryRequire("imgs/icons/wines.svg")} />
+              <span data-trans="wines">wines</span>
+            </li>
+            <li className="pairings">
+              <img src={tryRequire("imgs/icons/cheese.svg")} />
+              <span data-trans="pairings">pairings</span>
+            </li>
+            <li className="grapes">
+              <img src={tryRequire("imgs/icons/grapes.svg")} />
+              <span data-trans="grapes">grapes</span>
+            </li>
+            <li className="regions">
+              <img src={tryRequire("imgs/icons/regions.svg")} />
+              <span data-trans="regions">regions</span>
+            </li>
+            <li className="awards">
+              <img src={tryRequire("imgs/icons/awards.svg")} />
+              <span data-trans="awards">awards</span>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 }

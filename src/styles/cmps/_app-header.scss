@@ -1,53 +1,79 @@
 .app-header {
   user-select: none;
   display: flex;
-  flex-direction: column;
-  .control-bar {
-    font-size: 1em;
+  .logo {
+    margin: 12px 0;
     display: flex;
-    height: 64px;
-    .logo {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 120px;
-      margin-inline-end: 24px;
-    }
-    .search {
-      flex: 1;
-      margin: 12px;
-      border: 1px solid #dedede;
-      background-image: url("../../assets/imgs/icons/search.svg");
-      background-position: 16px;
-      background-size: 16px;
-      background-repeat: no-repeat;
-      border-radius: 3em;
-      display: flex;
-      max-width: 300px;
-      input {
-        background: transparent;
-        outline: none;
-        border: 0;
-        margin-inline-start: 50px;
-      }
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 1.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $clr1;
+    img {
+      height: 72px;
     }
   }
-  nav {
-    ul {
+  .control-bar {
+    margin: 12px;
+    flex: 1;
+    font-size: 1em;
+    display: flex;
+    flex-direction: column;
+    .main-controls {
       display: flex;
       justify-content: space-between;
-      max-width: 490px;
-      list-style-type: none;
-      li {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
+      .search {
+        flex: 1;
+        border: 1px solid #dedede;
+        background-color: $clrwht;
+        background-image: url("../../assets/imgs/icons/search.svg");
+        background-position: 16px;
+        background-size: 16px;
         background-repeat: no-repeat;
-        gap: 4px;
+        border-radius: 3em;
+        display: flex;
+        max-width: calc(100% - 40px);
+        @include from-tablet-layout {
+          max-width: 300px;
+        }
+        input {
+          height: 36px;
+          background: transparent;
+          outline: none;
+          border: 0;
+          margin-inline-start: 50px;
+          width: 100%;
+        }
+      }
+      .side-controls {
         text-transform: capitalize;
         img {
-          height: 20px;
-          width: 20px;
+          cursor: pointer;
+          border-radius: 50%;
+          height: 32px;
+          width: 32px;
+        }
+      }
+    }
+    nav {
+      max-width: 800px;
+      ul {
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        list-style-type: none;
+        li {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          background-repeat: no-repeat;
+          gap: 4px;
+          text-transform: capitalize;
+          img {
+            height: 20px;
+            width: 20px;
+          }
         }
       }
     }
@@ -92,6 +118,73 @@
     content: "";
     position: absolute;
     margin-inline-start: 10px;
+    top: -8px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid $clr4;
+  }
+}
+
+.quick-search-result {
+  top: 0;
+  position: absolute;
+  z-index: 100;
+  background-color: $clr4;
+  border-radius: 8px;
+  display: flex;
+  @include for-mobile-layout {
+    flex-direction: column;
+    width: calc(100% - 16px);
+    margin: 0 8px;
+  }
+  padding: 0 16px;
+  @include hover-box;
+  > ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding: 12px 14px;
+    li {
+      height: 32px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      @include until-normal-layout {
+        font-size: 1em;
+        padding: 2px;
+      }
+      @include from-normal-layout {
+        font-size: 1.2em;
+        padding: 6px;
+      }
+      &.bold {
+        font-weight: 700;
+      }
+      img {
+        height: 48px;
+        transform: rotate(90deg);
+      }
+      p {
+        span.bold {
+          color: $clr1;
+          font-weight: 700;
+        }
+        font-size: 0.8125em;
+        margin-inline-start: 32px;
+      }
+    }
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    @include from-tablet-layout {
+      margin-inline-start: 10px;
+    }
+    @include for-mobile-layout {
+      margin-inline-start: calc(50% - 16px);
+    }
     top: -8px;
     width: 0;
     height: 0;

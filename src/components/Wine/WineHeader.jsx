@@ -1,4 +1,4 @@
-import { StarRate } from "../StarRate";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { kababCaseToSentence, tryRequire } from "../../services/util.service";
 import { WineRate } from "./Review/WineRatePreview";
@@ -6,31 +6,39 @@ import { WineRate } from "./Review/WineRatePreview";
 export function WineHeader(props) {
   const { wine } = props;
   const history = useHistory();
+  const keywords = useSelector((state) => state.wineModule.keywords);
 
-  const keywords = () => {
-    const linkMap = [
+  const WineTags = () => {
+    const map = [
       {
         title: wine.country,
         path: `/wine?country=${wine.country.toLowerCase()}`,
       },
       { title: wine.region, path: `/wine?region=${wine.region.toLowerCase()}` },
-      ...(wine.grapes || []).map((grape) => ({
-        title: kababCaseToSentence(grape),
-        path: `/wine?grapes=${grape}`,
-      })),
+      ...(wine.grapes || []).map((grape) => {
+        const { name } = keywords?.grapes?.find((g) => g.seo === grape);
+        return {
+          title: name || kababCaseToSentence(grape),
+          path: `/wine?grapes=${grape}`,
+        };
+      }),
     ];
-    return linkMap.map((keyword, idx) => {
-      return keyword ? (
-        <span
-          onClick={() => history.push(keyword.path)}
-          className="tag"
-          key={"KEYWORD_" + idx}
-          data-trans={keyword.title.toLowerCase()}
-        >
-          {keyword.title}
-        </span>
-      ) : null;
-    });
+    return (
+      <div className="tags">
+        {map.map((keyword, idx) => {
+          return (
+            <span
+              onClick={() => history.push(keyword.path)}
+              className="tag"
+              key={"KEYWORD_" + idx}
+              data-trans={keyword.title.toLowerCase()}
+            >
+              {keyword.title}
+            </span>
+          );
+        })}
+      </div>
+    );
   };
 
   return (
@@ -49,7 +57,7 @@ export function WineHeader(props) {
           <h1>
             {wine.name} {wine.vintage}
           </h1>
-          <div className="tags">{keywords()}</div>
+          <WineTags />
           <WineRate rate={wine.rate} ratings={wine.ratings} />
         </div>
       </div>

@@ -34,12 +34,13 @@
     align-items: center;
     justify-content: center;
     .wine-bottle {
-      flex: 1;
+      // flex: 1;
       max-height: 280px;
+      max-width: 120px;
       img {
         top: -20px;
         height: 300px;
-        padding: 0 16px;
+        padding-inline-start: 16px;
         transition: transform 1s;
         &:not(:last-child) {
           position: absolute;
@@ -53,7 +54,7 @@
     }
     .wine-rate {
       padding-top: 20px;
-      margin-inline-start: -25%;
+      // margin-inline-start: -40%;
       flex: 1;
       text-align: center;
       display: flex;
@@ -358,7 +359,12 @@
   .taste-content {
     border-radius: $frmrad;
     background-color: $clrwht;
-    width: 80%;
+    @include from-tablet-layout {
+      width: 80%;
+    }
+    @include for-mobile-layout {
+      width: calc(100% - 16px);
+    }
     height: max-content;
     margin-top: 5vh;
     height: 90vh;
@@ -525,7 +531,12 @@
     flex-direction: column;
   }
   .information {
-    max-height: 180px;
+    @include for-mobile-layout {
+      max-height: 120px;
+    }
+    @include from-tablet-layout {
+      max-height: 180px;
+    }
     display: flex;
     flex: 1;
     min-width: 300px;
@@ -540,13 +551,17 @@
         span {
           text-transform: capitalize;
         }
-        max-width: 55ch;
         line-height: 1.3em;
       }
     }
     > img {
-      object-fit: contain;
-      max-width: 100px;
+      @include from-normal-layout {
+        object-fit: contain;
+        max-width: 50px;
+      }
+      @include until-normal-layout {
+        display: none;
+      }
     }
   }
   .meals {
@@ -559,10 +574,15 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      min-width: 150px;
       .image-container {
-        height: 120px;
-        width: 120px;
+        @include for-mobile-layout {
+          height: 90px;
+          width: 90px;
+        }
+        @include from-tablet-layout {
+          height: 120px;
+          width: 120px;
+        }
         border-radius: 50%;
         overflow: hidden;
         margin: 12px 8px;
@@ -584,18 +604,18 @@
 }
 
 .wine-add-review {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: $frmrad;
   @include from-tablet-layout {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     width: 80vw;
     height: 320px;
-    border-radius: $frmrad;
   }
   @include until-tablet-layout {
-    width: 100%;
-    height: 100vh;
+    width: calc(100% - 16px);
+    height: 90vh;
   }
   background: $clr4;
   display: flex;
@@ -652,7 +672,7 @@
         resize: none;
         height: 140px;
         @include until-tablet-layout {
-          height: calc(100vh - 180px);
+          height: calc(100vh - 285px);
         }
       }
       p.chars-left {

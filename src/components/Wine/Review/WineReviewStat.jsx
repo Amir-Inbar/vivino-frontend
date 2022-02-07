@@ -2,10 +2,13 @@ import { tryRequire } from "../../../services/util.service";
 import { WineRate } from "./WineRatePreview";
 
 export const ReviewStat = ({ wine }) => {
+  if (!wine?.ratings) return null;
+
   const setRatingBar = (rating) => {
     if (!parseInt(rating)) return 0;
     return parseInt(rating) / wine.ratings;
   };
+
   const total = 5;
   return (
     <div className="review-stat">

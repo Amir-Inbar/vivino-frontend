@@ -78,6 +78,8 @@ export function ScaleRate(props) {
           onMouseMove={(ev) => setMouse(ev, scale.max)}
           onMouseUp={stopDrag}
           onMouseLeave={stopDrag}
+          onTouchMove={(ev) => setMouse(ev, scale.max)}
+          onTouchEnd={stopDrag}
         >
           <td data-trans={scale.min}>{camelCaseToSentence(scale.min)}</td>
           <td className="scale-container">
