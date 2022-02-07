@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { authService } from "../services/auth.service";
 import { tryRequire } from "../services/util.service";
 import { setUser } from "../store/actions/userActions";
+import { QuickLogin } from "./QuickLogin";
 
 export const UserPopupMenu = () => {
   const rtl = document.dir === "rtl";
@@ -19,7 +20,7 @@ export const UserPopupMenu = () => {
     dispatch(setUser(null));
   };
 
-  const UserMenu = ({ isActive }) => {
+  const UserMenu = ({ isActive, close }) => {
     if (!elProfile.current) return null;
     const el = elProfile.current;
     const top = el.offsetTop + el.clientHeight + 8;
@@ -39,24 +40,19 @@ export const UserPopupMenu = () => {
       <div
         className="background-dimm"
         style={{ height: height + "px" }}
-        onClick={() => setIsActive(false)}
+        onClick={close}
       >
-        <div
-          className="user-quick-menu"
-          style={style}
-          onClick={() => setIsActive(false)}
-        >
+        <div className="user-quick-menu" style={style} onClick={close}>
           <button onClick={logout}>Logout</button>
         </div>
       </div>
     ) : null;
   };
 
-  const toggleUserMenu = async () => {
-    if (user) {
-      setIsActive(!isActive);
-    } else history.push("/login");
-  };
+  useEffect(() => {
+    if (isActive) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "initial";
+  }, [isActive]);
 
   return (
     <>
@@ -64,12 +60,16 @@ export const UserPopupMenu = () => {
         ref={elProfile}
         className="login"
         src={user?.image || tryRequire("imgs/icons/user-profile.png")}
-        onClick={toggleUserMenu}
+        onClick={() => setIsActive(!isActive)}
         onError={({ target }) =>
           (target.src = tryRequire("imgs/icons/user-profile.png"))
         }
       />
-      <UserMenu isActive={isActive} />
+      <UserMenu isActive={isActive && user} close={() => setIsActive(false)} />
+      <QuickLogin
+        isActive={isActive && !user}
+        close={() => setIsActive(false)}
+      />
     </>
   );
 };
