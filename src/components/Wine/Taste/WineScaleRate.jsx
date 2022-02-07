@@ -34,6 +34,8 @@ export function ScaleRate(props) {
 
   useEffect(async () => {
     isManualChange.current = false;
+    setScale(null);
+    isManualChange.current = false;
     if (!wineScale) {
       setScale({
         bold: wine.bold,
