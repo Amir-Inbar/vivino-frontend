@@ -40,7 +40,7 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
             )
             .slice(0, max - exists.length)
         : [];
-    setDataToShow([...exists, ...add]);
+    setDataToShow([...exists, ...add].sort((a, b) => b.count - a.count));
   }, [filter[query]]);
 
   const toggleSelect = (type) => {

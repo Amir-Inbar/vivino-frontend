@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 export function ScaleRate({ wine, set }) {
   const rtl = document.dir === "rtl";
   const isManualChange = useRef(false);
-  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const [targetElement, setTargetElement] = useState(null);
   const [wineScale, setScale] = useState();
   const [loadScale, setLoadedScale] = useState({});
@@ -74,19 +74,19 @@ export function ScaleRate({ wine, set }) {
   };
 
   const startDrag = ({ target }) => {
-    if (isMouseDown || !user) return;
-    setIsMouseDown(true);
+    if (isDragging || !user) return;
+    setIsDragging(true);
     setTargetElement(target);
   };
 
   const stopDrag = () => {
-    setIsMouseDown(false);
+    setIsDragging(false);
     setTargetElement(null);
   };
 
   const setPosition = (ev, scale, isTouch = false) => {
     console.log(ev);
-    if (!isMouseDown) return;
+    if (!isDragging) return;
     const bondClient = targetElement.parentElement.getBoundingClientRect();
     const thumbClient = targetElement.getBoundingClientRect();
     const scaleWidth = targetElement.parentElement.offsetWidth;
