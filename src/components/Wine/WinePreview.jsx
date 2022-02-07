@@ -1,11 +1,21 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { sentenceToKababCase, tryRequire } from "../../services/util.service";
+import { setFilterBy } from "../../store/actions/wineAction";
 import { StarRate } from "../StarRate";
 
 export const WinePreviews = ({ wines }) => {
   const rtl = document.dir === "rtl";
   const history = useHistory();
+  const dispatch = useDispatch();
+  const filter = useSelector((state) => state.wineModule.filter);
+
+  const goTo = (wineId) => {
+    dispatch(setFilterBy({}));
+    history.push(`/wine/${wineId}`);
+  };
+
   return wines.map((item, idx) => {
     const WineRate = ({ rate, ratings }) => {
       return rate ? (
@@ -23,7 +33,7 @@ export const WinePreviews = ({ wines }) => {
         className="wine-preview"
         style={rtl ? { "flex-direction": "row-reverse" } : null}
         key={"WINE_" + idx}
-        onClick={() => history.push(`/wine/${item._id}`)}
+        onClick={() => goTo(item._id)}
       >
         {item.background ? (
           <img
