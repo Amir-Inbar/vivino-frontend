@@ -28,6 +28,14 @@ export function ScaleRate(props) {
           if (res) setScale(res);
           setIsSelfRate(!!res);
         } catch (err) {}
+      } else {
+        setScale({
+          bold: wine.bold,
+          tannic: wine.tannic,
+          sweet: wine.sweet,
+          acidic: wine.acidic,
+        });
+        setIsSelfRate(false);
       }
     })();
   };
