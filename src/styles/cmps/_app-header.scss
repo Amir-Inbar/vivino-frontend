@@ -216,9 +216,8 @@
   max-width: 400px;
   min-height: 320px;
   max-height: 528px;
-  border-radius: 3px;
   padding: 30px 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+  @include hover-box;
   display: flex;
   flex-direction: column;
   .title {

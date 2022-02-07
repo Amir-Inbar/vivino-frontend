@@ -43,7 +43,7 @@ export const QuickLogin = ({ isActive, close }) => {
         style={{ top: `${top}px` }}
         onClick={(ev) => ev.stopPropagation()}
       >
-        <p className="title">Sign up</p>
+        <p className="title">{isSignUpMode ? "Sign up" : "Sign in"}</p>
         <form>
           <input
             placeholder="Enter Username"
@@ -75,7 +75,10 @@ export const QuickLogin = ({ isActive, close }) => {
         </form>
         <p className="alternative">OR</p>
         <button className="gmail-login-btn">
-          <span></span> Login with Gmail
+          <span>{isSignUpMode ? "Sign up" : "Login"} with Gmail</span>
+        </button>
+        <button className="facebook-login-btn">
+          <span>{isSignUpMode ? "Sign up" : "Login"} with Facebook</span>
         </button>
         <hr />
         <ul className="sign-in">
