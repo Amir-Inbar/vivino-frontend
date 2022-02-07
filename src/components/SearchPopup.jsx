@@ -15,7 +15,6 @@ export function SearchPopup(props) {
   const dispatch = useDispatch();
   const [wines, setWines] = useState(null);
   const filter = useSelector((state) => state.wineModule.filter);
-  const [position, setPosition] = useState({});
   const elSearch = useRef(null);
 
   const SearchResult = ({ result, close, search }) => {
@@ -76,10 +75,6 @@ export function SearchPopup(props) {
       cleanUp();
       return;
     }
-    // const el = target.parentElement;
-    // const top = el.offsetTop + el.clientHeight + 16;
-    // const left = el.offsetLeft;
-    // const right = window.innerWidth - (el.offsetLeft + el.clientWidth);
     debounce(
       () => {
         dispatch(setFilterBy({ ...filter, search: target.value }));
@@ -90,7 +85,7 @@ export function SearchPopup(props) {
   };
 
   useChangeEffect(() => {
-    if (!filter?.search) return;
+    if (!filter?.search || location.pathname === "/wine") return;
     (async () => {
       try {
         const wines = await wineService.query({ filter });

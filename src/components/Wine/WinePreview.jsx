@@ -9,7 +9,6 @@ export const WinePreviews = ({ wines }) => {
   const rtl = document.dir === "rtl";
   const history = useHistory();
   const dispatch = useDispatch();
-  const filter = useSelector((state) => state.wineModule.filter);
 
   const goTo = (wineId) => {
     dispatch(setFilterBy({}));
