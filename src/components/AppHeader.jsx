@@ -6,7 +6,7 @@ import {
 import { tryRequire } from "../services/util.service";
 import { PopupMenu } from "./PopupMenu";
 import { SearchPopup } from "./SearchPopup";
-import { UserPopupMenu } from "./UserPopupMenu";
+import { UserPopupMenu } from "./UserQuickMenu/UserPopupMenu";
 
 export const mediaQuery = { mobile: 540 };
 

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { authService } from "../services/auth.service";
-import { setUser } from "../store/actions/userActions";
+import { authService } from "../../services/auth.service";
+import { setUser } from "../../store/actions/userActions";
 
 export const QuickLogin = ({ isActive, close }) => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);

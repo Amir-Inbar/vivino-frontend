@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { authService } from "../services/auth.service";
-import { tryRequire } from "../services/util.service";
-import { setUser } from "../store/actions/userActions";
-import { QuickLogin } from "./QuickLogin";
+import { authService } from "../../services/auth.service";
+import { tryRequire } from "../../services/util.service";
+import { setUser } from "../../store/actions/userActions";
+import { QuickLogin } from "./UserQuickLogin";
 
 export const UserPopupMenu = () => {
   const rtl = document.dir === "rtl";
-  const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userModule.user);
   const elProfile = useRef(null);
@@ -20,9 +18,8 @@ export const UserPopupMenu = () => {
     dispatch(setUser(null));
   };
 
-  const UserMenu = ({ isActive, close }) => {
-    if (!elProfile.current) return null;
-    const el = elProfile.current;
+  const QuickMenu = ({ isActive, el, close }) => {
+    if (!el) return null;
     const top = el.offsetTop + el.clientHeight + 8;
     const left = el.offsetLeft;
     const right = window.innerWidth - el.offsetLeft - 32;
@@ -64,8 +61,13 @@ export const UserPopupMenu = () => {
         onError={({ target }) =>
           (target.src = tryRequire("imgs/icons/user-profile.png"))
         }
+        style={isActive ? { position: "relative", zIndex: 100 } : {}}
       />
-      <UserMenu isActive={isActive && user} close={() => setIsActive(false)} />
+      <QuickMenu
+        isActive={isActive && user}
+        el={elProfile.current}
+        close={() => setIsActive(false)}
+      />
       <QuickLogin
         isActive={isActive && !user}
         close={() => setIsActive(false)}
