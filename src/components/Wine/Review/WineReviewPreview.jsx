@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { makeId, tryRequire } from "../../../services/util.service";
+import { useState } from 'react';
+import { makeId, tryRequire } from '../../../services/util.service';
 export const ReviewsPreview = ({ reviews, setLike }) => {
-  var moment = require("moment");
+  var moment = require('moment');
   const [activeReview, setActiveReview] = useState(null);
-  if (!reviews) return null;
+  if (!reviews.length) return <div>No reviews found</div>;
   const UserInfo = ({ review }) => {
-    const btnNames = ["like", "comment"];
+    const btnNames = ['like', 'comment'];
     return (
       <div className="bottom-card flex space-between">
         <div className="user-info flex align-center">
@@ -13,14 +13,14 @@ export const ReviewsPreview = ({ reviews, setLike }) => {
             src={
               review.picture
                 ? review.picture
-                : tryRequire("imgs/icons/user-profile.png")
+                : tryRequire('imgs/icons/user-profile.png')
             }
             alt=""
           />
           <a href="google.com">
             {review.reviewer} (ratings {review.ratings})
           </a>
-          <span className="date"> {moment(review.createdAt).format("ll")}</span>
+          <span className="date"> {moment(review.createdAt).format('ll')}</span>
         </div>
         <div className="review-comments flex">
           {btnNames.map((el, idx) => (
@@ -31,13 +31,13 @@ export const ReviewsPreview = ({ reviews, setLike }) => {
                   ? setLike(review._id)
                   : setActiveReview(activeReview === review ? null : review)
               }
-              key={"REPLY_" + makeId()}
+              key={'REPLY_' + makeId()}
             >
               <img src={tryRequire(`imgs/icons/${el}.svg`)} alt="" />
               <span>
                 {!idx
-                  ? review.likes?.split(",").filter((like) => like).length
-                  : review.replies?.split(",").filter((like) => like).length}
+                  ? review.likes?.split(',').filter((like) => like).length
+                  : review.replies?.split(',').filter((like) => like).length}
               </span>
             </div>
           ))}
@@ -54,7 +54,7 @@ export const ReviewsPreview = ({ reviews, setLike }) => {
           src={
             activeReview.picture
               ? activeReview.picture
-              : tryRequire("imgs/icons/user-profile.png")
+              : tryRequire('imgs/icons/user-profile.png')
           }
           alt=""
         />
@@ -73,10 +73,10 @@ export const ReviewsPreview = ({ reviews, setLike }) => {
   return (
     <>
       {reviews.map((el, idx) => (
-        <div className="review-card-main" key={"REVIEW_" + idx}>
+        <div className="review-card-main" key={'REVIEW_' + idx}>
           <div className="review-card">
             <div className="user-rating flex align-center">
-              <img src={tryRequire("imgs/icons/single-star.svg")} alt="star" />
+              <img src={tryRequire('imgs/icons/single-star.svg')} alt="star" />
 
               <span className="review-rate-title">{el.rate}</span>
             </div>
