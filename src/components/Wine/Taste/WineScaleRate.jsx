@@ -84,21 +84,23 @@ export function ScaleRate({ wine, set }) {
     setTargetElement(null);
   };
 
-  const setMouse = (ev, scale) => {
+  const setPosition = (ev, scale, isTouch = false) => {
+    console.log(ev);
     if (!isMouseDown) return;
     const bondClient = targetElement.parentElement.getBoundingClientRect();
     const thumbClient = targetElement.getBoundingClientRect();
     const scaleWidth = targetElement.parentElement.offsetWidth;
+    const x = isTouch ? ev.touches[0].clientX : ev.pageX;
     if (rtl) {
-      const currPos = Math.min(ev.pageX - bondClient.left, scaleWidth);
+      const currPos = Math.min(x - bondClient.left, scaleWidth);
       setScale({
         ...wineScale,
         [scale]: Math.min((1 - currPos / scaleWidth) * 100, 100),
       });
     } else {
       const scaleMin = bondClient.left;
-      const thumbLeft = (ev.pageX - thumbClient.left) / 2;
-      const currPos = Math.min(ev.pageX + thumbLeft - scaleMin, scaleWidth);
+      const thumbLeft = (x - thumbClient.left) / 2;
+      const currPos = Math.min(x + thumbLeft - scaleMin, scaleWidth);
       setScale({
         ...wineScale,
         [scale]: Math.max((currPos / scaleWidth) * 100, 0),
@@ -119,10 +121,10 @@ export function ScaleRate({ wine, set }) {
               return typeof wineScale[scale.max] === "number" || user ? (
                 <tr
                   key={"SCALE_RATE_" + idx}
-                  onMouseMove={(ev) => setMouse(ev, scale.max)}
+                  onMouseMove={(ev) => setPosition(ev, scale.max)}
                   onMouseUp={stopDrag}
                   onMouseLeave={stopDrag}
-                  onTouchMove={(ev) => setMouse(ev, scale.max)}
+                  onTouchMove={(ev) => setPosition(ev, scale.max, true)}
                   onTouchEnd={stopDrag}
                 >
                   <td data-trans={scale.min}>
@@ -141,6 +143,7 @@ export function ScaleRate({ wine, set }) {
                           width: barWidth + "%",
                         }}
                         onMouseDown={startDrag}
+                        onTouchStart={startDrag}
                       ></div>
                     </div>
                   </td>
