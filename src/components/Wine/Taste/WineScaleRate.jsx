@@ -1,81 +1,66 @@
-import { camelCaseToSentence, debounce } from "../../../services/util.service";
+import { camelCaseToSentence } from "../../../services/util.service";
 import sections from "../../../assets/json/scale-sections.json";
 import { useEffect, useRef, useState } from "react";
 import { reviewService } from "../../../services/review.service";
-import { useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
 
-export function ScaleRate(props) {
+export function ScaleRate({ wine, set }) {
   const rtl = document.dir === "rtl";
-  const { wine } = props;
   const isManualChange = useRef(false);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [targetElement, setTargetElement] = useState(null);
   const [wineScale, setScale] = useState();
+  const [loadScale, setLoadedScale] = useState({});
   const [isSelfRate, setIsSelfRate] = useState({});
   const user = useSelector((state) => state.userModule.user);
 
-  const onSystemChange = () => {
-    if (!wine) return;
-    isManualChange.current = false;
-    (async () => {
-      if (user) {
-        try {
-          const res = await reviewService.query({
-            structure: true,
-            wineId: wine._id,
-          });
-          if (res) setScale(res);
-          setIsSelfRate(!!res);
-        } catch (err) {}
-      } else {
-        setScale({
-          bold: wine.bold,
-          tannic: wine.tannic,
-          sweet: wine.sweet,
-          acidic: wine.acidic,
-        });
-        setIsSelfRate(false);
-      }
-    })();
-  };
-
-  useEffect(async () => {
-    isManualChange.current = false;
-    setScale(null);
-    isManualChange.current = false;
-    if (!wineScale) {
-      setScale({
-        bold: wine.bold,
-        tannic: wine.tannic,
-        sweet: wine.sweet,
-        acidic: wine.acidic,
-      });
-    }
-    onSystemChange();
-  }, [wine]);
+  const barWidth = 15;
+  const slideRange = 100 - barWidth;
 
   useEffect(() => {
-    onSystemChange();
-  }, [user]);
+    wineChanged();
+    userChanged();
+  }, [wine, user]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    isManualChange.current = false;
+    setScale(loadScale ? { ...loadScale } : null);
+  }, [loadScale]);
+
+  useEffect(() => {
     if (!wineScale) return;
     if (!isManualChange.current) {
       isManualChange.current = true;
       return;
     }
-    debounce(
-      async () => {
-        const recent = await reviewService.set(wine._id, wineScale, {
-          type: "structure",
-        });
-        console.log(recent);
-      },
-      "wineScale",
-      2000
-    );
+    set(wineScale);
   }, [wineScale]);
+
+  const wineChanged = () => {
+    const data = {
+      bold: wine.bold,
+      tannic: wine.tannic,
+      sweet: wine.sweet,
+      acidic: wine.acidic,
+    };
+    setLoadedScale(data);
+    setIsSelfRate(false);
+  };
+
+  const userChanged = async () => {
+    if (user) {
+      try {
+        const data = await reviewService.query({
+          structure: true,
+          wineId: wine._id,
+        });
+        if (data) setLoadedScale(data);
+        setIsSelfRate(!!data);
+      } catch (err) {}
+    } else {
+      wineChanged();
+    }
+  };
 
   if (!wine || !wineScale) return null;
   const BasedOn = ({ wine }) => {
@@ -86,43 +71,6 @@ export function ScaleRate(props) {
         <p>{content}</p>
       </div>
     ) : null;
-  };
-
-  const scales = () => {
-    const barWidth = 15;
-    const slideRange = 100 - barWidth;
-    return sections.map((scale, idx) => {
-      const position = rtl
-        ? Math.max((wineScale[scale.max] / 100) * slideRange, 0)
-        : Math.max((wineScale[scale.max] / 100) * slideRange, 0);
-      return typeof wineScale[scale.max] === "number" || user ? (
-        <tr
-          key={"SCALE_RATE_" + idx}
-          onMouseMove={(ev) => setMouse(ev, scale.max)}
-          onMouseUp={stopDrag}
-          onMouseLeave={stopDrag}
-          onTouchMove={(ev) => setMouse(ev, scale.max)}
-          onTouchEnd={stopDrag}
-        >
-          <td data-trans={scale.min}>{camelCaseToSentence(scale.min)}</td>
-          <td className="scale-container">
-            <div className="scale">
-              <div
-                className={`thumb ${isSelfRate ? "self" : ""} ${
-                  typeof wineScale[scale.max] !== "number" ? "unrated" : ""
-                }`}
-                style={{
-                  [rtl ? "right" : "left"]: position + "%",
-                  width: barWidth + "%",
-                }}
-                onMouseDown={startDrag}
-              ></div>
-            </div>
-          </td>
-          <td data-trans={scale.max}>{camelCaseToSentence(scale.max)}</td>
-        </tr>
-      ) : null;
-    });
   };
 
   const startDrag = ({ target }) => {
@@ -158,16 +106,54 @@ export function ScaleRate(props) {
     }
   };
 
-  const data = scales();
-  return (
+  return sections.filter((scale) => wineScale[scale.max]).length || user ? (
     <>
       <h2>What does this wine taste like?</h2>
       <div className="details">
         <table onMouseLeave={stopDrag}>
-          <tbody>{data}</tbody>
+          <tbody>
+            {sections.map((scale, idx) => {
+              const position = rtl
+                ? Math.max((wineScale[scale.max] / 100) * slideRange, 0)
+                : Math.max((wineScale[scale.max] / 100) * slideRange, 0);
+              return typeof wineScale[scale.max] === "number" || user ? (
+                <tr
+                  key={"SCALE_RATE_" + idx}
+                  onMouseMove={(ev) => setMouse(ev, scale.max)}
+                  onMouseUp={stopDrag}
+                  onMouseLeave={stopDrag}
+                  onTouchMove={(ev) => setMouse(ev, scale.max)}
+                  onTouchEnd={stopDrag}
+                >
+                  <td data-trans={scale.min}>
+                    {camelCaseToSentence(scale.min)}
+                  </td>
+                  <td className="scale-container">
+                    <div className="scale">
+                      <div
+                        className={`thumb ${isSelfRate ? "self" : ""} ${
+                          typeof wineScale[scale.max] !== "number"
+                            ? "unrated"
+                            : ""
+                        }`}
+                        style={{
+                          [rtl ? "right" : "left"]: position + "%",
+                          width: barWidth + "%",
+                        }}
+                        onMouseDown={startDrag}
+                      ></div>
+                    </div>
+                  </td>
+                  <td data-trans={scale.max}>
+                    {camelCaseToSentence(scale.max)}
+                  </td>
+                </tr>
+              ) : null;
+            })}
+          </tbody>
         </table>
         <BasedOn wine={wine} />
       </div>
     </>
-  );
+  ) : null;
 }
