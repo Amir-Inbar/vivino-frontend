@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import useChangeEffect from "../../hooks/useChangeEffect";
 import { extractConditionKey } from "../../services/util.service";
+import { FilterSearchPopup } from "./FilterSearchPopup";
 
 export const MultiSelectFilter = ({ title, query, data, max = 6 }) => {
   const location = useLocation();
@@ -33,7 +34,7 @@ export const MultiSelectFilter = ({ title, query, data, max = 6 }) => {
         const extract = data.find(
           (item) => (item.seo || item.name?.toLowerCase()) === val
         );
-        if (extract) result.push(extract);
+        if (extract) result.unshift(extract);
       }
       return result;
     }, data.slice(0, max));
@@ -41,30 +42,38 @@ export const MultiSelectFilter = ({ title, query, data, max = 6 }) => {
   }, [filter[query]]);
 
   const toggleSelect = (type) => {
+    if (!type) return;
     type = type.toLowerCase();
     if (select.includes(type)) setSelect(select.filter((val) => val !== type));
     else setSelect([...select, type]);
   };
 
   return data ? (
-    <section className="wine-select-buttons">
-      <h2 data-trans={title.toLowerCase().replace(" ", "-")}>{title}</h2>
-      {dataToShow.map((item, idx) => {
-        const { name, seo } = item;
-        const key = seo || name?.toLowerCase().replace(" ", "-");
-        return (
-          <button
-            key={`BUTTON_${key}${idx}`}
-            className={`${
-              select.includes(seo || name.toLowerCase()) ? "selected" : ""
-            }`}
-            onClick={() => toggleSelect(seo || name)}
-            data-trans={key}
-          >
-            {name}
-          </button>
-        );
-      })}
-    </section>
+    <>
+      <section className="wine-select-buttons">
+        <h2 data-trans={title.toLowerCase().replace(" ", "-")}>{title}</h2>
+        <FilterSearchPopup
+          title={title}
+          data={data.filter((val) => !dataToShow.find((item) => item === val))}
+          toggleSelect={toggleSelect}
+        />
+        {dataToShow.map((item, idx) => {
+          const { name, seo } = item;
+          const key = seo || name?.toLowerCase().replace(" ", "-");
+          return (
+            <button
+              key={`BUTTON_${key}${idx}`}
+              className={`${
+                select.includes(seo || name.toLowerCase()) ? "selected" : ""
+              }`}
+              onClick={() => toggleSelect(seo || name)}
+              data-trans={key}
+            >
+              {name}
+            </button>
+          );
+        })}
+      </section>
+    </>
   ) : null;
 };

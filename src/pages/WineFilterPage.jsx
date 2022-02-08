@@ -36,7 +36,7 @@ export const FilterPage = (props) => {
         inRegion: queries.get("region"),
         "in+Grapes": queries.get("grapes"),
         inCountry: queries.get("country"),
-        inSeo: queries.get("seo"),
+        inStyle: queries.get("style"),
         inPairings: queries.get("pairings"),
       })
     );

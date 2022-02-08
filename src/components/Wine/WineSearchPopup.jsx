@@ -65,7 +65,7 @@ export function SearchPopup() {
               );
             })}
           </ul>
-          <button>Add new wine</button>
+          {!result.length ? <button>Add new wine "{search}"...</button> : null}
         </div>
       </div>
     );

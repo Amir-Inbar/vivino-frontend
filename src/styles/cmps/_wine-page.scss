@@ -806,6 +806,57 @@
       display: none;
     }
   }
+  .quick-filter-search {
+    display: block;
+    width: 100%;
+    .search {
+      margin-top: -8px;
+      input {
+        border: 0;
+        border-bottom: 1px solid $clr5;
+      }
+    }
+    .quick-filter-popup {
+      top: 0;
+      position: absolute;
+      z-index: 100;
+      background-color: $clr4;
+      border-radius: $frmrad;
+      display: flex;
+      max-width: 100%;
+      gap: 20px;
+      @include for-mobile-layout {
+        width: calc(100% - 16px);
+        margin: 0 8px;
+      }
+      padding: 8px;
+      button {
+        padding: 8px;
+        text-transform: capitalize;
+        margin: 8px 0;
+        &:hover {
+          background-color: $clr2;
+        }
+      }
+      @include hover-box;
+      &::before {
+        content: "";
+        position: absolute;
+        @include from-tablet-layout {
+          margin-inline-start: 10px;
+        }
+        @include for-mobile-layout {
+          margin-inline-start: calc(50% - 16px);
+        }
+        top: -8px;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid $clr4;
+      }
+    }
+  }
 }
 
 .card-wave {
