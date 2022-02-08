@@ -57,15 +57,6 @@ export const FilterPage = (props) => {
 
   return wines && keywords ? (
     <section className="wines-filter">
-      <div className="control-panel">
-        <button
-          onClick={() => setIsShowFilter(true)}
-          className={`${queries.toString() ? "marked" : ""}`}
-        >
-          filter
-        </button>
-        <button>sort</button>
-      </div>
       <nav
         className="filter-menu"
         style={isShowFilter ? { display: "block" } : null}
@@ -82,6 +73,15 @@ export const FilterPage = (props) => {
         </div>
       </nav>
       <div className="wines-result">
+        <div className="control-panel">
+          <button
+            onClick={() => setIsShowFilter(true)}
+            className={`filter-button ${queries.toString() ? "marked" : ""}`}
+          >
+            filter
+          </button>
+          <button className={`sort-button`}>sort</button>
+        </div>
         {wines.total ? (
           <WinePreviews wines={wines.data} />
         ) : (
