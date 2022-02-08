@@ -12,7 +12,7 @@ export function TasteLike(props) {
     if (!user) return;
     debounce(
       async () => {
-        const recent = await reviewService.set(wine._id, scales, {
+        await reviewService.set(wine._id, scales, {
           type: "structure",
         });
       },
