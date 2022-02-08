@@ -102,7 +102,7 @@ export function PopupMenu(props) {
       onClick={close}
       style={{ height: document.documentElement.scrollHeight + "px" }}
     >
-      <div className="popup-menu" style={position}>
+      <div className="popup-menu hover-box" style={position}>
         {tableRender("wines")}
       </div>
     </div>

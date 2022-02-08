@@ -21,7 +21,6 @@
   }
 
   .review-card {
-    @include hover-box;
     padding: 24px 32px;
 
     .user-rating {

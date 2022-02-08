@@ -8,11 +8,6 @@
     border-radius: $frmrad $frmrad 0 0;
     object-fit: cover;
   }
-  // background: linear-gradient(
-  //   338deg,
-  //   rgba(255, 255, 255, 1) 62%,
-  //   rgba(46, 28, 14, 0) 100%
-  // );
   position: relative;
   cursor: pointer;
   min-width: 210px;
@@ -22,7 +17,6 @@
   height: fit-content;
   width: calc(25% - 20px);
   margin: 0 10px;
-  @include hover-box;
   &:hover {
     .bottle-img {
       transform: translateY(-10px) rotateZ(-1deg);
@@ -314,7 +308,6 @@
           margin: 8px 4px;
           width: calc(100% / 3 - 8px);
           overflow: hidden;
-          @include hover-box;
           .picture {
             user-select: none;
             display: flex;
@@ -450,7 +443,6 @@
           display: block;
           margin: 16px 8px 4px 8px;
           padding: 16px;
-          @include hover-box;
         }
       }
     }
@@ -746,10 +738,8 @@
       width: 100%;
     }
     .wine-select-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
       button {
+        margin: 4px;
         position: relative;
         padding: 6px 8px;
         border: 0;
@@ -762,6 +752,60 @@
           background-color: $clr2;
           color: $clrwht;
           animation: flicker 0.2s 3 ease-in-out;
+        }
+      }
+      .quick-filter-search {
+        display: block;
+        width: 100%;
+        input {
+          background-color: transparent;
+          border: 0;
+          outline: none;
+          border-bottom: 1px solid $clr5;
+          &:focus {
+            border-bottom: 2px solid $clr1;
+          }
+        }
+        .quick-filter-popup {
+          top: 0;
+          position: absolute;
+          z-index: 100;
+          background-color: $clr4;
+          border-radius: $frmrad;
+          display: flex;
+          max-width: 100%;
+          gap: 20px;
+          padding: 8px;
+          box-shadow: 0 8px 8px 0 rgba(51, 48, 48, 0.2),
+            0 -8px 24px 0 rgba(234, 224, 218, 0.3);
+          @include for-mobile-layout {
+            width: calc(100% - 16px);
+            margin: 0 8px;
+          }
+          button {
+            padding: 8px;
+            text-transform: capitalize;
+            margin: 8px 0;
+            &:hover {
+              background-color: $clr2;
+            }
+          }
+          &::before {
+            content: "";
+            position: absolute;
+            @include from-tablet-layout {
+              margin-inline-start: 10px;
+            }
+            @include for-mobile-layout {
+              margin-inline-start: calc(50% - 16px);
+            }
+            top: -8px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid $clr4;
+          }
         }
       }
     }
@@ -812,62 +856,6 @@
     }
     &::-webkit-scrollbar {
       display: none;
-    }
-  }
-  .quick-filter-search {
-    display: block;
-    width: 100%;
-    .search {
-      margin-top: -16px;
-      input {
-        background-color: transparent;
-        border: 0;
-        outline: none;
-        border-bottom: 1px solid $clr5;
-        &:focus {
-          border-bottom: 2px solid $clr1;
-        }
-      }
-    }
-    .quick-filter-popup {
-      top: 0;
-      position: absolute;
-      z-index: 100;
-      background-color: $clr4;
-      border-radius: $frmrad;
-      display: flex;
-      max-width: 100%;
-      gap: 20px;
-      @include for-mobile-layout {
-        width: calc(100% - 16px);
-        margin: 0 8px;
-      }
-      padding: 8px;
-      button {
-        padding: 8px;
-        text-transform: capitalize;
-        margin: 8px 0;
-        &:hover {
-          background-color: $clr2;
-        }
-      }
-      @include hover-box;
-      &::before {
-        content: "";
-        position: absolute;
-        @include from-tablet-layout {
-          margin-inline-start: 10px;
-        }
-        @include for-mobile-layout {
-          margin-inline-start: calc(50% - 16px);
-        }
-        top: -8px;
-        width: 0;
-        height: 0;
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        border-bottom: 8px solid $clr4;
-      }
     }
   }
 }

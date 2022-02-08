@@ -94,7 +94,6 @@
     flex-direction: column;
   }
   padding: 0 16px;
-  @include hover-box;
   > ul {
     display: flex;
     flex-direction: column;
@@ -133,7 +132,6 @@
   position: absolute;
   z-index: 100;
   background-color: $clr4;
-  @include hover-box;
   display: flex;
   flex-direction: column;
   @include for-mobile-layout {
@@ -141,7 +139,6 @@
     margin: 0 8px;
   }
   padding: 0 16px;
-  @include hover-box;
   > ul {
     display: flex;
     flex-direction: column;
@@ -211,10 +208,6 @@
 
 .user-quick-menu {
   position: absolute;
-  // background-color: $clr4;
-  // padding: 16px;
-  // min-width: 200px;
-  @include hover-box;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -232,7 +225,6 @@
   min-height: 320px;
   max-height: 528px;
   padding: 30px 20px;
-  @include hover-box;
   display: flex;
   flex-direction: column;
   .title {

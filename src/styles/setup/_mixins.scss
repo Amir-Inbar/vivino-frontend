@@ -124,16 +124,3 @@
     content: close-quote;
   }
 }
-
-@mixin hover-box {
-  box-shadow: 0 0 0 1px rgba(87, 87, 87, 0.1),
-    0 8px 8px 0 rgba(234, 224, 218, 0.3);
-  border-radius: $frmrad;
-  transition: all 0.1s ease-in-out;
-  @media not all and (pointer: coarse) {
-    &:hover {
-      box-shadow: 0 8px 8px 0 rgba(51, 48, 48, 0.2),
-        0 -8px 24px 0 rgba(234, 224, 218, 0.3);
-    }
-  }
-}

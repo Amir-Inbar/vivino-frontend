@@ -22,7 +22,7 @@ export function WineryPreview({ wine }) {
   }, [wine]);
 
   return winery?.overview ? (
-    <section className="winery-preview">
+    <section className="winery-preview hover-box">
       <section className="information">
         <h2>{winery.name}</h2>
         <div className="country">

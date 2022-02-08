@@ -34,7 +34,7 @@ export function TasteFill(props) {
       );
       return (
         <div
-          className="taste-fill-preview"
+          className="taste-fill-preview hover-box"
           key={"TASTE_FILL_" + idx}
           onClick={() => setQuery("taste", taste.name)}
         >

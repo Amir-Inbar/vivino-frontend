@@ -96,7 +96,7 @@ export function TastePreview(props) {
             );
             return (
               <div className="taste-review" key={"REVIEW_" + idx}>
-                <div className="content">
+                <div className="content hover-box">
                   <div dangerouslySetInnerHTML={{ __html: desc }}></div>
                 </div>
                 <div className="summerize">

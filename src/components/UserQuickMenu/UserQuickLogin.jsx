@@ -39,7 +39,7 @@ export const QuickLogin = ({ isActive, close }) => {
       onClick={close}
     >
       <div
-        className="quick-login-popup"
+        className="quick-login-popup hover-box"
         style={{ top: `${top}px` }}
         onClick={(ev) => ev.stopPropagation()}
       >

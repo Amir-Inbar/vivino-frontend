@@ -37,7 +37,7 @@ export function SearchPopup() {
         style={{ height: height + "px" }}
         onClick={close}
       >
-        <div className="quick-search-result" style={style}>
+        <div className="quick-search-result hover-box" style={style}>
           <ul>
             {result.map((wine, idx) => {
               const re = new RegExp(`(${search})`, "gi");

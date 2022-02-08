@@ -39,7 +39,11 @@ export const UserPopupMenu = () => {
         style={{ height: height + "px" }}
         onClick={close}
       >
-        <div className="user-quick-menu" style={style} onClick={close}>
+        <div
+          className="user-quick-menu hover-box"
+          style={style}
+          onClick={close}
+        >
           <button onClick={logout}>Logout</button>
         </div>
       </div>

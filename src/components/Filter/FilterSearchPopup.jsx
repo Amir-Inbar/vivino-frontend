@@ -4,22 +4,22 @@ import { debounce } from "../../services/util.service";
 
 export function FilterSearchPopup({ data, toggleSelect }) {
   const [result, setResult] = useState([]);
-  const elSearch = useRef(null);
   const elInput = useRef(null);
 
-  const SearchResult = ({ el, result, search, set, close }) => {
-    if (!result?.length || !search) return null;
+  const SearchResult = ({ el, result, set, close }) => {
+    if (!result?.length || !el.value) return null;
     const top = el.offsetTop + el.clientHeight + 6;
     const style = { top: `${top}px`, width: `${el.clientWidth}px` };
     return (
       <div className="quick-filter-popup" style={style}>
         {result.map((res, idx) => {
-          const re = new RegExp(`(${search})`, "gi");
+          const re = new RegExp(`(${el.value})`, "gi");
           const title = {
             __html: `${res.name.replace(re, `<span class="bold">$1</span>`)}`,
           };
           return (
             <button
+              className="bgi"
               onClick={() => set(res.seo || res.name)}
               data-trans={`${res.seo || res.name} `}
               dangerouslySetInnerHTML={title}
@@ -77,19 +77,16 @@ export function FilterSearchPopup({ data, toggleSelect }) {
 
   return (
     <div className="quick-filter-search">
-      <div className="search" ref={elSearch}>
-        <input
-          ref={elInput}
-          onKeyPress={handleKey}
-          onInput={onSearch}
-          onBlur={cleanUp}
-          spellCheck="false"
-        ></input>
-      </div>
+      <input
+        ref={elInput}
+        onKeyPress={handleKey}
+        onInput={onSearch}
+        onBlur={cleanUp}
+        spellCheck="false"
+      ></input>
       <SearchResult
-        el={elSearch.current}
+        el={elInput.current}
         result={result}
-        search={elInput.current?.value}
         set={toggle}
         close={cleanUp}
       />
