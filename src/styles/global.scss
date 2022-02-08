@@ -1,25 +1,26 @@
 // Externals
 
 // Setup
-@import "setup/variables";
-@import "setup/functions";
-@import "setup/mixins";
+@import 'setup/variables';
+@import 'setup/functions';
+@import 'setup/mixins';
 
 // Basics
-@import "basics/typography";
-@import "basics/base";
-@import "basics/helpers";
-@import "basics/layout";
-@import "basics/modals";
-@import "basics/animations";
+@import 'basics/typography';
+@import 'basics/base';
+@import 'basics/helpers';
+@import 'basics/layout';
+@import 'basics/modals';
+@import 'basics/animations';
 
 // Pages
 
 // Components
-@import "./cmps/star-rate";
-@import "./cmps/app-header";
-@import "./cmps/primary-wine";
-@import "./cmps/wine-page";
-@import "./cmps/winery-page";
-@import "./cmps/login-page";
-@import "./cmps/wine-reviews";
+@import './cmps/star-rate';
+@import './cmps/app-header';
+@import './cmps/primary-wine';
+@import './cmps/wine-page';
+@import './cmps/winery-page';
+@import './cmps/login-page';
+@import './cmps/wine-reviews';
+@import './cmps/wine-edit-page';
