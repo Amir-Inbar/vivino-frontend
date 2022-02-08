@@ -698,6 +698,9 @@
     gap: 10px;
     justify-content: flex-end;
     padding: 12px 0;
+    @include for-mobile-layout {
+      margin-bottom: 16px;
+    }
     button {
       margin: 0 16px;
       position: relative;
