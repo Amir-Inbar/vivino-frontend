@@ -5,9 +5,11 @@
     margin: 0 auto;
     @include for-mobile-layout {
       max-width: initial;
+      padding: 0 10px;
     }
     @include for-tablet-layout {
       max-width: $mobile-breakpoint;
+      padding: 0 10px;
     }
     @include for-normal-layout {
       max-width: $tablet-breakpoint;
@@ -15,12 +17,6 @@
     @include for-wide-layout {
       max-width: $normal-breakpoint;
     }
-  }
-  @include for-mobile-layout {
-    padding: 0 10px;
-  }
-  @include for-tablet-layout {
-    padding: 0 10px;
   }
 }
 

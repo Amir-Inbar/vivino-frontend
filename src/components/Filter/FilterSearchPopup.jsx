@@ -65,7 +65,6 @@ export function FilterSearchPopup({ data, toggleSelect }) {
         ) || result[0];
       if (res) {
         toggle(res?.seo || res?.name);
-        elInput.current.value = "";
       }
     }
   };
