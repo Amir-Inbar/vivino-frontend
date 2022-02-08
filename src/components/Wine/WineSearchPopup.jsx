@@ -3,25 +3,26 @@ import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
-import useChangeEffect from "../hooks/useChangeEffect";
-import { debounce } from "../services/util.service";
-import { wineService } from "../services/wine.service";
-import { setFilterBy } from "../store/actions/wineAction";
-import { mediaQuery } from "./AppHeader";
+import useChangeEffect from "../../hooks/useChangeEffect";
+import { debounce } from "../../services/util.service";
+import { wineService } from "../../services/wine.service";
+import { setFilterBy } from "../../store/actions/wineAction";
+import { mediaQuery } from "../AppHeader";
 
-export function SearchPopup(props) {
+export function SearchPopup() {
   const rtl = document.dir === "rtl";
   const location = useLocation();
   const history = useHistory();
   const dispatch = useDispatch();
   const [wines, setWines] = useState(null);
   const filter = useSelector((state) => state.wineModule.filter);
+  const localWines = useSelector((state) => state.wineModule.keywords?.wines);
   const elSearch = useRef(null);
 
-  const SearchResult = ({ result, close, search, el }) => {
+  const SearchResult = ({ result = [], close, search, el }) => {
     const filter = useSelector((state) => state.wineModule.filter);
     if (location.pathname === "/wine") return null;
-    if (!filter?.search || !result?.length) return null;
+    if (!filter?.search) return null;
     const top = el.offsetTop + el.clientHeight + 16;
     const left = el.offsetLeft;
     const right = window.innerWidth - (el.offsetLeft + el.clientWidth);
@@ -40,28 +41,31 @@ export function SearchPopup(props) {
           <ul>
             {result.map((wine, idx) => {
               const re = new RegExp(`(${search})`, "gi");
-              const p1 = `${wine.winery} ${wine.name}`;
-              const p2 = `${wine.region}, ${wine.country}`;
+              const title = wine.winery
+                ? `${wine.winery} ${wine.name}`
+                : wine.name;
+              const key = wine.name?.toLowerCase().replace(" ", "-");
               const html = (text) => ({
                 __html: text.replace(re, `<span class="bold">$1</span>`),
               });
+              const wineId = wine.seo || wine._id;
               return (
                 <li
                   key={"SEARCH_RESULT_" + idx}
-                  onClick={() => history.push(`/wine/${wine._id}`)}
+                  onClick={() => history.push(wineId ? `/wine/${wineId}` : `/`)}
                 >
                   <img src={wine.image} />
                   <div className="title">
                     <p
-                      data-trans={`${wine.winery}-${wine.name}`}
-                      dangerouslySetInnerHTML={html(p1)}
+                      data-trans={key}
+                      dangerouslySetInnerHTML={html(title)}
                     ></p>
-                    {/* <p dangerouslySetInnerHTML={html(p2)}></p> */}
                   </div>
                 </li>
               );
             })}
           </ul>
+          <button>Add new wine</button>
         </div>
       </div>
     );
@@ -77,23 +81,33 @@ export function SearchPopup(props) {
       cleanUp();
       return;
     }
-    debounce(
-      () => {
-        dispatch(setFilterBy({ ...filter, search: target.value }));
-      },
-      "SET_FILTER",
-      500
-    );
+    if (localWines) {
+      dispatch(setFilterBy({ ...filter, search: target.value }));
+    } else {
+      debounce(
+        () => {
+          dispatch(setFilterBy({ ...filter, search: target.value }));
+        },
+        "SET_FILTER",
+        500
+      );
+    }
   };
 
   useChangeEffect(() => {
     if (!filter?.search || location.pathname === "/wine") return;
-    (async () => {
-      try {
-        const wines = await wineService.query({ filter });
-        setWines(wines);
-      } catch {}
-    })();
+    if (localWines) {
+      const re = new RegExp(`(${filter.search})`, "gi");
+      const wines = localWines.filter(({ name }) => name.match(re)).slice(0, 8);
+      setWines({ data: wines });
+    } else {
+      (async () => {
+        try {
+          const wines = await wineService.query({ filter });
+          setWines(wines);
+        } catch {}
+      })();
+    }
   }, [filter]);
 
   const searchStyle =

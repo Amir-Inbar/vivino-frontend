@@ -20,7 +20,7 @@ export function PopupMenu(props) {
             img: "",
             isBold: true,
           },
-          ...keywords.styles
+          ...keywords.data["wine styles"]
             .filter(({ type }) => type === "red")
             .map(({ name, seo }) => ({
               title: name,
@@ -31,7 +31,7 @@ export function PopupMenu(props) {
         ],
         [
           { title: "White", path: "/wine?type=white", img: "", isBold: true },
-          ...keywords.styles
+          ...keywords.data["wine styles"]
             .filter(({ type }) => type === "white")
             .map(({ name, seo }) => ({
               title: name,
@@ -41,7 +41,7 @@ export function PopupMenu(props) {
             })),
         ],
         [
-          ...keywords.types
+          ...keywords.data["wine type"]
             .filter(({ name }) => name !== "red" && name !== "white")
             .map(({ name }) => ({
               title: kababCaseToSentence(name),

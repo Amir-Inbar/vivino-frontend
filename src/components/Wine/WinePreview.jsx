@@ -32,7 +32,7 @@ export const WinePreviews = ({ wines }) => {
         className="wine-preview"
         style={rtl ? { flexDirection: "row-reverse" } : null}
         key={"WINE_" + idx}
-        onClick={() => goTo(item._id)}
+        onClick={() => goTo(item.seo || item._id)}
       >
         {item.background ? (
           <img

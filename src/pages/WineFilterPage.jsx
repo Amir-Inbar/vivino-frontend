@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MultiSelectFilter } from "../components/Filter/FilterMultiSelect";
 import { WinePreviews } from "../components/Wine/WinePreview";
 import { debounce } from "../services/util.service";
 import { wineService } from "../services/wine.service";
 import { setFilterBy } from "../store/actions/wineAction";
 import { ScaleRangeFilter } from "../components/Filter/FilterSelectRange";
 import useInfinityScroll from "../hooks/useInfinityScroll";
+import { WineFilters } from "../components/Wine/WineFilters";
 
 export const FilterPage = (props) => {
   const dispatch = useDispatch();
@@ -71,45 +71,12 @@ export const FilterPage = (props) => {
         style={isShowFilter ? { display: "block" } : null}
       >
         <div className="title">filters</div>
-        <MultiSelectFilter
-          title="wine type"
-          query="eqType"
-          data={keywords.types}
-        />
-        <ScaleRangeFilter
+        {/* <ScaleRangeFilter
           title="average rating"
           fromQuery="from"
           toQuery="to"
-        />
-        <MultiSelectFilter
-          title="Grapes"
-          query="in+Grapes"
-          data={keywords.grapes}
-        />
-        <MultiSelectFilter
-          title="regions"
-          query="inRegion"
-          data={keywords.regions}
-          max={6}
-        />
-        <MultiSelectFilter
-          title="countries"
-          query="inCountry"
-          data={[...new Set(keywords.regions.map((val) => val.country))].map(
-            (val) => ({ name: val })
-          )}
-          max={6}
-        />
-        <MultiSelectFilter
-          title="wine styles"
-          query="inSeo"
-          data={keywords.styles}
-        />
-        <MultiSelectFilter
-          title="food pairings"
-          query="inPairings"
-          data={keywords.food}
-        />
+        /> */}
+        <WineFilters keywords={keywords} />
         <div className="apply">
           <button onClick={() => setIsShowFilter(false)}>close</button>
         </div>
