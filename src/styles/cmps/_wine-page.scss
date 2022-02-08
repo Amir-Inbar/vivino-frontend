@@ -810,10 +810,15 @@
     display: block;
     width: 100%;
     .search {
-      margin-top: -8px;
+      margin-top: -16px;
       input {
+        background-color: transparent;
         border: 0;
+        outline: none;
         border-bottom: 1px solid $clr5;
+        &:focus {
+          border-bottom: 2px solid $clr1;
+        }
       }
     }
     .quick-filter-popup {

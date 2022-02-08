@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRef } from "react";
 import { debounce } from "../../services/util.service";
 
-export function FilterSearchPopup({ data, title, toggleSelect }) {
+export function FilterSearchPopup({ data, toggleSelect }) {
   const [result, setResult] = useState([]);
   const elSearch = useRef(null);
   const elInput = useRef(null);

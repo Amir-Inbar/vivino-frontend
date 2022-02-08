@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
@@ -12,7 +12,6 @@ export const MultiSelectFilter = ({ title, query, data, max = 6 }) => {
   const filter = useSelector((state) => state.wineModule.filter);
   const queries = new URLSearchParams(location.search);
   const [dataToShow, setDataToShow] = useState([]);
-
   const [select, setSelect] = useState([]);
 
   useChangeEffect(() => {
@@ -53,7 +52,6 @@ export const MultiSelectFilter = ({ title, query, data, max = 6 }) => {
       <section className="wine-select-buttons">
         <h2 data-trans={title.toLowerCase().replace(" ", "-")}>{title}</h2>
         <FilterSearchPopup
-          title={title}
           data={data.filter((val) => !dataToShow.find((item) => item === val))}
           toggleSelect={toggleSelect}
         />
