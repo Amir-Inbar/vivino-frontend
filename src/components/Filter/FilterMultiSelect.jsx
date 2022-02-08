@@ -62,7 +62,9 @@ export const MultiSelectFilter = ({ title, query, data, max = 6 }) => {
             <button
               key={`BUTTON_${key}${idx}`}
               className={`${
-                select.includes(seo || name.toLowerCase()) ? "selected" : ""
+                select.includes(seo || name.toLowerCase())
+                  ? "selected bgi"
+                  : "bgi"
               }`}
               onClick={() => toggleSelect(seo || name)}
               data-trans={key}

@@ -102,6 +102,12 @@ button.more {
   }
 }
 
+button.bgi {
+  background-image: url("../../assets/imgs/el-background.png");
+  background-size: 100% 100%;
+  background-position: center;
+}
+
 input {
   outline-color: $clr2;
   border: 2px solid $clr4;

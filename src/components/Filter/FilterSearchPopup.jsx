@@ -7,7 +7,7 @@ export function FilterSearchPopup({ data, toggleSelect }) {
   const elSearch = useRef(null);
   const elInput = useRef(null);
 
-  const SearchResult = ({ el, result, search, toggleSelect, close }) => {
+  const SearchResult = ({ el, result, search, set, close }) => {
     if (!result?.length || !search) return null;
     const top = el.offsetTop + el.clientHeight + 6;
     const style = { top: `${top}px`, width: `${el.clientWidth}px` };
@@ -20,7 +20,7 @@ export function FilterSearchPopup({ data, toggleSelect }) {
           };
           return (
             <button
-              onClick={() => toggleSelect(res.seo || res.name)}
+              onClick={() => set(res.seo || res.name)}
               data-trans={`${res.seo || res.name} `}
               dangerouslySetInnerHTML={title}
             ></button>
@@ -36,7 +36,7 @@ export function FilterSearchPopup({ data, toggleSelect }) {
         setResult(null);
       },
       `FILTER_CLEAR_${elInput.current.value}`,
-      500
+      1000
     );
   };
 
@@ -82,7 +82,6 @@ export function FilterSearchPopup({ data, toggleSelect }) {
           ref={elInput}
           onKeyPress={handleKey}
           onInput={onSearch}
-          onFocus={onSearch}
           onBlur={cleanUp}
           spellCheck="false"
         ></input>
@@ -91,8 +90,8 @@ export function FilterSearchPopup({ data, toggleSelect }) {
         el={elSearch.current}
         result={result}
         search={elInput.current?.value}
+        set={toggle}
         close={cleanUp}
-        toggleSelect={toggle}
       />
     </div>
   );
