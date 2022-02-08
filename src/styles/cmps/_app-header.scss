@@ -148,6 +148,7 @@
     list-style-type: none;
     padding: 12px 14px;
     li {
+      margin: 4px 0;
       height: 32px;
       display: flex;
       align-items: center;
@@ -167,13 +168,23 @@
         height: 48px;
         transform: rotate(90deg);
       }
-      p {
-        span.bold {
-          color: $clr1;
-          font-weight: 700;
-        }
-        font-size: 0.8125em;
+      .title {
+        width: 100%;
         margin-inline-start: 32px;
+        p {
+          margin: 0;
+          padding: 0;
+          span.bold {
+            color: $clr1;
+            font-weight: 700;
+          }
+          font-size: 0.8125em;
+          line-height: 1.25em;
+          max-width: calc(100% - 32px);
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+        }
       }
     }
   }

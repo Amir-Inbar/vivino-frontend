@@ -18,11 +18,10 @@ export function SearchPopup(props) {
   const filter = useSelector((state) => state.wineModule.filter);
   const elSearch = useRef(null);
 
-  const SearchResult = ({ result, close, search }) => {
+  const SearchResult = ({ result, close, search, el }) => {
     const filter = useSelector((state) => state.wineModule.filter);
     if (location.pathname === "/wine") return null;
     if (!filter?.search || !result?.length) return null;
-    const el = elSearch.current;
     const top = el.offsetTop + el.clientHeight + 16;
     const left = el.offsetLeft;
     const right = window.innerWidth - (el.offsetLeft + el.clientWidth);
@@ -41,22 +40,24 @@ export function SearchPopup(props) {
           <ul>
             {result.map((wine, idx) => {
               const re = new RegExp(`(${search})`, "gi");
-              const title = {
-                __html: `${wine.winery.replace(
-                  re,
-                  `<span class="bold">$1</span>`
-                )} ${wine.name.replace(re, `<span class="bold">$1</span>`)}`,
-              };
+              const p1 = `${wine.winery} ${wine.name}`;
+              const p2 = `${wine.region}, ${wine.country}`;
+              const html = (text) => ({
+                __html: text.replace(re, `<span class="bold">$1</span>`),
+              });
               return (
                 <li
                   key={"SEARCH_RESULT_" + idx}
                   onClick={() => history.push(`/wine/${wine._id}`)}
                 >
                   <img src={wine.image} />
-                  <p
-                    data-trans={`${wine.winery}-${wine.name}`}
-                    dangerouslySetInnerHTML={title}
-                  ></p>
+                  <div className="title">
+                    <p
+                      data-trans={`${wine.winery}-${wine.name}`}
+                      dangerouslySetInnerHTML={html(p1)}
+                    ></p>
+                    {/* <p dangerouslySetInnerHTML={html(p2)}></p> */}
+                  </div>
                 </li>
               );
             })}
@@ -81,7 +82,7 @@ export function SearchPopup(props) {
         dispatch(setFilterBy({ ...filter, search: target.value }));
       },
       "SET_FILTER",
-      1000
+      500
     );
   };
 
@@ -114,6 +115,7 @@ export function SearchPopup(props) {
         result={wines?.data}
         search={filter?.search}
         close={cleanUp}
+        el={elSearch.current}
       />
     </>
   );
