@@ -9,6 +9,7 @@ export function StarRate(props) {
   const box = total * size;
   const [rate, setRate] = useState(inRate || total);
   const [tempRate, setTempRate] = useState(null);
+  const [touchX, setTouchX] = useState(null);
 
   const style = isEditable ? { cursor: "pointer" } : {};
   const styleStar = { width: size + "px", height: size + "px" };
@@ -21,9 +22,9 @@ export function StarRate(props) {
     ...style,
   };
 
-  const hover = (ev, isTouch) => {
+  const mouseHover = (ev) => {
     if (!isEditable) return;
-    const x = isTouch ? ev.touches[0].clientX : ev.pageX;
+    const x = ev.pageX;
     const { left, right, width } =
       ev.target.parentElement.getBoundingClientRect();
     const position = Math.min(rtl ? width - (right - x) : x - left, box);
@@ -36,6 +37,23 @@ export function StarRate(props) {
     set(tempRate);
   };
 
+  const touchMove = (ev) => {
+    const x = ev.touches[0].clientX;
+    if (!touchX) {
+      setTouchX(x);
+    } else {
+      const diff = Math.round((touchX - x) / 16);
+      const rate = Math.min(Math.max(tempRate + diff, 1), 5);
+      setTempRate(rate);
+    }
+  };
+
+  const touchEnd = (ev) => {
+    setRate(tempRate);
+    set(tempRate);
+    setTouchX(null);
+  };
+
   return (
     <div
       className="stars-container"
@@ -43,12 +61,7 @@ export function StarRate(props) {
       onBlur={() => setTempRate(null)}
       onMouseLeave={() => setTempRate(null)}
     >
-      <div
-        className="stars"
-        style={styleEmptyStar}
-        onMouseMove={hover}
-        onTouchMove={(ev) => hover(ev, true)}
-      >
+      <div className="stars" style={styleEmptyStar} onMouseMove={mouseHover}>
         {[...Array(total)].map(() => (
           <img
             style={styleStar}
@@ -57,12 +70,7 @@ export function StarRate(props) {
           />
         ))}
       </div>
-      <div
-        className="stars"
-        style={styleFullStar}
-        onMouseMove={hover}
-        onTouchMove={(ev) => hover(ev, true)}
-      >
+      <div className="stars" style={styleFullStar} onMouseMove={mouseHover}>
         {[...Array(total)].map(() => (
           <img style={styleStar} src={fullStar} key={"FULL_STAR_" + makeId()} />
         ))}
