@@ -57,7 +57,7 @@ export const MultiSelectFilter = ({ title, query, data, max = 6 }) => {
         />
         {dataToShow.map((item, idx) => {
           const { name, seo } = item;
-          const key = seo || name?.toLowerCase().replace(" ", "-");
+          const key = seo || name.toLowerCase().replace(" ", "-");
           return (
             <button
               key={`BUTTON_${key}${idx}`}
