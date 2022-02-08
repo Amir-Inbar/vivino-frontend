@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { authService } from "../services/auth.service";
-import { setUser } from "../store/actions/userActions";
+import { authService } from "../../services/auth.service";
+import { setUser } from "../../store/actions/userActions";
 
-export const LoginPage = () => {
+export const QuickLogin = ({ isActive, close }) => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [fullname, setFullname] = useState("");
-  const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.wineModule.user);
+  const height = document.documentElement.scrollHeight;
+  const top = document.documentElement.scrollTop + window.innerHeight / 2;
 
   const submit = async () => {
     try {
@@ -25,16 +25,25 @@ export const LoginPage = () => {
     } catch (err) {
       console.log(err);
     }
+    close(false);
   };
 
   useEffect(() => {
-    if (user) history.goBack();
+    close();
   }, [user]);
 
-  return (
-    <section className="login-section">
-      <div className="login">
-        <p className="title">Sign up</p>
+  return isActive ? (
+    <div
+      className="background-dimm"
+      style={{ height: height + "px" }}
+      onClick={close}
+    >
+      <div
+        className="quick-login-popup"
+        style={{ top: `${top}px` }}
+        onClick={(ev) => ev.stopPropagation()}
+      >
+        <p className="title">{isSignUpMode ? "Sign up" : "Sign in"}</p>
         <form>
           <input
             placeholder="Enter Username"
@@ -66,7 +75,10 @@ export const LoginPage = () => {
         </form>
         <p className="alternative">OR</p>
         <button className="gmail-login-btn">
-          <span></span> Login with Gmail
+          <span>{isSignUpMode ? "Sign up" : "Login"} with Gmail</span>
+        </button>
+        <button className="facebook-login-btn">
+          <span>{isSignUpMode ? "Sign up" : "Login"} with Facebook</span>
         </button>
         <hr />
         <ul className="sign-in">
@@ -76,6 +88,6 @@ export const LoginPage = () => {
           </li>
         </ul>
       </div>
-    </section>
-  );
+    </div>
+  ) : null;
 };

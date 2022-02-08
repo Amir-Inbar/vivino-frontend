@@ -6,7 +6,7 @@ import {
 import { tryRequire } from "../services/util.service";
 import { PopupMenu } from "./PopupMenu";
 import { SearchPopup } from "./SearchPopup";
-import { UserPopupMenu } from "./UserPopupMenu";
+import { UserPopupMenu } from "./UserQuickMenu/UserPopupMenu";
 
 export const mediaQuery = { mobile: 540 };
 
@@ -49,7 +49,7 @@ export function AppHeader() {
               <img src={tryRequire("imgs/icons/wines.svg")} />
               <span data-trans="wines">wines</span>
             </li>
-            <li className="pairings">
+            {/* <li className="pairings">
               <img src={tryRequire("imgs/icons/cheese.svg")} />
               <span data-trans="pairings">pairings</span>
             </li>
@@ -64,7 +64,7 @@ export function AppHeader() {
             <li className="awards">
               <img src={tryRequire("imgs/icons/awards.svg")} />
               <span data-trans="awards">awards</span>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </div>

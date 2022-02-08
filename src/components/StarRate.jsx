@@ -21,14 +21,12 @@ export function StarRate(props) {
     ...style,
   };
 
-  const hover = (el) => {
+  const hover = (ev, isTouch) => {
     if (!isEditable) return;
+    const x = isTouch ? ev.touches[0].clientX : ev.pageX;
     const { left, right, width } =
-      el.target.parentElement.getBoundingClientRect();
-    const position = Math.min(
-      rtl ? width - (right - el.pageX) : el.pageX - left,
-      box
-    );
+      ev.target.parentElement.getBoundingClientRect();
+    const position = Math.min(rtl ? width - (right - x) : x - left, box);
     setTempRate(Math.max(Math.round(position / (size / 2) + 0.5) / 2, 1));
   };
 
@@ -45,7 +43,12 @@ export function StarRate(props) {
       onBlur={() => setTempRate(null)}
       onMouseLeave={() => setTempRate(null)}
     >
-      <div className="stars" style={styleEmptyStar} onMouseMove={hover}>
+      <div
+        className="stars"
+        style={styleEmptyStar}
+        onMouseMove={hover}
+        onTouchMove={(ev) => hover(ev, true)}
+      >
         {[...Array(total)].map(() => (
           <img
             style={styleStar}
@@ -54,7 +57,12 @@ export function StarRate(props) {
           />
         ))}
       </div>
-      <div className="stars" style={styleFullStar} onMouseMove={hover}>
+      <div
+        className="stars"
+        style={styleFullStar}
+        onMouseMove={hover}
+        onTouchMove={(ev) => hover(ev, true)}
+      >
         {[...Array(total)].map(() => (
           <img style={styleStar} src={fullStar} key={"FULL_STAR_" + makeId()} />
         ))}

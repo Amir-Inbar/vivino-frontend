@@ -38,7 +38,7 @@ export const HomePage = () => {
   return (
     <section className="primary-wines">
       <h1>Top rated in your area</h1>
-      <PriceRangeSwitcher />
+      {/* <PriceRangeSwitcher /> */}
       <WineSlider wines={wines?.data} />
     </section>
   );
