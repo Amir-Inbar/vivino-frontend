@@ -3,7 +3,10 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import useChangeEffect from "../../hooks/useChangeEffect";
-import { extractConditionKey } from "../../services/util.service";
+import {
+  extractConditionKey,
+  sentenceToKababCase,
+} from "../../services/util.service";
 import { FilterSearchPopup } from "./FilterSearchPopup";
 
 export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
@@ -50,14 +53,14 @@ export const MultiSelectFilter = ({ title, query, data, max = 8 }) => {
   return data ? (
     <>
       <section className="wine-select-buttons">
-        <h2 data-trans={title.toLowerCase().replace(" ", "-")}>{title}</h2>
+        <h2 data-trans={sentenceToKababCase(title)}>{title}</h2>
         <FilterSearchPopup
           data={data.filter((val) => !dataToShow.find((item) => item === val))}
           toggleSelect={toggleSelect}
         />
         {dataToShow.map((item, idx) => {
           const { name, seo } = item;
-          const key = seo || name.toLowerCase().replace(" ", "-");
+          const key = seo || sentenceToKababCase(name);
           return (
             <button
               key={`BUTTON_${key}${idx}`}

@@ -237,7 +237,15 @@
     display: flex;
     flex-direction: column;
     margin-top: 0em;
+    p {
+      text-transform: none;
+      margin: 0 0 6px 0;
+      &.warning {
+        color: red;
+      }
+    }
     input {
+      text-align: center;
       outline-color: $clr2;
       border: 2px solid $clr4;
       height: 44px;

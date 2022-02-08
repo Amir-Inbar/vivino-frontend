@@ -1,6 +1,10 @@
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { kababCaseToSentence, tryRequire } from "../../services/util.service";
+import {
+  kababCaseToSentence,
+  sentenceToKababCase,
+  tryRequire,
+} from "../../services/util.service";
 import { WineRate } from "./Review/WineRatePreview";
 
 export function WineHeader(props) {
@@ -31,7 +35,7 @@ export function WineHeader(props) {
               onClick={() => history.push(keyword.path)}
               className="tag"
               key={"KEYWORD_" + idx}
-              data-trans={keyword.title.toLowerCase()}
+              data-trans={sentenceToKababCase(keyword.title)}
             >
               {keyword.title}
             </span>
@@ -51,7 +55,11 @@ export function WineHeader(props) {
           />
         </div>
         <div className="content">
-          <h2 onClick={() => history.push(`/winery/${wine.wineryId}`)}>
+          <h2
+            onClick={() =>
+              history.push(`/winery/${sentenceToKababCase(wine.winery)}`)
+            }
+          >
             {wine.winery}
           </h2>
           <h1>

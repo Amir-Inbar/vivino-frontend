@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRef } from "react";
-import { debounce } from "../../services/util.service";
+import { debounce, sentenceToKababCase } from "../../services/util.service";
 
 export function FilterSearchPopup({ data, toggleSelect }) {
   const [result, setResult] = useState([]);
@@ -21,7 +21,7 @@ export function FilterSearchPopup({ data, toggleSelect }) {
             <button
               className="bgi"
               onClick={() => set(res.seo || res.name)}
-              data-trans={`${res.seo || res.name} `}
+              data-trans={`${res.seo || sentenceToKababCase(res.name)} `}
               dangerouslySetInnerHTML={title}
             ></button>
           );

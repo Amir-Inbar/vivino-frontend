@@ -6,26 +6,33 @@ import { setUser } from "../../store/actions/userActions";
 
 export const QuickLogin = ({ isActive, close }) => {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [fullname, setFullname] = useState("");
+  const [loginUser, setLoginUser] = useState({});
+  const [isAfterTry, setIsAfterTry] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.wineModule.user);
   const height = document.documentElement.scrollHeight;
   const top = document.documentElement.scrollTop + window.innerHeight / 2;
 
+  useEffect(() => {
+    setLoginUser({});
+    setIsAfterTry(false);
+  }, [isActive]);
+
   const submit = async () => {
     try {
       const user = isSignUpMode
-        ? await authService.signup({ username, fullname, password })
-        : await authService.login({ username, password });
+        ? await authService.signup(loginUser)
+        : await authService.login(loginUser);
       if (user) {
         dispatch(setUser(user));
+        close(false);
+      } else {
+        setIsAfterTry(true);
+        console.log("login failed");
       }
     } catch (err) {
       console.log(err);
     }
-    close(false);
   };
 
   useEffect(() => {
@@ -46,17 +53,23 @@ export const QuickLogin = ({ isActive, close }) => {
         <p className="title">{isSignUpMode ? "Sign up" : "Sign in"}</p>
         <form onSubmit={submit}>
           <input
-            placeholder="Enter Username"
+            placeholder="Enter email address"
             className="username"
-            value={username}
-            onChange={(ev) => setUsername(ev.target.value)}
+            value={loginUser?.username || ""}
+            onChange={(ev) =>
+              setLoginUser({ ...loginUser, username: ev.target.value })
+            }
+            type="email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
           />
           {isSignUpMode ? (
             <input
               placeholder="Enter Full Name"
               className="fullname"
-              value={fullname}
-              onChange={(ev) => setFullname(ev.target.value)}
+              value={loginUser?.fullname || ""}
+              onChange={(ev) =>
+                setLoginUser({ ...loginUser, fullname: ev.target.value })
+              }
             />
           ) : null}
           <div>
@@ -65,10 +78,15 @@ export const QuickLogin = ({ isActive, close }) => {
               autoComplete=""
               type="password"
               className="password"
-              value={password}
-              onChange={(ev) => setPassword(ev.target.value)}
+              value={loginUser?.password || ""}
+              onChange={(ev) =>
+                setLoginUser({ ...loginUser, password: ev.target.value })
+              }
             />
           </div>
+          {isAfterTry ? (
+            <p className="warning">Login failed, wrong username or password</p>
+          ) : null}
           <button type="submit" onClick={submit}>
             {isSignUpMode ? "Sign up" : "Log in"}
           </button>

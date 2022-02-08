@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import useChangeEffect from "../../hooks/useChangeEffect";
-import { debounce } from "../../services/util.service";
+import { debounce, sentenceToKababCase } from "../../services/util.service";
 import { wineService } from "../../services/wine.service";
 import { setFilterBy } from "../../store/actions/wineAction";
 import { mediaQuery } from "../AppHeader";
@@ -44,7 +44,6 @@ export function SearchPopup() {
               const title = wine.winery
                 ? `${wine.winery} ${wine.name}`
                 : wine.name;
-              const key = wine.name?.toLowerCase().replace(" ", "-");
               const html = (text) => ({
                 __html: text.replace(re, `<span class="bold">$1</span>`),
               });
@@ -57,7 +56,7 @@ export function SearchPopup() {
                   <img src={wine.image} />
                   <div className="title">
                     <p
-                      data-trans={key}
+                      data-trans={sentenceToKababCase(wine.name)}
                       dangerouslySetInnerHTML={html(title)}
                     ></p>
                   </div>

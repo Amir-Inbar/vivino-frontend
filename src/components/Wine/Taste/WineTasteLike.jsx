@@ -12,7 +12,6 @@ export function TasteLike(props) {
         const recent = await reviewService.set(wine._id, scales, {
           type: "structure",
         });
-        console.log(recent);
       },
       "WINE_SCALES",
       2000
