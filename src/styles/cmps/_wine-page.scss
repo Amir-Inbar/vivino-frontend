@@ -753,6 +753,9 @@
           color: $clrwht;
           animation: flicker 0.2s 3 ease-in-out;
         }
+        &:hover {
+          background-color: $clr2;
+        }
       }
       .quick-filter-search {
         display: block;

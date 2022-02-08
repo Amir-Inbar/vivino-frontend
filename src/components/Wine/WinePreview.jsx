@@ -29,7 +29,7 @@ export const WinePreviews = ({ wines }) => {
     };
     return (
       <div
-        className="wine-preview hover-box"
+        className="wine-preview hover-box bgi"
         style={rtl ? { flexDirection: "row-reverse" } : null}
         key={"WINE_" + idx}
         onClick={() => goTo(item.seo || item._id)}
