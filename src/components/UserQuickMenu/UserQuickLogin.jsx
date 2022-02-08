@@ -44,7 +44,7 @@ export const QuickLogin = ({ isActive, close }) => {
         onClick={(ev) => ev.stopPropagation()}
       >
         <p className="title">{isSignUpMode ? "Sign up" : "Sign in"}</p>
-        <form>
+        <form onSubmit={submit}>
           <input
             placeholder="Enter Username"
             className="username"
