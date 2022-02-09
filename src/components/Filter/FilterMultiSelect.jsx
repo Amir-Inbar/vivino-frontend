@@ -61,7 +61,6 @@ export const MultiSelectFilter = ({ title, query, data, max = 6 }) => {
       setDataToShow(show.length ? show : data.slice(0, 6));
     } else {
       const re = new RegExp(`^(${target.value})`, "gi");
-      console.log(select);
       const result = data
         .filter(
           ({ name, seo }) =>
