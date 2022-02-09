@@ -79,6 +79,7 @@ export const FilterQuickSort = () => {
         ref={elButton}
         onClick={() => setIsActive(!isActive)}
         className={`sort-button ${isActive || isSorted() ? "marked" : ""}`}
+        style={isActive ? { zIndex: 100 } : null}
       >
         sort
       </button>
