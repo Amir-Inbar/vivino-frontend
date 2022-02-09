@@ -4,10 +4,7 @@ import {
   useHistory,
   useLocation,
 } from "react-router-dom/cjs/react-router-dom.min";
-import {
-  extractConditionKey,
-  kababCaseToSentence,
-} from "../../services/util.service";
+import { extractConditionKey } from "../../services/util.service";
 
 export const FilterSelection = ({ keywords, filter, count = 0 }) => {
   const [select, setSelect] = useState([]);

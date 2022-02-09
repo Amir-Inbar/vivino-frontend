@@ -7,6 +7,13 @@ export function setFilterBy(filter) {
   }
 }
 
+export function setSortBy(sort) {
+  return (dispatch) => {
+    sort = Object.fromEntries(Object.entries(sort).filter(([key, val]) => val !== null));
+    dispatch({ type: 'SET_SORT', sort });
+  }
+}
+
 export function setKeywords(keywords) {
   return (dispatch) => {
     dispatch({ type: 'SET_KEYWORDS', keywords });

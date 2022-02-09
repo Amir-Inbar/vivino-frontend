@@ -7,12 +7,14 @@ import { setFilterBy } from "../store/actions/wineAction";
 import useInfinityScroll from "../hooks/useInfinityScroll";
 import { WineFilters } from "../components/Wine/WineFilters";
 import { FilterSelection } from "../components/Filter/FilterQuerySelected";
+import { FilterQuickSort } from "../components/Filter/FilterQuickSort";
 
 export const FilterPage = (props) => {
   const dispatch = useDispatch();
   const queries = new URLSearchParams(props.location.search);
   const [wines, setWines] = useState(null);
   const [isShowFilter, setIsShowFilter] = useState(null);
+  const sort = useSelector((state) => state.wineModule.sort);
   const filter = useSelector((state) => state.wineModule.filter);
   const keywords = useSelector((state) => state.wineModule.keywords);
 
@@ -28,7 +30,9 @@ export const FilterPage = (props) => {
     wines?.page.index < wines?.page.total
   );
 
-  const queryToFilter = () => {
+  const isFiltered = () => filter && Object.keys(filter).length;
+
+  useEffect(() => {
     dispatch(
       setFilterBy({
         ...filter,
@@ -40,21 +44,21 @@ export const FilterPage = (props) => {
         inPairings: queries.get("pairings"),
       })
     );
-  };
-
-  useEffect(() => {
-    debounce(() => queryToFilter(), "SET_FILTER", filter ? 500 : 0);
   }, [props.location.search]);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const wines = await wineService.query({ filter });
-        setWines(wines);
-        window.scrollTo(0, 0);
-      } catch {}
-    })();
-  }, [filter]);
+    debounce(
+      async () => {
+        try {
+          const wines = await wineService.query({ filter, sort });
+          setWines(wines);
+          window.scrollTo(0, 0);
+        } catch {}
+      },
+      "SEND_GET_REQ",
+      1000
+    );
+  }, [filter, sort]);
 
   return wines && keywords ? (
     <section className="filter-continaer">
@@ -67,11 +71,11 @@ export const FilterPage = (props) => {
         <div className="buttons">
           <button
             onClick={() => setIsShowFilter(true)}
-            className={`filter-button ${queries.toString() ? "marked" : ""}`}
+            className={`filter-button ${isFiltered() ? "marked" : ""}`}
           >
             filter
           </button>
-          <button className={`sort-button`}>sort</button>
+          <FilterQuickSort />
         </div>
       </div>
       <div className="wines-filter">

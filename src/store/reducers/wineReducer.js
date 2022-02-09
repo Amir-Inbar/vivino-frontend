@@ -3,11 +3,13 @@ const INITIAL_STATE = {
   page: null,
   wine: null,
   total: null,
-  filter: null,
+  filter: {},
+  sort: {},
   keywords: null,
 };
 
 export function wineReducer(state = INITIAL_STATE, action) {
+  console.log(action);
   switch (action.type) {
     case 'SET_WINES':
       return {
@@ -32,6 +34,12 @@ export function wineReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         filter: action.filter,
+      }
+    }
+    case 'SET_SORT': {
+      return {
+        ...state,
+        sort: action.sort,
       }
     }
     case 'ADD_WINE':
