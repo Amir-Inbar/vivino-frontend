@@ -30,7 +30,7 @@ export const FilterQuickSort = () => {
         case 1:
           return "up";
         default:
-          return null;
+          return "";
       }
     };
     return isActive ? (

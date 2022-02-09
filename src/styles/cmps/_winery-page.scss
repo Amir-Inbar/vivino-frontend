@@ -129,7 +129,7 @@
     top: -26px;
     padding: 0 8px;
     .title {
-      color: $clr5;
+      color: $clrblk;
       font-size: 1.25em;
       text-transform: uppercase;
       opacity: 0.8;
@@ -165,7 +165,7 @@
             font-weight: 700;
           }
           :not(:first-child) {
-            color: $clr5;
+            color: $clrblk;
             opacity: 0.8;
           }
         }
@@ -191,7 +191,7 @@
     text-transform: capitalize;
   }
   > p {
-    color: $clr5;
+    color: $clrblk;
     opacity: 0.8;
   }
 }

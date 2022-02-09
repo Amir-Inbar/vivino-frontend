@@ -59,7 +59,7 @@
         font-size: 2.6em;
       }
       .total-ratings {
-        color: $clr5;
+        color: $clrblk;
       }
       .sale-status {
         padding: 24px 0;
@@ -83,7 +83,7 @@
       padding: 0;
       font-size: 1em;
       font-weight: 400;
-      color: $clr5;
+      color: $clrblk;
       text-transform: capitalize;
     }
     .wine-country {
@@ -102,6 +102,7 @@
 }
 
 .wine-header {
+  margin: 0 0 24px 0;
   width: 100%;
   background-color: #f7f3f0;
   background: linear-gradient(
@@ -231,7 +232,7 @@
                 background-color: $clr2;
               }
               &.unrated {
-                background-color: $clr5;
+                background-color: $clrblk;
                 opacity: 0.3;
               }
               &:hover {
@@ -264,7 +265,7 @@
     button {
       &::after {
         content: "";
-        border: solid $clr5;
+        border: solid $clrblk;
         border-width: 0 2px 2px 0;
         display: inline-block;
         padding: 3px;
@@ -455,7 +456,7 @@
   button {
     &::after {
       content: "";
-      border: solid $clr5;
+      border: solid $clrblk;
       border-width: 0 2px 2px 0;
       display: inline-block;
       padding: 3px;
@@ -512,7 +513,7 @@
     text-transform: capitalize;
   }
   > p {
-    color: $clr5;
+    color: $clrblk;
   }
 }
 
