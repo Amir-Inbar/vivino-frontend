@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { makeId, tryRequire } from "../../../services/util.service";
+
 export const ReviewsPreview = ({ reviews, setLike }) => {
   var moment = require("moment");
   const [activeReview, setActiveReview] = useState(null);
@@ -28,17 +29,13 @@ export const ReviewsPreview = ({ reviews, setLike }) => {
               className="reviews-btn flex align-center"
               onClick={() =>
                 !idx
-                  ? setLike(review._id)
+                  ? setLike(review)
                   : setActiveReview(activeReview === review ? null : review)
               }
               key={"REPLY_" + makeId()}
             >
               <img src={tryRequire(`imgs/icons/${el}.svg`)} alt="" />
-              <span>
-                {!idx
-                  ? review.likes?.split(",").filter((like) => like).length
-                  : review.replies?.split(",").filter((like) => like).length}
-              </span>
+              <span>{!idx ? review.likes : review.replies}</span>
             </div>
           ))}
         </div>

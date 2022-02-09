@@ -21,8 +21,8 @@ async function set(wineId, review, queries) {
   return httpService.post(API + '/' + wineId, review, queries);
 }
 
-async function update(reviewId, queries) {
-  return httpService.put(API + '/' + reviewId, null, { like: reviewId });
+async function update(reviewId, content, queries) {
+  return httpService.put(API + '/' + reviewId, content, queries);
 }
 // async function remove(id) {
 //   return serverService.delete(API + id);

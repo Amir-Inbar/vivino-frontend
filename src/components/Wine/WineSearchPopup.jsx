@@ -27,7 +27,7 @@ export function SearchPopup() {
     const left = el.offsetLeft;
     const right = window.innerWidth - (el.offsetLeft + el.clientWidth);
     const height = document.documentElement.scrollHeight;
-    const style = { top: `${top}px` };
+    const style = { top: `${top}px`, minWidth: `${el.clientWidth}px` };
     if (window.innerWidth > mediaQuery.mobile)
       if (rtl) style.right = `${right}px`;
       else style.left = `${left}px`;

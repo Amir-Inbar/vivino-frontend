@@ -110,35 +110,37 @@ export const WineReviews = ({ wineId, wine }) => {
     );
   };
 
-  const setLike = async (reviewId) => {
-    const review = helpfulReviews.data.find(
-      (review) => review._id === reviewId
-    );
-    if (review.likes.split(",").includes("" + user._id)) {
-      review.likes = review.likes
-        .split(",")
-        .filter((like) => like !== "" + user._id)
-        .join(",");
-    } else {
-      review.likes += user._id + ",";
-    }
-    // setHelpfulReviews(
-    //   helpfulReviews.data.map((rv) => (rv._id === review._id ? review : rv))
-    // );
+  const setLike = async (review) => {
+    if (!user) return;
     try {
-      await reviewService.update(review._id);
-      setHelpfulReviews({
-        ...helpfulReviews,
-        data: helpfulReviews.data.map((rv) =>
-          rv._id === review._id ? review : rv
-        ),
+      const res = await reviewService.update(review._id, {
+        like: review.ilike ? false : true,
       });
+      if (res) {
+        const updateStates = (state, fn, id) => {
+          fn({
+            ...state,
+            data: [
+              ...state.data.map((rev) => {
+                if (rev._id !== id) return rev;
+                return {
+                  ...rev,
+                  ilike: rev.ilike ? 0 : 1,
+                  likes: !rev.ilike ? rev.likes + 1 : rev.likes - 1,
+                };
+              }),
+            ],
+          });
+        };
+        updateStates(helpfulReviews, setHelpfulReviews, review._id);
+        updateStates(recentReviews, setRecentReviews, review._id);
+        updateStates(userReviews, setUserReviews, review._id);
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
-  // if (!reviewsSections[reviewSection]) return <div></div>;
   let reviewsToDisplay = reviewsSections[reviewSection];
   return (
     <>
