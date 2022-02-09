@@ -8,12 +8,11 @@
     border: 0;
     text-transform: capitalize;
     color: $clrwht;
-    background-color: $clr2;
+    background-color: $clr1;
     max-height: 36px;
     &.marked {
-      border-color: $clr1;
       color: $clrwht;
-      background-color: $clr1;
+      background-color: $clr2;
     }
   }
   .control-panel {

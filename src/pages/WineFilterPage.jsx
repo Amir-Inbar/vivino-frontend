@@ -58,7 +58,7 @@ export const FilterPage = (props) => {
         } catch {}
       },
       "SEND_GET_REQ",
-      1000
+      100
     );
   }, [filter, sort]);
 
@@ -73,7 +73,7 @@ export const FilterPage = (props) => {
         <div className="buttons">
           <button
             onClick={() => setIsShowFilter(true)}
-            className={`filter-button ${isFiltered() ? "marked" : ""}`}
+            className={`filter-button bgi ${isFiltered() ? "marked" : ""}`}
           >
             filter
           </button>
