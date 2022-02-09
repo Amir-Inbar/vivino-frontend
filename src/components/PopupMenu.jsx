@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { kababCaseToSentence } from "../services/util.service";
+import { mediaQuery } from "./AppHeader";
 
 export function PopupMenu(props) {
   const rtl = document.dir === "rtl";
@@ -26,7 +27,7 @@ export function PopupMenu(props) {
               title: name,
               img: "",
               seo,
-              path: `/wine?seo=${seo}`,
+              path: `/wine?style=${seo}`,
             })),
         ],
         [
@@ -37,7 +38,7 @@ export function PopupMenu(props) {
               title: name,
               img: "",
               seo,
-              path: `/wine?seo=${seo}`,
+              path: `/wine?style=${seo}`,
             })),
         ],
         [
@@ -62,11 +63,16 @@ export function PopupMenu(props) {
 
   if (!config || !menus) return null;
 
-  const top = () => config.target.offsetTop + config.target.clientHeight + 8;
-  const left = () => config.target.offsetLeft - 20;
+  const isMobile = window.innerWidth < mediaQuery.mobile;
+
+  const top = () =>
+    isMobile ? 0 : config.target.offsetTop + config.target.clientHeight + 8;
+  const left = () => (isMobile ? 0 : config.target.offsetLeft - 20);
   const right = () =>
-    window.innerWidth -
-    (config.target.offsetLeft + config.target.clientWidth + 20);
+    isMobile
+      ? 0
+      : window.innerWidth -
+        (config.target.offsetLeft + config.target.clientWidth + 20);
 
   const tableRender = () => {
     const menu = menus[config.type];
@@ -98,7 +104,11 @@ export function PopupMenu(props) {
     <div
       className="background-dimm"
       onClick={close}
-      style={{ height: document.documentElement.scrollHeight + "px" }}
+      style={
+        !isMobile
+          ? { height: document.documentElement.scrollHeight + "px" }
+          : null
+      }
     >
       <div className="popup-menu hover-box" style={position}>
         {tableRender("wines")}

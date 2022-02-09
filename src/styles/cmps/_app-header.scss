@@ -88,26 +88,32 @@
   margin-top: 2px;
   z-index: 100;
   background-color: $clr4;
-  border-radius: 8px;
   display: flex;
   @include for-mobile-layout {
+    border-radius: 0;
     flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    max-height: 100%;
+    overflow-y: scroll;
+  }
+  @include from-tablet-layout {
+    border-radius: 8px;
   }
   padding: 0 16px;
   > ul {
     display: flex;
     flex-direction: column;
     list-style-type: none;
-    padding: 12px 14px;
+    padding: 12px 24px;
     li {
+      padding: 6px 0;
       cursor: pointer;
       @include until-normal-layout {
         font-size: 1em;
-        padding: 2px;
       }
       @include from-normal-layout {
         font-size: 1.2em;
-        padding: 6px;
       }
       &.bold {
         font-weight: 700;
