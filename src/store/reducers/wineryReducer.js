@@ -4,7 +4,6 @@ const INITIAL_STATE = {
 };
 
 export function wineryReducer(state = INITIAL_STATE, action) {
-  console.log(action);
   switch (action.type) {
     case 'SET_WINERIES':
       return {

@@ -94,8 +94,6 @@ export function PopupMenu(props) {
     ? { top: `${top()}px`, right: `${right()}px` }
     : { top: `${top()}px`, left: `${left()}px` };
 
-  console.log(position);
-
   return (
     <div
       className="background-dimm"

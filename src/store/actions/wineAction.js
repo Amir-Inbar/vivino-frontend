@@ -35,7 +35,6 @@ export function loadWine(id) {
   return async (dispatch) => {
     try {
       const wine = await wineService.getById(id);
-      console.log(wine);
       dispatch({ type: 'SET_WINE', wine });
     } catch (err) {
       console.log(err);
