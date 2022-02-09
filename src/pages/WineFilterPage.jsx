@@ -93,7 +93,9 @@ export const FilterPage = (props) => {
         /> */}
           <WineFilters keywords={keywords} />
           <div className="apply">
-            <button onClick={() => setIsShowFilter(false)}>close</button>
+            <button className="bgi" onClick={() => setIsShowFilter(false)}>
+              close
+            </button>
           </div>
         </nav>
         <div className="wines-result">

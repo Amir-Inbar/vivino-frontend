@@ -1,4 +1,5 @@
 import { httpService } from './http.service';
+import { typeOf } from './util.service';
 
 export const wineService = {
   query,
@@ -7,7 +8,18 @@ export const wineService = {
 
 const API = 'wine';
 
+function _clearEmptyQueries(queries) {
+  return Object.entries(queries).reduce((q, p) => {
+    const key = p[0];
+    const val = p[1];
+    console.log(typeOf(val) !== 'Object', Object.values(val).length);
+    if (typeOf(val) !== 'Object' || Object.values(val).length) q = { ...q, [key]: val };
+    return q
+  }, {});
+}
+
 async function query(queries) {
+  queries = _clearEmptyQueries(queries);
   return httpService.get(API, null, queries);
 }
 
