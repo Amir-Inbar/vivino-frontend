@@ -4,9 +4,9 @@ import { WinePreviews } from "../components/Wine/WinePreview";
 import { debounce } from "../services/util.service";
 import { wineService } from "../services/wine.service";
 import { setFilterBy } from "../store/actions/wineAction";
-import { ScaleRangeFilter } from "../components/Filter/FilterSelectRange";
 import useInfinityScroll from "../hooks/useInfinityScroll";
 import { WineFilters } from "../components/Wine/WineFilters";
+import { FilterSelection } from "../components/Filter/FilterQuerySelected";
 
 export const FilterPage = (props) => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export const FilterPage = (props) => {
     wines?.page.index < wines?.page.total
   );
 
-  const queryToFilter = () =>
+  const queryToFilter = () => {
     dispatch(
       setFilterBy({
         ...filter,
@@ -40,6 +40,7 @@ export const FilterPage = (props) => {
         inPairings: queries.get("pairings"),
       })
     );
+  };
 
   useEffect(() => {
     debounce(() => queryToFilter(), "SET_FILTER", filter ? 500 : 0);
@@ -56,24 +57,14 @@ export const FilterPage = (props) => {
   }, [filter]);
 
   return wines && keywords ? (
-    <section className="wines-filter">
-      <nav
-        className="filter-menu"
-        style={isShowFilter ? { display: "block" } : null}
-      >
-        <div className="title">filters</div>
-        {/* <ScaleRangeFilter
-          title="average rating"
-          fromQuery="from"
-          toQuery="to"
-        /> */}
-        <WineFilters keywords={keywords} />
-        <div className="apply">
-          <button onClick={() => setIsShowFilter(false)}>close</button>
-        </div>
-      </nav>
-      <div className="wines-result">
-        <div className="control-panel">
+    <section className="filter-continaer">
+      <div className="control-panel">
+        <FilterSelection
+          filter={filter}
+          keywords={keywords}
+          count={wines.total}
+        />
+        <div className="buttons">
           <button
             onClick={() => setIsShowFilter(true)}
             className={`filter-button ${queries.toString() ? "marked" : ""}`}
@@ -82,11 +73,30 @@ export const FilterPage = (props) => {
           </button>
           <button className={`sort-button`}>sort</button>
         </div>
-        {wines.total ? (
-          <WinePreviews wines={wines.data} />
-        ) : (
-          <div>No results</div>
-        )}
+      </div>
+      <div className="wines-filter">
+        <nav
+          className="filter-menu"
+          style={isShowFilter ? { display: "block" } : null}
+        >
+          <div className="title">filters</div>
+          {/* <ScaleRangeFilter
+          title="average rating"
+          fromQuery="from"
+          toQuery="to"
+        /> */}
+          <WineFilters keywords={keywords} />
+          <div className="apply">
+            <button onClick={() => setIsShowFilter(false)}>close</button>
+          </div>
+        </nav>
+        <div className="wines-result">
+          {wines.total ? (
+            <WinePreviews wines={wines.data} />
+          ) : (
+            <div>No results</div>
+          )}
+        </div>
       </div>
     </section>
   ) : null;

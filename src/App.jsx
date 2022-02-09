@@ -1,17 +1,17 @@
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
-import { AppHeader } from './components/AppHeader';
-import { WinePage } from './pages/WinePage';
-import { WineryPage } from './pages/WineryPage';
-import { HomePage } from './pages/HomePage';
-import { WineEditPage } from './pages/WineEditPage';
-import { LoginPage } from './pages/LoginPage';
-import { FilterPage } from './pages/WineFilterPage';
-import { useDispatch, useSelector } from 'react-redux';
-import { wineService } from './services/wine.service';
-import { setKeywords } from './store/actions/wineAction';
-import { useEffect } from 'react';
-import './styles/global.scss';
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import { AppHeader } from "./components/AppHeader";
+import { WinePage } from "./pages/WinePage";
+import { WineryPage } from "./pages/WineryPage";
+import { HomePage } from "./pages/HomePage";
+import { WineEditPage } from "./pages/WineEditPage";
+import { LoginPage } from "./pages/LoginPage";
+import { FilterPage } from "./pages/WineFilterPage";
+import { useDispatch, useSelector } from "react-redux";
+import { wineService } from "./services/wine.service";
+import { setKeywords } from "./store/actions/wineAction";
+import { useEffect } from "react";
+import "./styles/global.scss";
 
 export function App() {
   const keywords = useSelector((state) => state.wineModule.keywords);
