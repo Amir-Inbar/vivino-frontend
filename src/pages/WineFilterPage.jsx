@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { WinePreviews } from "../components/Wine/WinePreview";
-import { debounce } from "../services/util.service";
+import { debounce, extractConditionKey } from "../services/util.service";
 import { wineService } from "../services/wine.service";
 import { setFilterBy } from "../store/actions/wineAction";
 import useInfinityScroll from "../hooks/useInfinityScroll";
@@ -33,16 +33,18 @@ export const FilterPage = (props) => {
   const isFiltered = () => filter && Object.keys(filter).length;
 
   useEffect(() => {
+    if (!keywords) return;
     dispatch(
-      setFilterBy({
-        ...filter,
-        eqType: queries.get("type"),
-        inRegion: queries.get("region"),
-        "in+Grapes": queries.get("grapes"),
-        inCountry: queries.get("country"),
-        inStyle: queries.get("style"),
-        inPairings: queries.get("pairings"),
-      })
+      setFilterBy(
+        Object.values(keywords.query).reduce(
+          (obj, cKey) =>
+            (obj = {
+              ...obj,
+              [cKey]: queries.get(extractConditionKey(cKey)?.key),
+            }),
+          { ...filter }
+        )
+      )
     );
   }, [props.location.search]);
 
@@ -95,7 +97,7 @@ export const FilterPage = (props) => {
           </div>
         </nav>
         <div className="wines-result">
-          {wines.total ? (
+          {wines.total && !isShowFilter ? (
             <WinePreviews wines={wines.data} />
           ) : (
             <div>No results</div>

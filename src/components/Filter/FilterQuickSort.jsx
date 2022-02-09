@@ -10,7 +10,6 @@ export const FilterQuickSort = () => {
   const sort = useSelector((state) => state.wineModule.sort);
 
   const SortMenu = ({ isActive, el, close }) => {
-    console.dir(el);
     const top = el?.offsetTop + el?.clientHeight + 16;
     const width = Math.max(el?.clientWidth || 0, 150);
     const right = window.innerWidth - (el?.offsetLeft + el?.clientWidth);
