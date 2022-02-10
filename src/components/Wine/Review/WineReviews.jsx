@@ -31,6 +31,8 @@ export const WineReviews = ({ wineId, wine }) => {
     (async () => {
       if (user) {
         await loadUserReviews();
+        await loadRecentReviews();
+        await loadHelpfulReviews();
       } else {
         setUserReviews(null);
       }
