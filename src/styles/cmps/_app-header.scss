@@ -107,12 +107,13 @@
     list-style-type: none;
     padding: 12px 24px;
     li {
-      padding: 6px 0;
       cursor: pointer;
       @include until-normal-layout {
-        font-size: 1em;
+        padding: 8px 0;
+        font-size: 1.5em;
       }
       @include from-normal-layout {
+        padding: 6px 0;
         font-size: 1.2em;
       }
       &.bold {
@@ -150,6 +151,7 @@
     flex-direction: column;
     list-style-type: none;
     li {
+      font-size: 1.2em;
       padding: 12px 14px;
       margin: 4px 0;
       height: 32px;
@@ -157,11 +159,9 @@
       align-items: center;
       cursor: pointer;
       @include until-normal-layout {
-        font-size: 1em;
         padding: 2px;
       }
       @include from-normal-layout {
-        font-size: 1.2em;
         padding: 6px;
       }
       &.bold {
