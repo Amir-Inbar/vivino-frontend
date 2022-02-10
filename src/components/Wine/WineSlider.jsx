@@ -7,6 +7,8 @@ export const WineSlider = (props) => {
   const [position, setPosition] = useState(0);
   const itemPerPage = 4;
 
+  console.log(wines);
+
   const sliderStyle = () => {
     const sec = 2;
     const pos = position

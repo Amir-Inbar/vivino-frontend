@@ -9,6 +9,7 @@ export const wineService = {
 const API = 'wine';
 
 function _clearEmptyQueries(queries) {
+  if (!queries) return;
   return Object.entries(queries).reduce((q, p) => {
     const key = p[0];
     const val = p[1];

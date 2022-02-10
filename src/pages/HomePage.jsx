@@ -11,6 +11,7 @@ export const HomePage = () => {
     (async () => {
       try {
         const wines = await wineService.query();
+        console.log(wines);
         setWines(wines);
       } catch {}
     })();
